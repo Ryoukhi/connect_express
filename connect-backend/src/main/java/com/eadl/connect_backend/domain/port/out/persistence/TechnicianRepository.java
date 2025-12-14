@@ -1,0 +1,42 @@
+package com.eadl.connect_backend.domain.port.out.persistence;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.eadl.connect_backend.domain.model.user.Technician;
+
+/**
+ * Port OUT - Repository Technician
+ */
+public interface TechnicianRepository {
+    
+    /**
+     * Sauvegarde un technicien
+     */
+    Technician save(Technician technician);
+    
+    /**
+     * Récupère un technicien par son ID
+     */
+    Optional<Technician> findById(Long idTechnician);
+    
+    /**
+     * Récupère un technicien par son ID utilisateur
+     */
+    Optional<Technician> findByUserId(Long idUser);
+    
+    /**
+     * Récupère tous les techniciens
+     */
+    List<Technician> findAll();
+    
+    /**
+     * Compte le nombre de techniciens
+     */
+    Long count();
+    
+    /**
+     * Supprime un technicien
+     */
+    void delete(Technician technician);
+}
