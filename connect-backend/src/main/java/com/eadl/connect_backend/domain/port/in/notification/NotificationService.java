@@ -1,114 +1,117 @@
 package com.eadl.connect_backend.domain.port.in.notification;
 
-import com.eadl.connect_backend.domain.model.Notification;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import com.eadl.connect_backend.domain.model.notification.Notification;
+import com.eadl.connect_backend.domain.model.notification.NotificationType;
+
 /**
- * Interface de service pour la gestion des notifications
- * Définit les opérations CRUD et les fonctionnalités de notification
+ * Port IN - Service Notification
+ * Use cases pour la gestion des notifications
  */
 public interface NotificationService {
-
-    // ========== CREATE ==========
-
+    
     /**
-     * Crée une nouvelle notification
-     * @param notification L'objet notification à créer
-     * @return La notification créée avec son ID généré
+     * Crée une notification simple
      */
-    Notification createNotification(Notification notification);
-
+    Notification createNotification(Long idUser, NotificationType type, 
+                                   String title, String message);
+    
+    /**
+     * Crée une notification avec données
+     */
+    Notification createNotification(Long idUser, NotificationType type, 
+                                   String title, String message, String data);
+    
     /**
      * Envoie une notification à un utilisateur
-     * @param userId L'identifiant de l'utilisateur destinataire
-     * @param title Le titre de la notification
-     * @param message Le contenu de la notification
-     * @param type Le type de notification (INFO, WARNING, SUCCESS, ERROR)
-     * @return La notification créée et envoyée
      */
-    Notification sendNotification(Long userId, String title, String message, String type);
-
+    Notification sendNotification(Long idUser, NotificationType type, 
+                                  String title, String message);
+    
     /**
-     * Envoie une notification à plusieurs utilisateurs
-     * @param userIds Liste des identifiants des utilisateurs destinataires
-     * @param title Le titre de la notification
-     * @param message Le contenu de la notification
-     * @param type Le type de notification
-     * @return Liste des notifications créées
+     * Envoie une notification avec action URL
      */
-    List<Notification> sendBulkNotification(List<Long> userIds, String title, String message, String type);
-
+    Notification sendNotificationWithAction(Long idUser, NotificationType type, 
+                                           String title, String message, 
+                                           String actionUrl);
+    
     /**
-     * Envoie une notification à tous les utilisateurs
-     * @param title Le titre de la notification
-     * @param message Le contenu de la notification
-     * @param type Le type de notification
-     * @return Liste des notifications créées
+     * Envoie une notification programmée
      */
-    List<Notification> sendNotificationToAll(String title, String message, String type);
-
+    Notification scheduleNotification(Long idUser, NotificationType type, 
+                                     String title, String message, 
+                                     LocalDateTime scheduledAt);
+    
     /**
-     * Envoie une notification avec un lien d'action
-     * @param userId L'identifiant de l'utilisateur
-     * @param title Le titre de la notification
-     * @param message Le contenu de la notification
-     * @param actionUrl L'URL de redirection au clic
-     * @param type Le type de notification
-     * @return La notification créée
+     * Récupère une notification par son ID
      */
-    Notification sendNotificationWithAction(Long userId, String title, String message, String actionUrl, String type);
-
-    // ========== READ ==========
-
-    /**
-     * Récupère une notification par son identifiant
-     * @param id L'identifiant de la notification
-     * @return Optional contenant la notification si trouvée, sinon Optional vide
-     */
-    Optional<Notification> getNotificationById(Long id);
-
+    Optional<Notification> getNotificationById(Long idNotification);
+    
     /**
      * Récupère toutes les notifications d'un utilisateur
-     * @param userId L'identifiant de l'utilisateur
-     * @return Liste des notifications de l'utilisateur, triées par date (plus récentes en premier)
      */
-    List<Notification> getUserNotifications(Long userId);
-
+    List<Notification> getUserNotifications(Long idUser);
+    
     /**
      * Récupère les notifications non lues d'un utilisateur
-     * @param userId L'identifiant de l'utilisateur
-     * @return Liste des notifications non lues
      */
-    List<Notification> getUnreadNotifications(Long userId);
-
+    List<Notification> getUnreadNotifications(Long idUser);
+    
     /**
-     * Récupère les notifications lues d'un utilisateur
-     * @param userId L'identifiant de l'utilisateur
-     * @return Liste des notifications lues
+     * Récupère les notifications urgentes d'un utilisateur
      */
-    List<Notification> getReadNotifications(Long userId);
-
+    List<Notification> getUrgentNotifications(Long idUser);
+    
     /**
-     * Récupère les notifications par type pour un utilisateur
-     * @param userId L'identifiant de l'utilisateur
-     * @param type Le type de notification à filtrer
-     * @return Liste des notifications du type spécifié
+     * Récupère les notifications récentes (derniers jours)
      */
-    List<Notification> getNotificationsByType(Long userId, String type);
-
+    List<Notification> getRecentNotifications(Long idUser, int days);
+    
     /**
-     * Récupère les notifications récentes d'un utilisateur (dernières 24h)
-     * @param userId L'identifiant de l'utilisateur
-     * @return Liste des notifications des dernières 24 heures
+     * Marque une notification comme lue
      */
-    List<Notification> getRecentNotifications(Long userId);
-
+    Notification markAsRead(Long idNotification);
+    
     /**
-     * Récupère les notifications avec pagination
-     * @param userId L'identifiant de l'utilisateur
-     * @param page Le numéro de page (commence à 0)
-     * @param size Le nombre de notifications par page
-     * @return Liste des notifications paginées
+     * Marque toutes les notifications comme lues
      */
-    List<Notification> getUserNotifications
+    void markAllAsRead(Long idUser);
+    
+    /**
+     * Supprime une notification
+     */
+    void deleteNotification(Long idNotification);
+    
+    /**
+     * Supprime toutes les notifications lues
+     */
+    void deleteReadNotifications(Long idUser);
+    
+    /**
+     * Supprime les notifications expirées
+     */
+    void deleteExpiredNotifications();
+    
+    /**
+     * Compte les notifications non lues
+     */
+    Long countUnreadNotifications(Long idUser);
+    
+    /**
+     * Envoie une notification push (via service externe)
+     */
+    void sendPushNotification(Long idUser, String title, String message);
+    
+    /**
+     * Envoie une notification par email
+     */
+    void sendEmailNotification(Long idUser, String subject, String message);
+    
+    /**
+     * Envoie une notification par SMS
+     */
+    void sendSmsNotification(Long idUser, String message);
+}

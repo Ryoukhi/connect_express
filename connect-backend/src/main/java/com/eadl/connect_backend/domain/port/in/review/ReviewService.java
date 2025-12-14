@@ -1,251 +1,111 @@
 package com.eadl.connect_backend.domain.port.in.review;
 
-import com.eadl.connect_backend.domain.model.Review;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import com.eadl.connect_backend.domain.model.review.Review;
+
 /**
- * Interface de service pour la gestion des avis et évaluations
- * Définit les opérations CRUD et les fonctionnalités liées aux reviews
+ * Port IN - Service Avis
+ * Use cases pour la gestion des avis clients
  */
 public interface ReviewService {
-
-    // ========== CREATE ==========
-
+    
     /**
-     * Crée un nouvel avis
-     * @param review L'objet review à créer
-     * @return L'avis créé avec son ID généré
-     * @throws IllegalArgumentException si l'utilisateur a déjà laissé un avis pour ce service
+     * Crée un avis
      */
-    Review createReview(Review review);
-
+    Review createReview(Long idReservation, Long idClient, 
+                       Long idTechnician, int rating, String comment);
+    
     /**
-     * Crée un avis complet avec note et commentaire
-     * @param userId L'identifiant de l'utilisateur
-     * @param serviceId L'identifiant du service évalué
-     * @param rating La note (généralement de 1 à 5)
-     * @param comment Le commentaire textuel
-     * @return L'avis créé
+     * Récupère un avis par son ID
      */
-    Review createReview(Long userId, Long serviceId, int rating, String comment);
-
+    Optional<Review> getReviewById(Long idReview);
+    
     /**
-     * Crée un avis avec images
-     * @param userId L'identifiant de l'utilisateur
-     * @param serviceId L'identifiant du service
-     * @param rating La note
-     * @param comment Le commentaire
-     * @param imageUrls Liste des URLs des images jointes
-     * @return L'avis créé avec les images
+     * Récupère l'avis d'une réservation
      */
-    Review createReviewWithImages(Long userId, Long serviceId, int rating, String comment, List<String> imageUrls);
-
-    // ========== READ ==========
-
+    Optional<Review> getReviewByReservation(Long idReservation);
+    
     /**
-     * Récupère un avis par son identifiant
-     * @param id L'identifiant de l'avis
-     * @return Optional contenant l'avis si trouvé, sinon Optional vide
+     * Récupère tous les avis d'un technicien
      */
-    Optional<Review> getReviewById(Long id);
-
+    List<Review> getTechnicianReviews(Long idTechnician);
+    
     /**
-     * Récupère tous les avis d'un service
-     * @param serviceId L'identifiant du service
-     * @return Liste des avis du service, triés par date (plus récents en premier)
+     * Récupère tous les avis d'un client
      */
-    List<Review> getServiceReviews(Long serviceId);
-
+    List<Review> getClientReviews(Long idClient);
+    
     /**
-     * Récupère tous les avis laissés par un utilisateur
-     * @param userId L'identifiant de l'utilisateur
-     * @return Liste des avis de l'utilisateur
+     * Récupère les avis positifs d'un technicien
      */
-    List<Review> getUserReviews(Long userId);
-
+    List<Review> getPositiveReviews(Long idTechnician);
+    
     /**
-     * Récupère les avis d'un service avec pagination
-     * @param serviceId L'identifiant du service
-     * @param page Le numéro de page (commence à 0)
-     * @param size Le nombre d'avis par page
-     * @return Liste des avis paginés
+     * Récupère les avis négatifs d'un technicien
      */
-    List<Review> getServiceReviews(Long serviceId, int page, int size);
-
+    List<Review> getNegativeReviews(Long idTechnician);
+    
     /**
-     * Récupère les avis d'un service filtrés par note
-     * @param serviceId L'identifiant du service
-     * @param rating La note à filtrer (ex: 5 pour les avis 5 étoiles)
-     * @return Liste des avis avec la note spécifiée
+     * Récupère les avis signalés
      */
-    List<Review> getReviewsByRating(Long serviceId, int rating);
-
+    List<Review> getReportedReviews();
+    
     /**
-     * Récupère les meilleurs avis d'un service (notes les plus élevées)
-     * @param serviceId L'identifiant du service
-     * @param limit Le nombre maximum d'avis à retourner
-     * @return Liste des meilleurs avis
+     * Récupère les avis en attente de modération
      */
-    List<Review> getTopReviews(Long serviceId, int limit);
-
-    /**
-     * Récupère les avis récents d'un service (derniers 30 jours)
-     * @param serviceId L'identifiant du service
-     * @return Liste des avis récents
-     */
-    List<Review> getRecentReviews(Long serviceId);
-
-    /**
-     * Récupère les avis vérifiés d'un service
-     * (avis d'utilisateurs ayant réellement utilisé le service)
-     * @param serviceId L'identifiant du service
-     * @return Liste des avis vérifiés
-     */
-    List<Review> getVerifiedReviews(Long serviceId);
-
-    /**
-     * Vérifie si un utilisateur a déjà laissé un avis pour un service
-     * @param userId L'identifiant de l'utilisateur
-     * @param serviceId L'identifiant du service
-     * @return Optional contenant l'avis si existant
-     */
-    Optional<Review> getUserReviewForService(Long userId, Long serviceId);
-
-    // ========== UPDATE ==========
-
+    List<Review> getReviewsNeedingModeration();
+    
     /**
      * Met à jour un avis
-     * @param id L'identifiant de l'avis à modifier
-     * @param review L'objet review avec les nouvelles données
-     * @return L'avis mis à jour
-     * @throws UnauthorizedException si l'utilisateur n'est pas l'auteur
      */
-    Review updateReview(Long id, Review review);
-
+    Review updateReview(Long idReview, int newRating, String newComment);
+    
     /**
-     * Met à jour la note et le commentaire d'un avis
-     * @param reviewId L'identifiant de l'avis
-     * @param userId L'identifiant de l'utilisateur (pour vérification)
-     * @param rating La nouvelle note
-     * @param comment Le nouveau commentaire
-     * @return L'avis mis à jour
+     * Signale un avis
      */
-    Review updateReviewContent(Long reviewId, Long userId, int rating, String comment);
-
+    Review reportReview(Long idReview, Long reporterId, String reason);
+    
     /**
-     * Marque un avis comme vérifié
-     * (utilisateur confirmé comme ayant utilisé le service)
-     * @param reviewId L'identifiant de l'avis
+     * Modère un avis (admin)
      */
-    void markAsVerified(Long reviewId);
-
+    Review moderateReview(Long idAdmin, Long idReview);
+    
     /**
-     * Ajoute une réponse du prestataire à un avis
-     * @param reviewId L'identifiant de l'avis
-     * @param providerId L'identifiant du prestataire
-     * @param response La réponse textuelle
-     * @return L'avis avec la réponse ajoutée
+     * Supprime le signalement d'un avis
      */
-    Review addProviderResponse(Long reviewId, Long providerId, String response);
-
+    Review clearReport(Long idAdmin, Long idReview);
+    
     /**
-     * Ajoute des "likes" à un avis (vote utile)
-     * @param reviewId L'identifiant de l'avis
-     * @param userId L'identifiant de l'utilisateur qui like
+     * Supprime un avis
      */
-    void likeReview(Long reviewId, Long userId);
-
+    void deleteReview(Long idAdmin, Long idReview, String reason);
+    
     /**
-     * Retire le like d'un avis
-     * @param reviewId L'identifiant de l'avis
-     * @param userId L'identifiant de l'utilisateur
+     * Calcule la note moyenne d'un technicien
      */
-    void unlikeReview(Long reviewId, Long userId);
-
-    // ========== DELETE ==========
-
+    BigDecimal calculateAverageRating(Long idTechnician);
+    
     /**
-     * Supprime définitivement un avis
-     * @param id L'identifiant de l'avis à supprimer
-     * @param userId L'identifiant de l'utilisateur (pour vérification)
-     * @throws UnauthorizedException si l'utilisateur n'est pas l'auteur
+     * Compte le nombre d'avis d'un technicien
      */
-    void deleteReview(Long id, Long userId);
-
+    Long countReviews(Long idTechnician);
+    
     /**
-     * Signale un avis comme inapproprié
-     * @param reviewId L'identifiant de l'avis
-     * @param userId L'identifiant de l'utilisateur qui signale
-     * @param reason La raison du signalement
+     * Compte le nombre d'avis par note (distribution)
      */
-    void reportReview(Long reviewId, Long userId, String reason);
-
+    Map<Integer, Long> getRatingDistribution(Long idTechnician);
+    
     /**
-     * Archive un avis (soft delete)
-     * L'avis reste en base mais n'est plus visible publiquement
-     * @param reviewId L'identifiant de l'avis
+     * Vérifie si un client peut laisser un avis pour une réservation
      */
-    void archiveReview(Long reviewId);
-
+    boolean canReview(Long idClient, Long idReservation);
+    
     /**
-     * Restaure un avis archivé
-     * @param reviewId L'identifiant de l'avis
+     * Vérifie si un avis existe pour une réservation
      */
-    void restoreReview(Long reviewId);
-
-    // ========== MÉTHODES UTILITAIRES ET STATISTIQUES ==========
-
-    /**
-     * Calcule la note moyenne d'un service
-     * @param serviceId L'identifiant du service
-     * @return La note moyenne (ex: 4.5)
-     */
-    double calculateAverageRating(Long serviceId);
-
-    /**
-     * Compte le nombre total d'avis pour un service
-     * @param serviceId L'identifiant du service
-     * @return Le nombre d'avis
-     */
-    long countServiceReviews(Long serviceId);
-
-    /**
-     * Compte les avis par note pour un service
-     * @param serviceId L'identifiant du service
-     * @return Map avec la répartition des notes (ex: {5: 50, 4: 30, 3: 15, 2: 3, 1: 2})
-     */
-    Object getRatingDistribution(Long serviceId);
-
-    /**
-     * Récupère les statistiques complètes des avis d'un service
-     * @param serviceId L'identifiant du service
-     * @return Objet contenant moyenne, total, répartition, tendance, etc.
-     */
-    Object getReviewStatistics(Long serviceId);
-
-    /**
-     * Vérifie si un utilisateur a déjà laissé un avis pour un service
-     * @param userId L'identifiant de l'utilisateur
-     * @param serviceId L'identifiant du service
-     * @return true si un avis existe, false sinon
-     */
-    boolean hasUserReviewedService(Long userId, Long serviceId);
-
-    /**
-     * Vérifie si un utilisateur peut laisser un avis
-     * (généralement après avoir utilisé le service)
-     * @param userId L'identifiant de l'utilisateur
-     * @param serviceId L'identifiant du service
-     * @return true si l'utilisateur peut laisser un avis, false sinon
-     */
-    boolean canUserReview(Long userId, Long serviceId);
-
-    /**
-     * Recherche des avis par mot-clé dans les commentaires
-     * @param serviceId L'identifiant du service
-     * @param keyword Le mot-clé de recherche
-     * @return Liste des avis correspondants
-     */
-    List<Review> searchReviews(Long serviceId, String keyword);
+    boolean reviewExists(Long idReservation);
 }

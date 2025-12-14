@@ -1,31 +1,60 @@
 package com.eadl.connect_backend.domain.port.in.user;
 
-import com.eadl.connect_backend.domain.model.User;
+import com.eadl.connect_backend.domain.model.user.User;
 
 /**
- * Interface de service pour l'authentification des utilisateurs
- * Gère les opérations de connexion et d'inscription
+ * Port IN - Service d'authentification
+ * Use cases pour l'authentification et l'autorisation
  */
 public interface AuthService {
-
+    
     /**
-     * Authentifie un utilisateur avec son email et mot de passe
-     * @param email L'adresse email de l'utilisateur
-     * @param password Le mot de passe en clair
-     * @return L'utilisateur authentifié avec un token de session
-     * @throws AuthenticationException si les identifiants sont incorrects
-     * @throws AccountDisabledException si le compte est désactivé
+     * Authentifie un utilisateur
      */
     User login(String email, String password);
-
+    
     /**
-     * Enregistre un nouvel utilisateur dans le système
-     * Crée le compte, hash le mot de passe et assigne un rôle par défaut
-     * @param user L'objet utilisateur contenant les informations d'inscription
-     * @return L'utilisateur créé avec son ID et token de session
-     * @throws EmailAlreadyExistsException si l'email est déjà utilisé
-     * @throws ValidationException si les données sont invalides
+     * Déconnecte un utilisateur
      */
-    User register(User user);
-
+    void logout(Long idUser);
+    
+    /**
+     * Génère un token JWT
+     */
+    String generateToken(User user);
+    
+    /**
+     * Valide un token JWT
+     */
+    boolean validateToken(String token);
+    
+    /**
+     * Récupère l'utilisateur depuis un token
+     */
+    User getUserFromToken(String token);
+    
+    /**
+     * Rafraîchit un token
+     */
+    String refreshToken(String refreshToken);
+    
+    /**
+     * Envoie un email de réinitialisation de mot de passe
+     */
+    void sendPasswordResetEmail(String email);
+    
+    /**
+     * Réinitialise le mot de passe avec un token
+     */
+    void resetPassword(String token, String newPassword);
+    
+    /**
+     * Envoie un code de vérification par SMS
+     */
+    void sendPhoneVerificationCode(String phone);
+    
+    /**
+     * Vérifie le code de vérification téléphonique
+     */
+    boolean verifyPhoneCode(String phone, String code);
 }
