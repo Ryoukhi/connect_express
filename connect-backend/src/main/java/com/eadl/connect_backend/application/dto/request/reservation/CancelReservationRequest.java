@@ -1,23 +1,15 @@
 package com.eadl.connect_backend.application.dto.request.reservation;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-public class UpdateReservationStatusRequest {
+public class CancelReservationRequest {
     
-    @NotBlank(message = "Le statut est obligatoire")
-    private String status;
-    
+    @NotBlank(message = "La raison d'annulation est obligatoire")
+    @Size(max = 500)
     private String reason;
     
     // Getters & Setters
-    public String getStatus() {
-        return status;
-    }
-    
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
     public String getReason() {
         return reason;
     }
