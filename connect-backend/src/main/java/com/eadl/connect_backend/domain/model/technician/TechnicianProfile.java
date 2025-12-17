@@ -10,6 +10,7 @@ import java.util.Objects;
 public class TechnicianProfile {
     private Long idProfile;
     private Long idTechnician;
+    private Long idCategory;
     private String bio;
     private Integer yearsExperience;
     private BigDecimal hourlyRate;
@@ -22,6 +23,7 @@ public class TechnicianProfile {
     private Integer completedJobs;
     private BigDecimal averageRating;
 
+    
     private TechnicianProfile() {}
 
     // ========== Factory Method ==========
@@ -145,6 +147,8 @@ public class TechnicianProfile {
         return averageRating;
     }
 
+    
+
     // ========== Setters (pour reconstruction depuis DB) ==========
     public void setIdProfile(Long idProfile) {
         this.idProfile = idProfile;
@@ -186,5 +190,49 @@ public class TechnicianProfile {
                 ", completedJobs=" + completedJobs +
                 ", averageRating=" + averageRating +
                 '}';
+    }
+
+    public void setIdTechnician(Long idTechnician) {
+        this.idTechnician = idTechnician;
+    }
+
+    public Long getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(Long idCategory) {
+        this.idCategory = idCategory;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setYearsExperience(Integer yearsExperience) {
+        this.yearsExperience = yearsExperience;
+    }
+
+    public void setHourlyRate(BigDecimal hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
+    }
+
+    public void setLastLocationUpdate(LocalDateTime lastLocationUpdate) {
+        this.lastLocationUpdate = lastLocationUpdate;
+    }
+
+    public void setProfilePhotoUrl(String profilePhotoUrl) {
+        this.profilePhotoUrl = profilePhotoUrl;
     }
 }

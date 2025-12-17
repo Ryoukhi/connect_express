@@ -80,23 +80,14 @@ public interface ReservationService {
      */
     Reservation cancelReservation(Long idReservation, Long userId, String reason);
     
-    /**
-     * Replanifie une réservation
-     */
-    Reservation rescheduleReservation(Long idReservation, LocalDateTime newScheduledTime);
-    
-    /**
-     * Met à jour le prix d'une réservation
-     */
-    Reservation updatePrice(Long idReservation, BigDecimal newPrice);
-    
-    /**
-     * Vérifie si un technicien peut accepter une nouvelle réservation
-     */
-    boolean canAcceptReservation(Long idTechnician);
     
     /**
      * Compte les réservations complétées d'un technicien
      */
     Long countCompletedReservations(Long idTechnician);
+
+    /**
+     * Supprime une réservation
+     */
+    void deleteReservation(Long idReservation);
 }

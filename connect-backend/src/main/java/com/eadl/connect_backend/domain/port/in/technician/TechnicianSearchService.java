@@ -34,20 +34,6 @@ public interface TechnicianSearchService {
     List<TechnicianProfile> searchByMinRating(BigDecimal minRating);
     
     /**
-     * Recherche multi-critères
-     */
-    List<TechnicianProfile> searchTechnicians(
-        Long idCategory,
-        BigDecimal latitude,
-        BigDecimal longitude,
-        Double radiusKm,
-        BigDecimal minPrice,
-        BigDecimal maxPrice,
-        BigDecimal minRating,
-        Boolean availableOnly
-    );
-    
-    /**
      * Récupère les techniciens les mieux notés
      */
     List<TechnicianProfile> getTopRatedTechnicians(int limit);

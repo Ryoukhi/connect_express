@@ -39,4 +39,9 @@ public interface TechnicianRepository {
      * Supprime un technicien
      */
     void delete(Technician technician);
+
+    /**
+     * Récupère les techniciens actifs
+     */
+    List<Technician> findByActiveTrue();
 }

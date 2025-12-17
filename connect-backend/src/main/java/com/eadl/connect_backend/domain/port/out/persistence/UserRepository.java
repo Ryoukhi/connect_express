@@ -91,4 +91,16 @@ public interface UserRepository {
      * Supprime un utilisateur par ID
      */
     void deleteById(Long idUser);
+
+    /**
+     * récupère les utilisateurs actifs par role
+     */
+    List<User> findByRoleAndActive(Role role, boolean active);
+
+    /**
+     * Compte le nombre d'utilisateurs par rôle et statut actif
+     */
+    Long countByRoleAndActive(Role role, boolean active);
+
+
 }

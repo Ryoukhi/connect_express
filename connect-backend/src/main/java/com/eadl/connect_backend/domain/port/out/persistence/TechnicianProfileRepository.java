@@ -26,6 +26,8 @@ public interface TechnicianProfileRepository {
      * Récupère le profil d'un technicien
      */
     Optional<TechnicianProfile> findByTechnicianId(Long idTechnician);
+
+    List<TechnicianProfile> findByCategoryId(Long idCategory);
     
     /**
      * Récupère tous les profils
