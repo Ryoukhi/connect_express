@@ -1,5 +1,6 @@
 package com.eadl.connect_backend.domain.port.in.user;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.eadl.connect_backend.domain.model.user.User;
@@ -64,5 +65,14 @@ public interface UserService {
      * Vérifie si un téléphone existe déjà
      */
     boolean phoneExists(String phone);
-    
+
+    /**
+     * Retourne la liste de tous les utilisateurs
+     */
+    List<User> getAllUsers();
+
+    /**
+     * Recherche des utilisateurs par rôle
+     */
+    List<User> getUsersByRole(String role);
 }

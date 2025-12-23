@@ -99,8 +99,4 @@ public interface ChatService {
      */
     Long countUnreadMessages(Long idUser);
     
-    /**
-     * Vérifie si un utilisateur participe à une conversation
-     */
-    boolean isParticipant(Long idConversation, Long userId);
 }

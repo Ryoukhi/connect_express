@@ -11,18 +11,7 @@ import com.eadl.connect_backend.domain.model.user.Client;
  */
 public interface ClientService {
 
-    // ========== CREATE ==========
-
-    /**
-     * Crée un nouveau client dans le système
-     * @param client L'objet client à créer
-     * @return Le client créé avec son ID généré
-     * @throws IllegalArgumentException si les données sont invalides
-     */
-    Client createClient(Client client);
-
-    // ========== READ ==========
-
+    
     /**
      * Récupère un client par son identifiant
      * @param id L'identifiant du client
