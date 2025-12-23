@@ -1,13 +1,17 @@
 package com.eadl.connect_backend.application.service.category;
 
-import com.eadl.connect_backend.domain.model.Category;
+
+import com.eadl.connect_backend.domain.model.category.Category;
 import com.eadl.connect_backend.domain.port.in.category.CategoryService;
-import com.eadl.connect_backend.domain.port.out.CategoryRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.CategoryRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.TechnicianSkillRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,212 +25,136 @@ import java.util.Optional;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-
-    // ========== CREATE ==========
+    private final TechnicianSkillRepository technicianSkillRepository;
 
     @Override
     public Category createCategory(Category category) {
-        log.info("Création d'une nouvelle catégorie: {}", category.getName());
+        log.info("Création de la catégorie: {}", category.getName());
 
-        if (category.getName() != null && existsByName(category.getName())) {
+        if (category.getName() == null || category.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom de la catégorie est obligatoire");
+        }
+
+        if (categoryRepository.existsByName(category.getName())) {
             throw new IllegalArgumentException("Une catégorie avec ce nom existe déjà");
         }
 
-        if (category.getCode() != null && existsByCode(category.getCode())) {
-            throw new IllegalArgumentException("Une catégorie avec ce code existe déjà");
+        // Prefer domain factory to ensure defaults
+        Category toSave = Category.create(category.getName(), category.getDescription());
+        if (category.getIconUrl() != null) {
+            toSave.updateIcon(category.getIconUrl());
+        }
+        if (category.getDisplayOrder() != null) {
+            toSave.updateDisplayOrder(category.getDisplayOrder());
         }
 
-        if (category.getActive() == null) {
-            category.setActive(true);
-        }
-
-        Category savedCategory = categoryRepository.save(category);
-        log.info("Catégorie créée avec succès avec l'ID: {}", savedCategory.getId());
-        return savedCategory;
+        return categoryRepository.save(toSave);
     }
 
-    // ========== READ ==========
-
     @Override
-    @Transactional(readOnly = true)
     public Optional<Category> getCategoryById(Long id) {
-        log.debug("Recherche de la catégorie avec l'ID: {}", id);
         return categoryRepository.findById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Category> getCategoryByName(String name) {
-        log.debug("Recherche de la catégorie avec le nom: {}", name);
         return categoryRepository.findByName(name);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<Category> getCategoryByCode(String code) {
-        log.debug("Recherche de la catégorie avec le code: {}", code);
-        return categoryRepository.findByCode(code);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public List<Category> getAllCategories() {
-        log.debug("Récupération de toutes les catégories");
-        return categoryRepository.findAll();
+        // Return ordered list when available
+        try {
+            return categoryRepository.findAllOrderedByDisplayOrder();
+        } catch (Exception e) {
+            log.warn("Impossible d'obtenir les catégories ordonnées, retour à findAll()", e);
+            return categoryRepository.findAll();
+        }
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Category> getActiveCategories() {
-        // TODO: Implémenter
-        return List.of();
+        return categoryRepository.findByActive(true);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Category> getParentCategories() {
-        // TODO: Implémenter
-        return List.of();
+    public Category updateCategoryIcon(Long idCategory, String iconUrl) {
+        Category category = categoryRepository.findById(idCategory)
+                .orElseThrow(() -> new EntityNotFoundException("Catégorie introuvable"));
+        category.updateIcon(iconUrl);
+        return categoryRepository.save(category);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Category> getSubCategories(Long parentId) {
-        // TODO: Implémenter
-        return List.of();
+    public Category updateDisplayOrder(Long idCategory, Integer order) {
+        Category category = categoryRepository.findById(idCategory)
+                .orElseThrow(() -> new EntityNotFoundException("Catégorie introuvable"));
+        category.updateDisplayOrder(order);
+        return categoryRepository.save(category);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Category> getPopularCategories(int limit) {
-        // TODO: Implémenter
-        return List.of();
+    public Category activateCategory(Long idCategory) {
+        Category category = categoryRepository.findById(idCategory)
+                .orElseThrow(() -> new EntityNotFoundException("Catégorie introuvable"));
+        category.activate();
+        return categoryRepository.save(category);
     }
 
-    // ========== UPDATE ==========
+    @Override
+    public Category deactivateCategory(Long idCategory) {
+        Category category = categoryRepository.findById(idCategory)
+                .orElseThrow(() -> new EntityNotFoundException("Catégorie introuvable"));
+        category.deactivate();
+        return categoryRepository.save(category);
+    }
+
+    @Override
+    public Long countTechniciansByCategory(Long idCategory) {
+        // Count distinct profile IDs in technician skills
+        return technicianSkillRepository.findByCategoryId(idCategory)
+                .stream()
+                .map(s -> s.getIdProfile())
+                .distinct()
+                .count();
+    }
 
     @Override
     public Category updateCategory(Long id, Category category) {
-        log.info("Mise à jour de la catégorie avec l'ID: {}", id);
+        Category existing = categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Catégorie introuvable"));
 
-        Category existingCategory = categoryRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Catégorie non trouvée avec l'ID: " + id));
-
-        if (category.getName() != null && !category.getName().equals(existingCategory.getName())) {
-            if (existsByName(category.getName())) {
-                throw new IllegalArgumentException("Ce nom de catégorie est déjà utilisé");
+        if (category.getName() != null && !category.getName().trim().isEmpty()) {
+            // check uniqueness if changing name
+            if (!existing.getName().equals(category.getName()) && categoryRepository.existsByName(category.getName())) {
+                throw new IllegalArgumentException("Une catégorie avec ce nom existe déjà");
             }
-            existingCategory.setName(category.getName());
         }
 
-        if (category.getCode() != null && !category.getCode().equals(existingCategory.getCode())) {
-            if (existsByCode(category.getCode())) {
-                throw new IllegalArgumentException("Ce code de catégorie est déjà utilisé");
-            }
-            existingCategory.setCode(category.getCode());
-        }
+        existing.updateCategory(category.getName() == null ? existing.getName() : category.getName(),
+                category.getDescription() == null ? existing.getDescription() : category.getDescription());
 
-        if (category.getDescription() != null) {
-            existingCategory.setDescription(category.getDescription());
+        if (category.getIconUrl() != null) {
+            existing.updateIcon(category.getIconUrl());
         }
-
-        if (category.getImageUrl() != null) {
-            existingCategory.setImageUrl(category.getImageUrl());
-        }
-
         if (category.getDisplayOrder() != null) {
-            existingCategory.setDisplayOrder(category.getDisplayOrder());
+            existing.updateDisplayOrder(category.getDisplayOrder());
         }
 
-        if (category.getParentId() != null) {
-            existingCategory.setParentId(category.getParentId());
-        }
-
-        Category updatedCategory = categoryRepository.save(existingCategory);
-        log.info("Catégorie mise à jour avec succès: {}", id);
-        return updatedCategory;
+        return categoryRepository.save(existing);
     }
-
-    @Override
-    public Category updateCategoryInfo(Long id, String name, String description) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    @Override
-    public Category updateCategoryImage(Long id, String imageUrl) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    @Override
-    public Category updateCategoryOrder(Long id, int displayOrder) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    // ========== DELETE ==========
 
     @Override
     public void deleteCategory(Long id) {
-        log.info("Suppression de la catégorie avec l'ID: {}", id);
+        Category existing = categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Catégorie introuvable"));
 
-        if (!categoryRepository.existsById(id)) {
-            throw new IllegalArgumentException("Catégorie non trouvée avec l'ID: " + id);
+        // Prevent deletion if technicians are attached to this category
+        if (!technicianSkillRepository.findByCategoryId(id).isEmpty()) {
+            throw new IllegalStateException("Impossible de supprimer la catégorie car des techniciens y sont rattachés");
         }
 
-        categoryRepository.deleteById(id);
-        log.info("Catégorie supprimée avec succès: {}", id);
-    }
-
-    @Override
-    public void softDeleteCategory(Long id) {
-        // TODO: Implémenter
-    }
-
-    @Override
-    public void reactivateCategory(Long id) {
-        // TODO: Implémenter
-    }
-
-    // ========== MÉTHODES UTILITAIRES ==========
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean existsByName(String name) {
-        return categoryRepository.existsByName(name);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean existsByCode(String code) {
-        return categoryRepository.existsByCode(code);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public long countCategories() {
-        return categoryRepository.count();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public long countActiveCategories() {
-        // TODO: Implémenter
-        return 0;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Category> searchCategories(String keyword) {
-        // TODO: Implémenter
-        return List.of();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public long countServicesByCategory(Long categoryId) {
-        // TODO: Implémenter
-        return 0;
+        categoryRepository.delete(existing);
+        log.info("Catégorie supprimée id={}", id);
     }
 }

@@ -1,14 +1,15 @@
 package com.eadl.connect_backend.application.service.review;
 
-import com.eadl.connect_backend.domain.model.Review;
+import com.eadl.connect_backend.domain.model.review.Review;
 import com.eadl.connect_backend.domain.port.in.review.ReviewService;
-import com.eadl.connect_backend.domain.port.out.ReviewRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.ReviewRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,247 +23,74 @@ import java.util.Optional;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-
-    // ========== CREATE ==========
+    private final ReservationRepository reservationRepository;
 
     @Override
-    public Review createReview(Review review) {
-        log.info("Création d'un nouvel avis pour le service {} par l'utilisateur {}", review.getServiceId(), review.getUserId());
+    public Review createReview(Long idReservation, Long idClient, Long idTechnician, int rating, String comment) {
+        log.info("Création d'un avis pour la réservation id={}", idReservation);
 
-        if (hasUserReviewedService(review.getUserId(), review.getServiceId())) {
-            throw new IllegalArgumentException("Vous avez déjà laissé un avis pour ce service");
+        if (reviewRepository.existsByReservationId(idReservation)) {
+            throw new IllegalStateException("Un avis existe déjà pour cette réservation");
         }
 
-        if (review.getCreatedAt() == null) {
-            review.setCreatedAt(LocalDateTime.now());
+        var reservation = reservationRepository.findById(idReservation)
+                .orElseThrow(() -> new EntityNotFoundException("Réservation introuvable"));
+
+        if (!reservation.isCompleted()) {
+            throw new IllegalStateException("L'avis ne peut être créé que pour une réservation complétée");
         }
 
-        if (review.getVerified() == null) {
-            review.setVerified(false);
+        if (!reservation.getIdClient().equals(idClient) || !reservation.getIdTechnician().equals(idTechnician)) {
+            throw new IllegalArgumentException("Données de réservation incompatibles avec le client/technicien fournis");
         }
 
-        Review savedReview = reviewRepository.save(review);
-        log.info("Avis créé avec succès avec l'ID: {}", savedReview.getId());
-        return savedReview;
+        Review review = Review.create(idReservation, idClient, idTechnician, rating, comment);
+        return reviewRepository.save(review);
     }
 
     @Override
-    public Review createReview(Long userId, Long serviceId, int rating, String comment) {
-        log.info("Création d'un avis pour le service {} par l'utilisateur {}", serviceId, userId);
-
-        Review review = new Review();
-        review.setUserId(userId);
-        review.setServiceId(serviceId);
-        review.setRating(rating);
-        review.setComment(comment);
-        review.setCreatedAt(LocalDateTime.now());
-        review.setVerified(false);
-
-        return createReview(review);
+    public Optional<Review> getReviewById(Long idReview) {
+        return reviewRepository.findById(idReview);
     }
 
     @Override
-    public Review createReviewWithImages(Long userId, Long serviceId, int rating, String comment, List<String> imageUrls) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    // ========== READ ==========
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Review> getReviewById(Long id) {
-        log.debug("Recherche de l'avis avec l'ID: {}", id);
-        return reviewRepository.findById(id);
+    public Optional<Review> getReviewByReservation(Long idReservation) {
+        return reviewRepository.findByReservationId(idReservation);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Review> getServiceReviews(Long serviceId) {
-        log.debug("Récupération des avis du service: {}", serviceId);
-        return reviewRepository.findByServiceIdOrderByCreatedAtDesc(serviceId);
+    public List<Review> getTechnicianReviews(Long idTechnician) {
+        return reviewRepository.findByTechnicianId(idTechnician);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Review> getUserReviews(Long userId) {
-        log.debug("Récupération des avis de l'utilisateur: {}", userId);
-        return reviewRepository.findByUserIdOrderByCreatedAtDesc(userId);
+    public List<Review> getClientReviews(Long idClient) {
+        return reviewRepository.findByClientId(idClient);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Review> getServiceReviews(Long serviceId, int page, int size) {
-        // TODO: Implémenter
-        return List.of();
+    public Review updateReview(Long idReview, int newRating, String newComment) {
+        log.info("Mise à jour de l'avis id={}", idReview);
+        Review existing = reviewRepository.findById(idReview)
+                .orElseThrow(() -> new EntityNotFoundException("Avis introuvable"));
+
+        existing.updateReview(newRating, newComment);
+        return reviewRepository.save(existing);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Review> getReviewsByRating(Long serviceId, int rating) {
-        // TODO: Implémenter
-        return List.of();
+    public void deleteReview(Long idAdmin, Long idReview, String reason) {
+        log.info("Suppression de l'avis id={} par admin id={} raison={}", idReview, idAdmin, reason);
+        Review existing = reviewRepository.findById(idReview)
+                .orElseThrow(() -> new EntityNotFoundException("Avis introuvable"));
+
+        // For auditability you might want to store deletion reason in an audit log; here we just log and delete
+        reviewRepository.delete(existing);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Review> getTopReviews(Long serviceId, int limit) {
-        // TODO: Implémenter
-        return List.of();
+    public Long countReviews(Long idTechnician) {
+        return reviewRepository.countByTechnicianId(idTechnician);
     }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Review> getRecentReviews(Long serviceId) {
-        // TODO: Implémenter
-        return List.of();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Review> getVerifiedReviews(Long serviceId) {
-        // TODO: Implémenter
-        return List.of();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Review> getUserReviewForService(Long userId, Long serviceId) {
-        // TODO: Implémenter
-        return Optional.empty();
-    }
-
-    // ========== UPDATE ==========
-
-    @Override
-    public Review updateReview(Long id, Review review) {
-        log.info("Mise à jour de l'avis avec l'ID: {}", id);
-
-        Review existingReview = reviewRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Avis non trouvé avec l'ID: " + id));
-
-        if (review.getRating() != null) {
-            existingReview.setRating(review.getRating());
-        }
-        if (review.getComment() != null) {
-            existingReview.setComment(review.getComment());
-        }
-        if (review.getImageUrls() != null) {
-            existingReview.setImageUrls(review.getImageUrls());
-        }
-
-        existingReview.setUpdatedAt(LocalDateTime.now());
-
-        Review updatedReview = reviewRepository.save(existingReview);
-        log.info("Avis mis à jour avec succès: {}", id);
-        return updatedReview;
-    }
-
-    @Override
-    public Review updateReviewContent(Long reviewId, Long userId, int rating, String comment) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    @Override
-    public void markAsVerified(Long reviewId) {
-        // TODO: Implémenter
-    }
-
-    @Override
-    public Review addProviderResponse(Long reviewId, Long providerId, String response) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    @Override
-    public void likeReview(Long reviewId, Long userId) {
-        // TODO: Implémenter
-    }
-
-    @Override
-    public void unlikeReview(Long reviewId, Long userId) {
-        // TODO: Implémenter
-    }
-
-    // ========== DELETE ==========
-
-    @Override
-    public void deleteReview(Long id, Long userId) {
-        log.info("Suppression de l'avis {} par l'utilisateur {}", id, userId);
-
-        Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Avis non trouvé avec l'ID: " + id));
-
-        if (!review.getUserId().equals(userId)) {
-            throw new IllegalArgumentException("Vous n'êtes pas l'auteur de cet avis");
-        }
-
-        reviewRepository.delete(review);
-        log.info("Avis supprimé avec succès: {}", id);
-    }
-
-    @Override
-    public void reportReview(Long reviewId, Long userId, String reason) {
-        // TODO: Implémenter
-    }
-
-    @Override
-    public void archiveReview(Long reviewId) {
-        // TODO: Implémenter
-    }
-
-    @Override
-    public void restoreReview(Long reviewId) {
-        // TODO: Implémenter
-    }
-
-    // ========== MÉTHODES UTILITAIRES ET STATISTIQUES ==========
-
-    @Override
-    @Transactional(readOnly = true)
-    public double calculateAverageRating(Long serviceId) {
-        // TODO: Implémenter
-        return 0.0;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public long countServiceReviews(Long serviceId) {
-        return reviewRepository.countByServiceId(serviceId);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Object getRatingDistribution(Long serviceId) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Object getReviewStatistics(Long serviceId) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean hasUserReviewedService(Long userId, Long serviceId) {
-        return reviewRepository.existsByUserIdAndServiceId(userId, serviceId);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean canUserReview(Long userId, Long serviceId) {
-        // TODO: Implémenter
-        return false;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Review> searchReviews(Long serviceId, String keyword) {
-        // TODO: Implémenter
-        return List.of();
-    }
+    
 }

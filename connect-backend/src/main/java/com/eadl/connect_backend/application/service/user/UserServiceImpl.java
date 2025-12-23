@@ -1,14 +1,17 @@
 package com.eadl.connect_backend.application.service.user;
 
-import com.eadl.connect_backend.domain.model.User;
+import com.eadl.connect_backend.domain.model.user.Role;
+import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.domain.port.in.user.UserService;
-import com.eadl.connect_backend.domain.port.out.UserRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,137 +27,131 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // ========== CREATE ==========
-
     @Override
-    public User createUser(User user) {
-        log.info("Création d'un nouvel utilisateur avec l'email: {}", user.getEmail());
-
-        if (existsByEmail(user.getEmail())) {
-            throw new IllegalArgumentException("Un utilisateur avec cet email existe déjà");
-        }
-
-        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-
-        User savedUser = userRepository.save(user);
-        log.info("Utilisateur créé avec succès avec l'ID: {}", savedUser.getId());
-        return savedUser;
-    }
-
-    // ========== READ ==========
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<User> getUserById(Long id) {
-        log.debug("Recherche de l'utilisateur avec l'ID: {}", id);
-        return userRepository.findById(id);
+    public Optional<User> getUserById(Long idUser) {
+        return userRepository.findById(idUser);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<User> getUserByEmail(String email) {
-        log.debug("Recherche de l'utilisateur avec l'email: {}", email);
         return userRepository.findByEmail(email);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<User> getAllUsers() {
-        log.debug("Récupération de tous les utilisateurs");
-        return userRepository.findAll();
+    public Optional<User> getUserByPhone(String phone) {
+        return userRepository.findByPhone(phone);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<User> getUsersByRole(String role) {
-        log.debug("Récupération des utilisateurs avec le rôle: {}", role);
-        return userRepository.findByRole(role);
-    }
+    public User updateProfile(Long idUser, String firstName, String lastName, String phone) {
+        log.info("Mise à jour du profil utilisateur id={}", idUser);
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
 
-    // ========== UPDATE ==========
-
-    @Override
-    public User updateUser(Long id, User user) {
-        log.info("Mise à jour de l'utilisateur avec l'ID: {}", id);
-
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé avec l'ID: " + id));
-
-        if (user.getFirstName() != null) {
-            existingUser.setFirstName(user.getFirstName());
-        }
-        if (user.getLastName() != null) {
-            existingUser.setLastName(user.getLastName());
-        }
-        if (user.getEmail() != null && !user.getEmail().equals(existingUser.getEmail())) {
-            if (existsByEmail(user.getEmail())) {
-                throw new IllegalArgumentException("Cet email est déjà utilisé");
-            }
-            existingUser.setEmail(user.getEmail());
-        }
-        if (user.getPhone() != null) {
-            existingUser.setPhone(user.getPhone());
-        }
-        if (user.getRole() != null) {
-            existingUser.setRole(user.getRole());
+        // If phone is changed, ensure it's not already taken by another user
+        if (phone != null && !phone.equals(user.getPhone()) && userRepository.existsByPhone(phone)) {
+            throw new IllegalArgumentException("Ce numéro de téléphone est déjà utilisé");
         }
 
-        User updatedUser = userRepository.save(existingUser);
-        log.info("Utilisateur mis à jour avec succès: {}", id);
-        return updatedUser;
+        user.updateProfile(firstName == null ? user.getFirstName() : firstName,
+                lastName == null ? user.getLastName() : lastName,
+                phone == null ? user.getPhone() : phone);
+
+        return userRepository.save(user);
     }
 
     @Override
-    public User updateUserProfile(Long id, User user) {
-        // TODO: Implémenter
-        return null;
-    }
+    public void changePassword(Long idUser, String oldPassword, String newPassword) {
+        log.info("Changement de mot de passe pour l'utilisateur id={}", idUser);
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
 
-    @Override
-    public User updateUserPassword(Long id, String oldPassword, String newPassword) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    // ========== DELETE ==========
-
-    @Override
-    public void deleteUser(Long id) {
-        log.info("Suppression de l'utilisateur avec l'ID: {}", id);
-
-        if (!userRepository.existsById(id)) {
-            throw new IllegalArgumentException("Utilisateur non trouvé avec l'ID: " + id);
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Mot de passe actuel incorrect");
         }
 
-        userRepository.deleteById(id);
-        log.info("Utilisateur supprimé avec succès: {}", id);
+        user.changePassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 
     @Override
-    public void softDeleteUser(Long id) {
-        // TODO: Implémenter
+    public User verifyEmail(Long idUser, String verificationToken) {
+        log.info("Vérification d'email pour l'utilisateur id={}", idUser);
+        if (verificationToken == null || verificationToken.trim().isEmpty()) {
+            throw new IllegalArgumentException("Token de vérification invalide");
+        }
+
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+
+        // Token validation is out of scope here; accept provided token for now
+        user.verifyEmail();
+        return userRepository.save(user);
     }
 
-    // ========== MÉTHODES UTILITAIRES ==========
+    @Override
+    public User verifyPhone(Long idUser, String verificationCode) {
+        log.info("Vérification de téléphone pour l'utilisateur id={}", idUser);
+        if (verificationCode == null || verificationCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Code de vérification invalide");
+        }
+
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+
+        // Code validation is out of scope here; accept provided code for now
+        user.verifyPhone();
+        return userRepository.save(user);
+    }
 
     @Override
-    @Transactional(readOnly = true)
-    public boolean existsByEmail(String email) {
+    public User activateAccount(Long idUser) {
+        log.info("Activation du compte utilisateur id={}", idUser);
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+
+        user.activate();
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User deactivateAccount(Long idUser) {
+        log.info("Désactivation du compte utilisateur id={}", idUser);
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+
+        user.deactivate();
+        return userRepository.save(user);
+    }
+
+    @Override
+    public boolean emailExists(String email) {
         return userRepository.existsByEmail(email);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public long countUsers() {
-        return userRepository.count();
+    public boolean phoneExists(String phone) {
+        return userRepository.existsByPhone(phone);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<User> searchUsers(String keyword) {
-        // TODO: Implémenter
-        return List.of();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
+
+    @Override
+    public List<User> getUsersByRole(String role) {
+        if (role == null || role.trim().isEmpty()) {
+            throw new IllegalArgumentException("Role must be provided");
+        }
+
+        Role r;
+        try {
+            r = Role.valueOf(role.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Role inconnu: " + role);
+        }
+
+        return userRepository.findByRole(r);
+    } 
 }

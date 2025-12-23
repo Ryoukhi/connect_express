@@ -1,16 +1,21 @@
 package com.eadl.connect_backend.application.service.chat;
 
-import com.eadl.connect_backend.domain.model.Chat;
-import com.eadl.connect_backend.domain.model.Message;
+import com.eadl.connect_backend.domain.model.chat.Conversation;
+import com.eadl.connect_backend.domain.model.chat.Message;
 import com.eadl.connect_backend.domain.port.in.chat.ChatService;
-import com.eadl.connect_backend.domain.port.out.ChatRepository;
-import com.eadl.connect_backend.domain.port.out.MessageRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.ConversationRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.MessageRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.EntityNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,218 +28,191 @@ import java.util.Optional;
 @Transactional
 public class ChatServiceImpl implements ChatService {
 
-    private final ChatRepository chatRepository;
+    private final ConversationRepository conversationRepository;
     private final MessageRepository messageRepository;
-
-    // ========== CREATE ==========
-
-    @Override
-    public Chat createChat(Chat chat) {
-        log.info("Création d'un nouveau chat");
-
-        Chat savedChat = chatRepository.save(chat);
-        log.info("Chat créé avec succès avec l'ID: {}", savedChat.getId());
-        return savedChat;
-    }
+    private final ReservationRepository reservationRepository;
 
     @Override
-    public Chat getOrCreateChatBetweenUsers(Long userId1, Long userId2) {
-        // TODO: Implémenter
-        return null;
-    }
+    public Conversation createConversation(Long idReservation, Long idClient, Long idTechnician) {
+        log.info("Création d'une conversation pour réservation id={}", idReservation);
 
-    @Override
-    public Message sendMessage(Long chatId, Long senderId, String content) {
-        log.info("Envoi d'un message dans le chat: {}", chatId);
-
-        if (!chatRepository.existsById(chatId)) {
-            throw new IllegalArgumentException("Chat non trouvé avec l'ID: " + chatId);
+        Optional<Conversation> existing = conversationRepository.findByReservationId(idReservation);
+        if (existing.isPresent()) {
+            return existing.get();
         }
 
-        Message message = new Message();
-        message.setChatId(chatId);
-        message.setSenderId(senderId);
-        message.setContent(content);
-        message.setIsRead(false);
-        message.setSentAt(LocalDateTime.now());
+        // Validate reservation exists
+        reservationRepository.findById(idReservation)
+                .orElseThrow(() -> new EntityNotFoundException("Réservation introuvable"));
 
-        Message savedMessage = messageRepository.save(message);
-        log.info("Message envoyé avec succès: {}", savedMessage.getId());
-        return savedMessage;
+        Conversation conversation = Conversation.create(idReservation, idClient, idTechnician);
+        return conversationRepository.save(conversation);
     }
 
     @Override
-    public Message sendMessageWithAttachment(Long chatId, Long senderId, String content, String attachmentUrl) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    // ========== READ ==========
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<Chat> getChatById(Long id) {
-        log.debug("Recherche du chat avec l'ID: {}", id);
-        return chatRepository.findById(id);
+    public Optional<Conversation> getConversationById(Long idConversation) {
+        return conversationRepository.findById(idConversation);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Chat> getUserChats(Long userId) {
-        // TODO: Implémenter
-        return List.of();
+    public Optional<Conversation> getConversationByReservation(Long idReservation) {
+        return conversationRepository.findByReservationId(idReservation);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Chat> getActiveChats(Long userId) {
-        // TODO: Implémenter
-        return List.of();
+    public List<Conversation> getUserConversations(Long idUser) {
+        return conversationRepository.findByUserId(idUser);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<Chat> getChatBetweenUsers(Long userId1, Long userId2) {
-        // TODO: Implémenter
-        return Optional.empty();
+    public List<Conversation> getActiveConversations(Long idUser) {
+        return conversationRepository.findActiveByUserId(idUser);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Message> getChatMessages(Long chatId) {
-        log.debug("Récupération des messages du chat: {}", chatId);
-        return messageRepository.findByChatIdOrderBySentAtAsc(chatId);
+    public Conversation closeConversation(Long idConversation) {
+        Conversation conversation = conversationRepository.findById(idConversation)
+                .orElseThrow(() -> new EntityNotFoundException("Conversation introuvable"));
+        conversation.close();
+        return conversationRepository.save(conversation);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Message> getChatMessages(Long chatId, int page, int size) {
-        // TODO: Implémenter
-        return List.of();
+    public Conversation reopenConversation(Long idConversation) {
+        Conversation conversation = conversationRepository.findById(idConversation)
+                .orElseThrow(() -> new EntityNotFoundException("Conversation introuvable"));
+        conversation.reopen();
+        return conversationRepository.save(conversation);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<Message> getMessageById(Long messageId) {
-        log.debug("Recherche du message avec l'ID: {}", messageId);
-        return messageRepository.findById(messageId);
-    }
+    public Message sendTextMessage(Long idConversation, Long senderId, String content) {
+        log.info("Envoi message texte vers conversation id={} par user id={}", idConversation, senderId);
+        Conversation conversation = conversationRepository.findById(idConversation)
+                .orElseThrow(() -> new EntityNotFoundException("Conversation introuvable"));
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Message> getUnreadMessages(Long chatId, Long userId) {
-        // TODO: Implémenter
-        return List.of();
-    }
-
-    // ========== UPDATE ==========
-
-    @Override
-    public Chat updateChat(Long id, Chat chat) {
-        log.info("Mise à jour du chat avec l'ID: {}", id);
-
-        Chat existingChat = chatRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Chat non trouvé avec l'ID: " + id));
-
-        if (chat.getLastMessageAt() != null) {
-            existingChat.setLastMessageAt(chat.getLastMessageAt());
+        if (!conversation.isParticipant(senderId)) {
+            throw new IllegalArgumentException("Utilisateur non participant à la conversation");
         }
 
-        Chat updatedChat = chatRepository.save(existingChat);
-        log.info("Chat mis à jour avec succès: {}", id);
-        return updatedChat;
+        Message message = Message.createTextMessage(idConversation, senderId, content);
+        Message saved = messageRepository.save(message);
+
+        conversation.updateLastMessageTime();
+        conversationRepository.save(conversation);
+        return saved;
     }
 
     @Override
-    public void markMessageAsRead(Long messageId, Long userId) {
-        // TODO: Implémenter
-    }
+    public Message sendImageMessage(Long idConversation, Long senderId, String caption, byte[] imageData,
+            String fileName) {
+        log.info("Envoi image vers conversation id={} par user id={}", idConversation, senderId);
+        Conversation conversation = conversationRepository.findById(idConversation)
+                .orElseThrow(() -> new EntityNotFoundException("Conversation introuvable"));
 
-    @Override
-    public void markAllMessagesAsRead(Long chatId, Long userId) {
-        // TODO: Implémenter
-    }
-
-    @Override
-    public Message updateMessage(Long messageId, String newContent) {
-        // TODO: Implémenter
-        return null;
-    }
-
-    // ========== DELETE ==========
-
-    @Override
-    public void deleteChat(Long id) {
-        log.info("Suppression du chat avec l'ID: {}", id);
-
-        if (!chatRepository.existsById(id)) {
-            throw new IllegalArgumentException("Chat non trouvé avec l'ID: " + id);
+        if (!conversation.isParticipant(senderId)) {
+            throw new IllegalArgumentException("Utilisateur non participant à la conversation");
         }
 
-        messageRepository.deleteByChatId(id);
-        chatRepository.deleteById(id);
-        log.info("Chat et ses messages supprimés avec succès: {}", id);
+        try {
+            Path dir = Paths.get("uploads", "chat", String.valueOf(idConversation));
+            Files.createDirectories(dir);
+            Path filePath = dir.resolve(fileName);
+            Files.write(filePath, imageData);
+            String url = filePath.toAbsolutePath().toString();
+
+            Message message = Message.createImageMessage(idConversation, senderId, caption, url);
+            Message saved = messageRepository.save(message);
+
+            conversation.updateLastMessageTime();
+            conversationRepository.save(conversation);
+            return saved;
+        } catch (IOException e) {
+            log.error("Erreur lors de l'enregistrement de l'image pour conversation {}", idConversation, e);
+            throw new RuntimeException("Erreur lors de l'enregistrement de l'image", e);
+        }
     }
 
     @Override
-    public void archiveChat(Long chatId, Long userId) {
-        // TODO: Implémenter
-    }
+    public Message sendFileMessage(Long idConversation, Long senderId, byte[] fileData, String fileName) {
+        log.info("Envoi fichier vers conversation id={} par user id={}", idConversation, senderId);
+        Conversation conversation = conversationRepository.findById(idConversation)
+                .orElseThrow(() -> new EntityNotFoundException("Conversation introuvable"));
 
-    @Override
-    public void deleteMessage(Long messageId, Long userId) {
-        log.info("Suppression du message {} par l'utilisateur {}", messageId, userId);
-
-        Message message = messageRepository.findById(messageId)
-                .orElseThrow(() -> new IllegalArgumentException("Message non trouvé avec l'ID: " + messageId));
-
-        if (!message.getSenderId().equals(userId)) {
-            throw new IllegalArgumentException("Seul l'expéditeur peut supprimer ce message");
+        if (!conversation.isParticipant(senderId)) {
+            throw new IllegalArgumentException("Utilisateur non participant à la conversation");
         }
 
-        messageRepository.delete(message);
-        log.info("Message supprimé avec succès: {}", messageId);
+        try {
+            Path dir = Paths.get("uploads", "chat", String.valueOf(idConversation));
+            Files.createDirectories(dir);
+            Path filePath = dir.resolve(fileName);
+            Files.write(filePath, fileData);
+            String url = filePath.toAbsolutePath().toString();
+
+            Message message = Message.createFileMessage(idConversation, senderId, fileName, url);
+            Message saved = messageRepository.save(message);
+
+            conversation.updateLastMessageTime();
+            conversationRepository.save(conversation);
+            return saved;
+        } catch (IOException e) {
+            log.error("Erreur lors de l'enregistrement du fichier pour conversation {}", idConversation, e);
+            throw new RuntimeException("Erreur lors de l'enregistrement du fichier", e);
+        }
     }
 
     @Override
-    public void deleteMessageForEveryone(Long messageId, Long userId) {
-        // TODO: Implémenter
-    }
+    public Message sendSystemMessage(Long idConversation, String content) {
+        log.info("Envoi message système vers conversation id={}", idConversation);
+        Conversation conversation = conversationRepository.findById(idConversation)
+                .orElseThrow(() -> new EntityNotFoundException("Conversation introuvable"));
 
-    // ========== MÉTHODES UTILITAIRES ==========
+        Message message = Message.createSystemMessage(idConversation, content);
+        Message saved = messageRepository.save(message);
 
-    @Override
-    @Transactional(readOnly = true)
-    public long countUnreadMessages(Long chatId, Long userId) {
-        // TODO: Implémenter
-        return 0;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public long countTotalUnreadMessages(Long userId) {
-        // TODO: Implémenter
-        return 0;
+        conversation.updateLastMessageTime();
+        conversationRepository.save(conversation);
+        return saved;
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Message> searchMessagesInChat(Long chatId, String keyword) {
-        // TODO: Implémenter
-        return List.of();
+    public Optional<Message> getMessageById(Long idMessage) {
+        return messageRepository.findById(idMessage);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public boolean isUserInChat(Long chatId, Long userId) {
-        // TODO: Implémenter
-        return false;
+    public List<Message> getConversationMessages(Long idConversation) {
+        return messageRepository.findByConversationIdOrderBySentAt(idConversation);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<Message> getLastMessage(Long chatId) {
-        // TODO: Implémenter
-        return Optional.empty();
+    public List<Message> getUnreadMessages(Long idConversation, Long userId) {
+        return messageRepository.findUnreadByConversationIdAndReceiverId(idConversation, userId);
     }
+
+    @Override
+    public Message markMessageAsRead(Long idMessage) {
+        Message message = messageRepository.findById(idMessage)
+                .orElseThrow(() -> new EntityNotFoundException("Message introuvable"));
+        message.markAsRead();
+        return messageRepository.save(message);
+    }
+
+    @Override
+    public void markAllMessagesAsRead(Long idConversation, Long userId) {
+        List<Message> unread = messageRepository.findUnreadByConversationIdAndReceiverId(idConversation, userId);
+        for (Message m : unread) {
+            m.markAsRead();
+            messageRepository.save(m);
+        }
+        log.info("Tous les messages marqués comme lus pour conversation id={} user id={}", idConversation, userId);
+    }
+
+    @Override
+    public Long countUnreadMessages(Long idUser) {
+        return messageRepository.countUnreadByUserId(idUser);
+    }
+
+    
 }

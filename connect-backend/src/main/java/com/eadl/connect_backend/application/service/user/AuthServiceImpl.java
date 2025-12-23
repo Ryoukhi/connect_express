@@ -1,8 +1,7 @@
 package com.eadl.connect_backend.application.service.user;
-
-import com.eadl.connect_backend.domain.model.User;
+import com.eadl.connect_backend.domain.model.user.User;
+import com.eadl.connect_backend.domain.port.out.persistence.UserRepository;
 import com.eadl.connect_backend.domain.port.in.user.AuthService;
-import com.eadl.connect_backend.domain.port.out.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +27,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Email ou mot de passe incorrect"));
 
-        if (user.getActive() != null && !user.getActive()) {
+        if (!user.isActive()) {
             throw new IllegalStateException("Ce compte est désactivé");
         }
 
@@ -39,6 +38,17 @@ public class AuthServiceImpl implements AuthService {
 
         log.info("Connexion réussie pour l'utilisateur: {}", email);
         return user;
+    }
+
+    @Override
+    public void logout(Long idUser) {
+        log.info("Déconnexion pour l'utilisateur id: {}", idUser);
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
+        // Update the updatedAt timestamp to reflect the logout action
+        user.setUpdatedAt(java.time.LocalDateTime.now());
+        userRepository.save(user);
+        log.info("Déconnexion effectuée pour l'utilisateur id: {}", idUser);
     }
 
     @Override
@@ -61,19 +71,16 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Le nom est obligatoire");
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // Persist the encoded password using domain method that also updates timestamps
+        user.changePassword(passwordEncoder.encode(user.getPassword()));
 
-        if (user.getRole() == null || user.getRole().isEmpty()) {
-            user.setRole("USER");
-        }
-
-        if (user.getActive() == null) {
-            user.setActive(true);
-        }
+        // The domain model's concrete subclasses set the Role in their constructors/factories
+        // so no need to try to set it here. Ensure active flag is true by default in domain model
 
         User savedUser = userRepository.save(user);
-        log.info("Inscription réussie pour l'email: {}", user.getEmail());
+        log.info("Inscription réussie pour l'email: {}", savedUser.getEmail());
 
         return savedUser;
     }
+
 }
