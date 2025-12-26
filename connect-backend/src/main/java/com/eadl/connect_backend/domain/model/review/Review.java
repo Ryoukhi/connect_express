@@ -14,9 +14,6 @@ public class Review {
     private Rating rating;
     private String comment;
     private LocalDateTime createdAt;
-    private boolean reported;
-    private String reportReason;
-    private boolean moderated;
 
     private Review() {}
 
@@ -31,8 +28,6 @@ public class Review {
         review.rating = Rating.of(ratingValue);
         review.comment = comment;
         review.createdAt = LocalDateTime.now();
-        review.reported = false;
-        review.moderated = false;
         return review;
     }
 
@@ -42,19 +37,6 @@ public class Review {
         this.comment = newComment;
     }
 
-    public void report(String reason) {
-        this.reported = true;
-        this.reportReason = reason;
-    }
-
-    public void moderate() {
-        this.moderated = true;
-    }
-
-    public void clearReport() {
-        this.reported = false;
-        this.reportReason = null;
-    }
 
     public boolean isPositive() {
         return rating.isExcellent();
@@ -62,10 +44,6 @@ public class Review {
 
     public boolean isNegative() {
         return rating.isPoor();
-    }
-
-    public boolean needsModeration() {
-        return reported && !moderated;
     }
 
     // ========== Getters ==========
@@ -97,18 +75,7 @@ public class Review {
         return createdAt;
     }
 
-    public boolean isReported() {
-        return reported;
-    }
-
-    public String getReportReason() {
-        return reportReason;
-    }
-
-    public boolean isModerated() {
-        return moderated;
-    }
-
+    
     // ========== Setters (pour reconstruction depuis DB) ==========
     public void setIdReview(Long idReview) {
         this.idReview = idReview;
@@ -118,13 +85,6 @@ public class Review {
         this.rating = rating;
     }
 
-    public void setReported(boolean reported) {
-        this.reported = reported;
-    }
-
-    public void setModerated(boolean moderated) {
-        this.moderated = moderated;
-    }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
@@ -142,15 +102,5 @@ public class Review {
     @Override
     public int hashCode() {
         return Objects.hash(idReview);
-    }
-
-    @Override
-    public String toString() {
-        return "Review{" +
-                "idReview=" + idReview +
-                ", rating=" + rating +
-                ", idTechnician=" + idTechnician +
-                ", reported=" + reported +
-                '}';
     }
 }

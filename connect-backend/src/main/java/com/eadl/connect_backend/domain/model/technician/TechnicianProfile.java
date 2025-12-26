@@ -1,7 +1,6 @@
 package com.eadl.connect_backend.domain.model.technician;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -18,7 +17,6 @@ public class TechnicianProfile {
     private BigDecimal latitude;
     private BigDecimal longitude;
     private AvailabilityStatus availabilityStatus;
-    private LocalDateTime lastLocationUpdate;
     private String profilePhotoUrl;
     private Integer completedJobs;
     private BigDecimal averageRating;
@@ -50,12 +48,6 @@ public class TechnicianProfile {
 
     public void verify() {
         this.verified = true;
-    }
-
-    public void updateLocation(BigDecimal latitude, BigDecimal longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.lastLocationUpdate = LocalDateTime.now();
     }
 
     public void setAvailable() {
@@ -129,10 +121,6 @@ public class TechnicianProfile {
 
     public AvailabilityStatus getAvailabilityStatus() {
         return availabilityStatus;
-    }
-
-    public LocalDateTime getLastLocationUpdate() {
-        return lastLocationUpdate;
     }
 
     public String getProfilePhotoUrl() {
@@ -227,12 +215,13 @@ public class TechnicianProfile {
     public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }
-
-    public void setLastLocationUpdate(LocalDateTime lastLocationUpdate) {
-        this.lastLocationUpdate = lastLocationUpdate;
-    }
-
+    
     public void setProfilePhotoUrl(String profilePhotoUrl) {
         this.profilePhotoUrl = profilePhotoUrl;
+    }
+
+    public void updateLocation(BigDecimal latitude2, BigDecimal longitude2) {
+        this.latitude = latitude2;
+        this.longitude = longitude2;
     }
 }

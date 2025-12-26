@@ -23,7 +23,7 @@ public abstract class User {
 
     // Optional profile fields
     protected String profilePhotoUrl;
-    protected String preferences;
+    
 
     // Constructeur protégé
     protected User() {
@@ -33,7 +33,7 @@ public abstract class User {
         this.emailVerified = false;
         this.phoneVerified = false;
         this.profilePhotoUrl = null;
-        this.preferences = null;
+        
     }
 
     // ========== Business Logic Methods ==========
@@ -73,7 +73,7 @@ public abstract class User {
         return this.role == Role.CLIENT;
     }
 
-    // ========== Profile & Preferences ==========
+    // ========== Profile ==========
     public void updateProfilePhoto(String photoUrl) {
         this.profilePhotoUrl = photoUrl;
         this.updatedAt = LocalDateTime.now();
@@ -91,21 +91,6 @@ public abstract class User {
     public void setProfilePhotoUrl(String profilePhotoUrl) {
         this.profilePhotoUrl = profilePhotoUrl;
     }
-
-    public void updatePreferences(String preferences) {
-        this.preferences = preferences;
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public String getPreferences() {
-        return preferences;
-    }
-
-    public void setPreferences(String preferences) {
-        this.preferences = preferences;
-    }
-
-    
 
     public boolean isTechnician() {
         return this.role == Role.TECHNICIAN;

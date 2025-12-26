@@ -30,7 +30,6 @@ public class ReviewMapper {
         dto.setRating(review.getRating() != null ? review.getRating().getValue() : null);
         dto.setComment(review.getComment());
         dto.setCreatedAt(review.getCreatedAt());
-        dto.setReported(review.isReported());
         return dto;
     }
 

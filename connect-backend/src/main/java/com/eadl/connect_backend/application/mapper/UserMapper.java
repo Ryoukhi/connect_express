@@ -99,7 +99,6 @@ public class UserMapper {
         r.setLatitude(profile.getLatitude());
         r.setLongitude(profile.getLongitude());
         r.setAvailabilityStatus(profile.getAvailabilityStatus() != null ? profile.getAvailabilityStatus().name() : null);
-        r.setLastLocationUpdate(profile.getLastLocationUpdate());
         r.setProfilePhotoUrl(profile.getProfilePhotoUrl());
         r.setCompletedJobs(profile.getCompletedJobs());
         r.setAverageRating(profile.getAverageRating());

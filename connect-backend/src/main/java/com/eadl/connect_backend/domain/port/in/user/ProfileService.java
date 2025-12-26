@@ -18,15 +18,6 @@ public interface ProfileService {
      */
     User deleteProfilePhoto(Long idUser);
     
-    /**
-     * Met à jour les préférences utilisateur
-     */
-    User updatePreferences(Long idUser, String preferences);
-    
-    /**
-     * Récupère les préférences utilisateur
-     */
-    String getPreferences(Long idUser);
     
     /**
      * Supprime définitivement un compte

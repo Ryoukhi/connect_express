@@ -29,7 +29,6 @@ public class TechnicianMapper {
         dto.setLatitude(profile.getLatitude());
         dto.setLongitude(profile.getLongitude());
         dto.setAvailabilityStatus(profile.getAvailabilityStatus() != null ? profile.getAvailabilityStatus().name() : null);
-        dto.setLastLocationUpdate(profile.getLastLocationUpdate());
         dto.setProfilePhotoUrl(profile.getProfilePhotoUrl());
         dto.setCompletedJobs(profile.getCompletedJobs());
         dto.setAverageRating(profile.getAverageRating());

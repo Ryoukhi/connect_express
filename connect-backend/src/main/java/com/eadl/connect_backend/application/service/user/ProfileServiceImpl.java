@@ -67,25 +67,6 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public User updatePreferences(Long idUser, String preferences) {
-        log.info("Mise à jour des préférences pour l'utilisateur id: {}", idUser);
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
-
-        user.updatePreferences(preferences);
-        return userRepository.save(user);
-    }
-
-    @Override
-    public String getPreferences(Long idUser) {
-        log.info("Récupération des préférences pour l'utilisateur id: {}", idUser);
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
-
-        return user.getPreferences();
-    }
-
-    @Override
     public void deleteAccount(Long idUser, String password) {
         log.info("Suppression du compte pour l'utilisateur id: {}", idUser);
         User user = userRepository.findById(idUser)
