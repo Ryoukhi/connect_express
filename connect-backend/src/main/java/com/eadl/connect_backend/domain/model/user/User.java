@@ -166,7 +166,7 @@ public abstract class User {
         this.updatedAt = updatedAt;
     }
 
-    protected void setRole(Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
