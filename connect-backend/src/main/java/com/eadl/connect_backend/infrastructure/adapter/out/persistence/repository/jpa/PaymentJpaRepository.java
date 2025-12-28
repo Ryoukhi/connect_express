@@ -1,5 +1,5 @@
 package com.eadl.connect_backend.infrastructure.adapter.out.persistence.repository.jpa;
 
-public class PaymentJpaRepository {
+public interface PaymentJpaRepository {
 
 }

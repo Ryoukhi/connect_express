@@ -2,7 +2,6 @@ package com.eadl.connect_backend.domain.port.out.persistence;
 
 import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.domain.model.user.Role;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,16 +45,6 @@ public interface UserRepository {
      * Récupère les utilisateurs actifs
      */
     List<User> findByActive(boolean active);
-    
-    /**
-     * Recherche des utilisateurs par nom ou email
-     */
-    List<User> searchByNameOrEmail(String searchTerm);
-    
-    /**
-     * Récupère les utilisateurs créés après une date
-     */
-    List<User> findCreatedAfter(LocalDateTime date);
     
     /**
      * Récupère les utilisateurs avec pagination

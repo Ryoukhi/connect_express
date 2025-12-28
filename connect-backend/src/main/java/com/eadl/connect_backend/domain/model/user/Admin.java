@@ -5,7 +5,7 @@ package com.eadl.connect_backend.domain.model.user;
  */
 public class Admin extends User {
 
-    private Admin() {
+    public Admin() {
         super();
         this.role = Role.ADMIN;
         this.emailVerified = true;

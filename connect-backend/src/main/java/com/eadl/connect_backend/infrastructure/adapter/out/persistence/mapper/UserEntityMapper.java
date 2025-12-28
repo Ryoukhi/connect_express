@@ -1,72 +1,80 @@
 package com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import com.eadl.connect_backend.domain.model.user.Admin;
 import com.eadl.connect_backend.domain.model.user.Client;
-import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.Technician;
 import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.UserEntity;
 
 public class UserEntityMapper {
 
-	public static UserEntity toEntity(User model) {
-		if (model == null) return null;
-		UserEntity entity = new UserEntity();
-		entity.setIdUser(model.getIdUser());
-		entity.setFirstName(model.getFirstName());
-		entity.setLastName(model.getLastName());
-		entity.setEmail(model.getEmail());
-		entity.setPhone(model.getPhone());
-		entity.setPassword(model.getPassword());
-		entity.setRole(model.getRole() != null ? model.getRole() : Role.CLIENT);
-		entity.setCreatedAt(model.getCreatedAt());
-		entity.setUpdatedAt(model.getUpdatedAt());
-		entity.setActive(model.isActive());
-		entity.setEmailVerified(model.isEmailVerified());
-		entity.setPhoneVerified(model.isPhoneVerified());
-		entity.setProfilePhotoUrl(model.getProfilePhotoUrl());
-		return entity;
-	}
+    public UserEntity toEntity(User user) {
+        if (user == null) return null;
 
-	public static User toModel(UserEntity entity) {
-		if (entity == null) return null;
+        UserEntity entity = new UserEntity();
+        entity.setIdUser(user.getIdUser());
+        entity.setFirstName(user.getFirstName());
+        entity.setLastName(user.getLastName());
+        entity.setEmail(user.getEmail());
+        entity.setPhone(user.getPhone());
+        entity.setPassword(user.getPassword());
+        entity.setRole(user.getRole());
+        entity.setCreatedAt(user.getCreatedAt());
+        entity.setUpdatedAt(user.getUpdatedAt());
+        entity.setActive(user.isActive());
+        entity.setEmailVerified(user.isEmailVerified());
+        entity.setPhoneVerified(user.isPhoneVerified());
+        entity.setProfilePhotoUrl(user.getProfilePhotoUrl());
+        return entity;
+    }
 
-		Role role = entity.getRole();
-		User user;
-		if (role == Role.ADMIN) {
-			Admin admin = Admin.create(entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getPassword());
-			user = admin;
-		} else if (role == Role.TECHNICIAN) {
-			Technician tech = Technician.create(entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getPassword());
-			user = tech;
-		} else { // default to client
-			Client client = Client.create(entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getPassword(), null);
-			user = client;
-		}
+    public User toDomain(UserEntity entity) {
+        if (entity == null) return null;
 
-		user.setIdUser(entity.getIdUser());
-		user.setCreatedAt(entity.getCreatedAt());
-		user.setUpdatedAt(entity.getUpdatedAt());
-		user.setProfilePhotoUrl(entity.getProfilePhotoUrl());
+        User user;
+        switch (entity.getRole()) {
+            case ADMIN -> user = new Admin();
+            case TECHNICIAN -> user = new Technician();
+            default -> user = new Client();
+        }
 
-		if (entity.isActive()) user.activate(); else user.deactivate();
-		if (entity.isEmailVerified()) user.verifyEmail();
-		if (entity.isPhoneVerified()) user.verifyPhone();
+        user.restore(
+            entity.getIdUser(),
+            entity.getFirstName(),
+            entity.getLastName(),
+            entity.getEmail(),
+            entity.getPhone(),
+            entity.getPassword(),
+            entity.getRole(),
+            entity.getCreatedAt(),
+            entity.getUpdatedAt(),
+            entity.isActive(),
+            entity.isEmailVerified(),
+            entity.isPhoneVerified(),
+            entity.getProfilePhotoUrl()
+        );
 
-		return user;
-	}
+        return user;
+    }
 
-	public static List<UserEntity> toEntities(List<User> models) {
-		if (models == null) return null;
-		return models.stream().map(UserEntityMapper::toEntity).collect(Collectors.toList());
-	}
+    public List<UserEntity> toEntities(List<User> users) {
+        if (users == null) return List.of();
+        return users.stream().map(this::toEntity).toList();
+    }
 
-	public static List<User> toModels(List<UserEntity> entities) {
-		if (entities == null) return null;
-		return entities.stream().map(UserEntityMapper::toModel).collect(Collectors.toList());
-	}
+    public List<User> toDomains(List<UserEntity> entities) {
+        if (entities == null) return List.of();
+        return entities.stream().map(this::toDomain).toList();
+    }
 
+    public UserEntity toEntityIdOnly(Long userId) {
+        if (userId == null) {
+            throw new IllegalArgumentException("User id must not be null");
+        }
+
+        UserEntity entity = new UserEntity();
+        entity.setIdUser(userId);
+        return entity;
+    }
 }

@@ -1,5 +1,6 @@
 package com.eadl.connect_backend.application.service.review;
 
+import com.eadl.connect_backend.domain.model.review.Rating;
 import com.eadl.connect_backend.domain.model.review.Review;
 import com.eadl.connect_backend.domain.port.in.review.ReviewService;
 import com.eadl.connect_backend.domain.port.out.persistence.ReviewRepository;
@@ -10,87 +11,144 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Implémentation du service de gestion des avis
+ * Implémentation du service métier Review
+ * 
+ * <p>
+ * Ce service contient les règles métier liées à la gestion
+ * des avis clients (création, consultation, modification, suppression).
+ * </p>
+ *
+ * <p>
+ * Architecture : Hexagonale (Use Case / Application Service)
+ * </p>
  */
-@Service
-@RequiredArgsConstructor
-@Slf4j
-@Transactional
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ReservationRepository reservationRepository;
 
+    public ReviewServiceImpl(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Review createReview(Long idReservation, Long idClient, Long idTechnician, int rating, String comment) {
-        log.info("Création d'un avis pour la réservation id={}", idReservation);
+    public Review createReview() {
+        throw new UnsupportedOperationException(
+            "La création d'un avis nécessite des paramètres métier"
+        );
+    }
 
-        if (reviewRepository.existsByReservationId(idReservation)) {
-            throw new IllegalStateException("Un avis existe déjà pour cette réservation");
-        }
+    /**
+     * Crée un nouvel avis client
+     *
+     * @param idClient identifiant du client
+     * @param rating note attribuée
+     * @param comment commentaire du client
+     * @return avis créé
+     */
+    public Review createReview(Long idClient, Rating rating, String comment) {
 
-        var reservation = reservationRepository.findById(idReservation)
-                .orElseThrow(() -> new EntityNotFoundException("Réservation introuvable"));
+        validateRating(rating);
 
-        if (!reservation.isCompleted()) {
-            throw new IllegalStateException("L'avis ne peut être créé que pour une réservation complétée");
-        }
+        Review review = new Review();
+        review.setIdClient(idClient);
+        review.setRating(rating);
+        review.setComment(comment);
+        review.setCreatedAt(LocalDateTime.now());
 
-        if (!reservation.getIdClient().equals(idClient) || !reservation.getIdTechnician().equals(idTechnician)) {
-            throw new IllegalArgumentException("Données de réservation incompatibles avec le client/technicien fournis");
-        }
-
-        Review review = Review.create(idReservation, idClient, idTechnician, rating, comment);
         return reviewRepository.save(review);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Review> getReviewById(Long idReview) {
         return reviewRepository.findById(idReview);
     }
 
-    @Override
-    public Optional<Review> getReviewByReservation(Long idReservation) {
-        return reviewRepository.findByReservationId(idReservation);
-    }
-
-    @Override
-    public List<Review> getTechnicianReviews(Long idTechnician) {
-        return reviewRepository.findByTechnicianId(idTechnician);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Review> getClientReviews(Long idClient) {
         return reviewRepository.findByClientId(idClient);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Review updateReview(Long idReview, int newRating, String newComment) {
-        log.info("Mise à jour de l'avis id={}", idReview);
-        Review existing = reviewRepository.findById(idReview)
-                .orElseThrow(() -> new EntityNotFoundException("Avis introuvable"));
+    public Review updateReview(Long idReview, Review updatedReview) {
 
-        existing.updateReview(newRating, newComment);
-        return reviewRepository.save(existing);
+        Review existingReview = reviewRepository.findById(idReview)
+            .orElseThrow(() -> new IllegalArgumentException(
+                "Avis introuvable pour l'id : " + idReview
+            ));
+
+        validateRating(updatedReview.getRating());
+
+        existingReview.setRating(updatedReview.getRating());
+        existingReview.setComment(updatedReview.getComment());
+
+        return reviewRepository.update(idReview, existingReview);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteReview(Long idAdmin, Long idReview, String reason) {
-        log.info("Suppression de l'avis id={} par admin id={} raison={}", idReview, idAdmin, reason);
-        Review existing = reviewRepository.findById(idReview)
-                .orElseThrow(() -> new EntityNotFoundException("Avis introuvable"));
 
-        // For auditability you might want to store deletion reason in an audit log; here we just log and delete
-        reviewRepository.delete(existing);
+        if (reason == null || reason.isBlank()) {
+            throw new IllegalArgumentException(
+                "Une raison est obligatoire pour supprimer un avis"
+            );
+        }
+
+        Review review = reviewRepository.findById(idReview)
+            .orElseThrow(() -> new IllegalArgumentException(
+                "Avis introuvable pour l'id : " + idReview
+            ));
+
+        // Ici tu peux tracer l'action (audit)
+        // auditService.logAdminAction(idAdmin, "DELETE_REVIEW", reason);
+
+        reviewRepository.delete(review);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Long countReviews(Long idTechnician) {
-        return reviewRepository.countByTechnicianId(idTechnician);
+    public Long countReviews() {
+        return reviewRepository.count();
     }
-    
+
+    /* =========================
+       = MÉTHODES MÉTIER PRIVÉES =
+       ========================= */
+
+    /**
+     * Valide la note attribuée à un avis
+     */
+    private void validateRating(Rating rating) {
+        if (rating == null) {
+            throw new IllegalArgumentException("La note est obligatoire");
+        }
+
+        if (rating.getValue() < 1 || rating.getValue() > 5) {
+            throw new IllegalArgumentException(
+                "La note doit être comprise entre 1 et 5"
+            );
+        }
+    }
 }

@@ -23,5 +23,10 @@ public interface AuthService {
      */
     User register(User user);
 
+    /**
+     * Modifier le profil d'un utilisateur
+     */
+
+    User updateProfile(Long idUser, User updatedUser);
     
 }

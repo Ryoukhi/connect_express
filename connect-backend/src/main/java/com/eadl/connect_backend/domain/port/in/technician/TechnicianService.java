@@ -10,23 +10,16 @@ import java.util.Optional;
  * Use cases généraux pour les techniciens
  */
 public interface TechnicianService {
-    
-    Optional<Technician> getTechnicianById(Long idTechnician);
 
-    Optional<Technician> getTechnicianByUserId(Long idUser);
-
-    List<Technician> getAllTechnicians();
+    Technician registerTechnician(Technician technician);
 
     List<Technician> getActiveTechnicians();
 
-    List<Technician> getVerifiedTechnicians();
-
-    Technician createTechnician(String firstName, String lastName, String email, String phone, String password);
-
-    Technician updateTechnician(Long idTechnician, String firstName, String lastName, String phone);
-
-    Long countTechnicians();
-
     Long countActiveTechnicians();
 
+    List<Technician> getTechniciansByCity(String city);
+
+    Optional<Technician> getTechnicianById(Long technicianId);
+
+    void validateKyc(Long technicianId);
 }

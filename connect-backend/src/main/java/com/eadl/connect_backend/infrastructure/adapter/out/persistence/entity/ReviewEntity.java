@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ReviewEntity {
 
     @Id
@@ -30,10 +29,9 @@ public class ReviewEntity {
     @JoinColumn(name = "id_client")
     private UserEntity client;
 
-    // ManyToOne -> technician being reviewed
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_technician")
-    private UserEntity technician;
+    // OneToOne -> reservation, being reviewed
+    @OneToOne(mappedBy = "review", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ReservationEntity reservation;
 
     @PrePersist
     protected void onCreate() {

@@ -1,128 +1,109 @@
 package com.eadl.connect_backend.application.service.user;
 
-import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.User;
+import com.eadl.connect_backend.domain.port.exception.InvalidPasswordException;
+import com.eadl.connect_backend.domain.port.exception.UserNotFoundException;
 import com.eadl.connect_backend.domain.port.in.user.UserService;
 import com.eadl.connect_backend.domain.port.out.persistence.UserRepository;
+import com.eadl.connect_backend.domain.port.out.security.CurrentUserProvider;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.Optional;
 
-/**
- * Implémentation du service de gestion des utilisateurs
- */
 @Service
-@RequiredArgsConstructor
-@Slf4j
-@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CurrentUserProvider currentUserProvider;
     private final PasswordEncoder passwordEncoder;
 
+    public UserServiceImpl(
+            UserRepository userRepository,
+            CurrentUserProvider currentUserProvider,
+            PasswordEncoder passwordEncoder
+    ) {
+        this.userRepository = userRepository;
+        this.currentUserProvider = currentUserProvider;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    // ===================== READ =====================
+
     @Override
-    public Optional<User> getUserById(Long idUser) {
-        return userRepository.findById(idUser);
+    public Optional<User> getById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public Optional<User> getUserByPhone(String phone) {
+    public Optional<User> getByPhone(String phone) {
         return userRepository.findByPhone(phone);
     }
 
+    // ===================== UPDATE =====================
+
+    /**
+     * Met à jour le profil de l'utilisateur connecté
+     */
     @Override
-    public User updateProfile(Long idUser, String firstName, String lastName, String phone) {
-        log.info("Mise à jour du profil utilisateur id={}", idUser);
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+    public User updateProfile(User user) {
+        Long currentUserId = currentUserProvider.getCurrentUserId();
 
-        // If phone is changed, ensure it's not already taken by another user
-        if (phone != null && !phone.equals(user.getPhone()) && userRepository.existsByPhone(phone)) {
-            throw new IllegalArgumentException("Ce numéro de téléphone est déjà utilisé");
-        }
+        User existingUser = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + currentUserId));
 
-        user.updateProfile(firstName == null ? user.getFirstName() : firstName,
-                lastName == null ? user.getLastName() : lastName,
-                phone == null ? user.getPhone() : phone);
+        existingUser.updateProfile(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPhone()
+        );
 
-        return userRepository.save(user);
+        return userRepository.save(existingUser);
     }
 
     @Override
-    public void changePassword(Long idUser, String oldPassword, String newPassword) {
-        log.info("Changement de mot de passe pour l'utilisateur id={}", idUser);
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+    public void changePassword(String currentPassword, String newPassword) {
+        Long currentUserId = currentUserProvider.getCurrentUserId();
 
-        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new IllegalArgumentException("Mot de passe actuel incorrect");
+        User user = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + currentUserId));
+
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new InvalidPasswordException("Mot de passe actuel incorrect");
         }
 
         user.changePassword(passwordEncoder.encode(newPassword));
+
         userRepository.save(user);
     }
 
-    @Override
-    public User verifyEmail(Long idUser, String verificationToken) {
-        log.info("Vérification d'email pour l'utilisateur id={}", idUser);
-        if (verificationToken == null || verificationToken.trim().isEmpty()) {
-            throw new IllegalArgumentException("Token de vérification invalide");
-        }
-
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
-
-        // Token validation is out of scope here; accept provided token for now
-        user.verifyEmail();
-        return userRepository.save(user);
-    }
 
     @Override
-    public User verifyPhone(Long idUser, String verificationCode) {
-        log.info("Vérification de téléphone pour l'utilisateur id={}", idUser);
-        if (verificationCode == null || verificationCode.trim().isEmpty()) {
-            throw new IllegalArgumentException("Code de vérification invalide");
-        }
-
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
-
-        // Code validation is out of scope here; accept provided code for now
-        user.verifyPhone();
-        return userRepository.save(user);
-    }
-
-    @Override
-    public User activateAccount(Long idUser) {
-        log.info("Activation du compte utilisateur id={}", idUser);
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+    public User activate(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
 
         user.activate();
+
         return userRepository.save(user);
     }
 
     @Override
-    public User deactivateAccount(Long idUser) {
-        log.info("Désactivation du compte utilisateur id={}", idUser);
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur introuvable"));
+    public User deactivate(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
 
         user.deactivate();
+
         return userRepository.save(user);
     }
+
+    // ===================== CHECK =====================
 
     @Override
     public boolean emailExists(String email) {
@@ -133,25 +114,4 @@ public class UserServiceImpl implements UserService {
     public boolean phoneExists(String phone) {
         return userRepository.existsByPhone(phone);
     }
-
-    @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public List<User> getUsersByRole(String role) {
-        if (role == null || role.trim().isEmpty()) {
-            throw new IllegalArgumentException("Role must be provided");
-        }
-
-        Role r;
-        try {
-            r = Role.valueOf(role.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Role inconnu: " + role);
-        }
-
-        return userRepository.findByRole(r);
-    } 
 }

@@ -195,4 +195,26 @@ public abstract class User {
                 ", active=" + active +
                 '}';
     }
+
+    // Méthode de restauration pour le mapping depuis l'entité
+    public void restore(Long idUser, String firstName, String lastName,
+                        String email, String phone, String password,
+                        Role role, LocalDateTime createdAt,
+                        LocalDateTime updatedAt, boolean active,
+                        boolean emailVerified, boolean phoneVerified,
+                        String profilePhotoUrl) {
+        this.idUser = idUser;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.role = role;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.active = active;
+        this.emailVerified = emailVerified;
+        this.phoneVerified = phoneVerified;
+        this.profilePhotoUrl = profilePhotoUrl;
+    }
 }

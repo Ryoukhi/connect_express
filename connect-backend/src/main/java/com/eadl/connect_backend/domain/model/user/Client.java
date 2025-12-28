@@ -6,7 +6,7 @@ package com.eadl.connect_backend.domain.model.user;
 public class Client extends User {
     private String address;
 
-    private Client() {
+    public Client() {
         super();
         this.role = Role.CLIENT;
     }

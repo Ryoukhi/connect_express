@@ -1,5 +1,6 @@
 package com.eadl.connect_backend.infrastructure.adapter.out.persistence.repository.jpa;
 
-public interface CategoryJpaRepository {
+public interface AdminJpaRepository {
+
 
 }

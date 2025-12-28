@@ -54,6 +54,13 @@ public class Rating {
         return value == rating.value;
     }
 
+    public static Rating fromValue(Integer value) {
+        if (value == null) {
+            throw new IllegalArgumentException("Rating cannot be null");
+        }
+        return new Rating(value);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(value);

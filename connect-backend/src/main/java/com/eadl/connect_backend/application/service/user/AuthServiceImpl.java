@@ -83,4 +83,10 @@ public class AuthServiceImpl implements AuthService {
         return savedUser;
     }
 
+    @Override
+    public User updateProfile(Long idUser, User updatedUser) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateProfile'");
+    }
+
 }

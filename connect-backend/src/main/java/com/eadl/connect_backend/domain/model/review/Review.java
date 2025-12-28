@@ -8,23 +8,19 @@ import java.util.Objects;
  */
 public class Review {
     private Long idReview;
-    private Long idReservation;
     private Long idClient;
-    private Long idTechnician;
     private Rating rating;
     private String comment;
     private LocalDateTime createdAt;
 
-    private Review() {}
+    public Review() {}
 
     // ========== Factory Method ==========
     public static Review create(Long idReservation, Long idClient, 
                                Long idTechnician, int ratingValue, 
                                String comment) {
         Review review = new Review();
-        review.idReservation = idReservation;
         review.idClient = idClient;
-        review.idTechnician = idTechnician;
         review.rating = Rating.of(ratingValue);
         review.comment = comment;
         review.createdAt = LocalDateTime.now();
@@ -51,16 +47,8 @@ public class Review {
         return idReview;
     }
 
-    public Long getIdReservation() {
-        return idReservation;
-    }
-
     public Long getIdClient() {
         return idClient;
-    }
-
-    public Long getIdTechnician() {
-        return idTechnician;
     }
 
     public Rating getRating() {
@@ -85,6 +73,13 @@ public class Review {
         this.rating = rating;
     }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
+    }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;

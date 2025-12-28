@@ -3,67 +3,99 @@ package com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.domain.model.reservation.Reservation;
+import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.ReservationEntity;
+import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.ReviewEntity;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.UserEntity;
 
+/**
+ * Mapper pour convertir entre Reservation (domaine) et ReservationEntity (JPA)
+ */
+@Component
 public class ReservationEntityMapper {
 
-	public static ReservationEntity toEntity(Reservation model) {
-		if (model == null) return null;
-		ReservationEntity entity = new ReservationEntity();
-		entity.setIdReservation(model.getIdReservation());
-		entity.setDateRequested(model.getDateRequested());
-		entity.setScheduledTime(model.getScheduledTime());
-		entity.setStatus(model.getStatus());
-		entity.setPrice(model.getPrice());
-		entity.setAddress(model.getAddress());
-		entity.setDescription(model.getDescription());
-		entity.setCancellationReason(model.getCancellationReason());
-		entity.setCompletedAt(model.getCompletedAt());
-		entity.setCreatedAt(model.getCreatedAt());
-		entity.setUpdatedAt(model.getUpdatedAt());
+    private final UserEntityMapper userEntityMapper;
+	private final ReviewEntityMapper reviewEntityMapper;
 
-		if (model.getIdClient() != null) {
-			UserEntity client = new UserEntity();
-			client.setIdUser(model.getIdClient());
-			entity.setClient(client);
-		}
-		if (model.getIdTechnician() != null) {
-			UserEntity tech = new UserEntity();
-			tech.setIdUser(model.getIdTechnician());
-			entity.setTechnician(tech);
-		}
+    public ReservationEntityMapper(UserEntityMapper userEntityMapper, ReviewEntityMapper reviewEntityMapper) {
+        this.userEntityMapper = userEntityMapper;
+        this.reviewEntityMapper = reviewEntityMapper;
+    }
 
-		return entity;
-	}
+    /* ===========================
+       Conversion Domaine → Entity
+       =========================== */
 
-	public static Reservation toModel(ReservationEntity entity) {
-		if (entity == null) return null;
+    public ReservationEntity toEntity(Reservation reservation) {
+        if (reservation == null) return null;
 
-		Long clientId = entity.getClient() != null ? entity.getClient().getIdUser() : null;
-		Long techId = entity.getTechnician() != null ? entity.getTechnician().getIdUser() : null;
+        ReservationEntity entity = new ReservationEntity();
 
-		Reservation model = Reservation.create(clientId, techId,
-				entity.getScheduledTime(), entity.getPrice(), entity.getAddress(), entity.getDescription());
+        entity.setIdReservation(reservation.getIdReservation());
+        entity.setClient(userEntityMapper.toEntityIdOnly(reservation.getIdClient()));
+        entity.setTechnician(userEntityMapper.toEntityIdOnly(reservation.getIdTechnician()));
+		entity.setReview(reviewEntityMapper.toEntityIdOnly(reservation.getIdReview()));
+        entity.setScheduledTime(reservation.getScheduledTime());
+        entity.setDateRequested(reservation.getDateRequested());
+        entity.setStatus(reservation.getStatus() != null ? reservation.getStatus() : ReservationStatus.PENDING);
+        entity.setPrice(reservation.getPrice());
+        entity.setAddress(reservation.getAddress());
+        entity.setDescription(reservation.getDescription());
+        entity.setCancellationReason(reservation.getCancellationReason());
+        entity.setCreatedAt(reservation.getCreatedAt());
+        entity.setUpdatedAt(reservation.getUpdatedAt());
+        entity.setCompletedAt(reservation.getCompletedAt());
 
-		model.setIdReservation(entity.getIdReservation());
-		if (entity.getStatus() != null) model.setStatus(entity.getStatus());
-		model.setCreatedAt(entity.getCreatedAt());
-		model.setUpdatedAt(entity.getUpdatedAt());
-		model.setCompletedAt(entity.getCompletedAt());
+        if (reservation.getIdReview() != null) {
+            ReviewEntity reviewEntity = new ReviewEntity();
+            reviewEntity.setIdReview(reservation.getIdReview());
+            entity.setReview(reviewEntity);
+        }
 
-		return model;
-	}
+        return entity;
+    }
 
-	public static List<ReservationEntity> toEntities(List<Reservation> models) {
-		if (models == null) return null;
-		return models.stream().map(ReservationEntityMapper::toEntity).collect(Collectors.toList());
-	}
+    /* ===========================
+       Conversion Entity → Domaine
+       =========================== */
 
-	public static List<Reservation> toModels(List<ReservationEntity> entities) {
-		if (entities == null) return null;
-		return entities.stream().map(ReservationEntityMapper::toModel).collect(Collectors.toList());
-	}
+    public Reservation toDomain(ReservationEntity entity) {
+        if (entity == null) return null;
 
+        Reservation reservation = new Reservation();
+
+        reservation.setIdReservation(entity.getIdReservation());
+        reservation.setIdClient(entity.getClient() != null ? entity.getClient().getIdUser() : null);
+        reservation.setIdTechnician(entity.getTechnician() != null ? entity.getTechnician().getIdUser() : null);
+        reservation.setScheduledTime(entity.getScheduledTime());
+        reservation.setDateRequested(entity.getDateRequested());
+        reservation.setStatus(entity.getStatus());
+        reservation.setPrice(entity.getPrice());
+        reservation.setAddress(entity.getAddress());
+        reservation.setDescription(entity.getDescription());
+        reservation.setCancellationReason(entity.getCancellationReason());
+        reservation.setCreatedAt(entity.getCreatedAt());
+        reservation.setUpdatedAt(entity.getUpdatedAt());
+        reservation.setCompletedAt(entity.getCompletedAt());
+        reservation.setIdReview(entity.getReview() != null ? entity.getReview().getIdReview() : null);
+
+        return reservation;
+    }
+
+    /* ===========================
+       Listes
+       =========================== */
+
+    public List<ReservationEntity> toEntities(List<Reservation> reservations) {
+        if (reservations == null) return null;
+        return reservations.stream().map(this::toEntity).collect(Collectors.toList());
+    }
+
+    public List<Reservation> toDomains(List<ReservationEntity> entities) {
+        if (entities == null) return null;
+        return entities.stream().map(this::toDomain).collect(Collectors.toList());
+    }
 }

@@ -3,225 +3,209 @@ package com.eadl.connect_backend.application.service.reservation;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eadl.connect_backend.domain.model.notification.NotificationType;
 import com.eadl.connect_backend.domain.model.reservation.Reservation;
 import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
+import com.eadl.connect_backend.domain.port.exception.AvailabilityConflictException;
+import com.eadl.connect_backend.domain.port.exception.BusinessException;
 import com.eadl.connect_backend.domain.port.exception.ReservationNotFoundException;
-import com.eadl.connect_backend.domain.port.in.notification.NotificationService;
 import com.eadl.connect_backend.domain.port.in.reservation.ReservationService;
 import com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
+
+/**
+ * Implémentation des cas d'utilisation liés aux réservations.
+ *
+ * Couche Application :
+ * - orchestre les règles métier
+ * - ne dépend que des ports
+ * - transactionnelle
+ */
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class ReservationServiceImpl implements ReservationService {
-    
+
     private final ReservationRepository reservationRepository;
-    private final NotificationService notificationService;
-    
-    public ReservationServiceImpl(ReservationRepository reservationRepository,
-                                 NotificationService notificationService) {
-        this.reservationRepository = reservationRepository;
-        this.notificationService = notificationService;
-    }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Reservation createReservation(Long idClient, Long idTechnician, 
-                                        LocalDateTime scheduledTime, BigDecimal price,
-                                        String address, String description) {
-        // Créer la réservation
-        Reservation reservation = Reservation.create(
-            idClient, idTechnician, scheduledTime, price, address, description
+    public Reservation createReservation(Reservation reservation) {
+
+        validateReservationForCreation(reservation);
+
+        boolean available = reservationRepository.existsTechnicianReservationBetween(
+                reservation.getIdTechnician(),
+                reservation.getScheduledTime(),
+                reservation.getScheduledTime()
         );
-        
-        reservation = reservationRepository.save(reservation);
-        
-        // Notifier le technicien
-        notificationService.sendNotification(
-            idTechnician,
-            NotificationType.RESERVATION_CREATED,
-            "Nouvelle demande de réservation",
-            "Vous avez reçu une nouvelle demande de réservation"
-        );
-        
-        return reservation;
+
+        if (available) {
+            throw new AvailabilityConflictException(
+                    "Technician is not available at the requested time");
+        }
+
+        reservation.setStatus(ReservationStatus.PENDING);
+        reservation.setCreatedAt(LocalDateTime.now());
+
+        return reservationRepository.save(reservation);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public Optional<Reservation> getReservationById(Long idReservation) {
         return reservationRepository.findById(idReservation);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> getClientReservations(Long idClient) {
         return reservationRepository.findByClientId(idClient);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> getTechnicianReservations(Long idTechnician) {
         return reservationRepository.findByTechnicianId(idTechnician);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    @Transactional(readOnly = true)
-    public List<Reservation> getTechnicianActiveReservations(Long idTechnician) {
-        return reservationRepository.findActiveTechnicianReservations(idTechnician);
-    }
-    
-    @Override
-    @Transactional(readOnly = true)
-    public List<Reservation> getTechnicianPendingReservations(Long idTechnician) {
-        return reservationRepository.findByTechnicianIdAndStatus(
-            idTechnician, ReservationStatus.PENDING
-        );
-    }
-    
-    @Override
-    @Transactional(readOnly = true)
-    public List<Reservation> getReservationsByStatus(ReservationStatus status) {
-        return reservationRepository.findByStatus(status);
-    }
-    
-    @Override
-    public Reservation acceptReservation(Long idReservation, Long idTechnician) {
-        Reservation reservation = reservationRepository.findById(idReservation)
-            .orElseThrow(() -> new ReservationNotFoundException("Réservation non trouvée"));
-        
-        // Vérifier que c'est bien le technicien de la réservation
-        if (!reservation.getIdTechnician().equals(idTechnician)) {
-            throw new IllegalStateException("Vous n'êtes pas le technicien de cette réservation");
+    public Reservation updateReservation(Long idReservation, Reservation updated) {
+
+        Reservation existing = getExistingReservation(idReservation);
+
+        if (existing.getStatus() == ReservationStatus.CANCELLED ||
+            existing.getStatus() == ReservationStatus.COMPLETED) {
+            throw new BusinessException("Cannot update a finished or cancelled reservation");
         }
-        
-        // Accepter
-        reservation.accept();
-        reservation = reservationRepository.save(reservation);
-        
-        // Notifier le client
-        notificationService.sendNotification(
-            reservation.getIdClient(),
-            NotificationType.RESERVATION_ACCEPTED,
-            "Réservation acceptée",
-            "Le technicien a accepté votre réservation"
-        );
-        
-        return reservation;
+
+        updated.setUpdatedAt(LocalDateTime.now());
+        return reservationRepository.update(idReservation, updated);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Reservation rejectReservation(Long idReservation, Long idTechnician) {
-        Reservation reservation = reservationRepository.findById(idReservation)
-            .orElseThrow(() -> new ReservationNotFoundException("Réservation non trouvée"));
-        
-        if (!reservation.getIdTechnician().equals(idTechnician)) {
-            throw new IllegalStateException("Vous n'êtes pas le technicien de cette réservation");
+    public Reservation cancelReservation(Long idReservation, Long cancelledByUserId, String reason) {
+
+        Reservation reservation = getExistingReservation(idReservation);
+
+        if (reservation.getStatus() == ReservationStatus.CANCELLED) {
+            throw new BusinessException("Reservation already cancelled");
         }
-        
-        reservation.reject();
-        reservation = reservationRepository.save(reservation);
-        
-        // Notifier le client
-        notificationService.sendNotification(
-            reservation.getIdClient(),
-            NotificationType.RESERVATION_REJECTED,
-            "Réservation refusée",
-            "Le technicien a refusé votre réservation"
-        );
-        
-        return reservation;
-    }
-    
-    @Override
-    public Reservation startRoute(Long idReservation, Long idTechnician) {
-        Reservation reservation = reservationRepository.findById(idReservation)
-            .orElseThrow(() -> new ReservationNotFoundException("Réservation non trouvée"));
-        
-        reservation.startRoute();
-        reservation = reservationRepository.save(reservation);
-        
-        // Notifier le client
-        notificationService.sendNotification(
-            reservation.getIdClient(),
-            NotificationType.TECHNICIAN_EN_ROUTE,
-            "Technicien en route",
-            "Le technicien est en route vers votre domicile"
-        );
-        
-        return reservation;
-    }
-    
-    @Override
-    public Reservation startWork(Long idReservation, Long idTechnician) {
-        Reservation reservation = reservationRepository.findById(idReservation)
-            .orElseThrow(() -> new ReservationNotFoundException("Réservation non trouvée"));
-        reservation.startWork();
-        reservation = reservationRepository.save(reservation);
 
-        // Notifier le client
-        notificationService.sendNotification(
-            reservation.getIdClient(),
-            NotificationType.JOB_STARTED,
-            "Intervention commencée",
-            "Le technicien a commencé l'intervention"
-        );
-        return reservation;
+        reservation.setStatus(ReservationStatus.CANCELLED);
+        reservation.setCancellationReason(reason);
+        reservation.setUpdatedAt(LocalDateTime.now());
+
+        return reservationRepository.update(idReservation, reservation);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Reservation completeReservation(Long idReservation, Long idTechnician) {
-        Reservation reservation = reservationRepository.findById(idReservation)
-            .orElseThrow(() -> new ReservationNotFoundException("Réservation non trouvée"));
-        
-        reservation.complete();
-        reservation = reservationRepository.save(reservation);
-        
-        // Notifier le client
-        notificationService.sendNotification(
-            reservation.getIdClient(),
-            NotificationType.JOB_COMPLETED,
-            "Réservation terminée",
-            "Le technicien a terminé l'intervention"
-        );
-        
-        return reservation;
+    public Reservation changeStatus(Long idReservation, ReservationStatus newStatus) {
+
+        Reservation reservation = getExistingReservation(idReservation);
+        reservation.setStatus(newStatus);
+        reservation.setUpdatedAt(LocalDateTime.now());
+
+        return reservationRepository.update(idReservation, reservation);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Reservation cancelReservation(Long idReservation, Long userId, String reason) {
-        Reservation reservation = reservationRepository.findById(idReservation)
-            .orElseThrow(() -> new ReservationNotFoundException("Réservation non trouvée"));
-        
-        reservation.cancel(reason);
-        reservation = reservationRepository.save(reservation);
-        // Notifier le technicien
-        notificationService.sendNotification(
-            reservation.getIdTechnician(),
-            NotificationType.RESERVATION_CANCELLED,
-            "Réservation annulée",
-            "La réservation a été annulée. Raison: " + reason
-        );
+    public Reservation completeReservation(Long idReservation) {
 
-        return reservation;
-    }   
+        Reservation reservation = getExistingReservation(idReservation);
 
-    @Override
-    public Long countCompletedReservations(Long idTechnician) {
-        return reservationRepository.countCompletedByTechnicianId(
-            idTechnician
-        );
+        if (reservation.getStatus() != ReservationStatus.ACCEPTED) {
+            throw new BusinessException("Only accepted reservations can be completed");
+        }
+
+        reservation.setStatus(ReservationStatus.COMPLETED);
+        reservation.setCompletedAt(LocalDateTime.now());
+        reservation.setUpdatedAt(LocalDateTime.now());
+
+        return reservationRepository.update(idReservation, reservation);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void deleteReservation(Long idReservation) {
-        Reservation reservation = reservationRepository.findById(idReservation)
-            .orElseThrow(() -> new ReservationNotFoundException("Réservation non trouvée"));
-        
+    @Transactional(readOnly = true)
+    public boolean isTechnicianAvailable(
+            Long idTechnician,
+            LocalDateTime start,
+            LocalDateTime end) {
+
+        return !reservationRepository.existsTechnicianReservationBetween(
+                idTechnician, start, end);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteReservation(Long idReservation, Long idAdmin) {
+
+        Reservation reservation = getExistingReservation(idReservation);
         reservationRepository.delete(reservation);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Long countReservations() {
+        return reservationRepository.count();
+    }
+
+    /* =======================
+       Méthodes privées
+       ======================= */
+
+    private Reservation getExistingReservation(Long idReservation) {
+        return reservationRepository.findById(idReservation)
+                .orElseThrow(() ->
+                        new ReservationNotFoundException(
+                                "Reservation not found with id: " + idReservation));
+    }
+
+    private void validateReservationForCreation(Reservation reservation) {
+
+        if (reservation.getIdClient() == null ||
+            reservation.getIdTechnician() == null ||
+            reservation.getScheduledTime() == null) {
+            throw new BusinessException("Invalid reservation data");
+        }
+
+        if (reservation.getScheduledTime().isBefore(LocalDateTime.now())) {
+            throw new BusinessException("Reservation time must be in the future");
+        }
     }
 }

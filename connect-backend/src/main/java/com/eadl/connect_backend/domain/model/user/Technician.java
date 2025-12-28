@@ -5,7 +5,7 @@ package com.eadl.connect_backend.domain.model.user;
  */
 public class Technician extends User {
 
-    private Technician() {
+    public Technician() {
         super();
         this.role = Role.TECHNICIAN;
         this.active = false; // Inactif jusqu'à validation KYC

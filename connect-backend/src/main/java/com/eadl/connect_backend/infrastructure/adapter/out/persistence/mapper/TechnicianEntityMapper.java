@@ -8,7 +8,7 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.Us
 
 public class TechnicianEntityMapper {
 
-	public static UserEntity toEntity(Technician model) {
+	public UserEntity toEntity(Technician model) {
 		if (model == null) return null;
 		UserEntity entity = new UserEntity();
 		entity.setIdUser(model.getIdUser());
@@ -27,7 +27,7 @@ public class TechnicianEntityMapper {
 		return entity;
 	}
 
-	public static Technician toModel(UserEntity entity) {
+	public Technician toModel(UserEntity entity) {
 		if (entity == null) return null;
 		Technician tech = Technician.create(entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getPassword());
 		tech.setIdUser(entity.getIdUser());
@@ -41,14 +41,14 @@ public class TechnicianEntityMapper {
 		return tech;
 	}
 
-	public static List<UserEntity> toEntities(List<Technician> models) {
+	public List<UserEntity> toEntities(List<Technician> models) {
 		if (models == null) return null;
-		return models.stream().map(TechnicianEntityMapper::toEntity).collect(Collectors.toList());
+		return models.stream().map(this::toEntity).collect(Collectors.toList());
 	}
 
-	public static List<Technician> toModels(List<UserEntity> entities) {
+	public List<Technician> toModels(List<UserEntity> entities) {
 		if (entities == null) return null;
-		return entities.stream().map(TechnicianEntityMapper::toModel).collect(Collectors.toList());
+		return entities.stream().map(this::toModel).collect(Collectors.toList());
 	}
 
 }

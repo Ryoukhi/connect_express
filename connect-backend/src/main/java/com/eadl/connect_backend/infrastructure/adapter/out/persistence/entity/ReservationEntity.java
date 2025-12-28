@@ -65,8 +65,14 @@ public class ReservationEntity {
     @JoinColumn(name = "id_technician")
     private UserEntity technician;
 
+    // Facture associated with this reservation
     @OneToOne(mappedBy = "reservation", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
     private FactureEntity facture;
+
+    // Review associated with this reservation
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_review")
+    private ReviewEntity review;
     
     @PrePersist
     protected void onCreate() {

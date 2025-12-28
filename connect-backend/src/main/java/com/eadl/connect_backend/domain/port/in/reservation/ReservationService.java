@@ -2,92 +2,81 @@ package com.eadl.connect_backend.domain.port.in.reservation;
 
 import com.eadl.connect_backend.domain.model.reservation.Reservation;
 import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Port IN - Service de réservation
- * Use cases pour la gestion des réservations
+ * Port IN - ReservationService
+ *
+ * Cas d'utilisation liés au cycle de vie d'une réservation.
+ * Interface exposée au monde extérieur (API, UI, etc.).
  */
 public interface ReservationService {
-    
+
     /**
      * Crée une nouvelle réservation
      */
-    Reservation createReservation(Long idClient, Long idTechnician, 
-                                 LocalDateTime scheduledTime, BigDecimal price,
-                                 String address, String description);
-    
+    Reservation createReservation(Reservation reservation);
+
     /**
-     * Récupère une réservation par son ID
+     * Récupère une réservation par son identifiant
      */
     Optional<Reservation> getReservationById(Long idReservation);
-    
+
     /**
      * Récupère toutes les réservations d'un client
      */
     List<Reservation> getClientReservations(Long idClient);
-    
+
     /**
      * Récupère toutes les réservations d'un technicien
      */
     List<Reservation> getTechnicianReservations(Long idTechnician);
-    
+
     /**
-     * Récupère les réservations actives d'un technicien
+     * Met à jour une réservation
      */
-    List<Reservation> getTechnicianActiveReservations(Long idTechnician);
-    
-    /**
-     * Récupère les réservations en attente d'un technicien
-     */
-    List<Reservation> getTechnicianPendingReservations(Long idTechnician);
-    
-    /**
-     * Récupère les réservations par statut
-     */
-    List<Reservation> getReservationsByStatus(ReservationStatus status);
-    
-    /**
-     * Accepte une réservation (par le technicien)
-     */
-    Reservation acceptReservation(Long idReservation, Long idTechnician);
-    
-    /**
-     * Rejette une réservation (par le technicien)
-     */
-    Reservation rejectReservation(Long idReservation, Long idTechnician);
-    
-    /**
-     * Marque le technicien en route
-     */
-    Reservation startRoute(Long idReservation, Long idTechnician);
-    
-    /**
-     * Démarre l'intervention
-     */
-    Reservation startWork(Long idReservation, Long idTechnician);
-    
-    /**
-     * Termine l'intervention
-     */
-    Reservation completeReservation(Long idReservation, Long idTechnician);
-    
+    Reservation updateReservation(Long idReservation, Reservation reservation);
+
     /**
      * Annule une réservation
      */
-    Reservation cancelReservation(Long idReservation, Long userId, String reason);
-    
-    
-    /**
-     * Compte les réservations complétées d'un technicien
-     */
-    Long countCompletedReservations(Long idTechnician);
+    Reservation cancelReservation(
+            Long idReservation,
+            Long cancelledByUserId,
+            String reason
+    );
 
     /**
-     * Supprime une réservation
+     * Change le statut d'une réservation
      */
-    void deleteReservation(Long idReservation);
+    Reservation changeStatus(
+            Long idReservation,
+            ReservationStatus newStatus
+    );
+
+    /**
+     * Marque une réservation comme terminée
+     */
+    Reservation completeReservation(Long idReservation);
+
+    /**
+     * Vérifie la disponibilité d'un technicien sur un créneau
+     */
+    boolean isTechnicianAvailable(
+            Long idTechnician,
+            LocalDateTime start,
+            LocalDateTime end
+    );
+
+    /**
+     * Supprime une réservation (admin uniquement)
+     */
+    void deleteReservation(Long idReservation, Long idAdmin);
+
+    /**
+     * Compte le nombre total de réservations
+     */
+    Long countReservations();
 }

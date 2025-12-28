@@ -11,6 +11,7 @@ public class Reservation {
     private Long idReservation;
     private Long idClient;
     private Long idTechnician;
+    private Long idReview;
     private LocalDateTime dateRequested;
     private LocalDateTime scheduledTime;
     private ReservationStatus status;
@@ -22,25 +23,7 @@ public class Reservation {
     private LocalDateTime updatedAt;
     private LocalDateTime completedAt;
 
-    private Reservation() {}
-
-    // ========== Factory Method ==========
-    public static Reservation create(Long idClient, Long idTechnician, 
-                                    LocalDateTime scheduledTime, BigDecimal price, 
-                                    String address, String description) {
-        Reservation reservation = new Reservation();
-        reservation.idClient = idClient;
-        reservation.idTechnician = idTechnician;
-        reservation.dateRequested = LocalDateTime.now();
-        reservation.scheduledTime = scheduledTime;
-        reservation.status = ReservationStatus.PENDING;
-        reservation.price = price;
-        reservation.address = address;
-        reservation.description = description;
-        reservation.createdAt = LocalDateTime.now();
-        reservation.updatedAt = LocalDateTime.now();
-        return reservation;
-    }
+    public Reservation() {}
 
     // ========== Business Logic Methods ==========
     public void accept() {
@@ -204,6 +187,7 @@ public class Reservation {
         this.completedAt = completedAt;
     }
 
+    
     // ========== equals & hashCode ==========
     @Override
     public boolean equals(Object o) {
@@ -228,5 +212,45 @@ public class Reservation {
                 ", status=" + status +
                 ", price=" + price +
                 '}';
+    }
+
+    public Long getIdReview() {
+        return idReview;
+    }
+
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
+    }
+
+    public void setIdTechnician(Long idTechnician) {
+        this.idTechnician = idTechnician;
+    }
+
+    public void setIdReview(Long idReview) {
+        this.idReview = idReview;
+    }
+
+    public void setDateRequested(LocalDateTime dateRequested) {
+        this.dateRequested = dateRequested;
+    }
+
+    public void setScheduledTime(LocalDateTime scheduledTime) {
+        this.scheduledTime = scheduledTime;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCancellationReason(String cancellationReason) {
+        this.cancellationReason = cancellationReason;
     }
 }
