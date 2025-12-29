@@ -1,7 +1,10 @@
 package com.eadl.connect_backend.domain.port.out.persistence;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.jpa.repository.Query;
 
 import com.eadl.connect_backend.domain.model.review.Review;
 
@@ -39,4 +42,11 @@ public interface ReviewRepository {
      * Supprime un avis
      */
     void delete(Review review);
+
+    @Query("""
+        SELECT AVG(r.rating.value)
+        FROM Review r
+        WHERE r.idReview IN :reviewIds
+    """)
+    BigDecimal calculateAverageRating(List<Long> reviewIds);
 }

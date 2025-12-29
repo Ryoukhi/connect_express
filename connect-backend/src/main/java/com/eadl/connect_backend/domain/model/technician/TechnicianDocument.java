@@ -15,7 +15,7 @@ public class TechnicianDocument {
     private boolean verified;
     private String verificationNote;
 
-    private TechnicianDocument() {}
+    public TechnicianDocument() {}
 
     // ========== Factory Method ==========
     public static TechnicianDocument create(Long idProfile, DocumentType type, String url) {
@@ -81,6 +81,8 @@ public class TechnicianDocument {
         this.verificationNote = verificationNote;
     }
 
+    
+
     // ========== equals & hashCode ==========
     @Override
     public boolean equals(Object o) {
@@ -93,5 +95,21 @@ public class TechnicianDocument {
     @Override
     public int hashCode() {
         return Objects.hash(idDocument);
+    }
+
+    public void setIdProfile(Long idProfile) {
+        this.idProfile = idProfile;
+    }
+
+    public void setType(DocumentType type) {
+        this.type = type;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setUploadedAt(LocalDateTime uploadedAt) {
+        this.uploadedAt = uploadedAt;
     }
 }

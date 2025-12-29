@@ -52,6 +52,12 @@ public class UserEntity {
     @Column(nullable = false)
     private Role role;
 
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
+    private String neighborhood;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

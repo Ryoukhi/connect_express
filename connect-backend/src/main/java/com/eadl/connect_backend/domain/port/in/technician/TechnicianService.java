@@ -22,4 +22,8 @@ public interface TechnicianService {
     Optional<Technician> getTechnicianById(Long technicianId);
 
     void validateKyc(Long technicianId);
+
+    List<Technician> getTechniciansByNeighborhood(String neighborhood);
+
+    
 }

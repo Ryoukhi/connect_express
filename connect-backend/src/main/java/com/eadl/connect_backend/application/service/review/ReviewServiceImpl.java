@@ -4,14 +4,6 @@ import com.eadl.connect_backend.domain.model.review.Rating;
 import com.eadl.connect_backend.domain.model.review.Review;
 import com.eadl.connect_backend.domain.port.in.review.ReviewService;
 import com.eadl.connect_backend.domain.port.out.persistence.ReviewRepository;
-import com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import jakarta.persistence.EntityNotFoundException;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

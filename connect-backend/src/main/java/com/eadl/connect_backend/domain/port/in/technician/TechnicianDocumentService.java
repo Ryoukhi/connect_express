@@ -1,44 +1,43 @@
 package com.eadl.connect_backend.domain.port.in.technician;
 
 import com.eadl.connect_backend.domain.model.technician.TechnicianDocument;
-import com.eadl.connect_backend.domain.model.technician.DocumentType;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Port IN - Service de documents technicien
- * Use cases pour la gestion des documents KYC
+ * Service métier pour la gestion des documents KYC d’un technicien
  */
 public interface TechnicianDocumentService {
-    
+
     /**
-     * Upload un document
+     * Ajoute un nouveau document pour un profil de technicien
      */
-    TechnicianDocument uploadDocument(Long idProfile, DocumentType type, 
-                                     byte[] fileData, String fileName);
-    
+    TechnicianDocument addDocument(TechnicianDocument document);
+
+    /**
+     * Récupère tous les documents d’un profil de technicien
+     */
+    List<TechnicianDocument> getDocumentsByProfileId(Long technicianProfileId);
+
     /**
      * Récupère un document par son ID
      */
-    Optional<TechnicianDocument> getDocumentById(Long idDocument);
-    
+    Optional<TechnicianDocument> getDocumentById(Long documentId);
+
     /**
-     * Récupère tous les documents d'un profil
+     * Vérifie / valide un document KYC (Admin)
      */
-    List<TechnicianDocument> getDocumentsByProfile(Long idProfile);
-    
+    void verifyDocument(Long documentId, String verificationNote);
+
     /**
-     * Récupère les documents d'un profil par type
+     * Rejette un document KYC (Admin)
      */
-    Optional<TechnicianDocument> getDocumentByType(Long idProfile, DocumentType type);
-    
+    void rejectDocument(Long documentId, String verificationNote);
+
     /**
-     * Supprime un document
+     * Supprime un document d’un profil de technicien
      */
-    void deleteDocument(Long idDocument);
+    void deleteDocument(Long documentId);
+
     
-    /**
-     * Vérifie si tous les documents requis sont uploadés
-     */
-    boolean hasAllRequiredDocuments(Long idProfile);
 }

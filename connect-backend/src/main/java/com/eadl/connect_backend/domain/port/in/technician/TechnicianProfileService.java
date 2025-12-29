@@ -3,64 +3,80 @@ package com.eadl.connect_backend.domain.port.in.technician;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
 import com.eadl.connect_backend.domain.model.technician.AvailabilityStatus;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 /**
- * Port IN - Service de profil technicien
- * Use cases pour la gestion du profil professionnel
+ * Port IN - Use cases métier liés au profil professionnel du technicien
  */
 public interface TechnicianProfileService {
+
+
+    /**
+     * Crée le profil professionnel d’un technicien
+     */
+    TechnicianProfile createProfile(TechnicianProfile profile);
     
     /**
-     * Crée un profil technicien
+     * Récupère le profil professionnel d’un technicien
      */
-    TechnicianProfile createProfile(Long idTechnician, String bio, 
-                                   Integer yearsExperience, BigDecimal hourlyRate);
-    
+    Optional<TechnicianProfile> getProfileByTechnicianId(Long technicianId);
+
     /**
-     * Récupère un profil par son ID
+     * Complète ou met à jour le profil professionnel du technicien
+     * (bio, expérience, catégorie, tarif, localisation)
      */
-    Optional<TechnicianProfile> getProfileById(Long idProfile);
-    
+    TechnicianProfile updateProfile(TechnicianProfile profile);
+
     /**
-     * Récupère le profil d'un technicien
+     * Met à jour la disponibilité du technicien
      */
-    Optional<TechnicianProfile> getProfileByTechnician(Long idTechnician);
-    
+    TechnicianProfile updateAvailability(
+            Long technicianId,
+            AvailabilityStatus availabilityStatus
+    );
+
     /**
-     * Met à jour le profil
+     * Met à jour le tarif horaire
      */
-    TechnicianProfile updateProfile(Long idProfile, String bio, 
-                                   Integer yearsExperience, BigDecimal hourlyRate);
-    
+    TechnicianProfile updateHourlyRate(
+            Long technicianId,
+            BigDecimal hourlyRate
+    );
+
     /**
-     * Met à jour la photo de profil
+     * Valide le profil d’un technicien (KYC / Admin)
      */
-    TechnicianProfile updateProfilePhoto(Long idProfile, String photoUrl);
-    
+    void validateProfile(Long technicianId);
+
     /**
-     * Met à jour la localisation
+     * Invalide le profil d’un technicien (Admin)
      */
-    TechnicianProfile updateLocation(Long idProfile, BigDecimal latitude, 
-                                    BigDecimal longitude);
-    
+    void rejectProfile(Long technicianId, String reason);
+
     /**
-     * Change le statut de disponibilité
+     * Récupère les profils en attente de validation
      */
-    TechnicianProfile updateAvailability(Long idProfile, AvailabilityStatus status);
-    
+    List<TechnicianProfile> getPendingProfiles();
+
     /**
-     * Marque le profil comme vérifié
+     * Met à jour les statistiques après une mission terminée
      */
-    TechnicianProfile verifyProfile(Long idProfile);
-    
+    void updateStatisticsAfterJob(
+            Long technicianId,
+            BigDecimal newRating
+    );
+
     /**
-     * Incrémente le nombre de jobs complétés
+     * Recalcule le nombre total de missions complétées
+     * à partir des réservations terminées
      */
-    TechnicianProfile incrementCompletedJobs(Long idProfile);
-    
+    void recalculateCompletedJobs(Long technicianId);
+
     /**
-     * Met à jour la note moyenne
+     * Recalcule la note moyenne du technicien
+     * à partir des reviews des réservations complétées
      */
-    TechnicianProfile updateAverageRating(Long idProfile, BigDecimal rating);
+    void recalculateAverageRating(Long technicianId);
+
 }

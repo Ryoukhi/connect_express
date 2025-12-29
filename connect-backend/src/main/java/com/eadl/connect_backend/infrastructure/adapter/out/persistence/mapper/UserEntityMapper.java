@@ -20,6 +20,8 @@ public class UserEntityMapper {
         entity.setPhone(user.getPhone());
         entity.setPassword(user.getPassword());
         entity.setRole(user.getRole());
+        entity.setCity(user.getCity());
+        entity.setNeighborhood(user.getNeighborhood());
         entity.setCreatedAt(user.getCreatedAt());
         entity.setUpdatedAt(user.getUpdatedAt());
         entity.setActive(user.isActive());
@@ -47,6 +49,8 @@ public class UserEntityMapper {
             entity.getPhone(),
             entity.getPassword(),
             entity.getRole(),
+            entity.getCity(),
+            entity.getNeighborhood(),
             entity.getCreatedAt(),
             entity.getUpdatedAt(),
             entity.isActive(),

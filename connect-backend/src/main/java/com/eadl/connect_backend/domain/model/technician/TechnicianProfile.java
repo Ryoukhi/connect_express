@@ -14,8 +14,6 @@ public class TechnicianProfile {
     private Integer yearsExperience;
     private BigDecimal hourlyRate;
     private boolean verified;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
     private AvailabilityStatus availabilityStatus;
     private String profilePhotoUrl;
     private Integer completedJobs;
@@ -111,14 +109,6 @@ public class TechnicianProfile {
         return verified;
     }
 
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
-
-    public BigDecimal getLongitude() {
-        return longitude;
-    }
-
     public AvailabilityStatus getAvailabilityStatus() {
         return availabilityStatus;
     }
@@ -204,14 +194,6 @@ public class TechnicianProfile {
         this.hourlyRate = hourlyRate;
     }
 
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
-    }
-
     public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }
@@ -220,8 +202,4 @@ public class TechnicianProfile {
         this.profilePhotoUrl = profilePhotoUrl;
     }
 
-    public void updateLocation(BigDecimal latitude2, BigDecimal longitude2) {
-        this.latitude = latitude2;
-        this.longitude = longitude2;
-    }
 }

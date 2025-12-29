@@ -3,43 +3,36 @@ package com.eadl.connect_backend.domain.port.in.technician;
 import java.math.BigDecimal;
 import java.util.List;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
+import com.eadl.connect_backend.domain.model.technician.TechnicianSearchCriteria;
 
 public interface TechnicianSearchService {
-    
+
     /**
-     * Recherche des techniciens par catégorie
+     * Recherche simple par ville
      */
-    List<TechnicianProfile> searchByCategory(Long idCategory);
-    
+    List<TechnicianProfile> searchByCity(String city);
+
     /**
-     * Recherche des techniciens par localisation (rayon en km)
+     * Recherche avancée multi-critères
      */
-    List<TechnicianProfile> searchByLocation(BigDecimal latitude, 
-                                            BigDecimal longitude, 
-                                            Double radiusKm);
-    
+    List<TechnicianProfile> search(
+            TechnicianSearchCriteria criteria
+    );
+
     /**
-     * Recherche des techniciens par fourchette de tarif
+     * Top techniciens les mieux notés
      */
-    List<TechnicianProfile> searchByPriceRange(BigDecimal minPrice, BigDecimal maxPrice);
-    
+    List<TechnicianProfile> findTopRated(
+            String city,
+            int limit
+    );
+
     /**
-     * Recherche des techniciens disponibles
+     * Techniciens disponibles autour d’un point
      */
-    List<TechnicianProfile> searchAvailable();
-    
-    /**
-     * Recherche des techniciens avec une note minimale
-     */
-    List<TechnicianProfile> searchByMinRating(BigDecimal minRating);
-    
-    /**
-     * Récupère les techniciens les mieux notés
-     */
-    List<TechnicianProfile> getTopRatedTechnicians(int limit);
-    
-    /**
-     * Récupère les techniciens les plus expérimentés
-     */
-    List<TechnicianProfile> getMostExperiencedTechnicians(int limit);
+    List<TechnicianProfile> findNearbyAvailable(
+            BigDecimal latitude,
+            BigDecimal longitude,
+            BigDecimal radiusKm
+    );
 }

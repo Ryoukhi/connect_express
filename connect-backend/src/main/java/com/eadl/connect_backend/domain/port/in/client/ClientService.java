@@ -14,9 +14,10 @@ public interface ClientService {
     Client registerClient(Client client);
 
     List<Client> getActiveClients();
+
     List<Client> getClientsByCity(String city);
 
-    List<Reservation> getClientReservations(Long clientId);
+    List<Reservation> getClientReservations();
 
     Long countActiveClients();
 

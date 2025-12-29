@@ -15,6 +15,8 @@ public abstract class User {
     protected String phone;
     protected String password;
     protected Role role;
+    protected String city;
+    protected String neighborhood;
     protected LocalDateTime createdAt;
     protected LocalDateTime updatedAt;
     protected boolean active;
@@ -199,7 +201,7 @@ public abstract class User {
     // Méthode de restauration pour le mapping depuis l'entité
     public void restore(Long idUser, String firstName, String lastName,
                         String email, String phone, String password,
-                        Role role, LocalDateTime createdAt,
+                        Role role, String city, String neighborhood, LocalDateTime createdAt,
                         LocalDateTime updatedAt, boolean active,
                         boolean emailVerified, boolean phoneVerified,
                         String profilePhotoUrl) {
@@ -210,11 +212,61 @@ public abstract class User {
         this.phone = phone;
         this.password = password;
         this.role = role;
+        this.city = city;
+        this.neighborhood = neighborhood;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.active = active;
         this.emailVerified = emailVerified;
         this.phoneVerified = phoneVerified;
         this.profilePhotoUrl = profilePhotoUrl;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public void setPhoneVerified(boolean phoneVerified) {
+        this.phoneVerified = phoneVerified;
     }
 }

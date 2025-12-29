@@ -3,7 +3,7 @@ package com.eadl.connect_backend.application.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.eadl.connect_backend.application.dto.response.review.ReviewResponse;
+import com.eadl.connect_backend.application.dto.ReviewDto;
 import com.eadl.connect_backend.domain.model.review.Review;
 
 /**
@@ -11,31 +11,26 @@ import com.eadl.connect_backend.domain.model.review.Review;
  */
 public class ReviewMapper {
 
-    /**
-     * Convertit un domaine Review en ReviewResponse. Optionnellement on peut fournir
-     * le nom du client pour l'inclure dans la DTO.
-     */
-    public static ReviewResponse toResponse(Review review) {
-        return toResponse(review, null);
+    private ReviewMapper() {
+        // Utility class
     }
 
-    public static ReviewResponse toResponse(Review review, String clientName) {
+    public static ReviewDto toDto(Review review) {
         if (review == null) return null;
-        ReviewResponse dto = new ReviewResponse();
+
+        ReviewDto dto = new ReviewDto();
         dto.setIdReview(review.getIdReview());
-        dto.setIdReservation(review.getIdReservation());
         dto.setIdClient(review.getIdClient());
-        dto.setClientName(clientName);
-        dto.setIdTechnician(review.getIdTechnician());
-        dto.setRating(review.getRating() != null ? review.getRating().getValue() : null);
+        dto.setRating(review.getRating());
         dto.setComment(review.getComment());
         dto.setCreatedAt(review.getCreatedAt());
+
         return dto;
     }
 
-    public static List<ReviewResponse> toResponses(List<Review> reviews) {
-        if (reviews == null) return null;
-        return reviews.stream().map(ReviewMapper::toResponse).collect(Collectors.toList());
+    public static List<ReviewDto> toDtoList(List<Review> reviews) {
+        return reviews.stream()
+                .map(ReviewMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
-

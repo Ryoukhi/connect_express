@@ -38,4 +38,12 @@ public interface ClientRepository {
      * Supprime un client
      */
     void delete(Client client);
+
+    List<Client> findByActive(boolean b);
+
+    List<Client> findByCity(String city);
+
+    Optional<Client> findById(Long clientId);
+
+    Long countByActive(boolean b);
 }

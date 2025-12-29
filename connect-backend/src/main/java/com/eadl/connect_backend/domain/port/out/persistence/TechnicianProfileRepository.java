@@ -3,9 +3,9 @@ package com.eadl.connect_backend.domain.port.out.persistence;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
 import com.eadl.connect_backend.domain.model.technician.AvailabilityStatus;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
+import com.eadl.connect_backend.domain.model.technician.TechnicianSearchCriteria;
 
 /**
  * Port OUT - Repository TechnicianProfile
@@ -85,4 +85,34 @@ public interface TechnicianProfileRepository {
      * Supprime un profil
      */
     void delete(TechnicianProfile profile);
+
+    Optional<TechnicianProfile> findByIdTechnician(Long technicianId);
+
+    List<TechnicianProfile> findByVerifiedFalse();
+
+    /**
+     * Recherche avancée multi-critères
+     */
+    List<TechnicianProfile> search(
+            TechnicianSearchCriteria criteria
+    );
+
+    /**
+     * Récupère les techniciens les mieux notés
+     */
+    List<TechnicianProfile> findTopRated(
+            String city,
+            boolean verifiedOnly,
+            int limit
+    );
+
+    /**
+     * Récupère les techniciens disponibles à proximité
+     */
+    List<TechnicianProfile> findNearbyAvailable(
+            BigDecimal latitude,
+            BigDecimal longitude,
+            BigDecimal radiusKm,
+            AvailabilityStatus availabilityStatus
+    );
 }
