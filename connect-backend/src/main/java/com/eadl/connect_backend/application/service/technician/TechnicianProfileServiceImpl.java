@@ -75,7 +75,6 @@ public TechnicianProfile createProfile(TechnicianProfile profile) {
         existing.setIdCategory(profile.getIdCategory());
         existing.setYearsExperience(profile.getYearsExperience());
         existing.setHourlyRate(profile.getHourlyRate());
-        existing.setProfilePhotoUrl(profile.getProfilePhotoUrl());
 
         // Toute modification invalide la validation
         existing.setVerified(false);

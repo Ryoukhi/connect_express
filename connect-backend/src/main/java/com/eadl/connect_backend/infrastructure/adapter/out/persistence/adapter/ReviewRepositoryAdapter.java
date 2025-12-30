@@ -1,5 +1,7 @@
 package com.eadl.connect_backend.infrastructure.adapter.out.persistence.adapter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,66 +29,99 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
     private final ReviewJpaRepository reviewJpaRepository;
     private final ReviewEntityMapper reviewEntityMapper;
 
-    /**
-     * {@inheritDoc}
-     */
+    /* =========================
+       CREATE
+       ========================= */
     @Override
     public Review save(Review review) {
         ReviewEntity entity = reviewEntityMapper.toEntity(review);
         ReviewEntity saved = reviewJpaRepository.save(entity);
-        return reviewEntityMapper.toDomain(saved);
+        return reviewEntityMapper.toModel(saved);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /* =========================
+       UPDATE
+       ========================= */
     @Override
     public Review update(Long idReview, Review review) {
-        ReviewEntity existing = reviewJpaRepository.findById(idReview)
-            .orElseThrow(() ->
-                new IllegalArgumentException("Review not found with id: " + idReview));
+        ReviewEntity entity = reviewJpaRepository.findById(idReview)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Review not found with id " + idReview));
 
-        reviewEntityMapper.updateEntity(existing, review);
-        ReviewEntity updated = reviewJpaRepository.save(existing);
-        return reviewEntityMapper.toDomain(updated);
+        reviewEntityMapper.updateEntity(entity, review);
+
+        ReviewEntity updated = reviewJpaRepository.save(entity);
+        return reviewEntityMapper.toModel(updated);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /* =========================
+       FIND BY ID
+       ========================= */
     @Override
     @Transactional(readOnly = true)
     public Optional<Review> findById(Long idReview) {
         return reviewJpaRepository.findById(idReview)
-            .map(reviewEntityMapper::toDomain);
+                .map(reviewEntityMapper::toModel);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /* =========================
+       FIND BY CLIENT
+       ========================= */
     @Override
     @Transactional(readOnly = true)
     public List<Review> findByClientId(Long idClient) {
-        return reviewJpaRepository.findByClient_IdUser(idClient)
-            .stream()
-            .map(reviewEntityMapper::toDomain)
-            .toList();
+        return reviewJpaRepository.findByClientId(idClient)
+                .stream()
+                .map(reviewEntityMapper::toModel)
+                .toList();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /* =========================
+       COUNT
+       ========================= */
     @Override
     @Transactional(readOnly = true)
     public Long count() {
         return reviewJpaRepository.count();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /* =========================
+       DELETE
+       ========================= */
     @Override
     public void delete(Review review) {
+        if (review.getIdReview() == null) {
+            throw new IllegalArgumentException("Review id must not be null");
+        }
         reviewJpaRepository.deleteById(review.getIdReview());
+    }
+
+    /* =========================
+       BUSINESS – AVG RATING
+       ========================= */
+    @Override
+    @Transactional(readOnly = true)
+    public BigDecimal calculateAverageRating(List<Long> reviewIds) {
+
+        if (reviewIds == null || reviewIds.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+
+        List<Integer> ratings = reviewJpaRepository
+                .findRatingsByReviewIds(reviewIds);
+
+        if (ratings.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+
+        BigDecimal sum = ratings.stream()
+                .map(BigDecimal::valueOf)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return sum.divide(
+                BigDecimal.valueOf(ratings.size()),
+                2,
+                RoundingMode.HALF_UP
+        );
     }
 }

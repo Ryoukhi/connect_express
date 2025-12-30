@@ -5,6 +5,8 @@ import lombok.*;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import com.eadl.connect_backend.domain.model.review.Rating;
+
 @Entity
 @Table(name = "reviews")
 @Getter
@@ -17,7 +19,7 @@ public class ReviewEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReview;
 
-    private Integer rating;
+    private Rating rating;
 
     @Column(length = 2048)
     private String comment;

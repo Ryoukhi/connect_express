@@ -13,7 +13,7 @@ public class TechnicianSkill {
     private String description;
     private Integer level; // 1 à 5 (débutant à expert)
 
-    private TechnicianSkill() {}
+    public TechnicianSkill() {}
 
     // ========== Factory Method ==========
     public static TechnicianSkill create(Long idProfile, Long idCategory, 
@@ -41,6 +41,7 @@ public class TechnicianSkill {
         }
     }
 
+    
     public void downgradeLevel() {
         if (this.level > 1) {
             this.level--;
@@ -109,5 +110,25 @@ public class TechnicianSkill {
                 ", nameSkill='" + nameSkill + '\'' +
                 ", level=" + level +
                 '}';
+    }
+
+    public void setIdProfile(Long idProfile) {
+        this.idProfile = idProfile;
+    }
+
+    public void setIdCategory(Long idCategory) {
+        this.idCategory = idCategory;
+    }
+
+    public void setNameSkill(String nameSkill) {
+        this.nameSkill = nameSkill;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 }

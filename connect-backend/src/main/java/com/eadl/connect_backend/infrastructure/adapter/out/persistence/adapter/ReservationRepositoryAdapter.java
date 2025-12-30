@@ -33,47 +33,67 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
     public Reservation save(Reservation reservation) {
         ReservationEntity entity = mapper.toEntity(reservation);
         ReservationEntity saved = jpaRepository.save(entity);
-        return mapper.toDomain(saved);
+        return mapper.toModel(saved);
     }
 
     @Override
     public Reservation update(Long idReservation, Reservation reservation) {
-        Optional<ReservationEntity> optional = jpaRepository.findById(idReservation);
-        if (optional.isEmpty()) {
-            throw new IllegalArgumentException("Reservation not found with id: " + idReservation);
-        }
-        ReservationEntity entity = optional.get();
+        ReservationEntity existing = jpaRepository.findById(idReservation)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Reservation not found with id " + idReservation));
 
-        // Mise à jour des champs modifiables
-        entity.setScheduledTime(reservation.getScheduledTime());
-        entity.setStatus(reservation.getStatus());
-        entity.setPrice(reservation.getPrice());
-        entity.setAddress(reservation.getAddress());
-        entity.setDescription(reservation.getDescription());
-        entity.setCancellationReason(reservation.getCancellationReason());
-        entity.setUpdatedAt(reservation.getUpdatedAt());
-        entity.setCompletedAt(reservation.getCompletedAt());
-
-        ReservationEntity saved = jpaRepository.save(entity);
-        return mapper.toDomain(saved);
+        mapper.updateEntity(existing, reservation);
+        ReservationEntity updated = jpaRepository.save(existing);
+        return mapper.toModel(updated);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<Reservation> findById(Long idReservation) {
-        return jpaRepository.findById(idReservation).map(mapper::toDomain);
+        return jpaRepository.findById(idReservation)
+                .map(mapper::toModel);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> findByClientId(Long idClient) {
-        return mapper.toDomains(jpaRepository.findByClientId(idClient));
+        return jpaRepository.findByClient_IdClient(idClient)
+                .stream()
+                .map(mapper::toModel)
+                .toList();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> findByTechnicianId(Long idTechnician) {
-        return mapper.toDomains(jpaRepository.findByTechnicianId(idTechnician));
+        return jpaRepository.findByTechnician_IdTechnician(idTechnician)
+                .stream()
+                .map(mapper::toModel)
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Reservation> findByStatus(ReservationStatus status) {
+        return jpaRepository.findByStatus(status)
+                .stream()
+                .map(mapper::toModel)
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existsTechnicianReservationBetween(
+            Long idTechnician,
+            LocalDateTime start,
+            LocalDateTime end
+    ) {
+        return jpaRepository
+                .existsByTechnician_IdTechnicianAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
+                        idTechnician,
+                        end,
+                        start
+                );
     }
 
     @Override
@@ -90,18 +110,16 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
 
     @Override
     @Transactional(readOnly = true)
-    public boolean existsTechnicianReservationBetween(Long idTechnician, LocalDateTime start, LocalDateTime end) {
-        return jpaRepository.existsByTechnicianIdAndScheduledTimeBetween(idTechnician, start, end);
+    public long countByIdTechnicianAndStatus(Long technicianId, ReservationStatus status) {
+        return jpaRepository.countByTechnician_IdTechnicianAndStatus(technicianId, status);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Reservation> findByStatus(ReservationStatus status) {
-        if (status == null) {
-            throw new IllegalArgumentException("ReservationStatus cannot be null");
-        }
-        List<ReservationEntity> entities = jpaRepository.findByStatus(status);
-        return mapper.toDomains(entities);
+    public List<Long> findReviewIdsByIdTechnicianAndStatus(
+            Long technicianId,
+            ReservationStatus status
+    ) {
+        return jpaRepository.findReviewIdsByTechnicianAndStatus(technicianId, status);
     }
-
 }

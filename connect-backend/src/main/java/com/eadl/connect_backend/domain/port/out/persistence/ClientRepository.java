@@ -24,10 +24,6 @@ public interface ClientRepository {
      */
     List<Client> findAll();
     
-    /**
-     * Recherche des clients par adresse
-     */
-    List<Client> findByAddressContaining(String address);
     
     /**
      * Compte le nombre de clients

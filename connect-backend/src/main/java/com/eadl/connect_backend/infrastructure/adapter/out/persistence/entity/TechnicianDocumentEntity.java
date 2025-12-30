@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+import com.eadl.connect_backend.domain.model.technician.DocumentType;
+
 @Entity
 @Table(name = "technician_documents")
 @Getter
@@ -18,13 +20,15 @@ public class TechnicianDocumentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDocument;
 
-    private String name;
-
-    private String documentType;
+    private DocumentType documentType;
 
     private String url;
 
     private LocalDateTime uploadedAt;
+
+    private boolean verified;
+    
+    private String verificationNote;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_profile")

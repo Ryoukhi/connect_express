@@ -3,6 +3,7 @@ package com.eadl.connect_backend.domain.port.out.persistence;
 import java.util.List;
 import java.util.Optional;
 
+import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.Technician;
 
 /**
@@ -44,4 +45,6 @@ public interface TechnicianRepository {
      * Récupère les techniciens actifs
      */
     List<Technician> findByActiveTrue();
+
+    List<Technician> findByRoleAndActiveTrue(Role role, boolean active);
 }

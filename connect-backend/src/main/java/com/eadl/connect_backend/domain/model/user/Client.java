@@ -4,7 +4,6 @@ package com.eadl.connect_backend.domain.model.user;
  * Client - Spécialisation de User avec héritage
  */
 public class Client extends User {
-    private String address;
 
     public Client() {
         super();
@@ -21,24 +20,14 @@ public class Client extends User {
         client.email = email;
         client.phone = phone;
         client.password = password;
-        client.address = address;
         return client;
     }
 
-    // ========== Business Logic ==========
-    public void updateAddress(String newAddress) {
-        this.address = newAddress;
-        this.updatedAt = java.time.LocalDateTime.now();
-    }
-
+    
     // ========== Getters & Setters ==========
-    public String getAddress() {
-        return address;
-    }
+    
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    
 
     @Override
     public String toString() {
@@ -46,7 +35,6 @@ public class Client extends User {
                 "idUser=" + idUser +
                 ", fullName='" + getFullName() + '\'' +
                 ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
                 ", active=" + active +
                 '}';
     }

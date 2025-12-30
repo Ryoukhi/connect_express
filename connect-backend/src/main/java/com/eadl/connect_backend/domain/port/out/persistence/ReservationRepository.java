@@ -1,11 +1,8 @@
 package com.eadl.connect_backend.domain.port.out.persistence;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.data.jpa.repository.Query;
 
 import com.eadl.connect_backend.domain.model.reservation.Reservation;
 import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
@@ -67,14 +64,14 @@ public interface ReservationRepository {
      */
     void delete(Reservation reservation);
 
-    @Query("""
-        SELECT AVG(r.rating)
-        FROM Reservation r
-        WHERE r.idTechnician = :technicianId
-        AND r.status = 'COMPLETED'
-        AND r.rating IS NOT NULL
-    """)
-    BigDecimal calculateAverageRating(Long technicianId);
+//     @Query("""
+//         SELECT AVG(r.rating)
+//         FROM Reservation r
+//         WHERE r.idTechnician = :technicianId
+//         AND r.status = 'COMPLETED'
+//         AND r.rating IS NOT NULL
+//     """)
+//     BigDecimal calculateAverageRating(Long technicianId);
 
     long countByIdTechnicianAndStatus(
             Long technicianId,

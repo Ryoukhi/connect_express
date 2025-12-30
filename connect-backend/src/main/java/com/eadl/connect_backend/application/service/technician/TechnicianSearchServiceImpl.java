@@ -82,7 +82,7 @@ public class TechnicianSearchServiceImpl implements TechnicianSearchService {
             limit = 10; // valeur par défaut métier
         }
 
-        return searchRepository.findTopRated(
+        return searchRepository.findTopRatedByCity(
                 city,
                 true,      // uniquement profils validés
                 limit

@@ -1,54 +1,47 @@
 package com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.eadl.connect_backend.domain.model.user.Technician;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.UserEntity;
 
 public class TechnicianEntityMapper {
 
-	public UserEntity toEntity(Technician model) {
-		if (model == null) return null;
-		UserEntity entity = new UserEntity();
-		entity.setIdUser(model.getIdUser());
-		entity.setFirstName(model.getFirstName());
-		entity.setLastName(model.getLastName());
-		entity.setEmail(model.getEmail());
-		entity.setPhone(model.getPhone());
-		entity.setPassword(model.getPassword());
-		entity.setRole(model.getRole());
-		entity.setCreatedAt(model.getCreatedAt());
-		entity.setUpdatedAt(model.getUpdatedAt());
-		entity.setActive(model.isActive());
-		entity.setEmailVerified(model.isEmailVerified());
-		entity.setPhoneVerified(model.isPhoneVerified());
-		entity.setProfilePhotoUrl(model.getProfilePhotoUrl());
-		return entity;
-	}
+	
+private final UserEntityMapper userEntityMapper = new UserEntityMapper();
 
-	public Technician toModel(UserEntity entity) {
-		if (entity == null) return null;
-		Technician tech = Technician.create(entity.getFirstName(), entity.getLastName(), entity.getEmail(), entity.getPhone(), entity.getPassword());
-		tech.setIdUser(entity.getIdUser());
-		tech.setCreatedAt(entity.getCreatedAt());
-		tech.setUpdatedAt(entity.getUpdatedAt());
-		tech.setProfilePhotoUrl(entity.getProfilePhotoUrl());
-		tech.setRole(entity.getRole());
-		if (!entity.isActive()) tech.deactivate();
-		if (entity.isEmailVerified()) tech.verifyEmail();
-		if (entity.isPhoneVerified()) tech.verifyPhone();
-		return tech;
-	}
+    /**
+     * Convertit un Technician (domaine) en UserEntity
+     */
+    public UserEntity toEntity(Technician technician) {
+        if (technician == null) return null;
 
-	public List<UserEntity> toEntities(List<Technician> models) {
-		if (models == null) return null;
-		return models.stream().map(this::toEntity).collect(Collectors.toList());
-	}
+        UserEntity entity = userEntityMapper.toEntity(technician);
+        entity.setRole(technician.getRole()); // assure le rôle TECHNICIAN
+        return entity;
+    }
 
-	public List<Technician> toModels(List<UserEntity> entities) {
-		if (entities == null) return null;
-		return entities.stream().map(this::toModel).collect(Collectors.toList());
-	}
+    /**
+     * Convertit un UserEntity en Technician (domaine)
+     */
+    public Technician toDomain(UserEntity entity) {
+        if (entity == null) return null;
 
+        Technician technician = new Technician();
+        technician.setIdUser(entity.getIdUser());
+        technician.setFirstName(entity.getFirstName());
+        technician.setLastName(entity.getLastName());
+        technician.setEmail(entity.getEmail());
+        technician.setPhone(entity.getPhone());
+        technician.setPassword(entity.getPassword());
+        technician.setRole(entity.getRole());
+        technician.setCity(entity.getCity());
+        technician.setNeighborhood(entity.getNeighborhood());
+        technician.setCreatedAt(entity.getCreatedAt());
+        technician.setUpdatedAt(entity.getUpdatedAt());
+        technician.setActive(entity.isActive());
+        technician.setEmailVerified(entity.isEmailVerified());
+        technician.setPhoneVerified(entity.isPhoneVerified());
+        technician.setProfilePhotoUrl(entity.getProfilePhotoUrl());
+
+        return technician;
+    }
 }

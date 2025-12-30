@@ -27,10 +27,6 @@ public class TechnicianProfileEntity {
     private Integer yearsExperience;
 
     private BigDecimal hourlyRate;
- 
-    private BigDecimal latitude;
-
-    private BigDecimal longitude;
 
     private AvailabilityStatus availabilityStatus;
 

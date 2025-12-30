@@ -1,7 +1,5 @@
 package com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,9 +20,7 @@ public class TechnicianSkillEntity {
 
     private String description;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
+    private Integer level; // 1 à 5 (débutant à expert)
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_profile")
@@ -34,16 +30,5 @@ public class TechnicianSkillEntity {
     @JoinColumn(name = "id_category")
     private CategoryEntity category;
 
-    // ========== JPA Lifecycle ==========
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
 
 }

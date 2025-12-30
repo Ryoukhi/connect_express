@@ -100,7 +100,7 @@ public interface TechnicianProfileRepository {
     /**
      * Récupère les techniciens les mieux notés
      */
-    List<TechnicianProfile> findTopRated(
+    List<TechnicianProfile> findTopRatedByCity(
             String city,
             boolean verifiedOnly,
             int limit

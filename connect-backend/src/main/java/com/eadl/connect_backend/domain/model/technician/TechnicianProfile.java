@@ -1,6 +1,7 @@
 package com.eadl.connect_backend.domain.model.technician;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -15,12 +16,12 @@ public class TechnicianProfile {
     private BigDecimal hourlyRate;
     private boolean verified;
     private AvailabilityStatus availabilityStatus;
-    private String profilePhotoUrl;
     private Integer completedJobs;
     private BigDecimal averageRating;
-
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
-    private TechnicianProfile() {}
+    public TechnicianProfile() {}
 
     // ========== Factory Method ==========
     public static TechnicianProfile create(Long idTechnician, String bio, 
@@ -62,10 +63,6 @@ public class TechnicianProfile {
 
     public void setOnBreak() {
         this.availabilityStatus = AvailabilityStatus.ON_BREAK;
-    }
-
-    public void updateProfilePhoto(String photoUrl) {
-        this.profilePhotoUrl = photoUrl;
     }
 
     public void incrementCompletedJobs() {
@@ -111,10 +108,6 @@ public class TechnicianProfile {
 
     public AvailabilityStatus getAvailabilityStatus() {
         return availabilityStatus;
-    }
-
-    public String getProfilePhotoUrl() {
-        return profilePhotoUrl;
     }
 
     public Integer getCompletedJobs() {
@@ -198,8 +191,20 @@ public class TechnicianProfile {
         this.availabilityStatus = availabilityStatus;
     }
     
-    public void setProfilePhotoUrl(String profilePhotoUrl) {
-        this.profilePhotoUrl = profilePhotoUrl;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 }

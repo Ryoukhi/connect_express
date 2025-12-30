@@ -6,47 +6,52 @@ import java.util.Optional;
 import com.eadl.connect_backend.domain.model.technician.TechnicianSkill;
 
 /**
- * Port OUT - Repository TechnicianSkill
+ * Port OUT - Repository des compétences d’un technicien
  */
 public interface TechnicianSkillRepository {
-    
+
     /**
-     * Sauvegarde une compétence
+     * Ajoute ou met à jour une compétence
      */
     TechnicianSkill save(TechnicianSkill skill);
-    
+
     /**
      * Récupère une compétence par son ID
      */
-    Optional<TechnicianSkill> findById(Long idSkill);
-    
+    Optional<TechnicianSkill> findById(Long skillId);
+
     /**
-     * Récupère les compétences d'un profil
+     * Récupère toutes les compétences d’un profil technicien
      */
-    List<TechnicianSkill> findByProfileId(Long idProfile);
-    
+    List<TechnicianSkill> findByProfileId(Long profileId);
+
     /**
-     * Récupère les compétences par catégorie
+     * Récupère les compétences d’un technicien par catégorie
      */
-    List<TechnicianSkill> findByCategoryId(Long idCategory);
-    
+    List<TechnicianSkill> findByProfileIdAndCategoryId(
+            Long profileId,
+            Long categoryId
+    );
+
     /**
-     * Récupère les compétences d'un profil pour une catégorie
+     * Vérifie si une compétence existe déjà pour un profil
+     * (évite doublons : même skill + même profil)
      */
-    List<TechnicianSkill> findByProfileIdAndCategoryId(Long idProfile, Long idCategory);
-    
-    /**
-     * Récupère les compétences expertes (niveau >= 4)
-     */
-    List<TechnicianSkill> findExpertSkills(Long idProfile);
-    
+    boolean existsByProfileIdAndNameSkill(
+            Long profileId,
+            String nameSkill
+    );
+
     /**
      * Supprime une compétence
      */
     void delete(TechnicianSkill skill);
-    
+
     /**
-     * Supprime une compétence par ID
+     * Supprime toutes les compétences d’un profil
+     * (ex : suppression de profil)
      */
-    void deleteById(Long idSkill);
+    void deleteByProfileId(Long profileId);
+
+    List<TechnicianSkill> findByCategoryId(Long id);
 }

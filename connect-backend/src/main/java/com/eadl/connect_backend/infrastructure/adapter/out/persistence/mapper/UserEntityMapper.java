@@ -1,14 +1,20 @@
 package com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.eadl.connect_backend.domain.model.user.Admin;
 import com.eadl.connect_backend.domain.model.user.Client;
+import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.Technician;
 import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.UserEntity;
 
 public class UserEntityMapper {
 
+    /**
+     * Convertit un User (domaine) en UserEntity
+     */
     public UserEntity toEntity(User user) {
         if (user == null) return null;
 
@@ -19,7 +25,7 @@ public class UserEntityMapper {
         entity.setEmail(user.getEmail());
         entity.setPhone(user.getPhone());
         entity.setPassword(user.getPassword());
-        entity.setRole(user.getRole());
+        entity.setRole(user.getRole() != null ? user.getRole() : Role.CLIENT);
         entity.setCity(user.getCity());
         entity.setNeighborhood(user.getNeighborhood());
         entity.setCreatedAt(user.getCreatedAt());
@@ -28,55 +34,84 @@ public class UserEntityMapper {
         entity.setEmailVerified(user.isEmailVerified());
         entity.setPhoneVerified(user.isPhoneVerified());
         entity.setProfilePhotoUrl(user.getProfilePhotoUrl());
+
         return entity;
     }
 
+    /**
+     * Convertit un UserEntity en User (domaine)
+     */
     public User toDomain(UserEntity entity) {
         if (entity == null) return null;
 
+        Role role = entity.getRole();
         User user;
-        switch (entity.getRole()) {
-            case ADMIN -> user = new Admin();
-            case TECHNICIAN -> user = new Technician();
-            default -> user = new Client();
+
+        // Spécialisation selon le rôle
+        if (role == Role.ADMIN) {
+            Admin admin = Admin.create(
+                    entity.getFirstName(),
+                    entity.getLastName(),
+                    entity.getEmail(),
+                    entity.getPhone(),
+                    entity.getPassword()
+            );
+            user = admin;
+        } else if (role == Role.TECHNICIAN) {
+            Technician tech = Technician.create(
+                    entity.getFirstName(),
+                    entity.getLastName(),
+                    entity.getEmail(),
+                    entity.getPhone(),
+                    entity.getPassword()
+            );
+            user = tech;
+        } else { // CLIENT par défaut
+            Client client = Client.create(
+                    entity.getFirstName(),
+                    entity.getLastName(),
+                    entity.getEmail(),
+                    entity.getPhone(),
+                    entity.getPassword(),
+                    entity.getCity()
+            );
+            client.setNeighborhood(entity.getNeighborhood());
+            user = client;
         }
 
-        user.restore(
-            entity.getIdUser(),
-            entity.getFirstName(),
-            entity.getLastName(),
-            entity.getEmail(),
-            entity.getPhone(),
-            entity.getPassword(),
-            entity.getRole(),
-            entity.getCity(),
-            entity.getNeighborhood(),
-            entity.getCreatedAt(),
-            entity.getUpdatedAt(),
-            entity.isActive(),
-            entity.isEmailVerified(),
-            entity.isPhoneVerified(),
-            entity.getProfilePhotoUrl()
-        );
+        user.setIdUser(entity.getIdUser());
+        user.setCreatedAt(entity.getCreatedAt());
+        user.setUpdatedAt(entity.getUpdatedAt());
+        user.setProfilePhotoUrl(entity.getProfilePhotoUrl());
+
+        if (entity.isActive()) user.activate(); else user.deactivate();
+        if (entity.isEmailVerified()) user.verifyEmail();
+        if (entity.isPhoneVerified()) user.verifyPhone();
 
         return user;
     }
 
+    /**
+     * Convertit une liste de Users en UserEntities
+     */
     public List<UserEntity> toEntities(List<User> users) {
-        if (users == null) return List.of();
-        return users.stream().map(this::toEntity).toList();
+        if (users == null) return null;
+        return users.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
+    /**
+     * Convertit une liste de UserEntities en Users
+     */
     public List<User> toDomains(List<UserEntity> entities) {
-        if (entities == null) return List.of();
-        return entities.stream().map(this::toDomain).toList();
+        if (entities == null) return null;
+        return entities.stream().map(this::toDomain).collect(Collectors.toList());
     }
 
+    /**
+     * Conversion "ID only" (utile pour relation)
+     */
     public UserEntity toEntityIdOnly(Long userId) {
-        if (userId == null) {
-            throw new IllegalArgumentException("User id must not be null");
-        }
-
+        if (userId == null) return null;
         UserEntity entity = new UserEntity();
         entity.setIdUser(userId);
         return entity;
