@@ -70,7 +70,7 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
     @Override
     @Transactional(readOnly = true)
     public List<Review> findByClientId(Long idClient) {
-        return reviewJpaRepository.findByClientId(idClient)
+        return reviewJpaRepository.findByClient_IdUser(idClient)
                 .stream()
                 .map(reviewEntityMapper::toModel)
                 .toList();

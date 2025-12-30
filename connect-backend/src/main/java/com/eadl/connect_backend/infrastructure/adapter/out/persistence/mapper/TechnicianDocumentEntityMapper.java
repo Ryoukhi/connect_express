@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 import com.eadl.connect_backend.domain.model.technician.TechnicianDocument;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianDocumentEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TechnicianDocumentEntityMapper {
 
     /**

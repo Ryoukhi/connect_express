@@ -43,7 +43,7 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
     }
 
     @Override
-    public Optional<Technician> findByUserId(Long idUser) {
+    public Optional<Technician> findByidUser(Long idUser) {
         return jpaRepository
                 .findByIdUserAndRole(idUser, Role.TECHNICIAN)
                 .map(mapper::toDomain);

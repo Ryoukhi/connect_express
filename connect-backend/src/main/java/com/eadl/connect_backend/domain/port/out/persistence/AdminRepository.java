@@ -23,7 +23,7 @@ public interface AdminRepository {
     /**
      * Récupère un admin par son ID utilisateur
      */
-    Optional<Admin> findByUserId(Long idUser);
+    Optional<Admin> findByidUser(Long idUser);
     
     /**
      * Récupère tous les admins

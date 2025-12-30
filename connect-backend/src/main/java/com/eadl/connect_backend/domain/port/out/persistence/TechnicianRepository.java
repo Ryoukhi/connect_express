@@ -24,7 +24,7 @@ public interface TechnicianRepository {
     /**
      * Récupère un technicien par son ID utilisateur
      */
-    Optional<Technician> findByUserId(Long idUser);
+    Optional<Technician> findByidUser(Long idUser);
     
     /**
      * Récupère tous les techniciens

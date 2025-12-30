@@ -2,7 +2,9 @@ package com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper;
 
 import com.eadl.connect_backend.domain.model.user.Client;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.UserEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClientEntityMapper {
 
 private final UserEntityMapper userEntityMapper = new UserEntityMapper();

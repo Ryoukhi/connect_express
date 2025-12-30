@@ -17,7 +17,7 @@ public interface ClientRepository {
     /**
      * Récupère un client par son ID utilisateur
      */
-    Optional<Client> findByUserId(Long idUser);
+    Optional<Client> findByidUser(Long idUser);
     
     /**
      * Récupère tous les clients

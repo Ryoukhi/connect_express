@@ -28,8 +28,8 @@ public class ClientRepositoryAdapter implements ClientRepository {
     }
 
     @Override
-    public Optional<Client> findByUserId(Long idUser) {
-        return clientJpaRepository.findByUser_IdUser(idUser)
+    public Optional<Client> findByidUser(Long idUser) {
+        return clientJpaRepository.findByidUser(idUser)
                 .map(clientEntityMapper::toDomain);
     }
 

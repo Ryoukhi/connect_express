@@ -9,7 +9,9 @@ import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.Technician;
 import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.UserEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserEntityMapper {
 
     /**

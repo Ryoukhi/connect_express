@@ -4,7 +4,9 @@ import com.eadl.connect_backend.domain.model.technician.TechnicianSkill;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.CategoryEntity;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianProfileEntity;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianSkillEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TechnicianSkillEntityMapper {
     /**
      * Convertit un domaine en entité JPA

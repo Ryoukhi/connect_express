@@ -3,21 +3,20 @@ package com.eadl.connect_backend.domain.port.in.technician;
 import java.math.BigDecimal;
 import java.util.List;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
-import com.eadl.connect_backend.domain.model.technician.TechnicianSearchCriteria;
 
 public interface TechnicianSearchService {
 
     /**
      * Recherche simple par ville
      */
-    List<TechnicianProfile> searchByCity(String city);
+//     List<TechnicianProfile> searchByCity(String city);
 
-    /**
-     * Recherche avancée multi-critères
-     */
-    List<TechnicianProfile> search(
-            TechnicianSearchCriteria criteria
-    );
+//     /**
+//      * Recherche avancée multi-critères
+//      */
+//     List<TechnicianProfile> search(
+//             TechnicianSearchCriteria criteria
+//     );
 
     /**
      * Top techniciens les mieux notés
@@ -30,9 +29,9 @@ public interface TechnicianSearchService {
     /**
      * Techniciens disponibles autour d’un point
      */
-    List<TechnicianProfile> findNearbyAvailable(
-            BigDecimal latitude,
-            BigDecimal longitude,
-            BigDecimal radiusKm
-    );
+//     List<TechnicianProfile> findNearbyAvailable(
+//             BigDecimal latitude,
+//             BigDecimal longitude,
+//             BigDecimal radiusKm
+//     );
 }

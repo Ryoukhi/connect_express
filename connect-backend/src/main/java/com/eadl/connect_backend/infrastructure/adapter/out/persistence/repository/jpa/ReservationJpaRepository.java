@@ -11,24 +11,24 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.Re
 
 public interface ReservationJpaRepository extends JpaRepository<ReservationEntity, Long> {
 
-    List<ReservationEntity> findByClient_IdClient(Long idClient);
+    List<ReservationEntity> findByClient_IdUser(Long idClient);
 
-    List<ReservationEntity> findByTechnician_IdTechnician(Long idTechnician);
+    List<ReservationEntity> findByTechnician_IdUser(Long idTechnician);
 
     List<ReservationEntity> findByStatus(ReservationStatus status);
 
-    boolean existsByTechnician_IdTechnicianAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
+    boolean existsByTechnician_IdUserAndScheduledTimeBetween(
             Long idTechnician,
             LocalDateTime end,
             LocalDateTime start
     );
 
-    long countByTechnician_IdTechnicianAndStatus(Long idTechnician, ReservationStatus status);
+    long countByTechnician_IdUserAndStatus(Long idTechnician, ReservationStatus status);
 
     @Query("""
         select r.review.idReview
         from ReservationEntity r
-        where r.technician.idTechnician = :technicianId
+        where r.technician.idUser = :technicianId
           and r.status = :status
           and r.review is not null
     """)

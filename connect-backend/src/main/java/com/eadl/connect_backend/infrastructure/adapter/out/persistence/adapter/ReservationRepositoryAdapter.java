@@ -57,7 +57,7 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> findByClientId(Long idClient) {
-        return jpaRepository.findByClient_IdClient(idClient)
+        return jpaRepository.findByClient_IdUser(idClient)
                 .stream()
                 .map(mapper::toModel)
                 .toList();
@@ -66,7 +66,7 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> findByTechnicianId(Long idTechnician) {
-        return jpaRepository.findByTechnician_IdTechnician(idTechnician)
+        return jpaRepository.findByTechnician_IdUser(idTechnician)
                 .stream()
                 .map(mapper::toModel)
                 .toList();
@@ -89,7 +89,7 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
             LocalDateTime end
     ) {
         return jpaRepository
-                .existsByTechnician_IdTechnicianAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
+                .existsByTechnician_IdUserAndScheduledTimeBetween(
                         idTechnician,
                         end,
                         start
@@ -111,7 +111,7 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
     @Override
     @Transactional(readOnly = true)
     public long countByIdTechnicianAndStatus(Long technicianId, ReservationStatus status) {
-        return jpaRepository.countByTechnician_IdTechnicianAndStatus(technicianId, status);
+        return jpaRepository.countByTechnician_IdUserAndStatus(technicianId, status);
     }
 
     @Override

@@ -41,11 +41,6 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> findByActive(boolean active);
     
     /**
-     * Récupère les utilisateurs avec pagination
-     */
-    List<UserEntity> findAll(int page, int size);
-    
-    /**
      * Vérifie si un email existe
      */
     boolean existsByEmail(String email);

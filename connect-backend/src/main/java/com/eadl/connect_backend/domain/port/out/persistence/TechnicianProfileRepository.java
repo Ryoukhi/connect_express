@@ -3,9 +3,13 @@ package com.eadl.connect_backend.domain.port.out.persistence;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.repository.query.Param;
+
 import com.eadl.connect_backend.domain.model.technician.AvailabilityStatus;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
 import com.eadl.connect_backend.domain.model.technician.TechnicianSearchCriteria;
+import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianProfileEntity;
 
 /**
  * Port OUT - Repository TechnicianProfile
@@ -16,11 +20,6 @@ public interface TechnicianProfileRepository {
      * Sauvegarde un profil
      */
     TechnicianProfile save(TechnicianProfile profile);
-    
-    /**
-     * Récupère un profil par son ID
-     */
-    Optional<TechnicianProfile> findById(Long idProfile);
     
     /**
      * Récupère le profil d'un technicien
@@ -49,37 +48,11 @@ public interface TechnicianProfileRepository {
      */
     List<TechnicianProfile> findAvailable();
     
-    /**
-     * Récupère les profils dans un rayon géographique
-     */
-    List<TechnicianProfile> findByLocationRadius(BigDecimal latitude, 
-                                                 BigDecimal longitude, 
-                                                 Double radiusKm);
-    
-    /**
-     * Récupère les profils par fourchette de tarif
-     */
-    List<TechnicianProfile> findByHourlyRateBetween(BigDecimal minRate, BigDecimal maxRate);
-    
-    /**
-     * Récupère les profils avec une note minimale
-     */
-    List<TechnicianProfile> findByAverageRatingGreaterThanEqual(BigDecimal minRating);
     
     /**
      * Récupère les profils les mieux notés
      */
     List<TechnicianProfile> findTopRated(int limit);
-    
-    /**
-     * Récupère les profils les plus expérimentés
-     */
-    List<TechnicianProfile> findMostExperienced(int limit);
-    
-    /**
-     * Compte le nombre de profils vérifiés
-     */
-    Long countByVerified(boolean verified);
     
     /**
      * Supprime un profil
@@ -90,11 +63,17 @@ public interface TechnicianProfileRepository {
 
     List<TechnicianProfile> findByVerifiedFalse();
 
-    /**
-     * Recherche avancée multi-critères
-     */
+//     /**
+//      * Recherche avancée multi-critères
+//      */
     List<TechnicianProfile> search(
-            TechnicianSearchCriteria criteria
+        String city,
+        Long categoryId,
+        Boolean verifiedOnly,
+        Boolean activeOnly,
+        AvailabilityStatus availabilityStatus,
+        BigDecimal minHourlyRate,
+        BigDecimal maxHourlyRate
     );
 
     /**
@@ -104,15 +83,5 @@ public interface TechnicianProfileRepository {
             String city,
             boolean verifiedOnly,
             int limit
-    );
-
-    /**
-     * Récupère les techniciens disponibles à proximité
-     */
-    List<TechnicianProfile> findNearbyAvailable(
-            BigDecimal latitude,
-            BigDecimal longitude,
-            BigDecimal radiusKm,
-            AvailabilityStatus availabilityStatus
     );
 }

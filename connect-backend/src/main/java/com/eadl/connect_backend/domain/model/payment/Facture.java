@@ -15,7 +15,7 @@ public class Facture {
     private LocalDateTime generatedAt;
     private String invoiceNumber;
 
-    private Facture() {}
+    public Facture() {}
 
     // ========== Factory Method ==========
     public static Facture create(Long idReservation, BigDecimal amount, String pdfUrl) {
@@ -95,5 +95,21 @@ public class Facture {
                 ", amount=" + amount +
                 ", generatedAt=" + generatedAt +
                 '}';
+    }
+
+    public void setIdReservation(Long idReservation) {
+        this.idReservation = idReservation;
+    }
+
+    public void setPdfUrl(String pdfUrl) {
+        this.pdfUrl = pdfUrl;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setGeneratedAt(LocalDateTime generatedAt) {
+        this.generatedAt = generatedAt;
     }
 }

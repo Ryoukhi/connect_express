@@ -1,6 +1,5 @@
 package com.eadl.connect_backend.domain.port.out.persistence;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,16 @@ public interface FactureRepository {
      * Récupère une facture par son ID
      */
     Optional<Facture> findById(Long idFacture);
+
+    /**
+     * Récupère toutes les factures
+     */
+    List<Facture> findAll();
+
+    /**
+     * Supprime une facture par son ID
+     */
+    void deleteById(Long idFacture);
     
     /**
      * Récupère une facture par numéro
@@ -30,26 +39,7 @@ public interface FactureRepository {
      * Récupère la facture d'une réservation
      */
     Optional<Facture> findByReservationId(Long idReservation);
-    
-    /**
-     * Récupère toutes les factures d'un client
-     */
-    List<Facture> findByClientId(Long idClient);
-    
-    /**
-     * Récupère toutes les factures d'un technicien
-     */
-    List<Facture> findByTechnicianId(Long idTechnician);
-    
-    /**
-     * Récupère les factures dans une période
-     */
-    List<Facture> findByGeneratedAtBetween(LocalDateTime start, LocalDateTime end);
-    
-    /**
-     * Compte les factures
-     */
-    Long count();
+
     
     /**
      * Supprime une facture

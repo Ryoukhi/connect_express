@@ -3,6 +3,7 @@ package com.eadl.connect_backend.infrastructure.adapter.out.persistence.reposito
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianSkillEntity;
 
 public interface TechnicianSkillJpaRepository extends JpaRepository<TechnicianSkillEntity, Long> {
@@ -10,13 +11,13 @@ public interface TechnicianSkillJpaRepository extends JpaRepository<TechnicianSk
     /**
      * Récupère toutes les compétences d’un profil technicien
      */
-    List<TechnicianSkillEntity> findByProfileId(Long profileId);
+    List<TechnicianSkillEntity> findByProfile_IdProfile(Long idProfile);
 
     /**
      * Récupère les compétences d’un technicien par catégorie
      */
-    List<TechnicianSkillEntity> findByProfileIdAndCategoryId(
-            Long profileId,
+    List<TechnicianSkillEntity> findByProfile_IdProfileAndCategory_IdCategory(
+            Long idProfile,
             Long categoryId
     );
 
@@ -24,8 +25,8 @@ public interface TechnicianSkillJpaRepository extends JpaRepository<TechnicianSk
      * Vérifie si une compétence existe déjà pour un profil
      * (évite doublons : même skill + même profil)
      */
-    boolean existsByProfileIdAndNameSkill(
-            Long profileId,
+    boolean existsByProfile_IdProfileAndName(
+            Long idProfile,
             String nameSkill
     );
 
@@ -38,9 +39,22 @@ public interface TechnicianSkillJpaRepository extends JpaRepository<TechnicianSk
      * Supprime toutes les compétences d’un profil
      * (ex : suppression de profil)
      */
-    void deleteByProfileId(Long profileId);
+    void deleteByProfile_IdProfile(Long idProfile);
 
-    List<TechnicianSkillEntity> findByCategoryId(Long id);
+    /**
+     * Récupère les profils par catégorie
+     */
+    List<TechnicianSkillEntity> findByCategory_IdCategory(Long id);
+
+    /**
+     * Récupère les compétences d’un technicien via son user ID
+     */
+    List<TechnicianSkillEntity> findByProfile_Technician_IdUser(Long idTechnician);
+
+
+    
+
+
 
     
 }

@@ -3,9 +3,12 @@ package com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.domain.model.category.Category;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.CategoryEntity;
 
+@Component
 public class CategoryEntityMapper {
 
 	public CategoryEntity toEntity(Category model) {

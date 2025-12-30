@@ -39,7 +39,7 @@ public class AdminRepositoryAdapter implements AdminRepository{
     }
 
     @Override
-    public Optional<Admin> findByUserId(Long idUser) {
+    public Optional<Admin> findByidUser(Long idUser) {
         return adminJpaRepository.findByIdUser(idUser)
             .filter(entity -> entity.getRole() == Role.ADMIN)
             .map(userEntityMapper::toDomain)

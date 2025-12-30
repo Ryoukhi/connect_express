@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.util.StringUtils;
 import com.eadl.connect_backend.domain.model.technician.AvailabilityStatus;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
-import com.eadl.connect_backend.domain.model.technician.TechnicianSearchCriteria;
 import com.eadl.connect_backend.domain.port.in.technician.TechnicianSearchService;
 import com.eadl.connect_backend.domain.port.out.persistence.TechnicianProfileRepository;
 import org.springframework.stereotype.Service;
@@ -28,42 +27,42 @@ public class TechnicianSearchServiceImpl implements TechnicianSearchService {
      * 🔍 Recherche simple par ville
      * Cas d’usage client basique
      */
-    @Override
-    public List<TechnicianProfile> searchByCity(String city) {
+    // @Override
+    // public List<TechnicianProfile> searchByCity(String city) {
 
-        if (!StringUtils.hasText(city)) {
-            throw new IllegalArgumentException("City must not be empty");
-        }
+    //     if (!StringUtils.hasText(city)) {
+    //         throw new IllegalArgumentException("City must not be empty");
+    //     }
 
-        TechnicianSearchCriteria criteria = new TechnicianSearchCriteria();
-        criteria.setCity(city);
-        criteria.setActiveOnly(true);
-        criteria.setVerifiedOnly(true);
+    //     TechnicianSearchCriteria criteria = new TechnicianSearchCriteria();
+    //     criteria.setCity(city);
+    //     criteria.setActiveOnly(true);
+    //     criteria.setVerifiedOnly(true);
 
 
 
-        return searchRepository.search(criteria);
-    }
+    //     return searchRepository.search(criteria);
+    // }
 
     /**
      * 🔎 Recherche avancée multi-critères
      */
-    @Override
-    public List<TechnicianProfile> search(
-            TechnicianSearchCriteria criteria
-    ) {
+    // @Override
+    // public List<TechnicianProfile> search(
+    //         TechnicianSearchCriteria criteria
+    // ) {
 
-        if (criteria == null) {
-            throw new IllegalArgumentException("Search criteria must not be null");
-        }
+    //     if (criteria == null) {
+    //         throw new IllegalArgumentException("Search criteria must not be null");
+    //     }
 
-        // Règle métier par défaut
-        if (criteria.getAvailabilityStatus() == null) {
-            criteria.setAvailabilityStatus(AvailabilityStatus.AVAILABLE);
-        }
+    //     // Règle métier par défaut
+    //     if (criteria.getAvailabilityStatus() == null) {
+    //         criteria.setAvailabilityStatus(AvailabilityStatus.AVAILABLE);
+    //     }
 
-        return searchRepository.search(criteria);
-    }
+    //     return searchRepository.search(criteria);
+    // }
 
     /**
      * ⭐ Top techniciens les mieux notés
@@ -92,27 +91,27 @@ public class TechnicianSearchServiceImpl implements TechnicianSearchService {
     /**
      * 📍 Techniciens disponibles autour d’un point
      */
-    @Override
-    public List<TechnicianProfile> findNearbyAvailable(
-            BigDecimal latitude,
-            BigDecimal longitude,
-            BigDecimal radiusKm
-    ) {
+    // @Override
+    // public List<TechnicianProfile> findNearbyAvailable(
+    //         BigDecimal latitude,
+    //         BigDecimal longitude,
+    //         BigDecimal radiusKm
+    // ) {
 
-        if (latitude == null || longitude == null) {
-            throw new IllegalArgumentException("Latitude and longitude are required");
-        }
+    //     if (latitude == null || longitude == null) {
+    //         throw new IllegalArgumentException("Latitude and longitude are required");
+    //     }
 
-        if (radiusKm == null || radiusKm.compareTo(BigDecimal.ZERO) <= 0) {
-            radiusKm = BigDecimal.valueOf(10); // rayon par défaut : 10 km
-        }
+    //     if (radiusKm == null || radiusKm.compareTo(BigDecimal.ZERO) <= 0) {
+    //         radiusKm = BigDecimal.valueOf(10); // rayon par défaut : 10 km
+    //     }
 
-        return searchRepository.findNearbyAvailable(
-                latitude,
-                longitude,
-                radiusKm,
-                AvailabilityStatus.AVAILABLE
-        );
-    }
+    //     return searchRepository.findNearbyAvailable(
+    //             latitude,
+    //             longitude,
+    //             radiusKm,
+    //             AvailabilityStatus.AVAILABLE
+    //     );
+    // }
 
 }

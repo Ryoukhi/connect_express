@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
 import com.eadl.connect_backend.domain.model.technician.TechnicianSkill;
-import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.domain.port.in.technician.TechnicianSkillService;
 import com.eadl.connect_backend.domain.port.out.persistence.TechnicianProfileRepository;
@@ -56,7 +55,6 @@ public class TechnicianSkillServiceImpl implements TechnicianSkillService {
         TechnicianSkill existingSkill = skillRepository.findById(skill.getIdSkill())
                 .orElseThrow(() -> new IllegalArgumentException("Skill not found"));
 
-        validateOwnership(existingSkill.getIdProfile());
 
         existingSkill.setNameSkill(skill.getNameSkill());
         existingSkill.setDescription(skill.getDescription());
@@ -71,8 +69,6 @@ public class TechnicianSkillServiceImpl implements TechnicianSkillService {
 
         TechnicianSkill skill = skillRepository.findById(skillId)
                 .orElseThrow(() -> new IllegalArgumentException("Skill not found"));
-
-        validateOwnership(skill.getIdProfile());
 
         skillRepository.delete(skill);
     }
@@ -105,23 +101,5 @@ public class TechnicianSkillServiceImpl implements TechnicianSkillService {
         return skillRepository.findById(skillId);
     }
 
-    /**
-     * Vérifie que l’utilisateur connecté est autorisé à modifier le profil
-     */
-    private void validateOwnership(Long profileId) {
-
-        User currentUser = currentUserProvider.getCurrentUser();
-
-        if (currentUser.getRole() == Role.ADMIN) {
-            return;
-        }
-
-        TechnicianProfile profile = profileRepository
-                .findById(profileId)
-                .orElseThrow(() -> new IllegalStateException("Profile not found"));
-
-        if (!profile.getIdTechnician().equals(currentUser.getIdUser())) {
-            throw new SecurityException("Access denied");
-        }
-    }
+    
 }

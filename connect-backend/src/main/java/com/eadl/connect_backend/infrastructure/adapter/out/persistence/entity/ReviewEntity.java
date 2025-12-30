@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 import com.eadl.connect_backend.domain.model.review.Rating;
+import com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper.RatingJpaConverter;
 
 @Entity
 @Table(name = "reviews")
@@ -19,9 +20,11 @@ public class ReviewEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReview;
 
+    @Convert(converter = RatingJpaConverter.class)
+    @Column(nullable = false)
     private Rating rating;
 
-    @Column(length = 2048)
+    @Column(nullable = true, length = 2048)
     private String comment;
 
     private LocalDateTime createdAt;

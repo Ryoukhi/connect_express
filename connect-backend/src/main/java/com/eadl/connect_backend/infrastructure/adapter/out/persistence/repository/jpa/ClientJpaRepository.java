@@ -9,9 +9,7 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.Us
 
 public interface ClientJpaRepository extends JpaRepository<UserEntity, Long> {
 
-    Optional<UserEntity> findByUser_IdUser(Long idUser);
-
-    List<UserEntity> findByAddressContainingIgnoreCase(String address);
+    Optional<UserEntity> findByidUser(Long idUser);
 
     List<UserEntity> findByActive(boolean active);
 
