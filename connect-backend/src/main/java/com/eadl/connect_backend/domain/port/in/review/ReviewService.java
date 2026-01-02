@@ -3,6 +3,7 @@ package com.eadl.connect_backend.domain.port.in.review;
 import java.util.List;
 import java.util.Optional;
 
+import com.eadl.connect_backend.domain.model.review.Rating;
 import com.eadl.connect_backend.domain.model.review.Review;
 
 /**
@@ -14,7 +15,7 @@ public interface ReviewService {
     /**
      * Crée un avis
      */
-    Review createReview();
+    Review createReview(Long idClient, Rating rating, String comment);
     
     /**
      * Récupère un avis par son ID
@@ -40,6 +41,11 @@ public interface ReviewService {
      * Compte tous les avis
      */
     Long countReviews();
+
+    Optional<Review> getReviewByClientAndReservation(
+        Long clientId,
+        Long reservationId
+    );
     
    
     

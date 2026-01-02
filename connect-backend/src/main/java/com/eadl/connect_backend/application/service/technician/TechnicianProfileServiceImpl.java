@@ -36,23 +36,23 @@ public class TechnicianProfileServiceImpl implements TechnicianProfileService {
 
 
     @Override
-public TechnicianProfile createProfile(TechnicianProfile profile) {
+    public TechnicianProfile createProfile(TechnicianProfile profile) {
 
-    Long technicianId = currentUserProvider.getCurrentUserId();
+        Long technicianId = currentUserProvider.getCurrentUserId();
 
-    // Vérifier qu’un profil n’existe pas déjà
-    profileRepository.findByIdTechnician(technicianId)
-            .ifPresent(p -> {
-                throw new IllegalStateException("Profile already exists for this technician");
-            });
+        // Vérifier qu’un profil n’existe pas déjà
+        profileRepository.findByIdTechnician(technicianId)
+                .ifPresent(p -> {
+                    throw new IllegalStateException("Profile already exists for this technician");
+                });
 
-    profile.setIdTechnician(technicianId);
-    profile.setVerified(false);
-    profile.setCompletedJobs(0);
-    profile.setAverageRating(BigDecimal.ZERO);
+        profile.setIdTechnician(technicianId);
+        profile.setVerified(false);
+        profile.setCompletedJobs(0);
+        profile.setAverageRating(BigDecimal.ZERO);
 
-    return profileRepository.save(profile);
-}
+        return profileRepository.save(profile);
+    }
 
 
     // ================= READ =================

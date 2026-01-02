@@ -1,5 +1,7 @@
 package com.eadl.connect_backend.domain.port.in.user;
 
+import com.eadl.connect_backend.application.dto.AuthRequest;
+import com.eadl.connect_backend.application.dto.AuthResponse;
 import com.eadl.connect_backend.domain.model.user.User;
 
 /**
@@ -11,7 +13,7 @@ public interface AuthService {
     /**
      * Authentifie un utilisateur
      */
-    User login(String email, String password);
+    AuthResponse login(AuthRequest authRequest);
     
     /**
      * Déconnecte un utilisateur

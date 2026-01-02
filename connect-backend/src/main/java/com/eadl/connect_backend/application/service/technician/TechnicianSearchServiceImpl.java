@@ -1,9 +1,7 @@
 package com.eadl.connect_backend.application.service.technician;
 
-import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.util.StringUtils;
-import com.eadl.connect_backend.domain.model.technician.AvailabilityStatus;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
 import com.eadl.connect_backend.domain.port.in.technician.TechnicianSearchService;
 import com.eadl.connect_backend.domain.port.out.persistence.TechnicianProfileRepository;

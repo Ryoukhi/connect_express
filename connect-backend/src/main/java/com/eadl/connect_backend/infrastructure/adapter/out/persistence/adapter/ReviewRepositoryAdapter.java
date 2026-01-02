@@ -124,4 +124,14 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
                 RoundingMode.HALF_UP
         );
     }
+
+    @Override
+    public Optional<Review> findByClientIdAndReservationId(
+            Long clientId,
+            Long reservationId
+    ) {
+        return reviewJpaRepository
+                .findByClient_IdUserAndReservation_IdReservation(clientId, reservationId)
+                .map(reviewEntityMapper::toModel);
+    }
 }

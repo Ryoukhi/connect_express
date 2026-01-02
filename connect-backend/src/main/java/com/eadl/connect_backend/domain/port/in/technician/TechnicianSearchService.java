@@ -1,6 +1,5 @@
 package com.eadl.connect_backend.domain.port.in.technician;
 
-import java.math.BigDecimal;
 import java.util.List;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
 

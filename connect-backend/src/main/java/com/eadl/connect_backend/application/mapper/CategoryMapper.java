@@ -15,7 +15,7 @@ public class CategoryMapper {
         // Utility class
     }
 
-    public static CategoryDto toDto(Category category) {
+    public CategoryDto toDto(Category category) {
         if (category == null) return null;
 
         CategoryDto dto = new CategoryDto();
@@ -29,9 +29,29 @@ public class CategoryMapper {
         return dto;
     }
 
-    public static List<CategoryDto> toDtoList(List<Category> categories) {
+    public Category toModel(CategoryDto dto) {
+        if (dto == null) return null;
+
+        Category category = new Category();
+        category.setIdCategory(dto.getIdCategory());
+        category.setName(dto.getName());
+        category.setDescription(dto.getDescription());
+        category.setIconUrl(dto.getIconUrl());
+        category.setActive(dto.isActive());
+        category.setDisplayOrder(dto.getDisplayOrder());
+
+        return category;
+    }
+
+    public List<CategoryDto> toDtoList(List<Category> categories) {
         return categories.stream()
-                .map(CategoryMapper::toDto)
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<Category> toModelList(List<CategoryDto> dtos) {
+        return dtos.stream()
+                .map(this::toModel)
                 .collect(Collectors.toList());
     }
 }

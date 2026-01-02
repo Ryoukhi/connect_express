@@ -27,9 +27,30 @@ public class TechnicianDocumentMapper {
         return dto;
     }
 
+    public static TechnicianDocument toModel(TechnicianDocumentDto dto) {
+        if (dto == null) return null;
+
+        TechnicianDocument document = new TechnicianDocument();
+        document.setIdDocument(dto.getIdDocument());
+        document.setIdProfile(dto.getIdProfile());
+        document.setType(dto.getType());
+        document.setUrl(dto.getUrl());
+        document.setUploadedAt(dto.getUploadedAt());
+        document.setVerified(dto.isVerified());
+        document.setVerificationNote(dto.getVerificationNote());
+
+        return document;
+    }
+
     public static List<TechnicianDocumentDto> toDtoList(List<TechnicianDocument> documents) {
         return documents.stream()
                 .map(TechnicianDocumentMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public static List<TechnicianDocument> toModelList(List<TechnicianDocumentDto> dtos) {
+        return dtos.stream()
+                .map(TechnicianDocumentMapper::toModel)
                 .collect(Collectors.toList());
     }
 }

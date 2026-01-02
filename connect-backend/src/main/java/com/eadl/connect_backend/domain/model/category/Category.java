@@ -13,7 +13,7 @@ public class Category {
     private boolean active;
     private Integer displayOrder;
 
-    private Category() {}
+    public Category() {}
 
     // ========== Factory Method ==========
     public static Category create(String name, String description) {
@@ -107,5 +107,21 @@ public class Category {
                 ", name='" + name + '\'' +
                 ", active=" + active +
                 '}';
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
+    }
+
+    public void setDisplayOrder(Integer displayOrder) {
+        this.displayOrder = displayOrder;
     }
 }

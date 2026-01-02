@@ -15,7 +15,7 @@ public class ReviewMapper {
         // Utility class
     }
 
-    public static ReviewDto toDto(Review review) {
+    public ReviewDto toDto(Review review) {
         if (review == null) return null;
 
         ReviewDto dto = new ReviewDto();
@@ -28,9 +28,28 @@ public class ReviewMapper {
         return dto;
     }
 
-    public static List<ReviewDto> toDtoList(List<Review> reviews) {
+    public Review toModel(ReviewDto dto) {
+        if (dto == null) return null;
+
+        Review review = new Review();
+        review.setIdReview(dto.getIdReview());
+        review.setIdClient(dto.getIdClient());
+        review.setRating(dto.getRating());
+        review.setComment(dto.getComment());
+        review.setCreatedAt(dto.getCreatedAt());
+
+        return review;
+    }
+
+    public List<ReviewDto> toDtoList(List<Review> reviews) {
         return reviews.stream()
-                .map(ReviewMapper::toDto)
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<Review> toModelList(List<ReviewDto> dtos) {
+        return dtos.stream()
+                .map(this::toModel)
                 .collect(Collectors.toList());
     }
 }

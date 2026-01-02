@@ -49,4 +49,11 @@ public interface ReviewRepository {
         WHERE r.idReview IN :reviewIds
     """)
     BigDecimal calculateAverageRating(List<Long> reviewIds);
+
+    Optional<Review> findByClientIdAndReservationId(
+        Long clientId,
+        Long reservationId
+    );
+
+    
 }

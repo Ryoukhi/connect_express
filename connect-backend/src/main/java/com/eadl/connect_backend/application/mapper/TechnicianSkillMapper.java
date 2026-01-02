@@ -12,7 +12,7 @@ public class TechnicianSkillMapper {
         // Utility class
     }
 
-    public static TechnicianSkillDto toDto(TechnicianSkill skill) {
+    public TechnicianSkillDto toDto(TechnicianSkill skill) {
         if (skill == null) return null;
 
         TechnicianSkillDto technicianSkillDto = new TechnicianSkillDto();
@@ -27,9 +27,30 @@ public class TechnicianSkillMapper {
         return technicianSkillDto;
     }
 
-    public static List<TechnicianSkillDto> toDtoList(List<TechnicianSkill> skills) {
+    public TechnicianSkill toModel(TechnicianSkillDto dto) { 
+        if (dto == null) return null;
+
+        TechnicianSkill skill = new TechnicianSkill();
+        
+        skill.setIdSkill(dto.getIdSkill());
+        skill.setIdProfile(dto.getIdProfile());
+        skill.setIdCategory(dto.getIdCategory());
+        skill.setNameSkill(dto.getNameSkill());
+        skill.setDescription(dto.getDescription());
+        skill.setLevel(dto.getLevel());
+
+        return skill;
+    }
+
+    public List<TechnicianSkillDto> toDtoList(List<TechnicianSkill> skills) {
         return skills.stream()
-                .map(TechnicianSkillMapper::toDto)
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<TechnicianSkill> toModelList(List<TechnicianSkillDto> dtos) {
+        return dtos.stream()
+                .map(this::toModel)
                 .collect(Collectors.toList());
     }
 }

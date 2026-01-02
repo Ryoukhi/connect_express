@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * Implémentation du service métier Review
  * 
@@ -26,16 +28,6 @@ public class ReviewServiceImpl implements ReviewService {
 
     public ReviewServiceImpl(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Review createReview() {
-        throw new UnsupportedOperationException(
-            "La création d'un avis nécessite des paramètres métier"
-        );
     }
 
     /**
@@ -142,5 +134,18 @@ public class ReviewServiceImpl implements ReviewService {
                 "La note doit être comprise entre 1 et 5"
             );
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Review> getReviewByClientAndReservation(
+            Long clientId,
+            Long reservationId
+    ) {
+        if (clientId == null || reservationId == null) {
+            throw new IllegalArgumentException("ClientId and ReservationId are required");
+        }
+
+        return reviewRepository.findByClientIdAndReservationId(clientId, reservationId);
     }
 }

@@ -12,7 +12,7 @@ public class ReservationMapper {
         // Utility class
     }
 
-    public static ReservationDto toDto(Reservation reservation) {
+    public ReservationDto toDto(Reservation reservation) {
         if (reservation == null) return null;
 
         ReservationDto dto = new ReservationDto();
@@ -37,9 +37,40 @@ public class ReservationMapper {
         return dto;
     }
 
-    public static List<ReservationDto> toDtoList(List<Reservation> reservations) {
+    public Reservation toModel(ReservationDto dto) {
+        if (dto == null) return null;
+
+        Reservation reservation = new Reservation();
+        reservation.setIdReservation(dto.getIdReservation());
+        reservation.setIdClient(dto.getIdClient());
+        reservation.setIdTechnician(dto.getIdTechnician());
+        reservation.setIdReview(dto.getIdReview());
+
+        reservation.setDateRequested(dto.getDateRequested());
+        reservation.setScheduledTime(dto.getScheduledTime());
+        reservation.setStatus(dto.getStatus());
+
+        reservation.setPrice(dto.getPrice());
+        reservation.setAddress(dto.getAddress());
+        reservation.setDescription(dto.getDescription());
+        reservation.setCancellationReason(dto.getCancellationReason());
+
+        reservation.setCreatedAt(dto.getCreatedAt());
+        reservation.setUpdatedAt(dto.getUpdatedAt());
+        reservation.setCompletedAt(dto.getCompletedAt());
+
+        return reservation;
+    }
+
+    public List<ReservationDto> toDtoList(List<Reservation> reservations) {
         return reservations.stream()
-                .map(ReservationMapper::toDto)
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<Reservation> toModelList(List<ReservationDto> dtos) {
+        return dtos.stream()
+                .map(this::toModel)
                 .collect(Collectors.toList());
     }
 }

@@ -38,6 +38,7 @@ public class TechnicianProfile {
         return profile;
     }
 
+    
     // ========== Business Logic Methods ==========
     public void updateProfile(String bio, Integer yearsExperience, BigDecimal hourlyRate) {
         this.bio = bio;

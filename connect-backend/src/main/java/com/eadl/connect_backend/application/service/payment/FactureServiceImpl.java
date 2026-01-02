@@ -1,7 +1,6 @@
 package com.eadl.connect_backend.application.service.payment;
 
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +14,7 @@ import com.eadl.connect_backend.application.dto.FactureDto;
 import com.eadl.connect_backend.application.mapper.FactureMapper;
 import com.eadl.connect_backend.domain.model.payment.Facture;
 
-import com.eadl.connect_backend.domain.port.exception.FactureNotFoundException;
 import com.eadl.connect_backend.domain.port.in.payment.FactureService;
-import com.eadl.connect_backend.domain.port.out.external.StorageService;
 import com.eadl.connect_backend.domain.port.out.persistence.FactureRepository;
 import lombok.RequiredArgsConstructor;
 

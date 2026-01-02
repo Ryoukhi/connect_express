@@ -22,8 +22,6 @@ public abstract class User {
     protected boolean active;
     protected boolean emailVerified;
     protected boolean phoneVerified;
-
-    // Optional profile fields
     protected String profilePhotoUrl;
     
 

@@ -2,6 +2,7 @@ package com.eadl.connect_backend.infrastructure.adapter.out.persistence.reposito
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,9 @@ public interface ReviewJpaRepository extends JpaRepository<ReviewEntity, Long> {
      */
     @Query("SELECT r.rating FROM ReviewEntity r WHERE r.idReview IN :reviewIds")
     List<Integer> findRatingsByReviewIds(@Param("reviewIds") List<Long> reviewIds);
+
+    Optional<ReviewEntity> findByClient_IdUserAndReservation_IdReservation(
+        Long clientId,
+        Long reservationId
+    );
 }
