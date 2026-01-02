@@ -3,9 +3,12 @@ package com.eadl.connect_backend.application.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.application.dto.TechnicianDocumentDto;
 import com.eadl.connect_backend.domain.model.technician.TechnicianDocument;
 
+@Component
 public class TechnicianDocumentMapper {
 
     private TechnicianDocumentMapper() {

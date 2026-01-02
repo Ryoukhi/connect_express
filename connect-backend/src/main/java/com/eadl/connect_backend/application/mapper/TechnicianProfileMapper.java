@@ -1,10 +1,13 @@
 package com.eadl.connect_backend.application.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.application.dto.TechnicianProfileCreateDto;
 import com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto;
 import com.eadl.connect_backend.application.dto.TechnicianProfileUpdateDto;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
 
+@Component
 public class TechnicianProfileMapper {
 
     public TechnicianProfile toEntity(

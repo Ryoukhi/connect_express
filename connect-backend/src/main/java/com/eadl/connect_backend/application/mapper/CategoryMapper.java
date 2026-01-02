@@ -3,12 +3,15 @@ package com.eadl.connect_backend.application.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.application.dto.CategoryDto;
 import com.eadl.connect_backend.domain.model.category.Category;
 
 /**
  * Mapper utilitaire pour les catégories
  */
+@Component
 public class CategoryMapper {
 
     private CategoryMapper() {

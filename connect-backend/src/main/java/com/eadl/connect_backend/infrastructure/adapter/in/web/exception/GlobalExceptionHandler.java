@@ -1,9 +1,7 @@
 package com.eadl.connect_backend.infrastructure.adapter.in.web.exception;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -25,7 +23,6 @@ import jakarta.persistence.EntityNotFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Structure standard pour les erreurs
     public record ApiError(
             LocalDateTime timestamp,
             int status,
@@ -34,73 +31,11 @@ public class GlobalExceptionHandler {
             List<String> details
     ) {}
 
-    /* ===========================
-       Gestion des exceptions générales
-       =========================== */
-     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiError> handleAllExceptions(Exception ex) {
-        ApiError error = new ApiError(
-                LocalDateTime.now(),
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-                ex.getMessage(),
-                List.of(ex.getClass().getName())
-        );
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-    }
-
-    /* ===========================
-       Erreurs métiers personnalisées
-       =========================== */
+    // ===========================
+    // Business exceptions
+    // ===========================
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<Map<String, Object>> handleBusinessException(BusinessException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    }
-
-    /* ===========================
-       User not found
-       =========================== */
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleUserNotFound(UserNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(AdminNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleAdminNotFound(AdminNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(DocumentNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleDocumentNotFound(DocumentNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ApiError> handleEntityNotFound(EntityNotFoundException ex) {
-        ApiError error = new ApiError(
-                LocalDateTime.now(),
-                HttpStatus.NOT_FOUND.value(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(),
-                ex.getMessage(),
-                List.of(ex.getClass().getName())
-        );
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
-
-     @ExceptionHandler({IllegalArgumentException.class})
-    public ResponseEntity<ApiError> handleBusinessExceptions(RuntimeException ex) {
+    public ResponseEntity<ApiError> handleBusinessException(BusinessException ex) {
         ApiError error = new ApiError(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
@@ -111,24 +46,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
-
-    /* ===========================
-       Entity not found
-       =========================== */
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleEntityNotFound(UserNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    /* ===========================
-       Validation des @RequestBody
-       =========================== */
-    // =======================
-    // Validation DTO @Valid
-    // =======================
+    // ===========================
+    // Validation @Valid
+    // ===========================
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleValidationExceptions(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult()
@@ -147,14 +67,49 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
-    /* ===========================
-       Illegal arguments
-       =========================== */
+    // ===========================
+    // Illegal arguments
+    // ===========================
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ApiError> handleIllegalArgument(IllegalArgumentException ex) {
+        ApiError error = new ApiError(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage(),
+                List.of(ex.getClass().getName())
+        );
+        return ResponseEntity.badRequest().body(error);
+    }
+
+    // ===========================
+    // Not found exceptions
+    // ===========================
+    @ExceptionHandler({UserNotFoundException.class, AdminNotFoundException.class,
+                       DocumentNotFoundException.class, EntityNotFoundException.class})
+    public ResponseEntity<ApiError> handleNotFound(RuntimeException ex) {
+        ApiError error = new ApiError(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                List.of(ex.getClass().getName())
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    // ===========================
+    // Toutes les autres exceptions
+    // ===========================
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiError> handleAllExceptions(Exception ex) {
+        ApiError error = new ApiError(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+                ex.getMessage(),
+                List.of(ex.getClass().getName())
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 }

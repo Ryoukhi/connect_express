@@ -1,9 +1,12 @@
 package com.eadl.connect_backend.application.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.application.dto.RegisterDto;
 import com.eadl.connect_backend.domain.model.user.Client;
 import com.eadl.connect_backend.domain.model.user.User;
 
+@Component
 public class RegisterMapper {
 
     public Client toModel(RegisterDto dto) {

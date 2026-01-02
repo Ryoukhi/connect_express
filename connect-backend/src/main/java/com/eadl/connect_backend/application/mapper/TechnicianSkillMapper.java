@@ -3,9 +3,12 @@ package com.eadl.connect_backend.application.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.application.dto.TechnicianSkillDto;
 import com.eadl.connect_backend.domain.model.technician.TechnicianSkill;
 
+@Component
 public class TechnicianSkillMapper {
 
     private TechnicianSkillMapper() {

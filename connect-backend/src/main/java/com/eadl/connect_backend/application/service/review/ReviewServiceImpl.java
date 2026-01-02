@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Architecture : Hexagonale (Use Case / Application Service)
  * </p>
  */
+@Service
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;

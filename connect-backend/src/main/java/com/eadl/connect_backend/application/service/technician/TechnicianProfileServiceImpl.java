@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
 import com.eadl.connect_backend.domain.model.technician.AvailabilityStatus;
 import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
@@ -14,6 +16,7 @@ import com.eadl.connect_backend.domain.port.out.persistence.ReviewRepository;
 import com.eadl.connect_backend.domain.port.out.persistence.TechnicianProfileRepository;
 import com.eadl.connect_backend.domain.port.out.security.CurrentUserProvider;
 
+@Service
 public class TechnicianProfileServiceImpl implements TechnicianProfileService {
 
     private final TechnicianProfileRepository profileRepository;

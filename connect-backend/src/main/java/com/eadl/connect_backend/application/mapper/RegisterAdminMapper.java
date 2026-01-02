@@ -1,9 +1,12 @@
 package com.eadl.connect_backend.application.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.application.dto.RegisterAdminDto;
 import com.eadl.connect_backend.domain.model.user.Admin;
 import com.eadl.connect_backend.domain.model.user.User;
 
+@Component
 public class RegisterAdminMapper {
 
     public Admin toModel(RegisterAdminDto dto) {

@@ -3,6 +3,8 @@ package com.eadl.connect_backend.application.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.eadl.connect_backend.application.dto.UserDto;
 import com.eadl.connect_backend.domain.model.user.User;
 
@@ -10,6 +12,7 @@ import com.eadl.connect_backend.domain.model.user.User;
  * Mapper utilitaire pour convertir les entités User (et spécialisations)
  * en DTOs de réponse.
  */
+@Component
 public class UserMapper {
 
     private UserMapper() {
