@@ -3,9 +3,6 @@ package com.eadl.connect_backend.application.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import lombok.Builder;
-
-@Builder
 public class FactureDto {
 
     private Long idFacture;
@@ -66,6 +63,9 @@ public class FactureDto {
 
     public void setInvoiceNumber(String invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public FactureDto() {
     }
 
 }

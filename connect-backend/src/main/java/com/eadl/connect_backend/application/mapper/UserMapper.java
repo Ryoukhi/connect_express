@@ -31,11 +31,6 @@ public class UserMapper {
         dto.setRole(user.getRole());
         dto.setCity(user.getCity());
         dto.setNeighborhood(user.getNeighborhood());
-        dto.setActive(user.isActive());
-        dto.setEmailVerified(user.isEmailVerified());
-        dto.setPhoneVerified(user.isPhoneVerified());
-        dto.setProfilePhotoUrl(user.getProfilePhotoUrl());
-        dto.setCreatedAt(user.getCreatedAt());
 
         return dto;
     }

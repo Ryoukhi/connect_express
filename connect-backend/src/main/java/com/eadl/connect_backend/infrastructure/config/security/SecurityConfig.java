@@ -37,18 +37,24 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(new JwtAuthFilter(jwtUtil, userDetailsService), UsernamePasswordAuthenticationFilter.class);
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers(
+                "/api/auth/**",              // Autorise tout sous /auth/
+                "/v3/api-docs/**",       // Documentation JSON
+                "/swagger-ui/**",        // Interface Swagger
+                "/swagger-ui.html",       // Page de redirection Swagger
+                "/v3/api-docs/**",
+                "/actuator/**"           // Actuator endpoints
+            ).permitAll()
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(new JwtAuthFilter(jwtUtil, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
-    }
-
+    return http.build();
+}
 
     public static class JwtAuthFilter extends OncePerRequestFilter {
         private final JwtUtil jwtUtil;

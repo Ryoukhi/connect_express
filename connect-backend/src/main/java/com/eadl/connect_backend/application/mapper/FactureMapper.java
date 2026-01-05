@@ -15,14 +15,15 @@ public class FactureMapper {
     public FactureDto toDto(Facture facture) {
         if (facture == null) return null;
 
-        return FactureDto.builder()
-                .idFacture(facture.getIdFacture())
-                .idReservation(facture.getIdReservation())
-                .pdfUrl(facture.getPdfUrl())
-                .amount(facture.getAmount())
-                .generatedAt(facture.getGeneratedAt())
-                .invoiceNumber(facture.getInvoiceNumber())
-                .build();
+        FactureDto newDto = new FactureDto();
+        newDto.setIdFacture(facture.getIdFacture());
+        newDto.setIdReservation(facture.getIdReservation());
+        newDto.setPdfUrl(facture.getPdfUrl());
+        newDto.setAmount(facture.getAmount());
+        newDto.setGeneratedAt(facture.getGeneratedAt());
+        newDto.setInvoiceNumber(facture.getInvoiceNumber());
+
+        return newDto;
     }
 
     public Facture toModel(FactureDto dto) {

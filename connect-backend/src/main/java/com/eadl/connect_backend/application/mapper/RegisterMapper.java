@@ -3,6 +3,7 @@ package com.eadl.connect_backend.application.mapper;
 import org.springframework.stereotype.Component;
 
 import com.eadl.connect_backend.application.dto.RegisterDto;
+import com.eadl.connect_backend.application.dto.RegisterResponseDto;
 import com.eadl.connect_backend.domain.model.user.Client;
 import com.eadl.connect_backend.domain.model.user.User;
 
@@ -22,8 +23,8 @@ public class RegisterMapper {
         return client;
     }
 
-    public RegisterDto toDto(User user) {
-        RegisterDto dto = new RegisterDto();
+    public RegisterResponseDto toDto(User user) {
+        RegisterResponseDto dto = new RegisterResponseDto();
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.eadl.connect_backend.application.dto.AuthRequest;
 import com.eadl.connect_backend.application.dto.AuthResponse;
 import com.eadl.connect_backend.application.dto.RegisterDto;
+import com.eadl.connect_backend.application.dto.RegisterResponseDto;
 import com.eadl.connect_backend.application.mapper.RegisterMapper;
 import com.eadl.connect_backend.domain.model.user.Client;
 import com.eadl.connect_backend.domain.model.user.User;
@@ -43,14 +44,14 @@ public class AuthController {
      * Inscription utilisateur
      */
      @PostMapping("/register")
-        public ResponseEntity<RegisterDto> register(
+        public ResponseEntity<RegisterResponseDto> register(
                 @RequestBody RegisterDto registerDto
         ) {
             Client client = registerMapper.toModel(registerDto);
 
             User createdUser = authService.register(client);
 
-            RegisterDto response = registerMapper.toDto(createdUser);
+            RegisterResponseDto response = registerMapper.toDto(createdUser);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }
