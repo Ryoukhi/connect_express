@@ -2,6 +2,7 @@ package com.eadl.connect_backend.application.dto;
 
 public class RegisterResponseDto {
 
+    public String token;
     private String firstName;
     private String lastName;
     private String email;
@@ -12,7 +13,29 @@ public class RegisterResponseDto {
 
     public RegisterResponseDto() {
     }
-    
+
+    public RegisterResponseDto(String token, String firstName, String lastName, String email, String phone, String city,
+            String neighborhood, String profilePhotoUrl) {
+        this.token = token;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.city = city;
+        this.neighborhood = neighborhood;
+        this.profilePhotoUrl = profilePhotoUrl;
+    }
+
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -55,8 +78,4 @@ public class RegisterResponseDto {
     public void setProfilePhotoUrl(String profilePhotoUrl) {
         this.profilePhotoUrl = profilePhotoUrl;
     }
-
-    
-
-
 }

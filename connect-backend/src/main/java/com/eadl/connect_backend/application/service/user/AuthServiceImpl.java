@@ -1,6 +1,7 @@
 package com.eadl.connect_backend.application.service.user;
 import com.eadl.connect_backend.application.dto.AuthRequest;
 import com.eadl.connect_backend.application.dto.AuthResponse;
+import com.eadl.connect_backend.application.dto.RegisterResponseDto;
 import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.domain.port.out.persistence.UserRepository;
 import com.eadl.connect_backend.infrastructure.config.security.CustomUserDetails;
@@ -67,7 +68,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public User register(User user) {
+    public RegisterResponseDto register(User user) {
 
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Un compte avec cet email existe déjà");
@@ -95,6 +96,21 @@ public class AuthServiceImpl implements AuthService {
 
         user.changePassword(passwordEncoder.encode(user.getPassword()));
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        
+        // Générer un token JWT pour le nouvel utilisateur
+        CustomUserDetails userDetails = new CustomUserDetails(savedUser);
+        String token = jwtService.generateToken(userDetails);
+
+        return new RegisterResponseDto(
+                token,
+                savedUser.getFirstName(),
+                savedUser.getLastName(),
+                savedUser.getEmail(),
+                savedUser.getPhone(),
+                savedUser.getCity(),
+                savedUser.getNeighborhood(),
+                savedUser.getProfilePhotoUrl()
+        );
     }
 }

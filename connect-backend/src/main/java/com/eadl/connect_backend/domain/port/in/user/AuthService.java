@@ -2,6 +2,7 @@ package com.eadl.connect_backend.domain.port.in.user;
 
 import com.eadl.connect_backend.application.dto.AuthRequest;
 import com.eadl.connect_backend.application.dto.AuthResponse;
+import com.eadl.connect_backend.application.dto.RegisterResponseDto;
 import com.eadl.connect_backend.domain.model.user.User;
 
 /**
@@ -23,6 +24,6 @@ public interface AuthService {
     /**
      * Inscrit un nouvel utilisateur
      */
-    User register(User user);
+    RegisterResponseDto register(User user);
     
 }

@@ -11,7 +11,6 @@ import com.eadl.connect_backend.application.dto.RegisterDto;
 import com.eadl.connect_backend.application.dto.RegisterResponseDto;
 import com.eadl.connect_backend.application.mapper.RegisterMapper;
 import com.eadl.connect_backend.domain.model.user.Client;
-import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.domain.port.in.user.AuthService;
 
 @RestController
@@ -49,10 +48,8 @@ public class AuthController {
         ) {
             Client client = registerMapper.toModel(registerDto);
 
-            User createdUser = authService.register(client);
+            RegisterResponseDto createdUser = authService.register(client);
 
-            RegisterResponseDto response = registerMapper.toDto(createdUser);
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
         }
 }
