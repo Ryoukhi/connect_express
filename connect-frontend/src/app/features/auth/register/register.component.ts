@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthControllerService } from '../../../api/services/authController.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { RegisterDto } from '../../../api/models';
 import { CommonModule } from '@angular/common';
 import { HttpClient} from '@angular/common/http';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterModule],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
@@ -28,7 +29,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthControllerService,
+    private authControllerService: AuthControllerService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -74,11 +76,14 @@ export class RegisterComponent implements OnInit {
       profilePhotoUrl: formValue['profilePhotoUrl'] || null, // optionnel
     };
 
-    this.authService.register(registerDto, 'body').subscribe({
+    this.authControllerService.register(registerDto, 'body').subscribe({
       next: (response) => {
         this.submitting = false;
+
+        this.authService.storeSession(response)
+
         // Redirection après inscription
-        this.router.navigate(['/login']);
+        this.router.navigate(['/catalogue']);
       },
       error: (err) => {
         this.submitting = false;

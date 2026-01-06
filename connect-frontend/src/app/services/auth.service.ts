@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AuthControllerService } from '../api/services/authController.service';
-import { AuthRequest, AuthResponse } from '../api/models';
+import { AuthRequest, AuthResponse, RegisterResponseDto } from '../api/models';
+import { Router } from '@angular/router';
 // import jwtDecode from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
@@ -10,7 +11,7 @@ export class AuthService {
   private readonly TOKEN_KEY = 'access_token';
   private readonly USER_KEY = 'auth_user';
 
-  constructor(private authApi: AuthControllerService) {}
+  constructor(private authApi: AuthControllerService, private router: Router) {}
 
   login(request: AuthRequest): Observable<AuthResponse> {
     return this.authApi.login(request, 'body').pipe(
@@ -20,10 +21,10 @@ export class AuthService {
     );
   }
 
-  logout(idUser: number): Observable<void> {
-    return this.authApi.logout(idUser, 'body').pipe(
-      tap(() => this.clearSession())
-    );
+  logout(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
+    this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
@@ -39,18 +40,35 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
-  private storeSession(response: AuthResponse): void {
-    if (!response.token) {
-      throw new Error('JWT token manquant dans la réponse d’authentification');
+  storeSession(response: RegisterResponseDto | AuthResponse | any): boolean {
+
+    // Some HTTP clients return a full HttpResponse object; handle both shapes (body or direct object)
+    const respBody = response?.body ?? response;
+
+    const token = respBody?.token ?? respBody?.accessToken ?? respBody?.access_token ?? respBody?.data?.token ?? null;
+    if (!token) {
+      console.error('Aucun token reçu lors de storeSession — réponse complète :', response);
+      return false;
     }
 
-    localStorage.setItem(this.TOKEN_KEY, response.token);
-    localStorage.setItem(this.USER_KEY, JSON.stringify(response));
-  }
+    try {
+      localStorage.setItem(this.TOKEN_KEY, token);
+      const verify = localStorage.getItem(this.TOKEN_KEY);
+      console.log('storeSession: token saved', { token, verify, response: respBody });
+    } catch (err) {
+      console.error('storeSession: failed to save token to localStorage', err);
+      return false;
+    }
 
-  private clearSession() {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.USER_KEY);
+    const user = respBody?.user ?? respBody?.data?.user ?? respBody ?? response;
+    try {
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      console.log('storeSession: user saved', user);
+    } catch (err) {
+      console.error('storeSession: failed to save user to localStorage', err);
+    }
+
+    return true;
   }
 
   isLoggedIn(): boolean {
