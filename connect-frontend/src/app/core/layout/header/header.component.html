@@ -1,0 +1,40 @@
+<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-2 cursor-pointer">
+        <div class="bg-blue-600 p-2 rounded-lg">
+          <i class="fas fa-bolt text-white"></i>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-blue-900">
+          Connect<span class="text-blue-600">Express</span>
+        </span>
+      </div>
+
+      <!-- Navigation -->
+      <div class="hidden md:flex space-x-8 font-medium text-slate-700">
+        <a routerLink="/services" routerLinkActive="text-blue-600">
+          Services
+        </a>
+
+        <a routerLink="/how-it-works" routerLinkActive="text-blue-600">Comment ça marche</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-3">
+        <button
+          class="hidden sm:block px-4 py-2 text-sm font-semibold border border-slate-300 rounded-full hover:bg-slate-50 transition">
+          Devenir technicien
+        </button>
+
+        <button
+          routerLink="/register"
+          class="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-full shadow-lg shadow-blue-200 hover:bg-blue-700 transition">
+          S'inscrire
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>

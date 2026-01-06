@@ -1,0 +1,103 @@
+    <!-- Header Logo -->
+    <header class="py-10 px-4">
+        <div class="max-w-7xl mx-auto flex justify-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="bg-blue-600 p-2 rounded-lg group-hover:scale-110 transition-transform">
+                    <i class="fas fa-bolt text-white"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tight text-blue-900">Connect<span class="text-blue-600">Express</span></span>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center px-4 pb-20">
+        <!-- Login Card -->
+        <div class="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl shadow-blue-100 border border-slate-100 overflow-hidden">
+            <div class="p-8 md:p-10">
+                <div class="text-center mb-10">
+                    <h1 class="text-3xl font-extrabold text-slate-900">Bon retour !</h1>
+                    <p class="text-slate-500 mt-2">Heureux de vous revoir parmi nous.</p>
+                </div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Adresse Email</label>
+                        <div class="relative group">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-blue-600 transition-colors">
+                                <i class="far fa-envelope"></i>
+                            </span>
+                            <input type="email" formControlName="email" placeholder="nom@exemple.com"
+                                class="block w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white outline-none transition-all" required>
+                            <small *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid" class="text-red-600">
+                              Email invalide
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-semibold text-slate-700">Mot de passe</label>
+                            <a href="#" class="text-xs font-bold text-blue-600 hover:text-blue-800">Oublié ?</a>
+                        </div>
+                        <div class="relative group">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-blue-600 transition-colors">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            <input type="password" formControlName="password" placeholder="••••••••"
+                                class="block w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:bg-white outline-none transition-all" required>
+                        </div>
+                    </div>
+
+                    <div *ngIf="serverError" class="text-red-600 text-sm text-center">
+                      {{ serverError }}
+                    </div>
+
+                    <!-- Remember Me (Optionnel mais Pro) -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
+                        <label for="remember" class="ml-2 text-sm text-slate-600">Se souvenir de moi</label>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" [disabled]="submitting" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-lg shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition-all duration-200">
+                        {{ submitting ? 'Connexion...' : 'Se connecter' }}
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-slate-100"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-4 bg-white text-slate-400">Ou continuer avec</span>
+                    </div>
+                </div>
+
+                <!-- Social Login -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="flex items-center justify-center py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition font-medium text-slate-700">
+                        <img src="https://www.svgrepo.com/show/355037/google.svg" class="w-5 h-5 mr-2" alt="Google"> Google
+                    </button>
+                    <button class="flex items-center justify-center py-3 border border-slate-200 rounded-xl hover:bg-slate-50 transition font-medium text-slate-700">
+                        <i class="fab fa-apple text-xl mr-2"></i> Apple
+                    </button>
+                </div>
+
+                <!-- Redirect to Register -->
+                <div class="mt-10 text-center">
+                    <p class="text-slate-600">
+                        Nouveau sur Connect Express ?
+                        <a routerLink="/register" class="text-blue-600 font-bold hover:underline underline-offset-4">Créer un compte</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-6 text-center text-slate-400 text-sm">
+        &copy; 2024 Connect Express. Sécurisé par SSL.
+    </footer>
