@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AuthControllerService } from '../api/services/authController.service';
 import { AuthRequest, AuthResponse } from '../api/models';
+// import jwtDecode from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -51,4 +52,27 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
   }
+
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    // Tu peux ajouter une vérification de validité du token si tu veux
+    return !!token;
+  }
+
+  // Vérifie si le token est expiré
+  // isTokenExpired(token: string): boolean {
+  //   try {
+  //     const decoded: any = jwtDecode(token);
+  //     const exp = decoded.exp;
+  //     if (!exp) return true;
+
+  //     const now = Math.floor(Date.now() / 1000);
+  //     return exp < now;
+  //   } catch (error) {
+  //     return true;
+  //   }
+  // }
+
 }
+
+
