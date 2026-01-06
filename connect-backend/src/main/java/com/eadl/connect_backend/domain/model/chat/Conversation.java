@@ -47,6 +47,7 @@ public class Conversation {
     }
 
     public boolean isParticipant(Long userId) {
+        if (userId == null) return false;
         return userId.equals(idClient) || userId.equals(idTechnician);
     }
 
@@ -98,13 +99,21 @@ public class Conversation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Conversation that = (Conversation) o;
-        return Objects.equals(idConversation, that.idConversation);
+
+        // Si l'un des deux ID est null, considérer que les objets ne sont pas égaux
+        if (this.idConversation == null || that.idConversation == null) {
+            return false;
+        }
+
+        return this.idConversation.equals(that.idConversation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idConversation);
+        // Si idConversation est null, retourner un hashCode unique basé sur l'objet lui-même
+        return idConversation != null ? idConversation.hashCode() : System.identityHashCode(this);
     }
+
 
     @Override
     public String toString() {

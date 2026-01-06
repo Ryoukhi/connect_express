@@ -89,11 +89,11 @@ public class Category {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Category)) return false;
         Category category = (Category) o;
-        return Objects.equals(idCategory, category.idCategory) &&
-               Objects.equals(name, category.name);
+        return idCategory != null && idCategory.equals(category.idCategory);
     }
+
 
     @Override
     public int hashCode() {

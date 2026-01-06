@@ -19,7 +19,7 @@ public class Payment {
     private String errorMessage;
     private String providerResponse;
 
-    private Payment() {}
+    Payment() {}
 
     // ========== Factory Method ==========
     public static Payment create(Long idReservation, BigDecimal amount, PaymentMode mode) {
@@ -146,14 +146,17 @@ public class Payment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Payment payment = (Payment) o;
-        return Objects.equals(idPayment, payment.idPayment) &&
-               Objects.equals(transactionRef, payment.transactionRef);
+        Payment that = (Payment) o;
+
+        // Si l'ID est null, les objets ne sont pas égaux
+        if (this.idPayment == null || that.idPayment == null) return false;
+
+        return this.idPayment.equals(that.idPayment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPayment, transactionRef);
+        return idPayment != null ? idPayment.hashCode() : System.identityHashCode(this);
     }
 
     @Override
