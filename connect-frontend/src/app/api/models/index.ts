@@ -39,8 +39,8 @@ export interface TechnicianProfileResponseDto {
 
 export interface Rating {
     value?: number;
-    poor?: boolean;
     label?: string;
+    poor?: boolean;
     excellent?: boolean;
 }
 
@@ -117,13 +117,13 @@ export interface TechnicianProfileCreateDto {
 }
 
 export interface RegisterDto {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-    phone?: string;
-    city?: string;
-    neighborhood?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    phone: string;
+    city: string;
+    neighborhood: string;
     profilePhotoUrl?: string;
 }
 
@@ -146,7 +146,7 @@ export interface AuthRequest {
 export interface AuthResponse {
     token?: string;
     userId?: number;
-    firsName?: string;
+    firstName?: string;
     lastName?: string;
     active?: boolean;
 }

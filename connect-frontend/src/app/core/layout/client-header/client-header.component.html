@@ -13,18 +13,18 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-4">
-                <button class="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full transition">
-                    <i class="far fa-bell text-xl"></i>
-                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-                </button>
-                <div class="flex items-center gap-2 border-l pl-4 border-slate-200">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-xs font-bold">Marie Douala</p>
-                        <p class="text-[10px] text-slate-500 italic">Client Standard</p>
-                    </div>
-                    <img src="https://ui-avatars.com/api/?name=Marie+Douala&background=2563eb&color=fff" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" alt="Profile">
-                </div>
+            <div class="flex items-center gap-2 border-l pl-4 border-slate-200">
+              <div class="text-right hidden sm:block">
+                <p class="text-xs font-bold">
+                  {{ fullName }}
+                </p>
+              </div>
+
+              <img
+                [src]="'https://ui-avatars.com/api/?name=' + fullName + '&background=2563eb&color=fff'"
+                class="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+                alt="Profile"
+              >
             </div>
         </div>
     </nav>

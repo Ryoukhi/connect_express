@@ -11,6 +11,7 @@ export class AuthService {
   private readonly TOKEN_KEY = 'access_token';
   private readonly USER_KEY = 'auth_user';
 
+
   constructor(private authApi: AuthControllerService, private router: Router) {}
 
   login(request: AuthRequest): Observable<AuthResponse> {
@@ -90,6 +91,18 @@ export class AuthService {
   //     return true;
   //   }
   // }
+  getCurrentUser(): AuthResponse | null {
+    const user = localStorage.getItem(this.USER_KEY);
+    return user ? JSON.parse(user) : null;
+  }
+
+  getFullName(): string {
+    const user = this.getCurrentUser();
+    if (!user) return '';
+
+    return `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim();
+  }
+
 
 }
 

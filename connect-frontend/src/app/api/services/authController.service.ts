@@ -19,8 +19,6 @@ export class AuthControllerService {
     private readonly httpClient: HttpClient = inject(HttpClient);
     private readonly basePath: string = inject(BASE_PATH_DEFAULT);
     private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_DEFAULT;
-    private readonly TOKEN_KEY = 'access_token';
-    private readonly USER_KEY = 'auth_user';
 
     private createContextWithClientId(existingContext?: HttpContext): HttpContext {
         const context = existingContext || new HttpContext();

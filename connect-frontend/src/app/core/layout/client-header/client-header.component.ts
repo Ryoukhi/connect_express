@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-client-header',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './client-header.component.css'
 })
 export class ClientHeaderComponent {
+
+   fullName = '';
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.fullName = this.authService.getFullName();
+  }
 
 }

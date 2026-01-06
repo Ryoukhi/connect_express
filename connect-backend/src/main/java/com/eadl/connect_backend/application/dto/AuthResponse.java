@@ -4,20 +4,18 @@ public class AuthResponse {
 
     private String token;
     private Long userId;
-    private String firsName;
+    private String firstName;
     private String lastName;
     private boolean active;
-
-        
-    public AuthResponse(String token, Long userId, String firsName, String lastName, boolean active) {
+    
+    public AuthResponse(String token, Long userId, String firstName, String lastName, boolean active) {
         this.token = token;
         this.userId = userId;
-        this.firsName = firsName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.active = active;
     }
 
-    // Getters and Setters
     public String getToken() {
         return token;
     }
@@ -34,12 +32,12 @@ public class AuthResponse {
         this.userId = userId;
     }
 
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirsName(String firsName) {
-        this.firsName = firsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -57,4 +55,8 @@ public class AuthResponse {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    
+        
+    
 }
