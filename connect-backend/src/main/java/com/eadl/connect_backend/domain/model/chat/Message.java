@@ -85,6 +85,7 @@ public class Message {
     }
 
     public boolean isSentBy(Long userId) {
+        if (userId == null || senderId == null) return false;
         return userId.equals(senderId);
     }
 
@@ -147,14 +148,22 @@ public class Message {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Message message = (Message) o;
-        return Objects.equals(idMessage, message.idMessage);
+        Message that = (Message) o;
+
+        // Si l'un des deux ID est null, considérer que les objets ne sont pas égaux
+        if (this.idMessage == null || that.idMessage == null) {
+            return false;
+        }
+
+        return this.idMessage.equals(that.idMessage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idMessage);
+        // Si idMessage est null, retourner un hash unique basé sur l'objet lui-même
+        return idMessage != null ? idMessage.hashCode() : System.identityHashCode(this);
     }
+
 
     @Override
     public String toString() {
