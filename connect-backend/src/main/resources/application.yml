@@ -2,7 +2,7 @@ spring:
   application:
     name: connect-backend
   profiles:
-    active: dev
+    active: test
 
 # Swagger Configuration
 springdoc:
