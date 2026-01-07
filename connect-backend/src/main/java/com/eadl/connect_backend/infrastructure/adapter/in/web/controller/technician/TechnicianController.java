@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto;
+import com.eadl.connect_backend.application.dto.TechnicianSearchDto;
+import com.eadl.connect_backend.domain.model.technician.TechnicianProfile;
 import com.eadl.connect_backend.domain.model.user.Technician;
 import com.eadl.connect_backend.domain.port.in.technician.TechnicianService;
 
@@ -28,6 +31,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class TechnicianController {
 
     private final TechnicianService technicianService;
+    private final com.eadl.connect_backend.domain.port.in.technician.TechnicianSearchService technicianSearchService;
+    private final com.eadl.connect_backend.application.mapper.TechnicianProfileMapper technicianProfileMapper;
 
     /* =========================
        = CRÉATION / INSCRIPTION =
@@ -124,6 +129,39 @@ public class TechnicianController {
             @Parameter(description = "Nom du quartier") @RequestParam String neighborhood
     ) {
         return ResponseEntity.ok(technicianService.getTechniciansByNeighborhood(neighborhood));
+    }
+
+    /* =========================
+       = RECHERCHE MULTI-CRITÈRES =
+       ========================= */
+    @Operation(summary = "Rechercher des techniciens (multi-critères)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des techniciens filtrés"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
+    @GetMapping("/search")
+    public ResponseEntity<List<TechnicianProfileResponseDto>> searchTechnicians(
+            @Parameter(description = "Critères de recherche (optionnels)") @ModelAttribute TechnicianSearchDto dto
+    ) {
+        com.eadl.connect_backend.domain.port.in.technician.TechnicianSearchCriteria criteria =
+                new com.eadl.connect_backend.domain.port.in.technician.TechnicianSearchCriteria(
+                        dto.getCity(),
+                        dto.getNeighborhood(),
+                        dto.getCategoryName(),
+                        dto.getAvailabilityStatus(),
+                        dto.getMinRating(),
+                        dto.getMinPrice(),
+                        dto.getMaxPrice()
+                );
+
+        List<TechnicianProfile> profiles =
+                technicianSearchService.search(criteria);
+
+        List<com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto> response =
+                profiles.stream().map(technicianProfileMapper::toDto).toList();
+
+        return ResponseEntity.ok(response);
     }
 
     /* =========================

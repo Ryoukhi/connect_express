@@ -77,6 +77,7 @@ public class TechnicianProfileRepositoryAdapter
     @Transactional(readOnly = true)
     public List<TechnicianProfile> search(
             String city,
+            String neighborhood,
             Long categoryId,
             Boolean verifiedOnly,
             Boolean activeOnly,
@@ -85,13 +86,14 @@ public class TechnicianProfileRepositoryAdapter
             BigDecimal maxHourlyRate
     ) {
         log.debug(
-                "Searching TechnicianProfiles city={}, categoryId={}, verifiedOnly={}, activeOnly={}, availabilityStatus={}, minRate={}, maxRate={}",
-                city, categoryId, verifiedOnly, activeOnly,
+                "Searching TechnicianProfiles city={}, neighborhood={}, categoryId={}, verifiedOnly={}, activeOnly={}, availabilityStatus={}, minRate={}, maxRate={}",
+                city, neighborhood, categoryId, verifiedOnly, activeOnly,
                 availabilityStatus, minHourlyRate, maxHourlyRate
         );
 
         return jpaRepository.search(
                         city,
+                        neighborhood,
                         categoryId,
                         verifiedOnly,
                         activeOnly,

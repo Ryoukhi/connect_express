@@ -26,6 +26,11 @@ public interface TechnicianSearchService {
     );
 
     /**
+     * Recherche avancée multi-critères (tous critères optionnels)
+     */
+    List<TechnicianProfile> search(TechnicianSearchCriteria criteria);
+
+    /**
      * Techniciens disponibles autour d’un point
      */
 //     List<TechnicianProfile> findNearbyAvailable(

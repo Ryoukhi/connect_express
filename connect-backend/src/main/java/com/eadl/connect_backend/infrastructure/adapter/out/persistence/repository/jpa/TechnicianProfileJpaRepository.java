@@ -56,6 +56,7 @@ public interface TechnicianProfileJpaRepository extends JpaRepository<Technician
         JOIN tp.technician t
         LEFT JOIN tp.skills s
         WHERE (:city IS NULL OR t.city = :city)
+          AND (:neighborhood IS NULL OR t.neighborhood = :neighborhood)
           AND (:categoryId IS NULL OR s.category.idCategory = :categoryId)
           AND (:verifiedOnly IS NULL OR tp.verified = :verifiedOnly)
           AND (:activeOnly IS NULL OR t.active = :activeOnly)
@@ -65,6 +66,7 @@ public interface TechnicianProfileJpaRepository extends JpaRepository<Technician
     """)
     List<TechnicianProfileEntity> search(
         @Param("city") String city,
+        @Param("neighborhood") String neighborhood,
         @Param("categoryId") Long categoryId,
         @Param("verifiedOnly") Boolean verifiedOnly,
         @Param("activeOnly") Boolean activeOnly,

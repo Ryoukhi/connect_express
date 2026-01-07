@@ -64,6 +64,7 @@ public interface TechnicianProfileRepository {
 //      */
     List<TechnicianProfile> search(
         String city,
+        String neighborhood,
         Long categoryId,
         Boolean verifiedOnly,
         Boolean activeOnly,

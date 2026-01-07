@@ -4846,3 +4846,637 @@
 2026-01-07 15:15:52.065 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@546d87c4 is alive
 2026-01-07 15:16:19.129 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
 2026-01-07 15:16:19.130 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:16:49.145 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:16:49.145 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:16:51.608 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@56fa1594 is alive
+2026-01-07 15:16:54.880 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@15508dff is alive
+2026-01-07 15:17:01.042 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@53993dca is alive
+2026-01-07 15:17:02.948 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@240fbf31 is alive
+2026-01-07 15:17:08.934 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@124cae03 is alive
+2026-01-07 15:17:19.153 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:17:19.153 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:17:19.308 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7131eb66 is alive
+2026-01-07 15:17:31.402 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@788d81e7 is alive
+2026-01-07 15:17:34.297 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@757f72b0 is alive
+2026-01-07 15:17:35.358 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@546d87c4 is alive
+2026-01-07 15:17:37.038 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@a9d7f0a is alive
+2026-01-07 15:17:49.160 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:17:49.160 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:18:19.165 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:18:19.165 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:18:29.384 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@56fa1594 is alive
+2026-01-07 15:18:33.112 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@15508dff is alive
+2026-01-07 15:18:39.990 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@53993dca is alive
+2026-01-07 15:18:48.892 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@124cae03 is alive
+2026-01-07 15:18:49.174 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:18:49.174 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:18:56.356 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@240fbf31 is alive
+2026-01-07 15:19:00.560 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7131eb66 is alive
+2026-01-07 15:19:17.443 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@757f72b0 is alive
+2026-01-07 15:19:18.664 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@546d87c4 is alive
+2026-01-07 15:19:19.176 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:19:19.177 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:19:28.829 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@788d81e7 is alive
+2026-01-07 15:19:35.356 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@a9d7f0a is alive
+2026-01-07 15:19:49.194 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:19:49.194 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:20:07.168 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@56fa1594 is alive
+2026-01-07 15:20:11.344 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@15508dff is alive
+2026-01-07 15:20:18.930 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@53993dca is alive
+2026-01-07 15:20:19.273 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:20:19.274 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:20:28.895 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@124cae03 is alive
+2026-01-07 15:20:41.806 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7131eb66 is alive
+2026-01-07 15:20:49.282 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:20:49.283 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:20:49.914 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@240fbf31 is alive
+2026-01-07 15:21:00.593 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@757f72b0 is alive
+2026-01-07 15:21:01.983 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@546d87c4 is alive
+2026-01-07 15:21:19.301 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:21:19.301 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:21:26.254 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@788d81e7 is alive
+2026-01-07 15:21:33.667 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@a9d7f0a is alive
+2026-01-07 15:21:44.954 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@56fa1594 is alive
+2026-01-07 15:21:49.306 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:21:49.306 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:21:49.575 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@15508dff is alive
+2026-01-07 15:21:49.958 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:49.969 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:49.978 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianSkillDto
+2026-01-07 15:21:49.983 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.985 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.986 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.986 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:49.987 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:49.987 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:49.990 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianSkillDto
+2026-01-07 15:21:49.991 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.991 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.992 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.992 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:49.992 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:49.993 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:49.994 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.TechnicianSkillDto>
+2026-01-07 15:21:49.997 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.TechnicianSkillDto]
+2026-01-07 15:21:49.998 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.998 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.998 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:49.998 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:49.999 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:49.999 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.001 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianProfileUpdateDto
+2026-01-07 15:21:50.003 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.003 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.004 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.004 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.015 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto
+2026-01-07 15:21:50.016 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.016 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.016 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.016 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.017 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.017 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.018 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.technician.AvailabilityStatus]
+2026-01-07 15:21:50.019 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.019 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.020 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.021 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto>
+2026-01-07 15:21:50.021 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto]
+2026-01-07 15:21:50.022 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.022 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.022 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.023 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.023 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.024 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.technician.AvailabilityStatus]
+2026-01-07 15:21:50.025 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.026 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.026 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.031 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.domain.model.technician.AvailabilityStatus
+2026-01-07 15:21:50.033 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto
+2026-01-07 15:21:50.034 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.034 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.034 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.035 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.035 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.035 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.036 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.technician.AvailabilityStatus]
+2026-01-07 15:21:50.036 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.036 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.036 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.039 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.039 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReviewDto
+2026-01-07 15:21:50.042 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.042 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.042 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.review.Rating]
+2026-01-07 15:21:50.043 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.043 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.046 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.046 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.047 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.047 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.053 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReviewDto
+2026-01-07 15:21:50.053 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.054 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.054 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.review.Rating]
+2026-01-07 15:21:50.054 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.054 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.054 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.055 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.055 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.055 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.056 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.ReviewDto>
+2026-01-07 15:21:50.056 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.ReviewDto]
+2026-01-07 15:21:50.060 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.060 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.062 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.063 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.063 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.064 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.064 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.066 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.066 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.067 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.067 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.068 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.070 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.070 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.070 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.071 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.071 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.071 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.071 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.072 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.072 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.073 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.074 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.075 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.075 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.076 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.077 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.078 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.ReservationDto>
+2026-01-07 15:21:50.078 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.ReservationDto]
+2026-01-07 15:21:50.082 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.083 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.FactureDto
+2026-01-07 15:21:50.084 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.084 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.084 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.085 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.085 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.087 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.FactureDto
+2026-01-07 15:21:50.087 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.088 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.088 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.088 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.089 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.089 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.090 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.FactureDto>
+2026-01-07 15:21:50.092 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.FactureDto]
+2026-01-07 15:21:50.096 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.097 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.CategoryDto
+2026-01-07 15:21:50.099 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.099 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.099 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.100 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.101 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.CategoryDto
+2026-01-07 15:21:50.101 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.102 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.102 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.102 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.102 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.102 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.103 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.CategoryDto>
+2026-01-07 15:21:50.103 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.CategoryDto]
+2026-01-07 15:21:50.107 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.domain.model.user.Technician
+2026-01-07 15:21:50.109 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.110 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.111 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.111 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.112 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.112 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.113 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.user.Role]
+2026-01-07 15:21:50.114 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.114 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.115 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.116 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.117 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.118 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.118 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.119 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.119 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.120 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.121 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.122 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.124 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.domain.model.user.Technician
+2026-01-07 15:21:50.125 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.125 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.125 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.125 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.126 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.126 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.126 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.user.Role]
+2026-01-07 15:21:50.127 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.127 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.127 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.128 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.128 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.129 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.129 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.129 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.129 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.130 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.130 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.130 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.131 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.domain.model.user.Technician>
+2026-01-07 15:21:50.131 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.user.Technician]
+2026-01-07 15:21:50.132 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.132 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.132 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.133 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.133 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.133 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.133 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.user.Role]
+2026-01-07 15:21:50.134 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.134 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.135 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.135 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.135 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.136 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.136 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.136 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.136 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.139 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianSkillDto
+2026-01-07 15:21:50.139 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.141 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.142 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.142 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.143 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.143 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.145 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianSkillDto
+2026-01-07 15:21:50.146 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.146 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.146 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.146 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.146 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.146 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.148 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianProfileCreateDto
+2026-01-07 15:21:50.149 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.150 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.150 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.151 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.154 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto
+2026-01-07 15:21:50.163 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.164 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.165 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.166 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.167 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.167 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.170 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.technician.AvailabilityStatus]
+2026-01-07 15:21:50.172 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.173 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.176 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.184 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReviewDto
+2026-01-07 15:21:50.185 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.186 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.186 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.review.Rating]
+2026-01-07 15:21:50.187 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.188 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.188 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.189 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.190 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.191 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.198 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.200 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.201 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.202 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.203 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.203 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.206 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.208 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.220 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.222 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.222 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.223 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.224 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.226 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.228 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.237 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.domain.model.reservation.ReservationStatus
+2026-01-07 15:21:50.242 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.244 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.245 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.246 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.247 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.248 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.249 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.250 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.252 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.254 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.254 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.258 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.259 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.260 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.263 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.284 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.285 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.286 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.287 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.287 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.288 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.290 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.292 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.294 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.296 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.296 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.297 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.297 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.298 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.300 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.307 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.String
+2026-01-07 15:21:50.309 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.310 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.310 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.310 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.311 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.311 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.312 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.313 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.313 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.314 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.314 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.315 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.315 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.315 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.316 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.320 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.FactureDto
+2026-01-07 15:21:50.320 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.320 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.321 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.321 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.322 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.322 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.326 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.CategoryDto
+2026-01-07 15:21:50.326 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.326 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.327 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.328 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.328 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.329 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.330 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.RegisterDto
+2026-01-07 15:21:50.332 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.333 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.334 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.334 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.335 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.336 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.336 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.339 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.RegisterResponseDto
+2026-01-07 15:21:50.340 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.341 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.341 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.342 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.342 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.342 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.342 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.343 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.344 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.RegisterResponseDto>
+2026-01-07 15:21:50.345 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.RegisterResponseDto]
+2026-01-07 15:21:50.346 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.350 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.352 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.AuthRequest
+2026-01-07 15:21:50.355 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.AuthResponse
+2026-01-07 15:21:50.355 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.355 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.356 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.356 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.356 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.357 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.AuthResponse>
+2026-01-07 15:21:50.358 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.AuthResponse]
+2026-01-07 15:21:50.359 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.362 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.RegisterAdminDto
+2026-01-07 15:21:50.366 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<com.eadl.connect_backend.application.dto.RegisterAdminDto>
+2026-01-07 15:21:50.367 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.RegisterAdminDto]
+2026-01-07 15:21:50.389 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.394 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.400 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.domain.model.user.Technician
+2026-01-07 15:21:50.401 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.402 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.402 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.402 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.403 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.403 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.403 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.user.Role]
+2026-01-07 15:21:50.404 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.405 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.405 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.406 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.407 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.408 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.408 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.409 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.409 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.410 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.411 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.411 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.414 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.lang.Long>
+2026-01-07 15:21:50.414 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.416 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.String
+2026-01-07 15:21:50.417 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.util.List<com.eadl.connect_backend.domain.model.user.Technician>>
+2026-01-07 15:21:50.417 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [collection type; class java.util.List, contains [simple type, class com.eadl.connect_backend.domain.model.user.Technician]]
+2026-01-07 15:21:50.419 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.String
+2026-01-07 15:21:50.426 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianSkillDto
+2026-01-07 15:21:50.427 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.427 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.427 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.428 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.428 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.428 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.428 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve java.util.List<com.eadl.connect_backend.application.dto.TechnicianSkillDto>
+2026-01-07 15:21:50.431 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianSkillDto
+2026-01-07 15:21:50.432 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.432 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.432 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.432 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.433 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.433 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.433 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.util.List<com.eadl.connect_backend.application.dto.TechnicianSkillDto>>
+2026-01-07 15:21:50.434 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [collection type; class java.util.List, contains [simple type, class com.eadl.connect_backend.application.dto.TechnicianSkillDto]]
+2026-01-07 15:21:50.439 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto
+2026-01-07 15:21:50.440 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.441 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.441 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.442 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.442 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.442 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.443 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.technician.AvailabilityStatus]
+2026-01-07 15:21:50.444 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.444 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.444 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.447 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve java.util.List<com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto>
+2026-01-07 15:21:50.450 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.TechnicianProfileResponseDto
+2026-01-07 15:21:50.450 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.451 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.451 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.451 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.451 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.452 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.453 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.technician.AvailabilityStatus]
+2026-01-07 15:21:50.454 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.454 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.455 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.461 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReviewDto
+2026-01-07 15:21:50.462 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.462 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.463 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.review.Rating]
+2026-01-07 15:21:50.463 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.463 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.464 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.464 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.465 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.466 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.476 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReviewDto
+2026-01-07 15:21:50.476 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.477 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.477 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.review.Rating]
+2026-01-07 15:21:50.477 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class int]
+2026-01-07 15:21:50.477 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.478 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.478 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.478 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.479 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.483 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.util.List<com.eadl.connect_backend.application.dto.ReviewDto>>
+2026-01-07 15:21:50.484 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [collection type; class java.util.List, contains [simple type, class com.eadl.connect_backend.application.dto.ReviewDto]]
+2026-01-07 15:21:50.487 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.495 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.496 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.496 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.497 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.497 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.497 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.498 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.498 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.499 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.499 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.500 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.500 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.500 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.501 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.501 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.506 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.util.List<com.eadl.connect_backend.application.dto.ReservationDto>>
+2026-01-07 15:21:50.506 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [collection type; class java.util.List, contains [simple type, class com.eadl.connect_backend.application.dto.ReservationDto]]
+2026-01-07 15:21:50.512 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.513 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.time.LocalDateTime
+2026-01-07 15:21:50.514 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.time.LocalDateTime
+2026-01-07 15:21:50.517 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.lang.Boolean>
+2026-01-07 15:21:50.518 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Boolean]
+2026-01-07 15:21:50.521 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.FactureDto
+2026-01-07 15:21:50.522 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.522 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.522 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.523 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.524 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.525 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.525 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.util.List<com.eadl.connect_backend.application.dto.FactureDto>>
+2026-01-07 15:21:50.526 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [collection type; class java.util.List, contains [simple type, class com.eadl.connect_backend.application.dto.FactureDto]]
+2026-01-07 15:21:50.529 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.FactureDto
+2026-01-07 15:21:50.530 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.530 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.530 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.530 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.531 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.533 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.537 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.FactureDto
+2026-01-07 15:21:50.538 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.538 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.538 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.538 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.539 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.540 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.545 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ReservationDto
+2026-01-07 15:21:50.546 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.546 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.547 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.547 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.548 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.549 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.550 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.domain.model.reservation.ReservationStatus]
+2026-01-07 15:21:50.550 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.math.BigDecimal]
+2026-01-07 15:21:50.551 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.551 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.552 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.552 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.553 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.553 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.time.LocalDateTime]
+2026-01-07 15:21:50.558 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ClientDto
+2026-01-07 15:21:50.559 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.559 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.560 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.560 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.560 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.561 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.561 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.561 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.562 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve org.springframework.http.ResponseEntity<java.util.List<com.eadl.connect_backend.application.dto.ClientDto>>
+2026-01-07 15:21:50.562 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [collection type; class java.util.List, contains [simple type, class com.eadl.connect_backend.application.dto.ClientDto]]
+2026-01-07 15:21:50.563 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class com.eadl.connect_backend.application.dto.ClientDto]
+2026-01-07 15:21:50.567 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.ClientDto
+2026-01-07 15:21:50.568 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.568 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.568 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.568 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.569 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.569 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.569 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.569 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.573 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.CategoryDto
+2026-01-07 15:21:50.574 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.574 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.575 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.575 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.576 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.576 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.581 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.CategoryDto
+2026-01-07 15:21:50.582 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.582 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.582 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.583 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.583 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.584 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.591 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class com.eadl.connect_backend.application.dto.CategoryDto
+2026-01-07 15:21:50.591 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Long]
+2026-01-07 15:21:50.591 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.592 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.592 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.String]
+2026-01-07 15:21:50.592 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class boolean]
+2026-01-07 15:21:50.592 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve [simple type, class java.lang.Integer]
+2026-01-07 15:21:50.594 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.Long
+2026-01-07 15:21:50.599 [http-nio-8085-exec-5] DEBUG i.s.v.c.c.ModelConverterContextImpl - resolve class java.lang.String
+2026-01-07 15:21:50.612 [http-nio-8085-exec-5] INFO  o.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1811 ms
+2026-01-07 15:21:57.940 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@53993dca is alive
+2026-01-07 15:22:08.862 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@124cae03 is alive
+2026-01-07 15:22:19.319 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:22:19.319 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:22:23.059 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7131eb66 is alive
+2026-01-07 15:22:43.313 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@240fbf31 is alive
+2026-01-07 15:22:43.736 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@757f72b0 is alive
+2026-01-07 15:22:45.283 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@546d87c4 is alive
+2026-01-07 15:22:49.333 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:22:49.333 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:23:19.345 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:23:19.345 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:23:22.732 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@56fa1594 is alive
+2026-01-07 15:23:23.680 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@788d81e7 is alive
+2026-01-07 15:23:27.815 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@15508dff is alive
+2026-01-07 15:23:31.980 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@a9d7f0a is alive
+2026-01-07 15:23:36.882 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@53993dca is alive
+2026-01-07 15:23:48.825 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@124cae03 is alive
+2026-01-07 15:23:49.355 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:23:49.355 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:24:04.317 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7131eb66 is alive
+2026-01-07 15:24:19.369 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:24:19.369 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:24:26.885 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@757f72b0 is alive
+2026-01-07 15:24:28.586 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@546d87c4 is alive
+2026-01-07 15:24:36.719 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@240fbf31 is alive
+2026-01-07 15:24:49.381 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-07 15:24:49.381 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-07 15:25:00.525 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@56fa1594 is alive
+2026-01-07 15:25:06.036 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@15508dff is alive
