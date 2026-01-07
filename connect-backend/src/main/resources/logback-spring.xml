@@ -17,6 +17,19 @@
         </encoder>
     </appender>
 
+    <!-- <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="TECH_FILE"/>
+            <appender-ref ref="ERROR_FILE"/>
+        </root>
+    </springProfile> -->
+
     <!-- ========================================================= -->
     <!--  APPENDER TECHNIQUE (Spring, framework)                 -->
     <!-- ========================================================= -->
@@ -85,28 +98,21 @@
     <!-- ========================================================= -->
     <!--  LOGGER MÉTIER (packages ciblés uniquement)              -->
     <!-- ========================================================= -->
-    <logger name="com.eadl.suivi_academique.services"
+    <logger name="com.eadl.connect_backend.infrastructure.adapter.out.persistence"
             level="INFO"
             additivity="false">
         <appender-ref ref="BUSINESS_FILE"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
 
-    <logger name="com.eadl.suivi_academique.controller"
+    <logger name="com.eadl.connect_backend.application.service"
             level="INFO"
             additivity="false">
         <appender-ref ref="BUSINESS_FILE"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
 
-    <logger name="com.eadl.suivi_academique.domain"
-            level="INFO"
-            additivity="false">
-        <appender-ref ref="BUSINESS_FILE"/>
-        <appender-ref ref="CONSOLE"/>
-    </logger>
-
-    <logger name="com.eadl.suivi_academique"
+    <logger name="com.eadl.connect_backend"
             level="INFO"
             additivity="false">
         <appender-ref ref="CONSOLE"/>

@@ -17,6 +17,7 @@ export interface TechnicianSkillDto {
     level?: number;
 }
 
+/** Données du profil à mettre à jour */
 export interface TechnicianProfileUpdateDto {
     bio?: string;
     idCategory?: number;
@@ -103,12 +104,13 @@ export interface Technician {
     emailVerified?: boolean;
     phoneVerified?: boolean;
     profilePhotoUrl?: string;
-    fullName?: string;
-    client?: boolean;
     technician?: boolean;
     admin?: boolean;
+    fullName?: string;
+    client?: boolean;
 }
 
+/** Données du profil */
 export interface TechnicianProfileCreateDto {
     bio?: string;
     idCategory?: number;

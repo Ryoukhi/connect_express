@@ -25,15 +25,14 @@ export class FacturesService {
         return context.set(this.clientContextToken, 'default');
     }
 
-    getFactureById(idFacture: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<FactureDto>;
-    getFactureById(idFacture: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<FactureDto>>;
-    getFactureById(idFacture: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<FactureDto>>;
+    getFactureById(idFacture: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<FactureDto>;
+    getFactureById(idFacture: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<FactureDto>>;
+    getFactureById(idFacture: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<FactureDto>>;
     getFactureById(idFacture: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/factures/${idFacture}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -42,15 +41,14 @@ export class FacturesService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    updateFacture(idFacture: number, factureDto: FactureDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<FactureDto>;
-    updateFacture(idFacture: number, factureDto: FactureDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<FactureDto>>;
-    updateFacture(idFacture: number, factureDto: FactureDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<FactureDto>>;
+    updateFacture(idFacture: number, factureDto: FactureDto, observe?: 'body', options?: RequestOptions<'json'>): Observable<FactureDto>;
+    updateFacture(idFacture: number, factureDto: FactureDto, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<FactureDto>>;
+    updateFacture(idFacture: number, factureDto: FactureDto, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<FactureDto>>;
     updateFacture(idFacture: number, factureDto: FactureDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/factures/${idFacture}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -75,15 +73,14 @@ export class FacturesService {
         return this.httpClient.delete(url, requestOptions);
     }
 
-    getAllFactures(observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<FactureDto>>;
-    getAllFactures(observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<FactureDto>>>;
-    getAllFactures(observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<FactureDto>>>;
+    getAllFactures(observe?: 'body', options?: RequestOptions<'json'>): Observable<FactureDto>;
+    getAllFactures(observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<FactureDto>>;
+    getAllFactures(observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<FactureDto>>;
     getAllFactures(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/factures`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -92,15 +89,14 @@ export class FacturesService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    createFacture(factureDto: FactureDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<FactureDto>;
-    createFacture(factureDto: FactureDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<FactureDto>>;
-    createFacture(factureDto: FactureDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<FactureDto>>;
+    createFacture(factureDto: FactureDto, observe?: 'body', options?: RequestOptions<'json'>): Observable<FactureDto>;
+    createFacture(factureDto: FactureDto, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<FactureDto>>;
+    createFacture(factureDto: FactureDto, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<FactureDto>>;
     createFacture(factureDto: FactureDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/factures`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -109,15 +105,14 @@ export class FacturesService {
         return this.httpClient.post(url, factureDto, requestOptions);
     }
 
-    getFacturesByReservation(idReservation: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<FactureDto>>;
-    getFacturesByReservation(idReservation: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<FactureDto>>>;
-    getFacturesByReservation(idReservation: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<FactureDto>>>;
+    getFacturesByReservation(idReservation: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<FactureDto>;
+    getFacturesByReservation(idReservation: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<FactureDto>>;
+    getFacturesByReservation(idReservation: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<FactureDto>>;
     getFacturesByReservation(idReservation: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/factures/reservation/${idReservation}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
