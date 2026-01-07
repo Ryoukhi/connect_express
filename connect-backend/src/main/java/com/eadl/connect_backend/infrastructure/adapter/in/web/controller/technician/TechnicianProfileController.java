@@ -20,10 +20,18 @@ import com.eadl.connect_backend.domain.port.out.security.CurrentUserProvider;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @RestController
 @RequestMapping("/api/technician-profiles")
 @RequiredArgsConstructor
+@Tag(name = "Profils Technicien", description = "Gestion des profils des techniciens")
 public class TechnicianProfileController {
 
     private final TechnicianProfileService technicianProfileService;
@@ -31,28 +39,35 @@ public class TechnicianProfileController {
     private final CurrentUserProvider currentUserProvider;
 
     /* ================= CREATE ================= */
-
-    @PostMapping
+    @Operation(summary = "Créer un profil technicien (TECHNICIAN)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Profil créé",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TechnicianProfileResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "Données invalides"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('TECHNICIAN')")
+    @PostMapping
     public ResponseEntity<TechnicianProfileResponseDto> createProfile(
-            @RequestBody @Valid TechnicianProfileCreateDto dto
+            @Parameter(description = "Données du profil") @RequestBody @Valid TechnicianProfileCreateDto dto
     ) {
         TechnicianProfile profile = mapper.toEntity(dto);
-
-        TechnicianProfile created =
-                technicianProfileService.createProfile(profile);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(mapper.toDto(created));
+        TechnicianProfile created = technicianProfileService.createProfile(profile);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toDto(created));
     }
 
     /* ================= READ ================= */
-
-    @GetMapping("/technician/{technicianId}")
+    @Operation(summary = "Récupérer le profil d'un technicien par son ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Profil trouvé",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TechnicianProfileResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Profil non trouvé"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasAnyRole('CLIENT','ADMIN','TECHNICIAN')")
+    @GetMapping("/technician/{technicianId}")
     public ResponseEntity<TechnicianProfileResponseDto> getProfile(
-            @PathVariable Long technicianId
+            @Parameter(description = "ID du technicien") @PathVariable Long technicianId
     ) {
         return technicianProfileService
                 .getProfileByTechnicianId(technicianId)
@@ -60,12 +75,17 @@ public class TechnicianProfileController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/me")
+    @Operation(summary = "Récupérer le profil du technicien connecté")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Profil trouvé",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TechnicianProfileResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Profil non trouvé"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('TECHNICIAN')")
+    @GetMapping("/me")
     public ResponseEntity<TechnicianProfileResponseDto> getMyProfile() {
-
         Long technicianId = currentUserProvider.getCurrentUserId();
-
         return technicianProfileService
                 .getProfileByTechnicianId(technicianId)
                 .map(p -> ResponseEntity.ok(mapper.toDto(p)))
@@ -73,58 +93,70 @@ public class TechnicianProfileController {
     }
 
     /* ================= UPDATE ================= */
-
-    @PutMapping
+    @Operation(summary = "Mettre à jour le profil du technicien connecté")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Profil mis à jour",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TechnicianProfileResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Profil non trouvé"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('TECHNICIAN')")
+    @PutMapping
     public ResponseEntity<TechnicianProfileResponseDto> updateProfile(
-            @RequestBody @Valid TechnicianProfileUpdateDto dto
+            @Parameter(description = "Données du profil à mettre à jour") @RequestBody @Valid TechnicianProfileUpdateDto dto
     ) {
         Long technicianId = currentUserProvider.getCurrentUserId();
-
-        TechnicianProfile existing =
-                technicianProfileService
-                        .getProfileByTechnicianId(technicianId)
-                        .orElseThrow(() ->
-                                new BusinessException("Profile not found") {});
-
+        TechnicianProfile existing = technicianProfileService
+                .getProfileByTechnicianId(technicianId)
+                .orElseThrow(() -> new BusinessException("Profile not found") {});
         mapper.updateEntity(dto, existing);
-
-        TechnicianProfile updated =
-                technicianProfileService.updateProfile(existing);
-
+        TechnicianProfile updated = technicianProfileService.updateProfile(existing);
         return ResponseEntity.ok(mapper.toDto(updated));
     }
 
     /* ================= AVAILABILITY ================= */
-
-    @PutMapping("/availability")
+    @Operation(summary = "Mettre à jour le statut de disponibilité du technicien connecté")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Statut mis à jour",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TechnicianProfileResponseDto.class))),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('TECHNICIAN')")
+    @PutMapping("/availability")
     public ResponseEntity<TechnicianProfileResponseDto> updateAvailability(
-            @RequestParam AvailabilityStatus status
+            @Parameter(description = "Nouveau statut de disponibilité") @RequestParam AvailabilityStatus status
     ) {
         Long technicianId = currentUserProvider.getCurrentUserId();
-
         return ResponseEntity.ok(
                 mapper.toDto(
-                        technicianProfileService
-                                .updateAvailability(technicianId, status)
+                        technicianProfileService.updateAvailability(technicianId, status)
                 )
         );
     }
 
     /* ================= ADMIN ================= */
-
-    @PutMapping("/{technicianId}/validate")
+    @Operation(summary = "Valider un profil technicien (ADMIN)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Profil validé"),
+            @ApiResponse(responseCode = "404", description = "Profil non trouvé"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{technicianId}/validate")
     public ResponseEntity<Void> validateProfile(
-            @PathVariable Long technicianId
+            @Parameter(description = "ID du technicien") @PathVariable Long technicianId
     ) {
         technicianProfileService.validateProfile(technicianId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/pending")
+    @Operation(summary = "Récupérer les profils en attente de validation (ADMIN)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des profils en attente"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/pending")
     public List<TechnicianProfileResponseDto> getPendingProfiles() {
         return technicianProfileService.getPendingProfiles()
                 .stream()
