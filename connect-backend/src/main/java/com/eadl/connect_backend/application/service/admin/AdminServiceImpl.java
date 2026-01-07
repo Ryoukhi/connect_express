@@ -1,5 +1,7 @@
 package com.eadl.connect_backend.application.service.admin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,8 @@ import com.eadl.connect_backend.domain.port.out.security.PasswordEncoder;
 @Service
 @Transactional
 public class AdminServiceImpl implements AdminService {
+
+    private static final Logger log = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     private final AdminRepository adminRepository;
     private final UserRepository userRepository;
@@ -31,32 +35,49 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin createAdmin(Admin admin) {
-        // Encodage du mot de passe
-        admin.changePassword(passwordEncoder.encode(admin.getPassword()));
+        log.info("Creating new admin with email={}", admin.getEmail());
 
-        // Activation par défaut
+        admin.changePassword(passwordEncoder.encode(admin.getPassword()));
         admin.activate();
 
-        return adminRepository.save(admin);
+        Admin savedAdmin = adminRepository.save(admin);
+
+        log.info("Admin created successfully with id={}", savedAdmin.getId());
+
+        return savedAdmin;
     }
 
     // ================== USER MANAGEMENT ==================
 
     @Override
     public void suspendUser(Long userId) {
+        log.info("Suspending user with id={}", userId);
+
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id " + userId));
+                .orElseThrow(() -> {
+                    log.warn("User not found, cannot suspend userId={}", userId);
+                    return new UserNotFoundException("User not found with id " + userId);
+                });
 
         user.deactivate();
         userRepository.save(user);
+
+        log.info("User suspended successfully, userId={}", userId);
     }
 
     @Override
     public void activateUser(Long userId) {
+        log.info("Activating user with id={}", userId);
+
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id " + userId));
+                .orElseThrow(() -> {
+                    log.warn("User not found, cannot activate userId={}", userId);
+                    return new UserNotFoundException("User not found with id " + userId);
+                });
 
         user.activate();
         userRepository.save(user);
+
+        log.info("User activated successfully, userId={}", userId);
     }
 }

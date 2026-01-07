@@ -267,4 +267,8 @@ public abstract class User {
     public void setPhoneVerified(boolean phoneVerified) {
         this.phoneVerified = phoneVerified;
     }
+
+    public Throwable getId() {
+        return null;
+    }
 }

@@ -16,27 +16,23 @@ import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Implémentation des cas d'utilisation liés aux réservations.
- *
- * Couche Application :
- * - orchestre les règles métier
- * - ne dépend que des ports
- * - transactionnelle
  */
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Reservation createReservation(Reservation reservation) {
+        log.info("Création d'une nouvelle réservation pour clientId={} et technicianId={}",
+                reservation.getIdClient(), reservation.getIdTechnician());
 
         validateReservationForCreation(reservation);
 
@@ -47,69 +43,71 @@ public class ReservationServiceImpl implements ReservationService {
         );
 
         if (available) {
-            throw new AvailabilityConflictException(
-                    "Technician is not available at the requested time");
+            log.error("Conflit de disponibilité pour le technicien id={} à {}",
+                    reservation.getIdTechnician(), reservation.getScheduledTime());
+            throw new AvailabilityConflictException("Technician is not available at the requested time");
         }
 
         reservation.setStatus(ReservationStatus.PENDING);
         reservation.setCreatedAt(LocalDateTime.now());
 
-        return reservationRepository.save(reservation);
+        Reservation saved = reservationRepository.save(reservation);
+        log.info("Réservation créée avec succès id={}, status={}", saved.getId(), saved.getStatus());
+        return saved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Transactional(readOnly = true)
     public Optional<Reservation> getReservationById(Long idReservation) {
+        log.debug("Récupération de la réservation id={}", idReservation);
         return reservationRepository.findById(idReservation);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> getClientReservations(Long idClient) {
-        return reservationRepository.findByClientId(idClient);
+        log.debug("Récupération des réservations pour le client id={}", idClient);
+        List<Reservation> reservations = reservationRepository.findByClientId(idClient);
+        log.debug("Nombre de réservations récupérées pour le client id={}: {}", idClient, reservations.size());
+        return reservations;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Transactional(readOnly = true)
     public List<Reservation> getTechnicianReservations(Long idTechnician) {
-        return reservationRepository.findByTechnicianId(idTechnician);
+        log.debug("Récupération des réservations pour le technicien id={}", idTechnician);
+        List<Reservation> reservations = reservationRepository.findByTechnicianId(idTechnician);
+        log.debug("Nombre de réservations récupérées pour le technicien id={}: {}", idTechnician, reservations.size());
+        return reservations;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Reservation updateReservation(Long idReservation, Reservation updated) {
+        log.info("Mise à jour de la réservation id={}", idReservation);
 
         Reservation existing = getExistingReservation(idReservation);
 
         if (existing.getStatus() == ReservationStatus.CANCELLED ||
-            existing.getStatus() == ReservationStatus.COMPLETED) {
+                existing.getStatus() == ReservationStatus.COMPLETED) {
+            log.error("Impossible de mettre à jour la réservation id={} : déjà terminée ou annulée", idReservation);
             throw new BusinessException("Cannot update a finished or cancelled reservation");
         }
 
         updated.setUpdatedAt(LocalDateTime.now());
-        return reservationRepository.update(idReservation, updated);
+        Reservation saved = reservationRepository.update(idReservation, updated);
+        log.info("Réservation id={} mise à jour avec succès, status={}", saved.getId(), saved.getStatus());
+        return saved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Reservation cancelReservation(Long idReservation, Long cancelledByUserId, String reason) {
+        log.info("Annulation de la réservation id={} par utilisateur id={}, raison='{}'",
+                idReservation, cancelledByUserId, reason);
 
         Reservation reservation = getExistingReservation(idReservation);
 
         if (reservation.getStatus() == ReservationStatus.CANCELLED) {
+            log.error("Réservation id={} déjà annulée", idReservation);
             throw new BusinessException("Reservation already cancelled");
         }
 
@@ -117,31 +115,33 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCancellationReason(reason);
         reservation.setUpdatedAt(LocalDateTime.now());
 
-        return reservationRepository.update(idReservation, reservation);
+        Reservation saved = reservationRepository.update(idReservation, reservation);
+        log.info("Réservation id={} annulée avec succès", saved.getId());
+        return saved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Reservation changeStatus(Long idReservation, ReservationStatus newStatus) {
+        log.info("Changement de statut de la réservation id={} vers {}", idReservation, newStatus);
 
         Reservation reservation = getExistingReservation(idReservation);
         reservation.setStatus(newStatus);
         reservation.setUpdatedAt(LocalDateTime.now());
 
-        return reservationRepository.update(idReservation, reservation);
+        Reservation saved = reservationRepository.update(idReservation, reservation);
+        log.info("Statut de la réservation id={} mis à jour avec succès: {}", saved.getId(), saved.getStatus());
+        return saved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Reservation completeReservation(Long idReservation) {
+        log.info("Marquer la réservation id={} comme complétée", idReservation);
 
         Reservation reservation = getExistingReservation(idReservation);
 
         if (reservation.getStatus() != ReservationStatus.ACCEPTED) {
+            log.error("Impossible de compléter la réservation id={} : status actuel={}",
+                    idReservation, reservation.getStatus());
             throw new BusinessException("Only accepted reservations can be completed");
         }
 
@@ -149,40 +149,35 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCompletedAt(LocalDateTime.now());
         reservation.setUpdatedAt(LocalDateTime.now());
 
-        return reservationRepository.update(idReservation, reservation);
+        Reservation saved = reservationRepository.update(idReservation, reservation);
+        log.info("Réservation id={} complétée avec succès", saved.getId());
+        return saved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Transactional(readOnly = true)
-    public boolean isTechnicianAvailable(
-            Long idTechnician,
-            LocalDateTime start,
-            LocalDateTime end) {
-
-        return !reservationRepository.existsTechnicianReservationBetween(
-                idTechnician, start, end);
+    public boolean isTechnicianAvailable(Long idTechnician, LocalDateTime start, LocalDateTime end) {
+        log.debug("Vérification disponibilité du technicien id={} entre {} et {}", idTechnician, start, end);
+        boolean available = !reservationRepository.existsTechnicianReservationBetween(idTechnician, start, end);
+        log.debug("Disponibilité du technicien id={} : {}", idTechnician, available);
+        return available;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void deleteReservation(Long idReservation, Long idAdmin) {
-
+        log.info("Suppression de la réservation id={} par l'administrateur id={}", idReservation, idAdmin);
         Reservation reservation = getExistingReservation(idReservation);
         reservationRepository.delete(reservation);
+        log.info("Réservation id={} supprimée avec succès", idReservation);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Transactional(readOnly = true)
     public Long countReservations() {
-        return reservationRepository.count();
+        log.debug("Comptage total des réservations");
+        Long count = reservationRepository.count();
+        log.debug("Nombre total de réservations : {}", count);
+        return count;
     }
 
     /* =======================
@@ -191,21 +186,25 @@ public class ReservationServiceImpl implements ReservationService {
 
     private Reservation getExistingReservation(Long idReservation) {
         return reservationRepository.findById(idReservation)
-                .orElseThrow(() ->
-                        new ReservationNotFoundException(
-                                "Reservation not found with id: " + idReservation));
+                .orElseThrow(() -> {
+                    log.error("Réservation introuvable pour id={}", idReservation);
+                    return new ReservationNotFoundException("Reservation not found with id: " + idReservation);
+                });
     }
 
     private void validateReservationForCreation(Reservation reservation) {
-
         if (reservation.getIdClient() == null ||
-            reservation.getIdTechnician() == null ||
-            reservation.getScheduledTime() == null) {
+                reservation.getIdTechnician() == null ||
+                reservation.getScheduledTime() == null) {
+            log.error("Données invalides pour la création de réservation : {}", reservation);
             throw new BusinessException("Invalid reservation data");
         }
 
         if (reservation.getScheduledTime().isBefore(LocalDateTime.now())) {
+            log.error("La réservation est programmée dans le passé : {}", reservation.getScheduledTime());
             throw new BusinessException("Reservation time must be in the future");
         }
+
+        log.debug("Données de réservation valides pour création : {}", reservation);
     }
 }

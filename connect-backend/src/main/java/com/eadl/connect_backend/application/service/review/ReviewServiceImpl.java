@@ -11,19 +11,13 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Implémentation du service métier Review
- * 
- * <p>
- * Ce service contient les règles métier liées à la gestion
- * des avis clients (création, consultation, modification, suppression).
- * </p>
- *
- * <p>
- * Architecture : Hexagonale (Use Case / Application Service)
- * </p>
  */
 @Service
+@Slf4j
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
@@ -32,17 +26,16 @@ public class ReviewServiceImpl implements ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    /**
-     * Crée un nouvel avis client
-     *
-     * @param idClient identifiant du client
-     * @param rating note attribuée
-     * @param comment commentaire du client
-     * @return avis créé
-     */
+    @Override
     public Review createReview(Long idClient, Rating rating, String comment) {
+        log.info("Création d'un nouvel avis pour le client id={}", idClient);
 
-        validateRating(rating);
+        try {
+            validateRating(rating);
+        } catch (IllegalArgumentException e) {
+            log.error("Erreur lors de la validation de la note pour client id={}: {}", idClient, e.getMessage());
+            throw e;
+        }
 
         Review review = new Review();
         review.setIdClient(idClient);
@@ -50,101 +43,98 @@ public class ReviewServiceImpl implements ReviewService {
         review.setComment(comment);
         review.setCreatedAt(LocalDateTime.now());
 
-        return reviewRepository.save(review);
+        Review saved = reviewRepository.save(review);
+        log.info("Avis créé avec succès id={}, clientId={}, rating={}", saved.getId(), idClient, rating.getValue());
+        return saved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Optional<Review> getReviewById(Long idReview) {
+        log.debug("Récupération de l'avis id={}", idReview);
         return reviewRepository.findById(idReview);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<Review> getClientReviews(Long idClient) {
-        return reviewRepository.findByClientId(idClient);
+        log.debug("Récupération des avis du client id={}", idClient);
+        List<Review> reviews = reviewRepository.findByClientId(idClient);
+        log.debug("Nombre d'avis récupérés pour client id={}: {}", idClient, reviews.size());
+        return reviews;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Review updateReview(Long idReview, Review updatedReview) {
+        log.info("Mise à jour de l'avis id={}", idReview);
 
         Review existingReview = reviewRepository.findById(idReview)
-            .orElseThrow(() -> new IllegalArgumentException(
-                "Avis introuvable pour l'id : " + idReview
-            ));
+                .orElseThrow(() -> {
+                    log.error("Avis introuvable pour id={}", idReview);
+                    return new IllegalArgumentException("Avis introuvable pour l'id : " + idReview);
+                });
 
-        validateRating(updatedReview.getRating());
+        try {
+            validateRating(updatedReview.getRating());
+        } catch (IllegalArgumentException e) {
+            log.error("Erreur lors de la validation de la note pour avis id={}: {}", idReview, e.getMessage());
+            throw e;
+        }
 
         existingReview.setRating(updatedReview.getRating());
         existingReview.setComment(updatedReview.getComment());
 
-        return reviewRepository.update(idReview, existingReview);
+        Review saved = reviewRepository.update(idReview, existingReview);
+        log.info("Avis id={} mis à jour avec succès, rating={}", saved.getId(), saved.getRating().getValue());
+        return saved;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void deleteReview(Long idAdmin, Long idReview, String reason) {
+        log.info("Suppression de l'avis id={} par admin id={}, raison='{}'", idReview, idAdmin, reason);
 
         if (reason == null || reason.isBlank()) {
-            throw new IllegalArgumentException(
-                "Une raison est obligatoire pour supprimer un avis"
-            );
+            log.error("Tentative de suppression de l'avis id={} sans raison", idReview);
+            throw new IllegalArgumentException("Une raison est obligatoire pour supprimer un avis");
         }
 
         Review review = reviewRepository.findById(idReview)
-            .orElseThrow(() -> new IllegalArgumentException(
-                "Avis introuvable pour l'id : " + idReview
-            ));
-
-        // Ici tu peux tracer l'action (audit)
-        // auditService.logAdminAction(idAdmin, "DELETE_REVIEW", reason);
+                .orElseThrow(() -> {
+                    log.error("Avis introuvable pour suppression id={}", idReview);
+                    return new IllegalArgumentException("Avis introuvable pour l'id : " + idReview);
+                });
 
         reviewRepository.delete(review);
+        log.info("Avis id={} supprimé avec succès", idReview);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Long countReviews() {
-        return reviewRepository.count();
+        log.debug("Comptage total des avis");
+        Long count = reviewRepository.count();
+        log.debug("Nombre total d'avis : {}", count);
+        return count;
     }
 
-    /* =========================
-       = MÉTHODES MÉTIER PRIVÉES =
-       ========================= */
-
-    /**
-     * Valide la note attribuée à un avis
-     */
     private void validateRating(Rating rating) {
         if (rating == null) {
+            log.error("Note obligatoire non fournie");
             throw new IllegalArgumentException("La note est obligatoire");
         }
 
         if (rating.getValue() < 1 || rating.getValue() > 5) {
-            throw new IllegalArgumentException(
-                "La note doit être comprise entre 1 et 5"
-            );
+            log.error("Note invalide: {}", rating.getValue());
+            throw new IllegalArgumentException("La note doit être comprise entre 1 et 5");
         }
+
+        log.debug("Note validée: {}", rating.getValue());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Review> getReviewByClientAndReservation(
-            Long clientId,
-            Long reservationId
-    ) {
+    public Optional<Review> getReviewByClientAndReservation(Long clientId, Long reservationId) {
+        log.debug("Récupération de l'avis pour client id={} et réservation id={}", clientId, reservationId);
+
         if (clientId == null || reservationId == null) {
+            log.error("ClientId ou ReservationId manquant pour récupération d'avis");
             throw new IllegalArgumentException("ClientId and ReservationId are required");
         }
 

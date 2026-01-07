@@ -253,4 +253,8 @@ public class Reservation {
     public void setCancellationReason(String cancellationReason) {
         this.cancellationReason = cancellationReason;
     }
+
+    public Object getId() {
+        return null;
+    }
 }

@@ -114,4 +114,7 @@ public class TechnicianDocument {
     }
 
 
+    public Object getId() {
+        return null;
+    }
 }
