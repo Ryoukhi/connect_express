@@ -1,21 +1,16 @@
 version: '3.8'
 
-# docker-compose for Connect (pro-friendly)
-# Services:
-#  - db (MySQL) with persistent volume and healthchecks
-#  - backend (Spring Boot) built from ./connect-backend
-#  - frontend (Angular SSR/Node) built from ./connect-frontend
-#  - proxy (nginx) serving the frontend and reverse-proxying /api to backend
-
 services:
   db:
     image: mysql:8.0
     container_name: connect-db
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-connectdb}
-      MYSQL_USER: ${MYSQL_USER:-connect}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-connect_password}
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: connectdb
+      MYSQL_USER: connect
+      MYSQL_PASSWORD: connect_password
+    ports:
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
@@ -36,15 +31,12 @@ services:
     env_file:
       - ./connect-backend/.env
     ports:
-      - "8084:${SERVER_PORT}" # Spring Boot (dev profile uses 8085)
+      - "8085:8085" # Spring Boot
     environment:
       # Make the spring datasource point to the mysql service inside the compose network
-      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/${MYSQL_DATABASE:-connectdb}"
-      SPRING_DATASOURCE_USERNAME: "${MYSQL_USER:-connect}"
-      SPRING_DATASOURCE_PASSWORD: "${MYSQL_PASSWORD:-connect_password}"
-      SPRING_PROFILES_ACTIVE: "dev"
-      # Tweak Java memory via JAVA_OPTS if needed
-      JAVA_OPTS: "-Xms256m -Xmx512m"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/connectdb"
+      SPRING_DATASOURCE_USERNAME: "connect"
+      SPRING_DATASOURCE_PASSWORD: "connect_password"
     depends_on:
       db:
         condition: service_healthy
@@ -63,27 +55,13 @@ services:
       context: ./connect-frontend
     container_name: connect-frontend
     # The frontend Node SSR in the current Dockerfile listens on 4200
-    expose:
-      - "4200"
+    ports:
+      - "4200:4200"
     depends_on:
       - backend
     networks:
       - connect-network
     restart: unless-stopped
-
-  # proxy:
-  #   image: nginx:alpine
-  #   container_name: connect-proxy
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-  #   depends_on:
-  #     - frontend
-  #     - backend
-  #   networks:
-  #     - connect-network
-  #   restart: unless-stopped
 
 volumes:
   db_data:
@@ -92,10 +70,3 @@ volumes:
 networks:
   connect-network:
     driver: bridge
-
-# Usage tips:
-# 1) Create a .env file in the repository root to override MySQL creds (MYSQL_ROOT_PASSWORD, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE)
-# 2) Run `docker compose up --build` to build images and start the stack
-# 3) The frontend will be available at http://localhost and backend at http://localhost:8085 (proxied under /api by nginx)
-# 4) Adjust the backend healthcheck endpoint if your Spring Boot actuator endpoint is different or disabled
-# 5) For production, consider using managed secrets for credentials and configure TLS on the proxy
