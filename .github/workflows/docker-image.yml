@@ -35,7 +35,7 @@ jobs:
           java-version: '21'
 
       - name: Build backend (skip tests)
-        run: ./mvnw -B -DskipTests package
+        run: mvn clean package -DskipTests
         working-directory: ./connect-backend
 
   build-and-push:
