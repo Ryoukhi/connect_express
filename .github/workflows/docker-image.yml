@@ -34,8 +34,8 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Build backend (skip tests)
-        run: mvn clean package -DskipTests
+      - name: Build backend (with Unit tests)
+        run: mvn clean package
         working-directory: ./connect-backend
 
   build-and-push:
