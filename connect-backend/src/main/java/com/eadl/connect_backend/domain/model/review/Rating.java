@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Rating {
     private final int value;
 
-    private Rating(int value) {
+    public Rating(int value) {
         if (value < 1 || value > 5) {
             throw new IllegalArgumentException("La note doit être entre 1 et 5");
         }

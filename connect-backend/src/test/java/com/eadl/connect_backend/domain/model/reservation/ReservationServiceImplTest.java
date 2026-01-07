@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ReservationTest {
+class ReservationServiceImplTest {
 
     private Reservation createPendingReservation() {
         Reservation reservation = new Reservation();
