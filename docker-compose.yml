@@ -33,8 +33,10 @@ services:
       context: ./connect-backend
       # Use buildkit / cache for faster rebuilds in CI if available
     container_name: connect-backend
+    env_file:
+      - ./connect-backend/.env
     ports:
-      - "8085:8085" # Spring Boot (dev profile uses 8085)
+      - "8084:${SERVER_PORT}" # Spring Boot (dev profile uses 8085)
     environment:
       # Make the spring datasource point to the mysql service inside the compose network
       SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/${MYSQL_DATABASE:-connectdb}"
@@ -63,9 +65,6 @@ services:
     # The frontend Node SSR in the current Dockerfile listens on 4200
     expose:
       - "4200"
-    environment:
-      # If you need to change the API base path at build-time, inject it here
-      # e.g. NG_APP_API_URL: "http://api.myhost.example"
     depends_on:
       - backend
     networks:

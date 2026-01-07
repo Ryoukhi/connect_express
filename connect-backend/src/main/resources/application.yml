@@ -2,7 +2,7 @@ spring:
   application:
     name: connect-backend
   profiles:
-    active: test
+    active: ${SPRING_PROFILES_ACTIVE:test}
 
 # Swagger Configuration
 springdoc:
@@ -13,7 +13,7 @@ springdoc:
 
 # CORS Configuration (autorise Angular en dev)
 cors:
-  allowed-origins: "http://localhost:4200"
+  allowed-origins: ${HOST_NAME_CORS:http://localhost:4200}
   allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
   allowed-headers: "*"
   allow-credentials: true
