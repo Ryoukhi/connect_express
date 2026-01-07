@@ -112,4 +112,6 @@ public class TechnicianDocument {
     public void setUploadedAt(LocalDateTime uploadedAt) {
         this.uploadedAt = uploadedAt;
     }
+
+
 }

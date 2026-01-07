@@ -13,29 +13,41 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper.Te
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.repository.jpa.TechnicianDocumentJpaRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @RequiredArgsConstructor
-public class TechnicianDocumentRepositoryAdapter implements TechnicianDocumentRepository {
+@Slf4j
+public class TechnicianDocumentRepositoryAdapter
+        implements TechnicianDocumentRepository {
 
     private final TechnicianDocumentJpaRepository technicianDocumentJpaRepository;
     private final TechnicianDocumentEntityMapper mapper;
 
     @Override
     public TechnicianDocument save(TechnicianDocument document) {
+        log.info("Saving TechnicianDocument");
+
         TechnicianDocumentEntity entity = mapper.toEntity(document);
-        TechnicianDocumentEntity saved = technicianDocumentJpaRepository.save(entity);
+        TechnicianDocumentEntity saved =
+                technicianDocumentJpaRepository.save(entity);
+
+        log.info("TechnicianDocument saved with id={}", saved.getIdDocument());
         return mapper.toModel(saved);
     }
 
     @Override
     public Optional<TechnicianDocument> findById(Long idDocument) {
+        log.debug("Finding TechnicianDocument by id={}", idDocument);
+
         return technicianDocumentJpaRepository.findById(idDocument)
                 .map(mapper::toModel);
     }
 
     @Override
     public List<TechnicianDocument> findByProfileId(Long idProfile) {
+        log.debug("Finding TechnicianDocuments by profileId={}", idProfile);
+
         return technicianDocumentJpaRepository
                 .findByProfile_IdProfile(idProfile)
                 .stream()
@@ -48,6 +60,12 @@ public class TechnicianDocumentRepositoryAdapter implements TechnicianDocumentRe
             Long idProfile,
             DocumentType type
     ) {
+        log.debug(
+                "Finding TechnicianDocument by profileId={} and type={}",
+                idProfile,
+                type
+        );
+
         return technicianDocumentJpaRepository
                 .findByProfile_IdProfileAndDocumentType(idProfile, type)
                 .map(mapper::toModel);
@@ -55,6 +73,8 @@ public class TechnicianDocumentRepositoryAdapter implements TechnicianDocumentRe
 
     @Override
     public List<TechnicianDocument> findByVerified(boolean verified) {
+        log.debug("Finding TechnicianDocuments by verified={}", verified);
+
         return technicianDocumentJpaRepository
                 .findByVerified(verified)
                 .stream()
@@ -64,6 +84,8 @@ public class TechnicianDocumentRepositoryAdapter implements TechnicianDocumentRe
 
     @Override
     public List<TechnicianDocument> findPendingDocuments() {
+        log.debug("Finding pending TechnicianDocuments (verified=false)");
+
         return technicianDocumentJpaRepository
                 .findByVerifiedFalse()
                 .stream()
@@ -73,12 +95,21 @@ public class TechnicianDocumentRepositoryAdapter implements TechnicianDocumentRe
 
     @Override
     public void delete(TechnicianDocument document) {
-        TechnicianDocumentEntity entity = mapper.toEntity(document);
-        technicianDocumentJpaRepository.delete(entity);
+        if (document.getIdDocument() == null) {
+            log.warn("Attempt to delete TechnicianDocument with null id");
+            throw new IllegalArgumentException("Document id must not be null");
+        }
+
+        log.info("Deleting TechnicianDocument with id={}",
+                document.getIdDocument());
+
+        technicianDocumentJpaRepository
+                .deleteById(document.getIdDocument());
     }
 
     @Override
     public void deleteById(Long idDocument) {
+        log.info("Deleting TechnicianDocument by id={}", idDocument);
         technicianDocumentJpaRepository.deleteById(idDocument);
     }
 }
