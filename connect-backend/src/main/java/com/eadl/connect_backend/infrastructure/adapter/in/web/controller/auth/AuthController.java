@@ -14,28 +14,29 @@ import com.eadl.connect_backend.domain.model.user.Client;
 import com.eadl.connect_backend.domain.port.in.user.AuthService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication", description = "Endpoints pour la connexion, déconnexion et l'inscription des utilisateurs")
 public class AuthController {
 
     private final AuthService authService;
     private final RegisterMapper registerMapper;
 
-    /**
-     * Login utilisateur
-     */
+    // ================== LOGIN ==================
     @Operation(summary = "Connecte un utilisateur et retourne un token JWT")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Connexion réussie",
-            content = @Content(mediaType = "application/json", schema = @Schema(implementation = AuthResponse.class))),
-        @ApiResponse(responseCode = "401", description = "Identifiants invalides")
+            @ApiResponse(responseCode = "200", description = "Connexion réussie",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = AuthResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Identifiants invalides")
     })
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) {
@@ -43,27 +44,25 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * Logout utilisateur
-     */
+    // ================== LOGOUT ==================
     @Operation(summary = "Déconnecte un utilisateur")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "204", description = "Utilisateur déconnecté")
+            @ApiResponse(responseCode = "204", description = "Utilisateur déconnecté")
     })
     @PostMapping("/logout/{idUser}")
-    public ResponseEntity<Void> logout(@PathVariable Long idUser) {
+    public ResponseEntity<Void> logout(
+            @Schema(description = "ID de l'utilisateur à déconnecter") @PathVariable Long idUser
+    ) {
         authService.logout(idUser);
         return ResponseEntity.noContent().build();
     }
 
-    /**
-     * Inscription utilisateur
-     */
+    // ================== REGISTER ==================
     @Operation(summary = "Inscrit un nouvel utilisateur")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Utilisateur créé avec succès",
-            content = @Content(mediaType = "application/json", schema = @Schema(implementation = RegisterResponseDto.class))),
-        @ApiResponse(responseCode = "400", description = "Données invalides")
+            @ApiResponse(responseCode = "201", description = "Utilisateur créé avec succès",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RegisterResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "Données invalides")
     })
     @PostMapping("/register")
     public ResponseEntity<RegisterResponseDto> register(@Valid @RequestBody RegisterDto registerDto) {

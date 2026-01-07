@@ -13,9 +13,18 @@ import com.eadl.connect_backend.domain.port.in.technician.TechnicianService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @RestController
 @RequestMapping("/api/technicians")
 @RequiredArgsConstructor
+@Tag(name = "Techniciens", description = "Gestion des techniciens")
 public class TechnicianController {
 
     private final TechnicianService technicianService;
@@ -23,11 +32,17 @@ public class TechnicianController {
     /* =========================
        = CRÉATION / INSCRIPTION =
        ========================= */
-
-    @PostMapping
+    @Operation(summary = "Inscrire un technicien (TECHNICIAN)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Technicien créé",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Technician.class))),
+            @ApiResponse(responseCode = "400", description = "Données invalides"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('TECHNICIAN')")
+    @PostMapping
     public ResponseEntity<Technician> registerTechnician(
-            @RequestBody @Valid Technician technician
+            @Parameter(description = "Données du technicien") @RequestBody @Valid Technician technician
     ) {
         Technician saved = technicianService.registerTechnician(technician);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
@@ -36,11 +51,16 @@ public class TechnicianController {
     /* =========================
        = VALIDATION KYC (ADMIN) =
        ========================= */
-
-    @PutMapping("/{technicianId}/validate-kyc")
+    @Operation(summary = "Valider le KYC d'un technicien (ADMIN)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "KYC validé"),
+            @ApiResponse(responseCode = "404", description = "Technicien non trouvé"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{technicianId}/validate-kyc")
     public ResponseEntity<Void> validateKyc(
-            @PathVariable Long technicianId
+            @Parameter(description = "ID du technicien") @PathVariable Long technicianId
     ) {
         technicianService.validateKyc(technicianId);
         return ResponseEntity.noContent().build();
@@ -49,17 +69,28 @@ public class TechnicianController {
     /* =========================
        = CONSULTATION PUBLIQUE =
        ========================= */
-
-    @GetMapping("/active")
+    @Operation(summary = "Récupérer tous les techniciens actifs (ADMIN, CLIENT)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des techniciens actifs"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
+    @GetMapping("/active")
     public ResponseEntity<List<Technician>> getActiveTechnicians() {
         return ResponseEntity.ok(technicianService.getActiveTechnicians());
     }
 
-    @GetMapping("/{technicianId}")
+    @Operation(summary = "Récupérer un technicien par ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Technicien trouvé",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Technician.class))),
+            @ApiResponse(responseCode = "404", description = "Technicien non trouvé"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT', 'TECHNICIAN')")
+    @GetMapping("/{technicianId}")
     public ResponseEntity<Technician> getTechnicianById(
-            @PathVariable Long technicianId
+            @Parameter(description = "ID du technicien") @PathVariable Long technicianId
     ) {
         return technicianService.getTechnicianById(technicianId)
                 .map(ResponseEntity::ok)
@@ -69,36 +100,43 @@ public class TechnicianController {
     /* =========================
        = FILTRAGE / RECHERCHE =
        ========================= */
-
-    @GetMapping("/search/city")
+    @Operation(summary = "Rechercher des techniciens par ville")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des techniciens filtrés"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
+    @GetMapping("/search/city")
     public ResponseEntity<List<Technician>> getByCity(
-            @RequestParam String city
+            @Parameter(description = "Nom de la ville") @RequestParam String city
     ) {
-        return ResponseEntity.ok(
-                technicianService.getTechniciansByCity(city)
-        );
+        return ResponseEntity.ok(technicianService.getTechniciansByCity(city));
     }
 
-    @GetMapping("/search/neighborhood")
+    @Operation(summary = "Rechercher des techniciens par quartier")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des techniciens filtrés"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
+    @GetMapping("/search/neighborhood")
     public ResponseEntity<List<Technician>> getByNeighborhood(
-            @RequestParam String neighborhood
+            @Parameter(description = "Nom du quartier") @RequestParam String neighborhood
     ) {
-        return ResponseEntity.ok(
-                technicianService.getTechniciansByNeighborhood(neighborhood)
-        );
+        return ResponseEntity.ok(technicianService.getTechniciansByNeighborhood(neighborhood));
     }
 
     /* =========================
        = STATISTIQUES (ADMIN) =
        ========================= */
-
-    @GetMapping("/stats/active/count")
+    @Operation(summary = "Compter les techniciens actifs (ADMIN)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Nombre de techniciens actifs"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
     @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/stats/active/count")
     public ResponseEntity<Long> countActiveTechnicians() {
-        return ResponseEntity.ok(
-                technicianService.countActiveTechnicians()
-        );
+        return ResponseEntity.ok(technicianService.countActiveTechnicians());
     }
 }
