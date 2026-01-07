@@ -15,15 +15,18 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.Us
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper.TechnicianEntityMapper;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.repository.jpa.TechnicianJpaRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class TechnicianRepositoryAdapter implements TechnicianRepository {
 
     private final TechnicianJpaRepository jpaRepository;
     private final TechnicianEntityMapper mapper;
 
     public TechnicianRepositoryAdapter(
-        TechnicianJpaRepository jpaRepository,
-        TechnicianEntityMapper mapper
+            TechnicianJpaRepository jpaRepository,
+            TechnicianEntityMapper mapper
     ) {
         this.jpaRepository = jpaRepository;
         this.mapper = mapper;
@@ -31,26 +34,39 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
 
     @Override
     public Technician save(Technician technician) {
+        log.info("Saving Technician");
+
         UserEntity saved = jpaRepository.save(mapper.toEntity(technician));
+
+        log.info("Technician saved with id={}", saved.getIdUser());
         return mapper.toDomain(saved);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Technician> findById(Long idTechnician) {
+        log.debug("Finding Technician by id={}", idTechnician);
+
         return jpaRepository.findById(idTechnician)
                 .filter(e -> e.getRole() == Role.TECHNICIAN)
                 .map(mapper::toDomain);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Technician> findByidUser(Long idUser) {
+        log.debug("Finding Technician by idUser={}", idUser);
+
         return jpaRepository
                 .findByIdUserAndRole(idUser, Role.TECHNICIAN)
                 .map(mapper::toDomain);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Technician> findAll() {
+        log.debug("Finding all Technicians");
+
         return jpaRepository.findByRole(Role.TECHNICIAN)
                 .stream()
                 .map(mapper::toDomain)
@@ -58,18 +74,31 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Long count() {
+        log.debug("Counting Technicians");
+
         return jpaRepository.countByRole(Role.TECHNICIAN);
     }
 
     @Override
     public void delete(Technician technician) {
+        if (technician.getIdUser() == null) {
+            log.warn("Attempt to delete Technician with null id");
+            throw new IllegalArgumentException("Technician id must not be null");
+        }
+
+        log.info("Deleting Technician with id={}", technician.getIdUser());
         jpaRepository.delete(mapper.toEntity(technician));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Technician> findByActiveTrue() {
-        return jpaRepository.findByRoleAndActiveTrue(Role.TECHNICIAN, true)
+        log.debug("Finding active Technicians");
+
+        return jpaRepository
+                .findByRoleAndActiveTrue(Role.TECHNICIAN, true)
                 .stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
@@ -78,20 +107,32 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
     @Override
     @Transactional(readOnly = true)
     public List<Technician> findByRoleAndActiveTrue(Role role, boolean active) {
-        // On récupère les entités User correspondant au rôle et au statut actif
-        List<UserEntity> entities = jpaRepository.findByRoleAndActiveTrue(role, active);
+        log.debug(
+                "Finding users by role={} and active={}",
+                role, active
+        );
 
-        // On convertit chaque entity en domaine Technician
+        List<UserEntity> entities =
+                jpaRepository.findByRoleAndActiveTrue(role, active);
+
         return entities.stream()
                 .map(entity -> {
                     User user = mapper.toDomain(entity);
+
                     if (user instanceof Technician technician) {
                         return technician;
                     }
-                    // Si jamais l'entité n'est pas un Technician, on peut filtrer ou lever une exception
-                    throw new IllegalStateException("Expected Technician, got " + user.getClass().getSimpleName());
+
+                    log.error(
+                            "Expected Technician but got {} for userId={}",
+                            user.getClass().getSimpleName(),
+                            entity.getIdUser()
+                    );
+
+                    throw new IllegalStateException(
+                            "Expected Technician, got " + user.getClass().getSimpleName()
+                    );
                 })
                 .toList();
     }
-
 }

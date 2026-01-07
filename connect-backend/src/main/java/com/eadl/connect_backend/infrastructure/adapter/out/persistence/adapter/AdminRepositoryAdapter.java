@@ -3,6 +3,8 @@ package com.eadl.connect_backend.infrastructure.adapter.out.persistence.adapter;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.eadl.connect_backend.domain.model.user.Admin;
@@ -13,7 +15,9 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper.Us
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.repository.jpa.AdminJpaRepository;
 
 @Repository
-public class AdminRepositoryAdapter implements AdminRepository{
+public class AdminRepositoryAdapter implements AdminRepository {
+
+    private static final Logger log = LoggerFactory.getLogger(AdminRepositoryAdapter.class);
 
     private final AdminJpaRepository adminJpaRepository;
     private final UserEntityMapper userEntityMapper;
@@ -25,38 +29,70 @@ public class AdminRepositoryAdapter implements AdminRepository{
 
     @Override
     public Admin save(Admin admin) {
+        log.info("Saving Admin: {}", admin);
+
         UserEntity userEntity = userEntityMapper.toEntity(admin);
         UserEntity savedEntity = adminJpaRepository.save(userEntity);
-        return (Admin) userEntityMapper.toDomain(savedEntity);
+        Admin savedAdmin = (Admin) userEntityMapper.toDomain(savedEntity);
+
+        log.info("Saved Admin: {}", savedAdmin);
+        return savedAdmin;
     }
 
     @Override
     public Optional<Admin> findById(Long idAdmin) {
-        return adminJpaRepository.findById(idAdmin)
-            .filter(entity -> entity.getRole() == Role.ADMIN)
-            .map(userEntityMapper::toDomain)
-            .map(user -> (Admin) user);
+        log.info("Finding Admin by id: {}", idAdmin);
+
+        Optional<Admin> admin = adminJpaRepository.findById(idAdmin)
+                .filter(entity -> entity.getRole() == Role.ADMIN)
+                .map(userEntityMapper::toDomain)
+                .map(user -> (Admin) user);
+
+        if (admin.isPresent()) {
+            log.info("Found Admin: {}", admin.get());
+        } else {
+            log.warn("No Admin found with id: {}", idAdmin);
+        }
+
+        return admin;
     }
 
     @Override
     public Optional<Admin> findByidUser(Long idUser) {
-        return adminJpaRepository.findByIdUser(idUser)
-            .filter(entity -> entity.getRole() == Role.ADMIN)
-            .map(userEntityMapper::toDomain)
-            .map(user -> (Admin) user);
+        log.info("Finding Admin by user id: {}", idUser);
+
+        Optional<Admin> admin = adminJpaRepository.findByIdUser(idUser)
+                .filter(entity -> entity.getRole() == Role.ADMIN)
+                .map(userEntityMapper::toDomain)
+                .map(user -> (Admin) user);
+
+        if (admin.isPresent()) {
+            log.info("Found Admin by user id {}: {}", idUser, admin.get());
+        } else {
+            log.warn("No Admin found with user id: {}", idUser);
+        }
+
+        return admin;
     }
 
     @Override
     public List<Admin> findAll() {
+        log.info("Fetching all Admins");
+
         List<UserEntity> entities = adminJpaRepository.findAllByRole(Role.ADMIN);
-        return userEntityMapper.toDomains(entities).stream()
-            .map(user -> (Admin) user)
-            .toList();
+        List<Admin> admins = userEntityMapper.toDomains(entities).stream()
+                .map(user -> (Admin) user)
+                .toList();
+
+        log.info("Found {} Admins", admins.size());
+        return admins;
     }
 
     @Override
     public Long count() {
-        return adminJpaRepository.countByRole(Role.ADMIN);
+        log.info("Counting all Admins");
+        Long count = adminJpaRepository.countByRole(Role.ADMIN);
+        log.info("Total Admins: {}", count);
+        return count;
     }
-
 }
