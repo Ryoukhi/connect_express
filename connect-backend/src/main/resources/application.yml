@@ -2,7 +2,8 @@ spring:
   application:
     name: connect-backend
   profiles:
-    active: dev
+    active: ${SPRING_PROFILES_ACTIVE:test}
+
 server:
   port: 8085
 

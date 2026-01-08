@@ -1,0 +1,454 @@
+2026-01-08 02:50:03.504 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@17ca6798 is alive
+2026-01-08 02:50:03.567 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@b9d5fb8 is alive
+2026-01-08 02:50:03.568 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7b60fe01 is alive
+2026-01-08 02:50:03.568 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@5cc5dabd is alive
+2026-01-08 02:50:03.570 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3edee081 is alive
+2026-01-08 02:50:03.570 [HikariPool-16:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Thread starvation or clock leap detected (housekeeper delta=6h20m16s994ms24µs).
+2026-01-08 02:50:03.570 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:50:03.570 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:50:03.571 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@5836ff08 is alive
+2026-01-08 02:50:03.571 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3310043f is alive
+2026-01-08 02:50:03.572 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@6c66562c is alive
+2026-01-08 02:50:03.572 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@764f1e4a is alive
+2026-01-08 02:50:03.572 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@60d3c0a3 is alive
+2026-01-08 02:50:04.528 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3310043f: (connection has passed maxLifetime)
+2026-01-08 02:50:04.532 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@b9d5fb8: (connection has passed maxLifetime)
+2026-01-08 02:50:04.533 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5836ff08: (connection has passed maxLifetime)
+2026-01-08 02:50:04.534 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5cc5dabd: (connection has passed maxLifetime)
+2026-01-08 02:50:04.534 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@764f1e4a: (connection has passed maxLifetime)
+2026-01-08 02:50:04.537 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@60d3c0a3: (connection has passed maxLifetime)
+2026-01-08 02:50:04.538 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@17ca6798: (connection has passed maxLifetime)
+2026-01-08 02:50:04.539 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6c66562c: (connection has passed maxLifetime)
+2026-01-08 02:50:04.540 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7b60fe01: (connection has passed maxLifetime)
+2026-01-08 02:50:04.899 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3edee081: (connection has passed maxLifetime)
+2026-01-08 02:50:04.782 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (366e8b56-a5db-4201-8b81-1e52d0371825)
+2026-01-08 02:50:04.970 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:04.970 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:04.973 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:04.983 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (366e8b56-a5db-4201-8b81-1e52d0371825)
+2026-01-08 02:50:04.983 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c
+2026-01-08 02:50:05.027 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (ed87fe95-c094-45d5-9ada-5c7643c9791a)
+2026-01-08 02:50:05.042 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.042 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.045 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.055 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (ed87fe95-c094-45d5-9ada-5c7643c9791a)
+2026-01-08 02:50:05.055 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf
+2026-01-08 02:50:05.089 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (2f156619-7f35-45d8-b84a-abf9f085cf1b)
+2026-01-08 02:50:05.103 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.103 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.106 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.113 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (2f156619-7f35-45d8-b84a-abf9f085cf1b)
+2026-01-08 02:50:05.113 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@631af214
+2026-01-08 02:50:05.153 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (619ca0c8-4775-4251-874a-d63d549b8344)
+2026-01-08 02:50:05.168 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.169 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.172 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.177 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (619ca0c8-4775-4251-874a-d63d549b8344)
+2026-01-08 02:50:05.177 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@65667a09
+2026-01-08 02:50:05.213 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (61345b72-3961-4f0a-96a7-b2dd123835da)
+2026-01-08 02:50:05.229 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.230 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.232 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.244 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (61345b72-3961-4f0a-96a7-b2dd123835da)
+2026-01-08 02:50:05.245 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a
+2026-01-08 02:50:05.290 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (4b108c0f-135d-4942-b610-12c669127a55)
+2026-01-08 02:50:05.304 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.304 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.306 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.313 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (4b108c0f-135d-4942-b610-12c669127a55)
+2026-01-08 02:50:05.313 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6
+2026-01-08 02:50:05.354 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (2fd0251a-08e4-4bef-83f0-68979e0f3fc3)
+2026-01-08 02:50:05.370 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.370 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.373 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.379 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (2fd0251a-08e4-4bef-83f0-68979e0f3fc3)
+2026-01-08 02:50:05.379 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7638231
+2026-01-08 02:50:05.414 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (af1e676b-6c73-4417-a186-8c29e71fe94a)
+2026-01-08 02:50:05.429 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.430 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.432 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.440 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (af1e676b-6c73-4417-a186-8c29e71fe94a)
+2026-01-08 02:50:05.440 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb
+2026-01-08 02:50:05.472 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (3fc3168b-1873-454f-a98e-1abf0c6626d3)
+2026-01-08 02:50:05.487 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.487 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.489 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.496 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (3fc3168b-1873-454f-a98e-1abf0c6626d3)
+2026-01-08 02:50:05.496 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8
+2026-01-08 02:50:05.533 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (9d6208d3-4f89-4af2-8beb-a2e645d135a6)
+2026-01-08 02:50:05.715 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.715 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 02:50:05.717 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 02:50:05.725 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (9d6208d3-4f89-4af2-8beb-a2e645d135a6)
+2026-01-08 02:50:05.725 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b
+2026-01-08 02:50:05.767 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Connection not added, stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:50:33.578 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:50:33.578 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:51:03.582 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:51:03.582 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:51:33.597 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:51:33.597 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:51:42.897 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 02:51:43.167 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 02:51:50.873 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 02:51:52.078 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 02:51:53.170 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 02:51:56.188 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 02:51:56.345 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 02:51:57.827 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 02:51:58.927 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 02:52:00.452 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 02:52:03.603 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:52:03.603 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:52:33.603 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:52:33.603 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:53:03.606 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:53:03.606 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:53:20.294 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 02:53:21.339 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 02:53:33.609 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:53:33.609 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:53:36.689 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 02:53:38.984 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 02:53:41.086 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 02:53:46.657 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 02:53:47.388 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 02:53:50.282 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 02:53:52.739 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 02:53:55.469 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 02:54:03.622 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:54:03.622 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:54:33.623 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:54:33.623 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:54:57.685 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 02:54:59.515 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 02:55:03.635 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:55:03.635 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:55:22.506 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 02:55:25.878 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 02:55:29.004 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 02:55:33.644 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:55:33.644 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:55:37.127 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 02:55:38.430 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 02:55:42.737 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 02:55:46.548 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 02:55:50.486 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 02:56:03.653 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:56:03.653 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:56:33.667 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:56:33.667 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:56:35.090 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 02:56:37.688 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 02:57:03.669 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:57:03.669 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:57:08.332 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 02:57:12.782 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 02:57:16.920 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 02:57:27.600 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 02:57:29.461 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 02:57:33.679 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:57:33.679 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:57:35.192 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 02:57:40.352 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 02:57:45.502 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 02:58:03.683 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:58:03.683 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:58:12.485 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 02:58:15.866 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 02:58:33.683 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:58:33.683 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:58:54.150 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 02:58:59.686 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 02:59:03.687 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:59:03.687 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:59:04.842 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 02:59:18.066 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 02:59:20.500 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 02:59:27.648 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 02:59:33.688 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 02:59:33.688 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 02:59:34.161 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 02:59:40.524 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 02:59:49.875 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 02:59:54.043 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:00:03.701 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:00:03.701 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:00:33.715 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:00:33.715 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:00:39.973 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:00:46.593 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:00:52.767 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:01:03.728 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:01:03.728 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:01:08.538 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:01:11.529 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 03:01:20.103 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:01:27.272 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:01:27.968 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:01:32.223 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:01:33.740 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:01:33.741 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:01:35.541 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 03:02:03.745 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:02:03.745 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:02:25.791 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:02:33.486 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:02:33.751 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:02:33.751 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:02:40.693 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:02:59.003 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:03:02.566 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 03:03:03.759 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:03:03.759 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:03:04.666 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:03:10.393 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:03:12.553 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:03:21.777 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:03:30.559 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 03:03:33.763 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:03:33.763 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:04:03.765 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:04:03.765 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:04:11.608 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:04:20.387 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:04:28.612 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:04:33.775 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:04:33.775 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:04:42.068 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:04:48.571 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:04:49.467 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:04:53.595 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 03:05:03.778 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:05:03.778 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:05:04.996 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:05:15.578 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:05:25.583 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 03:05:33.789 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:05:33.789 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:05:57.430 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:06:03.802 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:06:03.802 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:06:07.293 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:06:16.535 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:06:19.471 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:06:26.747 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:06:33.803 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:06:33.803 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:06:39.931 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:06:44.626 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 03:06:57.450 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:07:03.811 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:07:03.811 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:07:09.391 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:07:20.598 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 03:07:33.815 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:07:33.815 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:07:43.247 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:07:54.192 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:07:56.867 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:08:03.824 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:08:03.824 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:08:04.450 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:08:04.924 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:08:30.392 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:08:33.839 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:08:33.839 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:08:35.664 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 03:08:49.903 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:09:03.194 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:09:03.851 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:09:03.851 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:09:15.625 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 03:09:29.065 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:09:33.858 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:09:33.858 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:09:34.272 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:09:41.093 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:09:43.109 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:09:52.376 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:10:03.872 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:10:03.872 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:10:20.870 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:10:26.699 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 03:10:33.877 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:10:33.877 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:10:42.348 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:10:56.997 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:11:03.889 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:11:03.889 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:11:10.649 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 03:11:11.663 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:11:14.888 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:11:21.282 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:11:27.986 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:11:33.891 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:11:33.891 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:11:40.286 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:12:03.906 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:12:03.906 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:12:11.341 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:12:17.740 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6 is alive
+2026-01-08 03:12:33.915 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:12:33.915 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:12:34.796 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:12:49.057 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8 is alive
+2026-01-08 03:12:50.810 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:12:59.452 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:13:00.707 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:13:03.921 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:13:03.921 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:13:05.665 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb is alive
+2026-01-08 03:13:07.215 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@51026dd8: (connection has passed maxLifetime)
+2026-01-08 03:13:07.218 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (54f63509-5472-450d-93ee-4ecc81b44617)
+2026-01-08 03:13:07.236 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:13:07.237 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:13:07.239 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 03:13:07.247 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (54f63509-5472-450d-93ee-4ecc81b44617)
+2026-01-08 03:13:07.248 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@240671bb
+2026-01-08 03:13:14.884 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@65667a09 is alive
+2026-01-08 03:13:28.198 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:13:28.941 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@65667a09: (connection has passed maxLifetime)
+2026-01-08 03:13:28.946 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (02c50a50-5529-4a26-b7b6-fbc699a21d3f)
+2026-01-08 03:13:28.962 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:13:28.962 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:13:28.965 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 03:13:28.971 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (02c50a50-5529-4a26-b7b6-fbc699a21d3f)
+2026-01-08 03:13:28.971 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e4aedaa
+2026-01-08 03:13:33.925 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:13:33.925 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:13:40.581 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@55636ddb: (connection has passed maxLifetime)
+2026-01-08 03:13:40.582 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (ffc5c5a2-813f-40b1-9ce3-5e8b2bb79d7a)
+2026-01-08 03:13:40.591 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:13:40.591 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:13:40.593 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 03:13:40.599 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (ffc5c5a2-813f-40b1-9ce3-5e8b2bb79d7a)
+2026-01-08 03:13:40.599 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5fd62d00
+2026-01-08 03:14:01.807 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:14:03.951 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:14:03.951 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:14:04.218 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@45117aa6: (connection has passed maxLifetime)
+2026-01-08 03:14:04.230 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (219fe5ce-561d-4b8a-a390-46b1bf722960)
+2026-01-08 03:14:04.246 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:14:04.246 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:14:04.248 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 03:14:04.254 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (219fe5ce-561d-4b8a-a390-46b1bf722960)
+2026-01-08 03:14:04.254 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@aa88814
+2026-01-08 03:14:27.254 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:14:33.963 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:14:33.963 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:14:37.625 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:14:44.611 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@631af214 is alive
+2026-01-08 03:14:46.526 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf is alive
+2026-01-08 03:15:03.976 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:15:03.976 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:15:06.251 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@240671bb is alive
+2026-01-08 03:15:16.112 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a is alive
+2026-01-08 03:15:20.778 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@e4aedaa is alive
+2026-01-08 03:15:29.549 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@5fd62d00 is alive
+2026-01-08 03:15:33.984 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:15:33.984 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:15:52.268 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b is alive
+2026-01-08 03:16:00.176 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@aa88814 is alive
+2026-01-08 03:16:03.995 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:16:03.995 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 03:16:10.930 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@781ed82a: (connection has passed maxLifetime)
+2026-01-08 03:16:10.931 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Attempting to create/setup new connection (53bd79b1-c9a9-41d5-994b-3a4b4e0f11aa)
+2026-01-08 03:16:10.942 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:16:10.942 [HikariPool-16:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 03:16:10.943 [HikariPool-16:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 03:16:10.953 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Established new connection (53bd79b1-c9a9-41d5-994b-3a4b4e0f11aa)
+2026-01-08 03:16:10.953 [HikariPool-16:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Added connection com.mysql.cj.jdbc.ConnectionImpl@459a20f4
+2026-01-08 03:16:15.809 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c is alive
+2026-01-08 03:16:19.708 [HikariPool-16:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@7638231 is alive
+2026-01-08 03:16:24.979 [Thread-61] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Shutdown initiated...
+2026-01-08 03:16:24.979 [Thread-61] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - Before shutdown stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 03:16:24.984 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3212f00c: (connection evicted)
+2026-01-08 03:16:24.987 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1b4d3ccf: (connection evicted)
+2026-01-08 03:16:24.987 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@631af214: (connection evicted)
+2026-01-08 03:16:24.988 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7638231: (connection evicted)
+2026-01-08 03:16:24.989 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@4bfe845b: (connection evicted)
+2026-01-08 03:16:24.989 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@240671bb: (connection evicted)
+2026-01-08 03:16:24.990 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@e4aedaa: (connection evicted)
+2026-01-08 03:16:24.990 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5fd62d00: (connection evicted)
+2026-01-08 03:16:24.991 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@aa88814: (connection evicted)
+2026-01-08 03:16:24.991 [HikariPool-16:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-16 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@459a20f4: (connection evicted)
+2026-01-08 03:16:24.992 [Thread-61] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-16 - After  shutdown stats (total=0/10, idle=0/10, active=0, waiting=0)
+2026-01-08 03:16:24.992 [Thread-61] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-16 - Shutdown completed.
+2026-01-08 03:16:25.745 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'spring.profiles.active' to java.util.Set<java.lang.String>:
+
+    Property: spring.profiles.active
+    Value: "SPRING_PROFILES_ACTIVE=dev"
+    Origin: class path resource [application.yml] - 5:13
+    Reason: java.lang.IllegalStateException: Profile 'SPRING_PROFILES_ACTIVE=dev' must contain a letter, digit or allowed char ('-', '_', '.', '+', '@')
+
+Action:
+
+Update your application's configuration
+
+2026-01-08 03:16:37.375 [restartedMain] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'inMemoryDatabaseShutdownExecutor' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'inMemoryDatabaseShutdownExecutor' defined in class path resource [org/springframework/boot/devtools/autoconfigure/DevToolsDataSourceAutoConfiguration.class]: Unsatisfied dependency expressed through method 'inMemoryDatabaseShutdownExecutor' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/jdbc/autoconfigure/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Failed to determine a suitable driver class
+2026-01-08 03:16:37.388 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+
+2026-01-08 03:16:38.916 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'spring.profiles.active' to java.util.Set<java.lang.String>:
+
+    Property: spring.profiles.active
+    Value: "${SPRING_PROFILES_ACTIVE=dev}"
+    Origin: class path resource [application.yml] - 5:13
+    Reason: java.lang.IllegalStateException: Profile '${SPRING_PROFILES_ACTIVE=dev}' must contain a letter, digit or allowed char ('-', '_', '.', '+', '@')
+
+Action:
+
+Update your application's configuration
+
+2026-01-08 03:16:43.590 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'spring.profiles.active' to java.util.Set<java.lang.String>:
+
+    Property: spring.profiles.active
+    Value: "${SPRING_PROFILES_ACTIVE=test}"
+    Origin: class path resource [application.yml] - 5:13
+    Reason: java.lang.IllegalStateException: Profile '${SPRING_PROFILES_ACTIVE=test}' must contain a letter, digit or allowed char ('-', '_', '.', '+', '@')
+
+Action:
+
+Update your application's configuration
+
