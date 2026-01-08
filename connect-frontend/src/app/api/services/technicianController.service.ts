@@ -12,7 +12,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { RequestOptions, Technician } from "../models";
+import { RequestOptions, Technician, TechnicianProfileResponseDto } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class TechnicianControllerService {
@@ -130,6 +130,50 @@ export class TechnicianControllerService {
             observe: observe as any,
             params,
             responseType: 'blob' as 'blob',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    /**
+     * Multi-criteria search (returns TechnicianProfileResponseDto[])
+     */
+    search(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<TechnicianProfileResponseDto>>;
+    search(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<TechnicianProfileResponseDto>>>;
+    search(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<TechnicianProfileResponseDto>>>;
+    search(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/technicians/search`;
+
+        let params = new HttpParams();
+        if (city != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, city, 'city');
+        }
+        if (neighborhood != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, neighborhood, 'neighborhood');
+        }
+        if (categoryName != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, categoryName, 'categoryName');
+        }
+        if (availabilityStatus != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, availabilityStatus, 'availabilityStatus');
+        }
+        if (minRating != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, minRating, 'minRating');
+        }
+        if (minPrice != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, minPrice, 'minPrice');
+        }
+        if (maxPrice != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, maxPrice, 'maxPrice');
+        }
+
+        const requestOptions: any = {
+            observe: observe as any,
+            params,
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
