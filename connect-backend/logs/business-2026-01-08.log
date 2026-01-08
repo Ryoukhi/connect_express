@@ -1,0 +1,12 @@
+2026-01-08 03:56:45.215 INFO  - Tentative de login pour email=eva@gmail.com
+2026-01-08 03:56:45.760 INFO  - Login réussi pour l'utilisateur id=7
+2026-01-08 04:18:40.654 INFO  - Tentative de login pour email=paul@gmail.com
+2026-01-08 04:18:40.869 INFO  - Login réussi pour l'utilisateur id=6
+2026-01-08 04:47:31.712 INFO  - Tentative de login pour email=eva@gmail.com
+2026-01-08 04:47:32.260 INFO  - Login réussi pour l'utilisateur id=7
+2026-01-08 07:59:24.366 INFO  - Inscription d'un nouvel utilisateur email=kopsing@g.c
+2026-01-08 07:59:24.796 INFO  - Saving User email=kopsing@g.c, role=CLIENT
+2026-01-08 07:59:25.144 INFO  - User saved with id=9
+2026-01-08 07:59:25.184 INFO  - Inscription réussie pour utilisateur id=9, email=kopsing@g.c
+2026-01-08 08:08:42.651 INFO  - Tentative de login pour email=eva@gmail.com
+2026-01-08 08:08:42.925 INFO  - Login réussi pour l'utilisateur id=7

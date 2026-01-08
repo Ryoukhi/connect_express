@@ -42,10 +42,7 @@
             <h3 class="filter-title">Catégorie</h3>
             <select [(ngModel)]="filters.category" class="filter-select">
               <option value="">Toutes</option>
-              <option value="PLOMBIER">Plombier</option>
-              <option value="ELECTRICIEN">Électricien</option>
-              <option value="MECANICIEN">Mécanicien</option>
-              <option value="INFORMATICIEN">Informaticien</option>
+              <option *ngFor="let c of categories" [value]="c.name">{{ c.name }}</option>
             </select>
           </div>
 
@@ -100,13 +97,8 @@
 
             <!-- Barre horizontale des catégories -->
             <div class="flex items-center gap-3 overflow-x-auto no-scrollbar pb-6">
-                <button class="px-6 py-2.5 bg-blue-600 text-white rounded-full text-sm font-bold whitespace-nowrap shadow-lg shadow-blue-100">Tous</button>
-                <button class="px-6 py-2.5 bg-white border border-slate-200 hover:border-blue-400 rounded-full text-sm font-medium whitespace-nowrap transition">Plomberie</button>
-                <button class="px-6 py-2.5 bg-white border border-slate-200 hover:border-blue-400 rounded-full text-sm font-medium whitespace-nowrap transition">Électricité</button>
-                <button class="px-6 py-2.5 bg-white border border-slate-200 hover:border-blue-400 rounded-full text-sm font-medium whitespace-nowrap transition">Mécanique</button>
-                <button class="px-6 py-2.5 bg-white border border-slate-200 hover:border-blue-400 rounded-full text-sm font-medium whitespace-nowrap transition">Climatisation</button>
-                <button class="px-6 py-2.5 bg-white border border-slate-200 hover:border-blue-400 rounded-full text-sm font-medium whitespace-nowrap transition">Maçonnerie</button>
-                <button class="px-6 py-2.5 bg-white border border-slate-200 hover:border-blue-400 rounded-full text-sm font-medium whitespace-nowrap transition">Peinture</button>
+                <button (click)="selectCategory(null)" [ngClass]="{ 'px-6 py-2.5 rounded-full text-sm font-bold whitespace-nowrap shadow-lg shadow-blue-100': true, 'bg-blue-600 text-white': !filters.category, 'bg-white border border-slate-200': !!filters.category }">Tous</button>
+                <button *ngFor="let c of categories" (click)="selectCategory(c)" [ngClass]="{ 'px-6 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition': true, 'bg-blue-600 text-white': filters.category === c.name, 'bg-white border border-slate-200 hover:border-blue-400': filters.category !== c.name }">{{ c.name }}</button>
             </div>
 
             <!-- Header résultats -->
