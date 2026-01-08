@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-class ReviewTest {
+class ReviewServiceImplTest {
 
     @Test
     void shouldCreateReviewWithValidData() {
