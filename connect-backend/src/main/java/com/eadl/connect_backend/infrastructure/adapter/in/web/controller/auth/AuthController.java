@@ -11,6 +11,7 @@ import com.eadl.connect_backend.application.dto.RegisterDto;
 import com.eadl.connect_backend.application.dto.RegisterResponseDto;
 import com.eadl.connect_backend.application.mapper.RegisterMapper;
 import com.eadl.connect_backend.domain.model.user.Client;
+import com.eadl.connect_backend.domain.model.user.Technician;
 import com.eadl.connect_backend.domain.port.in.user.AuthService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -68,6 +69,13 @@ public class AuthController {
     public ResponseEntity<RegisterResponseDto> register(@Valid @RequestBody RegisterDto registerDto) {
         Client client = registerMapper.toModel(registerDto);
         RegisterResponseDto createdUser = authService.register(client);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    @PostMapping("/register-technician")
+    public ResponseEntity<RegisterResponseDto> registerTechnician(@Valid @RequestBody RegisterDto registerDto) {
+        Technician technician = registerMapper.toModelTechnician(registerDto);
+        RegisterResponseDto createdUser = authService.register(technician);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 }
