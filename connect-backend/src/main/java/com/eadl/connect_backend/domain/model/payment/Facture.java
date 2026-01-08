@@ -112,4 +112,8 @@ public class Facture {
     public void setGeneratedAt(LocalDateTime generatedAt) {
         this.generatedAt = generatedAt;
     }
+
+    public Object getId() {
+        return null;
+    }
 }

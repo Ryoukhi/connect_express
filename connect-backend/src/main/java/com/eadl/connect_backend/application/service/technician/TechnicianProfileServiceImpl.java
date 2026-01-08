@@ -16,7 +16,10 @@ import com.eadl.connect_backend.domain.port.out.persistence.ReviewRepository;
 import com.eadl.connect_backend.domain.port.out.persistence.TechnicianProfileRepository;
 import com.eadl.connect_backend.domain.port.out.security.CurrentUserProvider;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class TechnicianProfileServiceImpl implements TechnicianProfileService {
 
     private final TechnicianProfileRepository profileRepository;
@@ -24,28 +27,24 @@ public class TechnicianProfileServiceImpl implements TechnicianProfileService {
     private final ReservationRepository reservationRepository;
     private final ReviewRepository reviewRepository;
 
-    
-
-    // ================= CREATE =================
-
     public TechnicianProfileServiceImpl(TechnicianProfileRepository profileRepository,
-            CurrentUserProvider currentUserProvider, ReservationRepository reservationRepository,
-            ReviewRepository reviewRepository) {
+                                        CurrentUserProvider currentUserProvider, ReservationRepository reservationRepository,
+                                        ReviewRepository reviewRepository) {
         this.profileRepository = profileRepository;
         this.currentUserProvider = currentUserProvider;
         this.reservationRepository = reservationRepository;
         this.reviewRepository = reviewRepository;
     }
 
-
+    // ================= CREATE =================
     @Override
     public TechnicianProfile createProfile(TechnicianProfile profile) {
-
         Long technicianId = currentUserProvider.getCurrentUserId();
+        log.info("Création d'un profil pour le technicien id={}", technicianId);
 
-        // Vérifier qu’un profil n’existe pas déjà
         profileRepository.findByIdTechnician(technicianId)
                 .ifPresent(p -> {
+                    log.error("Profil existant déjà pour le technicien id={}", technicianId);
                     throw new IllegalStateException("Profile already exists for this technician");
                 });
 
@@ -54,111 +53,142 @@ public class TechnicianProfileServiceImpl implements TechnicianProfileService {
         profile.setCompletedJobs(0);
         profile.setAverageRating(BigDecimal.ZERO);
 
-        return profileRepository.save(profile);
+        TechnicianProfile saved = profileRepository.save(profile);
+        log.info("Profil créé avec succès pour le technicien id={}", technicianId);
+        return saved;
     }
 
-
     // ================= READ =================
-
     @Override
     public Optional<TechnicianProfile> getProfileByTechnicianId(Long technicianId) {
+        log.debug("Récupération du profil du technicien id={}", technicianId);
         return profileRepository.findByTechnicianId(technicianId);
     }
 
     // ================= UPDATE PROFILE =================
-
     @Override
     public TechnicianProfile updateProfile(TechnicianProfile profile) {
+        log.info("Mise à jour du profil du technicien id={}", profile.getIdTechnician());
 
         TechnicianProfile existing = profileRepository
                 .findByTechnicianId(profile.getIdTechnician())
-                .orElseThrow(() -> new BusinessException("Technician profile not found") {});
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour le technicien id={}", profile.getIdTechnician());
+                    return new BusinessException("Technician profile not found") {
+                    };
+                });
 
         existing.setBio(profile.getBio());
         existing.setIdCategory(profile.getIdCategory());
         existing.setYearsExperience(profile.getYearsExperience());
         existing.setHourlyRate(profile.getHourlyRate());
-
-        // Toute modification invalide la validation
         existing.setVerified(false);
 
-        return profileRepository.save(existing);
+        TechnicianProfile saved = profileRepository.save(existing);
+        log.info("Profil mis à jour pour le technicien id={}", profile.getIdTechnician());
+        return saved;
     }
 
     // ================= AVAILABILITY =================
-
     @Override
     public TechnicianProfile updateAvailability(Long technicianId, AvailabilityStatus availabilityStatus) {
+        log.info("Mise à jour de la disponibilité du technicien id={} en {}", technicianId, availabilityStatus);
 
         TechnicianProfile profile = profileRepository
                 .findByTechnicianId(technicianId)
-                .orElseThrow(() -> new BusinessException("Technician profile not found") {});
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour le technicien id={}", technicianId);
+                    return new BusinessException("Technician profile not found") {
+                    };
+                });
 
         profile.setAvailabilityStatus(availabilityStatus);
-
-        return profileRepository.save(profile);
+        TechnicianProfile saved = profileRepository.save(profile);
+        log.debug("Disponibilité mise à jour pour le technicien id={}", technicianId);
+        return saved;
     }
 
     // ================= HOURLY RATE =================
-
     @Override
     public TechnicianProfile updateHourlyRate(Long technicianId, BigDecimal hourlyRate) {
+        log.info("Mise à jour du tarif horaire pour le technicien id={}", technicianId);
 
         if (hourlyRate == null || hourlyRate.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new BusinessException("Hourly rate must be positive") {};
+            log.error("Tarif horaire invalide: {}", hourlyRate);
+            throw new BusinessException("Hourly rate must be positive") {
+            };
         }
 
         TechnicianProfile profile = profileRepository
                 .findByTechnicianId(technicianId)
-                .orElseThrow(() -> new BusinessException("Technician profile not found") {});
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour le technicien id={}", technicianId);
+                    return new BusinessException("Technician profile not found") {
+                    };
+                });
 
         profile.setHourlyRate(hourlyRate);
-
-        return profileRepository.save(profile);
+        TechnicianProfile saved = profileRepository.save(profile);
+        log.debug("Tarif horaire mis à jour pour le technicien id={} à {}", technicianId, hourlyRate);
+        return saved;
     }
 
     // ================= VALIDATION =================
-
     @Override
     public void validateProfile(Long technicianId) {
+        log.info("Validation du profil du technicien id={}", technicianId);
 
         TechnicianProfile profile = profileRepository
                 .findByTechnicianId(technicianId)
-                .orElseThrow(() -> new BusinessException("Technician profile not found") {});
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour validation id={}", technicianId);
+                    return new BusinessException("Technician profile not found") {
+                    };
+                });
 
         profile.setVerified(true);
-
         profileRepository.save(profile);
+        log.info("Profil validé pour le technicien id={}", technicianId);
     }
 
     @Override
     public void rejectProfile(Long technicianId, String reason) {
+        log.info("Rejet du profil du technicien id={}, raison='{}'", technicianId, reason);
 
         TechnicianProfile profile = profileRepository
                 .findByTechnicianId(technicianId)
-                .orElseThrow(() -> new BusinessException("Technician profile not found") {});
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour rejet id={}", technicianId);
+                    return new BusinessException("Technician profile not found") {
+                    };
+                });
 
         profile.setVerified(false);
-
-        // Optionnel : log admin / notification
         profileRepository.save(profile);
+        log.info("Profil rejeté pour le technicien id={}", technicianId);
     }
 
     // ================= ADMIN =================
-
     @Override
     public List<TechnicianProfile> getPendingProfiles() {
-        return profileRepository.findByVerifiedFalse();
+        log.debug("Récupération des profils non vérifiés");
+        List<TechnicianProfile> pending = profileRepository.findByVerifiedFalse();
+        log.debug("Nombre de profils en attente: {}", pending.size());
+        return pending;
     }
 
     // ================= STATS =================
-
     @Override
     public void updateStatisticsAfterJob(Long technicianId, BigDecimal newRating) {
+        log.info("Mise à jour des statistiques après job pour le technicien id={}, nouvelle note={}", technicianId, newRating);
 
         TechnicianProfile profile = profileRepository
                 .findByTechnicianId(technicianId)
-                .orElseThrow(() -> new BusinessException("Technician profile not found") {});
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour mise à jour stats id={}", technicianId);
+                    return new BusinessException("Technician profile not found") {
+                    };
+                });
 
         int completedJobs = profile.getCompletedJobs() + 1;
         profile.setCompletedJobs(completedJobs);
@@ -172,13 +202,18 @@ public class TechnicianProfileServiceImpl implements TechnicianProfileService {
         );
 
         profileRepository.save(profile);
+        log.debug("Stats mises à jour: completedJobs={}, averageRating={}", completedJobs, profile.getAverageRating());
     }
 
     @Override
     public void recalculateCompletedJobs(Long technicianId) {
+        log.info("Recalcul du nombre de jobs terminés pour le technicien id={}", technicianId);
 
         TechnicianProfile profile = profileRepository.findByIdTechnician(technicianId)
-                .orElseThrow(() -> new IllegalStateException("Profile not found"));
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour recalcul completedJobs id={}", technicianId);
+                    return new IllegalStateException("Profile not found");
+                });
 
         long completedJobs = reservationRepository.countByIdTechnicianAndStatus(
                 technicianId,
@@ -187,14 +222,18 @@ public class TechnicianProfileServiceImpl implements TechnicianProfileService {
 
         profile.setCompletedJobs((int) completedJobs);
         profileRepository.save(profile);
+        log.debug("Nombre de jobs terminés recalculé: {}", completedJobs);
     }
-
 
     @Override
     public void recalculateAverageRating(Long technicianId) {
+        log.info("Recalcul de la note moyenne pour le technicien id={}", technicianId);
 
         TechnicianProfile profile = profileRepository.findByIdTechnician(technicianId)
-                .orElseThrow(() -> new IllegalStateException("Profile not found"));
+                .orElseThrow(() -> {
+                    log.error("Profil introuvable pour recalcul averageRating id={}", technicianId);
+                    return new IllegalStateException("Profile not found");
+                });
 
         List<Long> reviewIds =
                 reservationRepository.findReviewIdsByIdTechnicianAndStatus(
@@ -205,17 +244,7 @@ public class TechnicianProfileServiceImpl implements TechnicianProfileService {
         if (reviewIds.isEmpty()) {
             profile.setAverageRating(BigDecimal.ZERO);
             profileRepository.save(profile);
-            return;
+            log.debug("Aucune review trouvée, note moyenne mise");
         }
-
-        BigDecimal averageRating =
-                reviewRepository.calculateAverageRating(reviewIds);
-
-        profile.setAverageRating(
-                averageRating != null ? averageRating : BigDecimal.ZERO
-        );
-
-        profileRepository.save(profile);
     }
-
 }

@@ -98,4 +98,8 @@ public class Review {
     public int hashCode() {
         return Objects.hash(idReview);
     }
+
+    public Object getId() {
+        return null;
+    }
 }

@@ -7,11 +7,14 @@ import com.eadl.connect_backend.domain.port.in.user.UserService;
 import com.eadl.connect_backend.domain.port.out.persistence.UserRepository;
 import com.eadl.connect_backend.domain.port.out.security.CurrentUserProvider;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -32,30 +35,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getById(Long userId) {
+        log.debug("Recherche utilisateur par id={}", userId);
         return userRepository.findById(userId);
     }
 
     @Override
     public Optional<User> getByEmail(String email) {
+        log.debug("Recherche utilisateur par email={}", email);
         return userRepository.findByEmail(email);
     }
 
     @Override
     public Optional<User> getByPhone(String phone) {
+        log.debug("Recherche utilisateur par téléphone={}", phone);
         return userRepository.findByPhone(phone);
     }
 
     // ===================== UPDATE =====================
 
-    /**
-     * Met à jour le profil de l'utilisateur connecté
-     */
     @Override
     public User updateProfile(User user) {
         Long currentUserId = currentUserProvider.getCurrentUserId();
+        log.info("Mise à jour du profil utilisateur id={}", currentUserId);
 
         User existingUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + currentUserId));
+                .orElseThrow(() -> {
+                    log.error("Échec de mise à jour : utilisateur introuvable id={}", currentUserId);
+                    return new UserNotFoundException("User not found with ID: " + currentUserId);
+                });
 
         existingUser.updateProfile(
                 user.getFirstName(),
@@ -63,55 +70,75 @@ public class UserServiceImpl implements UserService {
                 user.getPhone()
         );
 
-        return userRepository.save(existingUser);
+        User savedUser = userRepository.save(existingUser);
+        log.info("Profil utilisateur mis à jour avec succès id={}", currentUserId);
+        return savedUser;
     }
 
     @Override
     public void changePassword(String currentPassword, String newPassword) {
         Long currentUserId = currentUserProvider.getCurrentUserId();
+        log.info("Changement de mot de passe pour utilisateur id={}", currentUserId);
 
         User user = userRepository.findById(currentUserId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + currentUserId));
+                .orElseThrow(() -> {
+                    log.error("Échec du changement de mot de passe : utilisateur introuvable id={}", currentUserId);
+                    return new UserNotFoundException("User not found with ID: " + currentUserId);
+                });
 
         if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            log.warn("Mot de passe actuel incorrect pour utilisateur id={}", currentUserId);
             throw new InvalidPasswordException("Mot de passe actuel incorrect");
         }
 
         user.changePassword(passwordEncoder.encode(newPassword));
-
         userRepository.save(user);
+        log.info("Mot de passe modifié avec succès pour utilisateur id={}", currentUserId);
     }
-
 
     @Override
     public User activate(Long userId) {
+        log.info("Activation de l'utilisateur id={}", userId);
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
+                .orElseThrow(() -> {
+                    log.error("Échec d'activation : utilisateur introuvable id={}", userId);
+                    return new UserNotFoundException("User not found with ID: " + userId);
+                });
 
         user.activate();
-
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        log.info("Utilisateur activé id={}", userId);
+        return savedUser;
     }
 
     @Override
     public User deactivate(Long userId) {
+        log.info("Désactivation de l'utilisateur id={}", userId);
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
+                .orElseThrow(() -> {
+                    log.error("Échec de désactivation : utilisateur introuvable id={}", userId);
+                    return new UserNotFoundException("User not found with ID: " + userId);
+                });
 
         user.deactivate();
-
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        log.info("Utilisateur désactivé id={}", userId);
+        return savedUser;
     }
 
     // ===================== CHECK =====================
 
     @Override
     public boolean emailExists(String email) {
-        return userRepository.existsByEmail(email);
+        boolean exists = userRepository.existsByEmail(email);
+        log.debug("Vérification existence email={} : {}", email, exists);
+        return exists;
     }
 
     @Override
     public boolean phoneExists(String phone) {
-        return userRepository.existsByPhone(phone);
+        boolean exists = userRepository.existsByPhone(phone);
+        log.debug("Vérification existence téléphone={} : {}", phone, exists);
+        return exists;
     }
 }
