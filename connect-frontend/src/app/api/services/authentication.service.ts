@@ -41,6 +41,23 @@ export class AuthenticationService {
         return this.httpClient.post(url, registerDto, requestOptions);
     }
 
+    registerTechnician1(registerDto: RegisterDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<RegisterResponseDto>;
+    registerTechnician1(registerDto: RegisterDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<RegisterResponseDto>>;
+    registerTechnician1(registerDto: RegisterDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<RegisterResponseDto>>;
+    registerTechnician1(registerDto: RegisterDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/auth/register-technician`;
+
+        const requestOptions: any = {
+            observe: observe as any,
+            responseType: 'blob' as 'blob',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.post(url, registerDto, requestOptions);
+    }
+
     logout(idUser: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
     logout(idUser: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
     logout(idUser: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;

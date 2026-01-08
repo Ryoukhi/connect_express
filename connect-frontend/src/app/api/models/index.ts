@@ -40,8 +40,8 @@ export interface TechnicianProfileResponseDto {
 
 export interface Rating {
     value?: number;
-    label?: string;
     poor?: boolean;
+    label?: string;
     excellent?: boolean;
 }
 
@@ -104,10 +104,11 @@ export interface Technician {
     emailVerified?: boolean;
     phoneVerified?: boolean;
     profilePhotoUrl?: string;
-    technician?: boolean;
-    admin?: boolean;
+    id?: { cause?: { stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; suppressed?: Array<{ stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; localizedMessage?: string }>; localizedMessage?: string }; stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; suppressed?: Array<{ stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; localizedMessage?: string }>; localizedMessage?: string };
     fullName?: string;
     client?: boolean;
+    technician?: boolean;
+    admin?: boolean;
 }
 
 /** Données du profil */
@@ -162,6 +163,16 @@ export interface RegisterAdminDto {
     city?: string;
     neighborhood?: string;
     profilePhotoUrl?: string;
+}
+
+export interface TechnicianSearchDto {
+    city?: string;
+    neighborhood?: string;
+    categoryName?: string;
+    availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK';
+    minRating?: number;
+    minPrice?: number;
+    maxPrice?: number;
 }
 
 export interface ClientDto {

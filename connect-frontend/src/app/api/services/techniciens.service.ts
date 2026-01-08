@@ -12,7 +12,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { RequestOptions, Technician } from "../models";
+import { RequestOptions, Technician, TechnicianSearchDto, TechnicianProfileResponseDto } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class TechniciensService {
@@ -81,6 +81,29 @@ export class TechniciensService {
 
         const requestOptions: any = {
             observe: observe as any,
+            responseType: 'blob' as 'blob',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    searchTechnicians(dto: TechnicianSearchDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<TechnicianProfileResponseDto>>;
+    searchTechnicians(dto: TechnicianSearchDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<TechnicianProfileResponseDto>>>;
+    searchTechnicians(dto: TechnicianSearchDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<TechnicianProfileResponseDto>>>;
+    searchTechnicians(dto: TechnicianSearchDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/technicians/search`;
+
+        let params = new HttpParams();
+        if (dto != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, dto, 'dto');
+        }
+
+        const requestOptions: any = {
+            observe: observe as any,
+            params,
             responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
