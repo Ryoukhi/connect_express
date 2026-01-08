@@ -6315,3 +6315,49 @@ java.lang.Throwable: Runtime.exit(130)
 2026-01-08 10:41:39.453 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
 2026-01-08 10:41:39.453 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
 2026-01-08 10:41:40.972 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@298de38b is alive
+2026-01-08 10:42:03.419 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1660ac8c is alive
+2026-01-08 10:42:09.463 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 10:42:09.463 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 10:42:09.999 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@1afbe56d is alive
+2026-01-08 10:42:10.197 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@52bc0806 is alive
+2026-01-08 10:42:25.391 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@2b575977 is alive
+2026-01-08 10:42:37.419 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1afbe56d: (connection has passed maxLifetime)
+2026-01-08 10:42:37.421 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (57b44696-b7a7-4d02-8f3d-ff56848f2d8c)
+2026-01-08 10:42:37.438 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 10:42:37.438 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 10:42:37.441 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 10:42:37.448 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (57b44696-b7a7-4d02-8f3d-ff56848f2d8c)
+2026-01-08 10:42:37.448 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e7f83d4
+2026-01-08 10:42:39.471 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 10:42:39.471 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-08 10:42:59.200 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@763cf7c0 is alive
+2026-01-08 10:43:00.047 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@6101a56d is alive
+2026-01-08 10:43:02.413 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - keepalive: connection com.mysql.cj.jdbc.ConnectionImpl@42916eb1 is alive
+2026-01-08 10:43:05.094 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@352eacf6: (connection has passed maxLifetime)
+2026-01-08 10:43:05.101 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (48062e14-36f9-481d-ac56-4296d6fd89ad)
+2026-01-08 10:43:05.114 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 10:43:05.114 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-08 10:43:05.118 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-08 10:43:05.125 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (48062e14-36f9-481d-ac56-4296d6fd89ad)
+2026-01-08 10:43:05.125 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6f33a0a4
+2026-01-08 10:43:08.915 [SIGINT handler] DEBUG java.lang.Runtime - Runtime.exit() called with status: 130
+java.lang.Throwable: Runtime.exit(130)
+	at java.base/java.lang.Shutdown.logRuntimeExit(Shutdown.java:179)
+	at java.base/java.lang.Shutdown.exit(Shutdown.java:160)
+	at java.base/java.lang.Terminator$1.handle(Terminator.java:51)
+	at java.base/jdk.internal.misc.Signal$1.run(Signal.java:218)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-01-08 10:43:09.138 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-01-08 10:43:09.138 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Before shutdown stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-08 10:43:09.141 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@688d643b: (connection evicted)
+2026-01-08 10:43:09.142 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@52bc0806: (connection evicted)
+2026-01-08 10:43:09.144 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@763cf7c0: (connection evicted)
+2026-01-08 10:43:09.144 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@298de38b: (connection evicted)
+2026-01-08 10:43:09.145 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@2b575977: (connection evicted)
+2026-01-08 10:43:09.146 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6101a56d: (connection evicted)
+2026-01-08 10:43:09.146 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@42916eb1: (connection evicted)
+2026-01-08 10:43:09.146 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1660ac8c: (connection evicted)
+2026-01-08 10:43:09.147 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@e7f83d4: (connection evicted)
+2026-01-08 10:43:09.148 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6f33a0a4: (connection evicted)
+2026-01-08 10:43:09.150 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After  shutdown stats (total=0/10, idle=0/10, active=0, waiting=0)
+2026-01-08 10:43:09.151 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
