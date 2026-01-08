@@ -148,11 +148,12 @@ class ReviewServiceImplTest {
                 .thenReturn(Optional.of(review));
 
         Review updated = new Review();
-        updated.setRating(new Rating(0));
+        updated.setRating(null);
 
         assertThatThrownBy(() ->
                 reviewService.updateReview(1L, updated))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("note est obligatoire");
     }
 
     // ================= DELETE =================

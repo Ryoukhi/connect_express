@@ -245,6 +245,11 @@ public class TechnicianProfileServiceImpl implements TechnicianProfileService {
             profile.setAverageRating(BigDecimal.ZERO);
             profileRepository.save(profile);
             log.debug("Aucune review trouvée, note moyenne mise");
+        } else {
+            BigDecimal average = reviewRepository.calculateAverageRating(reviewIds);
+            profile.setAverageRating(average);
+            profileRepository.save(profile);
+            log.debug("Note moyenne recalculée: {}", average);
         }
     }
 }
