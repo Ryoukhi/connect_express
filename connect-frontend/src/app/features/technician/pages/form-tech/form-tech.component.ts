@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthControllerService } from '../../../api/services/authController.service';
-import { Router, RouterLink, RouterModule } from '@angular/router';
-import { RegisterDto } from '../../../api/models';
+import { Router, RouterLink, RouterModule } from "@angular/router";
+import { AuthControllerService, AuthenticationService, RegisterDto } from '../../../../api';
+import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../services/auth.service';
+
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterModule],
-  templateUrl: './register.component.html'
+  selector: 'app-form-tech',
+  imports: [RouterLink, CommonModule, ReactiveFormsModule, RouterModule],
+  templateUrl: './form-tech.component.html',
+  styleUrl: './form-tech.component.css'
 })
-export class RegisterComponent implements OnInit {
+export class FormTechComponent implements OnInit {
 
   registerForm!: FormGroup;
   submitting = false;
@@ -28,10 +28,11 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authControllerService: AuthControllerService,
+    private authentificationService: AuthenticationService,
     private authService: AuthService,
     private router: Router
   ) {}
+
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -75,14 +76,14 @@ export class RegisterComponent implements OnInit {
       profilePhotoUrl: formValue['profilePhotoUrl'] || null, // optionnel
     };
 
-    this.authControllerService.register(registerDto, 'body').subscribe({
+    this.authentificationService.registerTechnician1(registerDto, 'body').subscribe({
       next: (response) => {
         this.submitting = false;
 
         this.authService.storeSession(response)
 
         // Redirection après inscription
-        this.router.navigate(['/catalogue']);
+        this.router.navigate(['/dashboard-technicien']);
       },
       error: (err) => {
         this.submitting = false;
@@ -90,4 +91,5 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
+
 }

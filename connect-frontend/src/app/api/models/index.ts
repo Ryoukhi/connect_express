@@ -40,9 +40,9 @@ export interface TechnicianProfileResponseDto {
 
 export interface Rating {
     value?: number;
-    poor?: boolean;
-    label?: string;
     excellent?: boolean;
+    label?: string;
+    poor?: boolean;
 }
 
 export interface ReviewDto {

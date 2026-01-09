@@ -6,7 +6,7 @@ import { HttpInterceptor, HttpContextToken } from "@angular/common/http";
  */
 export const BASE_PATH_DEFAULT = new InjectionToken<string>('BASE_PATH_DEFAULT', {
     providedIn: 'root',
-    factory: () => '/api', // Default fallback
+    factory: () => 'http://localhost:8085', // Default fallback
 });
 /**
  * Injection token for the default client HTTP interceptor instances

@@ -72,6 +72,12 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
+    @Operation(summary = "Inscrit un nouveau technicien")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Technicien créé avec succès",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RegisterResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "Données invalides")
+    })
     @PostMapping("/register-technician")
     public ResponseEntity<RegisterResponseDto> registerTechnician(@Valid @RequestBody RegisterDto registerDto) {
         Technician technician = registerMapper.toModelTechnician(registerDto);
