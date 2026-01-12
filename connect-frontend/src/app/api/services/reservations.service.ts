@@ -149,11 +149,79 @@ export class ReservationsService {
         return this.httpClient.post(url, null, requestOptions);
     }
 
+    getTechnicianRevenue(technicianId: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<number>;
+    getTechnicianRevenue(technicianId: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<number>>;
+    getTechnicianRevenue(technicianId: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<number>>;
+    getTechnicianRevenue(technicianId: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/reservations/stats/revenue/${technicianId}`;
+
+        const requestOptions: any = {
+            observe: observe as any,
+            responseType: 'blob' as 'blob',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    getTechnicianAverageRating(technicianId: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<number>;
+    getTechnicianAverageRating(technicianId: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<number>>;
+    getTechnicianAverageRating(technicianId: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<number>>;
+    getTechnicianAverageRating(technicianId: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/reservations/stats/rating/${technicianId}`;
+
+        const requestOptions: any = {
+            observe: observe as any,
+            responseType: 'blob' as 'blob',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
     countReservations(observe?: 'body', options?: RequestOptions<'blob'>): Observable<number>;
     countReservations(observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<number>>;
     countReservations(observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<number>>;
     countReservations(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations/stats/count`;
+
+        const requestOptions: any = {
+            observe: observe as any,
+            responseType: 'blob' as 'blob',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    countPendingReservations(observe?: 'body', options?: RequestOptions<'blob'>): Observable<number>;
+    countPendingReservations(observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<number>>;
+    countPendingReservations(observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<number>>;
+    countPendingReservations(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/reservations/stats/count/pending`;
+
+        const requestOptions: any = {
+            observe: observe as any,
+            responseType: 'blob' as 'blob',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    countAcceptedNow(observe?: 'body', options?: RequestOptions<'blob'>): Observable<number>;
+    countAcceptedNow(observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<number>>;
+    countAcceptedNow(observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<number>>;
+    countAcceptedNow(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/reservations/stats/count/accepted-now`;
 
         const requestOptions: any = {
             observe: observe as any,

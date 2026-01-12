@@ -206,4 +206,48 @@ public class ReservationController {
     public ResponseEntity<Long> countReservations() {
         return ResponseEntity.ok(reservationService.countReservations());
     }
+
+        @Operation(summary = "Revenu total d'un technicien (COMPLETED)")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Revenu total retourné"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasAnyRole('TECHNICIAN','ADMIN')")
+        @GetMapping("/stats/revenue/{technicianId}")
+        public ResponseEntity<java.math.BigDecimal> getTechnicianRevenue(@PathVariable Long technicianId) {
+                return ResponseEntity.ok(reservationService.getTechnicianRevenue(technicianId));
+        }
+
+        @Operation(summary = "Moyenne des notes (rating) d'un technicien sur 5 (COMPLETED)")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Moyenne des notes retournée (0-5)"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasAnyRole('TECHNICIAN','ADMIN')")
+        @GetMapping("/stats/rating/{technicianId}")
+        public ResponseEntity<Double> getTechnicianAverageRating(@PathVariable Long technicianId) {
+                return ResponseEntity.ok(reservationService.getTechnicianAverageRating(technicianId));
+        }
+
+        @Operation(summary = "Compter les réservations PENDING (admin)")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Nombre de réservations PENDING"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('ADMIN')")
+        @GetMapping("/stats/count/pending")
+        public ResponseEntity<Long> countPendingReservations() {
+                return ResponseEntity.ok(reservationService.countPendingReservations());
+        }
+
+        @Operation(summary = "Compter les réservations ACCEPTED programmées maintenant (admin)")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Nombre de réservations ACCEPTED pour maintenant"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('ADMIN')")
+        @GetMapping("/stats/count/accepted-now")
+        public ResponseEntity<Long> countAcceptedNow() {
+                return ResponseEntity.ok(reservationService.countAcceptedNow());
+        }
 }

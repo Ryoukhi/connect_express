@@ -1,0 +1,160 @@
+            <div class="p-4 md:p-8 space-y-8">
+
+                <!-- STATS GRID -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-calendar-check"></i></div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase">Aujourd'hui</p>
+                        <h3 class="text-2xl font-black">4</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-wallet"></i></div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase">Revenus (mois)</p>
+                        <h3 class="text-2xl font-black">245k <span class="text-sm font-normal text-slate-400">F</span></h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                        <div class="w-10 h-10 bg-yellow-50 text-yellow-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-star"></i></div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase">Note moyenne</p>
+                        <h3 class="text-2xl font-black">4.9 <span class="text-sm font-normal text-slate-400">/ 5</span></h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                        <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-user-clock"></i></div>
+                        <p class="text-slate-500 text-xs font-semibold uppercase">En attente</p>
+                        <h3 class="text-2xl font-black text-purple-600">2</h3>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+
+                    <!-- NOUVELLES DEMANDES (Section critique) -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-extrabold text-slate-900">Demandes en attente</h2>
+                            <span class="bg-red-100 text-red-600 text-[10px] font-black px-2 py-1 rounded-full animate-pulse uppercase">Urgent</span>
+                        </div>
+
+                        <!-- Card Demande 1 -->
+                        <div class="bg-white rounded-[2.5rem] border-2 border-blue-100 p-6 shadow-xl shadow-blue-50 relative overflow-hidden group">
+                            <div class="flex flex-col md:flex-row justify-between gap-6">
+                                <div class="flex gap-4">
+                                    <img src="https://ui-avatars.com/api/?name=Alice+Mballa&background=random" class="w-14 h-14 rounded-2xl" alt="Client">
+                                    <div>
+                                        <h4 class="font-bold text-lg">Alice Mballa</h4>
+                                        <p class="text-slate-500 text-sm"><i class="fas fa-map-marker-alt mr-1 text-red-500"></i> Logbessou, Douala (à 3km)</p>
+                                        <div class="mt-2 inline-block px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">Fuite d'eau cuisine</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm text-slate-400">Proposé pour :</p>
+                                    <p class="font-black text-slate-900">Aujourd'hui, 14:30</p>
+                                    <p class="text-blue-600 font-black text-xl mt-1">12.500 F</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-6">
+                                <button class="py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100">Accepter</button>
+                                <button class="py-3 bg-white border border-slate-200 text-slate-400 rounded-xl font-bold hover:bg-red-50 hover:text-red-500 hover:border-red-100 transition">Refuser</button>
+                            </div>
+                        </div>
+
+                        <!-- Card Demande 2 -->
+                        <div class="bg-white rounded-[2.5rem] border border-slate-100 p-6 shadow-sm">
+                            <div class="flex flex-col md:flex-row justify-between gap-6 opacity-80">
+                                <div class="flex gap-4">
+                                    <img src="https://ui-avatars.com/api/?name=Jean+Toko&background=random" class="w-14 h-14 rounded-2xl" alt="Client">
+                                    <div>
+                                        <h4 class="font-bold text-lg text-slate-800">Jean Toko</h4>
+                                        <p class="text-slate-500 text-sm italic">Bonapriso, Douala</p>
+                                        <div class="mt-2 inline-block px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">Installation Lavabo</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm text-slate-400">Date :</p>
+                                    <p class="font-black text-slate-900">Demain, 09:00</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-6">
+                                <button class="py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100">Accepter</button>
+                                <button class="py-3 bg-white border border-slate-200 text-slate-400 rounded-xl font-bold hover:bg-red-50 hover:text-red-500 hover:border-red-100 transition">Refuser</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PLANNING DU JOUR (Sidebar Droite) -->
+                    <div class="space-y-6">
+                        <h2 class="text-xl font-extrabold text-slate-900">Confirmés (Aujourd'hui)</h2>
+                        <div class="space-y-4">
+                            <!-- Job 1 -->
+                            <div class="flex gap-4 relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-green-500 before:rounded-full">
+                                <div class="text-sm font-bold text-slate-400 min-w-[50px]">08:00</div>
+                                <div class="bg-white p-4 rounded-2xl border border-slate-100 flex-1 shadow-sm">
+                                    <h5 class="font-bold text-sm">Marc Antoine</h5>
+                                    <p class="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Dépannage WC</p>
+                                    <button class="mt-3 text-[10px] font-bold text-blue-600 flex items-center gap-1 hover:underline">
+                                        <i class="fas fa-directions"></i> Itinéraire
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Job 2 -->
+                            <div class="flex gap-4 relative pl-6 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-slate-200 before:rounded-full opacity-60">
+                                <div class="text-sm font-bold text-slate-400 min-w-[50px]">11:00</div>
+                                <div class="bg-white p-4 rounded-2xl border border-slate-100 flex-1 shadow-sm">
+                                    <h5 class="font-bold text-sm">Marie Curie</h5>
+                                    <p class="text-[10px] text-slate-500 mt-1 uppercase tracking-widest">Inspection Tuyauterie</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Zone de promotion / Tips -->
+                        <div class="bg-slate-900 rounded-[2rem] p-6 text-white relative overflow-hidden">
+                            <div class="relative z-10">
+                                <p class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">Astuce Pro</p>
+                                <h4 class="font-bold text-sm leading-relaxed italic">"Répondez aux demandes en moins de 5 min pour augmenter vos revenus de 30%."</h4>
+                            </div>
+                            <i class="fas fa-lightbulb absolute -bottom-4 -right-4 text-slate-800 text-6xl rotate-12"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- HISTORIQUE RÉCENT (Tableau Simple) -->
+                <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-slate-50 flex justify-between items-center">
+                        <h2 class="text-lg font-bold">Historique récent</h2>
+                        <a href="#" class="text-xs font-bold text-blue-600 hover:underline">Voir tout</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                    <th class="px-6 py-4">Client</th>
+                                    <th class="px-6 py-4">Date</th>
+                                    <th class="px-6 py-4">Service</th>
+                                    <th class="px-6 py-4">Montant</th>
+                                    <th class="px-6 py-4 text-right">Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50 text-sm">
+                                <tr>
+                                    <td class="px-6 py-4 font-semibold">Paul Biya M.</td>
+                                    <td class="px-6 py-4 text-slate-500">12 Janv 2026</td>
+                                    <td class="px-6 py-4">Soudure Tuyau</td>
+                                    <td class="px-6 py-4 font-bold">45.000 F</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase">Terminé</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-semibold">Jean-Jacques R.</td>
+                                    <td class="px-6 py-4 text-slate-500">10 Janv 2026</td>
+                                    <td class="px-6 py-4">Débouchage</td>
+                                    <td class="px-6 py-4 font-bold">15.000 F</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase">Terminé</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>

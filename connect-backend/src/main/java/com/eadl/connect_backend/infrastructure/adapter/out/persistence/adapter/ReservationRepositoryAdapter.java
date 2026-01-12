@@ -169,4 +169,45 @@ public class ReservationRepositoryAdapter implements ReservationRepository {
         log.info("Found {} review IDs", reviewIds.size());
         return reviewIds;
     }
+
+    @Override
+    public long countByStatusAndScheduledTimeBetween(ReservationStatus status, LocalDateTime start, LocalDateTime end) {
+        log.info("Counting reservations with status {} between {} and {}", status, start, end);
+        long count = jpaRepository.countByStatusAndScheduledTimeBetween(status, start, end);
+        log.info("Found {} reservations", count);
+        return count;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public long countByStatus(ReservationStatus status) {
+        log.info("Counting reservations with status {}", status);
+        long count = jpaRepository.countByStatus(status);
+        log.info("Found {} reservations with status {}", count, status);
+        return count;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public java.math.BigDecimal sumPriceByTechnicianIdAndStatus(Long technicianId, ReservationStatus status) {
+        log.info("Summing price for technician {} with status {}", technicianId, status);
+        java.math.BigDecimal sum = jpaRepository.sumPriceByTechnicianAndStatus(technicianId, status);
+        if (sum == null) {
+            sum = java.math.BigDecimal.ZERO;
+        }
+        log.info("Sum for technician {}: {}", technicianId, sum);
+        return sum;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Double averageRatingByTechnicianIdAndStatus(Long technicianId, ReservationStatus status) {
+        log.info("Calculating average rating for technician {} with status {}", technicianId, status);
+        Double average = jpaRepository.averageRatingByTechnicianAndStatus(technicianId, status);
+        if (average == null) {
+            average = 0.0;
+        }
+        log.info("Average rating for technician {}: {}", technicianId, average);
+        return average;
+    }
 }

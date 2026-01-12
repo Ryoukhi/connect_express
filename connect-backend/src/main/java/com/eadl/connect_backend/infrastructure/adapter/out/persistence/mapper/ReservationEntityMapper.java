@@ -28,7 +28,8 @@ public class ReservationEntityMapper {
         reservation.setScheduledTime(entity.getScheduledTime());
         reservation.setStatus(entity.getStatus());
         reservation.setPrice(entity.getPrice());
-        reservation.setAddress(entity.getAddress());
+        reservation.setCity(entity.getCity());
+        reservation.setNeighborhood(entity.getNeighborhood());
         reservation.setDescription(entity.getDescription());
         reservation.setCancellationReason(entity.getCancellationReason());
         reservation.setCompletedAt(entity.getCompletedAt());
@@ -65,7 +66,8 @@ public class ReservationEntityMapper {
         entity.setScheduledTime(reservation.getScheduledTime());
         entity.setStatus(reservation.getStatus());
         entity.setPrice(reservation.getPrice());
-        entity.setAddress(reservation.getAddress());
+        entity.setCity(reservation.getCity());
+        entity.setNeighborhood(reservation.getNeighborhood());
         entity.setDescription(reservation.getDescription());
         entity.setCancellationReason(reservation.getCancellationReason());
         entity.setCompletedAt(reservation.getCompletedAt());
@@ -113,8 +115,12 @@ public class ReservationEntityMapper {
             entity.setPrice(reservation.getPrice());
         }
 
-        if (reservation.getAddress() != null) {
-            entity.setAddress(reservation.getAddress());
+        if (reservation.getCity() != null) {
+            entity.setCity(reservation.getCity());
+        }
+
+        if (reservation.getNeighborhood() != null) {
+            entity.setNeighborhood(reservation.getNeighborhood());
         }
 
         if (reservation.getDescription() != null) {

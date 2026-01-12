@@ -41,8 +41,8 @@ export interface TechnicianProfileResponseDto {
 export interface Rating {
     value?: number;
     excellent?: boolean;
-    label?: string;
     poor?: boolean;
+    label?: string;
 }
 
 export interface ReviewDto {
@@ -62,7 +62,8 @@ export interface ReservationDto {
     scheduledTime?: Date;
     status?: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED';
     price?: number;
-    address?: string;
+    city?: string;
+    neighborhood?: string;
     description?: string;
     cancellationReason?: string;
     createdAt?: Date;
