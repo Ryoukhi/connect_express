@@ -7,7 +7,7 @@ import java.util.Objects;
  * Entité racine User - Classe abstraite
  * Représente un utilisateur de la plateforme
  */
-public abstract class User {
+public class User {
     protected Long idUser;
     protected String firstName;
     protected String lastName;
@@ -26,7 +26,7 @@ public abstract class User {
     
 
     // Constructeur protégé
-    protected User() {
+    public User() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.active = true;

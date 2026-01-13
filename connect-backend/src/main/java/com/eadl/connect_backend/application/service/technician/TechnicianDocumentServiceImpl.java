@@ -20,21 +20,24 @@ public class TechnicianDocumentServiceImpl implements TechnicianDocumentService 
     private final CurrentUserProvider currentUserProvider;
     private final UserRepository userRepository;
 
+    // ==== Constructeur avec injection de tous les dépôts ====
     public TechnicianDocumentServiceImpl(
             TechnicianDocumentRepository documentRepository,
-            CurrentUserProvider currentUserProvider) {
+            CurrentUserProvider currentUserProvider,
+            UserRepository userRepository) {
         this.documentRepository = documentRepository;
         this.currentUserProvider = currentUserProvider;
-        this.userRepository = null;
+        this.userRepository = userRepository;
     }
 
+    // ===================== CREATE =====================
     @Override
     public TechnicianDocument addDocument(TechnicianDocument document) {
         Long currentUserId = currentUserProvider.getCurrentUserId();
 
         User currentUser = userRepository.findById(currentUserId)
                 .orElseThrow(() -> new IllegalStateException("Current user not found"));
-        // Seul le technicien propriétaire du profil peut ajouter un document
+
         if (!currentUser.getRole().equals(Role.TECHNICIAN)) {
             throw new IllegalStateException("Only technicians can add documents");
         }
@@ -50,6 +53,7 @@ public class TechnicianDocumentServiceImpl implements TechnicianDocumentService 
         return documentRepository.save(newDocument);
     }
 
+    // ===================== READ =====================
     @Override
     public List<TechnicianDocument> getDocumentsByProfileId(Long technicianProfileId) {
         return documentRepository.findByProfileId(technicianProfileId);
@@ -60,14 +64,11 @@ public class TechnicianDocumentServiceImpl implements TechnicianDocumentService 
         return documentRepository.findById(documentId);
     }
 
+    // ===================== VERIFY / REJECT =====================
     @Override
     public void verifyDocument(Long documentId, String verificationNote) {
-         Long currentUserId = currentUserProvider.getCurrentUserId();
+        User currentUser = getCurrentUserOrThrow();
 
-        User currentUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> new IllegalStateException("Current user not found"));
-
-        // Seul un admin peut valider un document
         if (!currentUser.getRole().equals(Role.ADMIN)) {
             throw new IllegalStateException("Only admins can verify documents");
         }
@@ -82,10 +83,7 @@ public class TechnicianDocumentServiceImpl implements TechnicianDocumentService 
 
     @Override
     public void rejectDocument(Long documentId, String verificationNote) {
-        Long currentUserId = currentUserProvider.getCurrentUserId();
-
-        User currentUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> new IllegalStateException("Current user not found"));
+        User currentUser = getCurrentUserOrThrow();
 
         if (!currentUser.getRole().equals(Role.ADMIN)) {
             throw new IllegalStateException("Only admins can reject documents");
@@ -99,21 +97,28 @@ public class TechnicianDocumentServiceImpl implements TechnicianDocumentService 
         documentRepository.save(document);
     }
 
+    // ===================== DELETE =====================
     @Override
     public void deleteDocument(Long documentId) {
-        Long currentUserId = currentUserProvider.getCurrentUserId();
+        User currentUser = getCurrentUserOrThrow();
 
-        User currentUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> new IllegalStateException("Current user not found"));
         TechnicianDocument document = documentRepository.findById(documentId)
                 .orElseThrow(() -> new IllegalArgumentException("Document not found"));
 
-        // Le technicien propriétaire ou un admin peut supprimer le document
+        // Seul l'admin ou le propriétaire peut supprimer
         if (!currentUser.getRole().equals(Role.ADMIN) &&
-            !document.getIdProfile().equals(currentUser.getIdUser())) {
+                !document.getIdProfile().equals(currentUser.getIdUser())) {
             throw new IllegalStateException("You are not allowed to delete this document");
         }
 
         documentRepository.delete(document);
+    }
+
+    // ===================== Helper =====================
+    private User getCurrentUserOrThrow() {
+        Long currentUserId = currentUserProvider.getCurrentUserId();
+        return userRepository.findById(currentUserId)
+                .orElseThrow(() -> new IllegalStateException("Current user not found"));
+
     }
 }

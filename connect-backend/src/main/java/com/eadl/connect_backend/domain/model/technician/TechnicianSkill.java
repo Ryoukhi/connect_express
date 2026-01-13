@@ -16,8 +16,8 @@ public class TechnicianSkill {
     public TechnicianSkill() {}
 
     // ========== Factory Method ==========
-    public static TechnicianSkill create(Long idProfile, Long idCategory, 
-                                        String nameSkill, String description, 
+    public static TechnicianSkill create(Long idProfile, Long idCategory,
+                                        String nameSkill, String description,
                                         Integer level) {
         TechnicianSkill skill = new TechnicianSkill();
         skill.idProfile = idProfile;
@@ -41,12 +41,13 @@ public class TechnicianSkill {
         }
     }
 
-    
+
     public void downgradeLevel() {
         if (this.level > 1) {
             this.level--;
         }
     }
+
 
     private static Integer validateLevel(Integer level) {
         if (level == null || level < 1 || level > 5) {
