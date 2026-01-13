@@ -49,7 +49,7 @@ public class TechnicianDocumentRepositoryAdapter
         log.debug("Finding TechnicianDocuments by profileId={}", idProfile);
 
         return technicianDocumentJpaRepository
-                .findByProfile_IdProfile(idProfile)
+                .findBySkill_IdSkill(idProfile)
                 .stream()
                 .map(mapper::toModel)
                 .toList();
@@ -67,7 +67,7 @@ public class TechnicianDocumentRepositoryAdapter
         );
 
         return technicianDocumentJpaRepository
-                .findByProfile_IdProfileAndDocumentType(idProfile, type)
+                .findBySkill_IdSkillAndDocumentType(idProfile, type)
                 .map(mapper::toModel);
     }
 

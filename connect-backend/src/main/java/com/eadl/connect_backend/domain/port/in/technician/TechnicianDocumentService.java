@@ -15,9 +15,9 @@ public interface TechnicianDocumentService {
     TechnicianDocument addDocument(TechnicianDocument document);
 
     /**
-     * Récupère tous les documents d’un profil de technicien
+     * Récupère tous les documents d’une compétence de technicien
      */
-    List<TechnicianDocument> getDocumentsByProfileId(Long technicianProfileId);
+    List<TechnicianDocument> getDocumentsByTechnicianSkillId(Long technicianSkillId);
 
     /**
      * Récupère un document par son ID

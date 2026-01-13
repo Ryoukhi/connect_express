@@ -48,7 +48,7 @@ public class TechnicianSkillController {
             @Parameter(description = "Données de la compétence à ajouter") @RequestBody @Valid TechnicianSkillDto dto
     ) {
         Long technicianId = currentUserProvider.getCurrentUserId();
-        dto.setIdProfile(technicianId);
+        dto.setIdUser(technicianId);
         TechnicianSkill skill = technicianSkillMapper.toModel(dto);
         TechnicianSkill created = technicianSkillService.addSkill(skill);
         return ResponseEntity.status(HttpStatus.CREATED).body(technicianSkillMapper.toDto(created));
@@ -98,8 +98,26 @@ public class TechnicianSkillController {
             @Parameter(description = "Données de la compétence à mettre à jour") @RequestBody @Valid TechnicianSkillDto dto
     ) {
         Long technicianId = currentUserProvider.getCurrentUserId();
-        dto.setIdProfile(technicianId);
+        dto.setIdUser(technicianId);
         TechnicianSkill updated = technicianSkillService.updateSkill(idSkill, technicianSkillMapper.toModel(dto));
+        return ResponseEntity.ok(technicianSkillMapper.toDto(updated));
+    }
+
+    /* ================= VERIFY (ADMIN) ================= */
+    @Operation(summary = "Vérifier/annuler la vérification d'une compétence (Admin)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Compétence mise à jour",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = TechnicianSkillDto.class))),
+            @ApiResponse(responseCode = "403", description = "Accès interdit"),
+            @ApiResponse(responseCode = "404", description = "Compétence non trouvée")
+    })
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/{idSkill}/verify")
+    public ResponseEntity<TechnicianSkillDto> verifySkill(
+            @Parameter(description = "ID de la compétence") @PathVariable Long idSkill,
+            @Parameter(description = "true pour vérifier, false pour annuler") @RequestParam boolean verified
+    ) {
+        TechnicianSkill updated = technicianSkillService.verifySkill(idSkill, verified);
         return ResponseEntity.ok(technicianSkillMapper.toDto(updated));
     }
 

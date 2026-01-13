@@ -1,0 +1,39 @@
+<div class="p-6 max-w-3xl mx-auto">
+  <button class="text-sm text-slate-500 mb-4" (click)="goBack()">← Retour</button>
+
+  <h2 class="text-2xl font-bold mb-2">Détail de la réservation</h2>
+
+  <div *ngIf="loading" class="text-sm text-slate-400">Chargement…</div>
+  <div *ngIf="error" class="text-sm text-red-500">{{ error }}</div>
+
+  <div *ngIf="reservation && !loading && !error" class="bg-white p-6 rounded shadow mt-4">
+    <div class="mb-4">
+      <p class="text-sm text-slate-500">Réservation #{{ reservation.idReservation }}</p>
+      <p class="text-sm text-slate-500">Statut</p>
+      <p class="font-bold">{{ reservation.status }}</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <p class="text-sm text-slate-500">Client</p>
+        <p class="font-bold">{{ reservation.idClient ? ('Client #' + reservation.idClient) : 'Client' }}</p>
+
+        <p class="text-sm text-slate-500 mt-3">Adresse</p>
+        <p>{{ reservation.neighborhood }}{{ reservation.city ? (', ' + reservation.city) : '' }}</p>
+      </div>
+
+      <div>
+        <p class="text-sm text-slate-500">Heure prévue</p>
+        <p class="font-bold">{{ reservation.scheduledTime | date:'EEEE d MMMM yyyy HH:mm' }}</p>
+
+        <p class="text-sm text-slate-500 mt-3">Prix</p>
+        <p class="font-bold">{{ reservation.price ? (reservation.price | number:'1.0-0') + ' F' : '—' }}</p>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <p class="text-sm text-slate-500">Description</p>
+      <p>{{ reservation.description || '—' }}</p>
+    </div>
+  </div>
+</div>

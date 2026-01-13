@@ -6,6 +6,10 @@ import { ExplorationComponent } from './features/explorer/page/exploration/explo
 import { authGuard } from './guards/auth.guard';
 import { FormTechComponent } from './features/technician/pages/form-tech/form-tech.component';
 import { DashboardTechnicienComponent } from './features/technician/pages/dashboard-technicien/dashboard-technicien.component';
+import { TechSkillsComponent } from './features/technician/pages/tech-skills/tech-skills.component';
+import { TodayReservationsComponent } from './features/technician/pages/today-reservations/today-reservations.component';
+import { ReservationDetailComponent } from './features/technician/pages/reservation-detail/reservation-detail.component';
+import { PendingReservationsComponent } from './features/technician/pages/pending-reservations/pending-reservations.component';
 
 export const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -14,5 +18,9 @@ export const routes: Routes = [
   {path: "devenir-technicien", component: FormTechComponent},
   {path: 'catalogue', component: ExplorationComponent, canActivate: [authGuard]},
   {path: 'dashboard-technicien', component: DashboardTechnicienComponent, canActivate: [authGuard]},
+  {path: 'dashboard-technicien/profile', component: TechSkillsComponent, canActivate: [authGuard]},
+  {path: 'dashboard-technicien/today', component: TodayReservationsComponent, canActivate: [authGuard]},
+  {path: 'dashboard-technicien/reservation/:id', component: ReservationDetailComponent, canActivate: [authGuard]},
+  {path: 'dashboard-technicien/pending', component: PendingReservationsComponent, canActivate: [authGuard]},
   {path: '**', redirectTo: 'login'} // Wildcard route for a 404 page
 ];

@@ -24,6 +24,13 @@ public class TechnicianDocumentEntityMapper {
         entity.setVerificationNote(model.getVerificationNote());
         entity.setUploadedAt(model.getUploadedAt());
 
+        // Relation to skill (we store the skill id in model.idProfile)
+        if (model.getIdProfile() != null) {
+            com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianSkillEntity skill = new com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianSkillEntity();
+            skill.setIdSkill(model.getIdProfile());
+            entity.setSkill(skill);
+        }
+
         return entity;
     }
 
@@ -39,7 +46,7 @@ public class TechnicianDocumentEntityMapper {
         model.setUrl(entity.getUrl());
         model.setVerified(entity.isVerified());
         model.setVerificationNote(entity.getVerificationNote());
-        model.setIdProfile(entity.getProfile() != null ? entity.getProfile().getIdProfile() : null);
+        model.setIdProfile(entity.getSkill() != null ? entity.getSkill().getIdSkill() : null);
         model.setUploadedAt(entity.getUploadedAt());
 
         return model;

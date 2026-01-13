@@ -1,0 +1,6 @@
+2026-01-13 12:46:49.601 INFO  - Tentative de login pour email=admin@example.com
+2026-01-13 12:46:50.227 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-13 12:52:49.904 INFO  - Tentative de login pour email=admin@example.com
+2026-01-13 12:52:50.026 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-13 12:56:26.780 INFO  - Tentative de login pour email=admin@example.com
+2026-01-13 12:56:26.908 INFO  - Login réussi pour l'utilisateur id=13

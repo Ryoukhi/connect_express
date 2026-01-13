@@ -12,7 +12,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
-import { RequestOptions, Technician, TechnicianSearchDto, TechnicianProfileResponseDto } from "../models";
+import { RequestOptions, Technician, TechnicianResultSearchDto } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class TechniciensService {
@@ -90,15 +90,33 @@ export class TechniciensService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    searchTechnicians(dto: TechnicianSearchDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<TechnicianProfileResponseDto>>;
-    searchTechnicians(dto: TechnicianSearchDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<TechnicianProfileResponseDto>>>;
-    searchTechnicians(dto: TechnicianSearchDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<TechnicianProfileResponseDto>>>;
-    searchTechnicians(dto: TechnicianSearchDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    searchTechnicians(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<TechnicianResultSearchDto>>;
+    searchTechnicians(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<TechnicianResultSearchDto>>>;
+    searchTechnicians(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<TechnicianResultSearchDto>>>;
+    searchTechnicians(city?: string, neighborhood?: string, categoryName?: string, availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK', minRating?: number, minPrice?: number, maxPrice?: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/technicians/search`;
 
         let params = new HttpParams();
-        if (dto != null) {
-            params = HttpParamsBuilder.addToHttpParams(params, dto, 'dto');
+        if (city != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, city, 'city');
+        }
+        if (neighborhood != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, neighborhood, 'neighborhood');
+        }
+        if (categoryName != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, categoryName, 'categoryName');
+        }
+        if (availabilityStatus != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, availabilityStatus, 'availabilityStatus');
+        }
+        if (minRating != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, minRating, 'minRating');
+        }
+        if (minPrice != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, minPrice, 'minPrice');
+        }
+        if (maxPrice != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, maxPrice, 'maxPrice');
         }
 
         const requestOptions: any = {

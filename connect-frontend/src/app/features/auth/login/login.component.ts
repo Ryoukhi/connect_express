@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AuthRequest } from '../../../api/models';
+import { TechniciensService } from '../../../api/services/techniciens.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private techniciensService: TechniciensService,
     private router: Router
   ) {
     // Formulaire avec nonNullable pour éviter null
@@ -43,18 +45,42 @@ export class LoginComponent {
     this.submitting = true;
 
     const authRequest: AuthRequest = {
-      email: this.email!.value,      // safe access avec nonNullable
+      email: this.email!.value,
       password: this.password!.value
     };
 
     this.authService.login(authRequest).subscribe({
       next: (res) => {
         if (!res?.token) {
-          console.error('Login succeeded but no token in response', res);
+          console.error('Login réussi mais token manquant', res);
+          this.serverError = 'Erreur interne d’authentification';
+          this.submitting = false;
           return;
         }
+
+        // 🔐 Sauvegarde session
         this.authService.storeSession(res);
-        setTimeout(() => this.router.navigate(['/catalogue']), 200);
+
+        const userId = this.authService.getUserId();
+
+        if (!userId) {
+          console.warn('UserId introuvable, redirection catalogue');
+          this.router.navigate(['/catalogue']);
+          this.submitting = false;
+          return;
+        }
+
+        // 🔍 Vérifie si le user est technicien
+        this.techniciensService.getTechnicianById(userId, 'body').subscribe({
+          next: () => {
+            this.router.navigate(['/dashboard-technicien']);
+            this.submitting = false;
+          },
+          error: () => {
+            this.router.navigate(['/catalogue']);
+            this.submitting = false;
+          }
+        });
       },
       error: (err) => {
         this.submitting = false;

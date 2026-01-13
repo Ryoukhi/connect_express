@@ -81,7 +81,7 @@ public class UserEntity {
 
     // Technician profile - one-to-one (a technician has one profile)
     @OneToOne(mappedBy = "technician", cascade = CascadeType.ALL, orphanRemoval = true)
-    private TechnicianProfileEntity technicianProfile;
+    private TechnicianSkillEntity technicianSkill;
 
     // Admin actions performed by an admin user
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)

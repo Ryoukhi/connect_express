@@ -11,10 +11,10 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.Te
 public interface TechnicianDocumentJpaRepository
         extends JpaRepository<TechnicianDocumentEntity, Long> {
 
-    List<TechnicianDocumentEntity> findByProfile_IdProfile(Long idProfile);
+    List<TechnicianDocumentEntity> findBySkill_IdSkill(Long idSkill);
 
-    Optional<TechnicianDocumentEntity> findByProfile_IdProfileAndDocumentType(
-            Long idProfile,
+    Optional<TechnicianDocumentEntity> findBySkill_IdSkillAndDocumentType(
+            Long idSkill,
             DocumentType documentType
     );
 

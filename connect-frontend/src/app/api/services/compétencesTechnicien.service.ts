@@ -73,6 +73,28 @@ export class CompétencesTechnicienService {
         return this.httpClient.post(url, technicianSkillDto, requestOptions);
     }
 
+    verifySkill(idSkill: number, verified: boolean, observe?: 'body', options?: RequestOptions<'json'>): Observable<TechnicianSkillDto>;
+    verifySkill(idSkill: number, verified: boolean, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TechnicianSkillDto>>;
+    verifySkill(idSkill: number, verified: boolean, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TechnicianSkillDto>>;
+    verifySkill(idSkill: number, verified: boolean, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/technician-skills/${idSkill}/verify`;
+
+        let params = new HttpParams();
+        if (verified != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, verified, 'verified');
+        }
+
+        const requestOptions: any = {
+            observe: observe as any,
+            params,
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.post(url, null, requestOptions);
+    }
+
     getMySkills(observe?: 'body', options?: RequestOptions<'json'>): Observable<TechnicianSkillDto>;
     getMySkills(observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TechnicianSkillDto>>;
     getMySkills(observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TechnicianSkillDto>>;

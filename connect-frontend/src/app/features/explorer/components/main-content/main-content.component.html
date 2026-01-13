@@ -105,7 +105,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h1 class="text-2xl font-extrabold text-slate-900">Techniciens disponibles</h1>
-                    <p class="text-slate-500 text-sm">142 professionnels trouvés à Douala</p>
+                    <p class="text-slate-500 text-sm">{{ totalTechnicians }} professionnels trouvés{{ filters.city ? ' à ' + filters.city : '' }}</p>
                 </div>
                 <!-- <div class="flex items-center gap-2">
                     <span class="text-sm text-slate-500">Trier par :</span>
@@ -130,7 +130,7 @@
                     <div class="relative h-48 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Tech">
                         <div class="absolute top-4 left-4 flex gap-2">
-                            <span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">{{ getCategoryName(tech.idCategory) }}</span>
+                            <span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">{{ tech.skillName || 'Service' }}</span>
                         </div>
                         <button class="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur hover:bg-white rounded-full flex items-center justify-center text-white hover:text-red-500 transition shadow-lg">
                             <i class="far fa-heart"></i>
@@ -143,16 +143,16 @@
                                     {{ getTechnicianDisplayName(tech) }}
                                     <i *ngIf="tech.verified" class="fas fa-check-circle text-blue-500 text-xs" title="Vérifié"></i>
                                 </h3>
-                                <p class="text-slate-500 text-sm italic"><i class="fas fa-map-marker-alt mr-1"></i> {{ tech.id ? 'Quartier inconnu' : '—' }}</p>
+                                <p class="text-slate-500 text-sm italic"><i class="fas fa-map-marker-alt mr-1"></i> {{ tech.neighborhood || '—' }}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-blue-600 font-extrabold text-lg">{{ tech.hourlyRate || '—' }} <span class="text-[10px]">FCFA/h</span></p>
+                                <p class="text-blue-600 font-extrabold text-lg">{{ tech.hourlyRate ? (tech.hourlyRate + '') : '—' }} <span class="text-[10px]">FCFA/h</span></p>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-4 py-4 border-y border-slate-50 my-4 text-xs font-medium text-slate-600">
                             <span class="flex items-center gap-1"><i class="fas fa-star text-yellow-400"></i> {{ tech.averageRating || '—' }}</span>
-                            <span class="flex items-center gap-1"><i class="fas fa-briefcase text-slate-400"></i> {{ tech.yearsExperience || '—' }} ans</span>
+                            <span class="flex items-center gap-1"><i class="fas fa-briefcase text-slate-400"></i> {{ tech.yearsOfExperience || '—' }} ans</span>
                         </div>
 
                         <div class="flex items-center justify-between gap-4">

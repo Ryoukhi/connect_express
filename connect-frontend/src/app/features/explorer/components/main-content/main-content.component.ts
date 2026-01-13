@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TechnicianProfileResponseDto, CategoryDto } from '../../../../api/models';
-import { TechnicianControllerService } from '../../../../api/services/technicianController.service';
+import { TechnicianResultSearchDto, CategoryDto } from '../../../../api/models';
+import { TechniciensService } from '../../../../api/services/techniciens.service';
 import { CategoryControllerService } from '../../../../api/services/categoryController.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class MainContentComponent {
   };
 
   categories: CategoryDto[] = [];
-  technicians: TechnicianProfileResponseDto[] = [];
+  technicians: TechnicianResultSearchDto[] = [];
   loading = false;
   errorMsg: string | null = null;
   currentPage: number = 1;
@@ -38,7 +38,7 @@ export class MainContentComponent {
   totalTechnicians: number = 0;
 
   constructor(
-    private technicianService: TechnicianControllerService,
+    private techniciensService: TechniciensService,
     private categoryService: CategoryControllerService
   ) {
     // initial load
@@ -61,11 +61,9 @@ export class MainContentComponent {
 
   getTechnicianDisplayName(tech: any): string {
     if (!tech) return 'Technicien';
-    const first = tech.firstName || tech.technician?.firstName;
-    const last = tech.lastName || tech.technician?.lastName;
-    if (first || last) return `${first || ''} ${last || ''}`.trim();
+    // New DTO provides a display `name` field
+    if (tech.name) return tech.name;
     if (tech.fullName) return tech.fullName;
-    if (tech.technicianId) return `Technicien #${tech.technicianId}`;
     return 'Technicien';
   }
 
@@ -93,7 +91,7 @@ export class MainContentComponent {
 
     const availability = this.filters.availabilityStatus === 'OFFLINE' ? 'UNAVAILABLE' : this.filters.availabilityStatus || undefined;
 
-    this.technicianService.search(
+    this.techniciensService.searchTechnicians(
       this.filters.city || undefined,
       this.filters.district || undefined,
       this.filters.category || undefined,
@@ -116,7 +114,7 @@ export class MainContentComponent {
     });
   }
 
-  getPaginatedTechnicians(allTechnicians: TechnicianProfileResponseDto[]): TechnicianProfileResponseDto[] {
+  getPaginatedTechnicians(allTechnicians: TechnicianResultSearchDto[]): TechnicianResultSearchDto[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     return allTechnicians.slice(startIndex, endIndex);
@@ -146,7 +144,7 @@ export class MainContentComponent {
     this.loading = true;
     const availability = this.filters.availabilityStatus === 'OFFLINE' ? 'UNAVAILABLE' : this.filters.availabilityStatus || undefined;
 
-    this.technicianService.search(
+    this.techniciensService.searchTechnicians(
       this.filters.city || undefined,
       this.filters.district || undefined,
       this.filters.category || undefined,

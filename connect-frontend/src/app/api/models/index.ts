@@ -10,39 +10,24 @@
 import { HttpContext, HttpHeaders } from "@angular/common/http";
 export interface TechnicianSkillDto {
     idSkill?: number;
-    idProfile?: number;
+    idUser?: number;
     idCategory?: number;
-    nameSkill?: string;
+    name?: string;
     description?: string;
     level?: number;
-}
-
-/** Données du profil à mettre à jour */
-export interface TechnicianProfileUpdateDto {
-    bio?: string;
-    idCategory?: number;
-    yearsExperience?: number;
-    hourlyRate?: number;
-}
-
-export interface TechnicianProfileResponseDto {
-    id?: number;
-    technicianId?: number;
-    bio?: string;
-    idCategory?: number;
     yearsExperience?: number;
     hourlyRate?: number;
     availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK';
     verified?: boolean;
-    completedJobs?: number;
-    averageRating?: number;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export interface Rating {
     value?: number;
-    excellent?: boolean;
     poor?: boolean;
     label?: string;
+    excellent?: boolean;
 }
 
 export interface ReviewDto {
@@ -107,17 +92,19 @@ export interface Technician {
     profilePhotoUrl?: string;
     id?: { cause?: { stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; suppressed?: Array<{ stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; localizedMessage?: string }>; localizedMessage?: string }; stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; suppressed?: Array<{ stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; localizedMessage?: string }>; localizedMessage?: string };
     fullName?: string;
+    admin?: boolean;
     client?: boolean;
     technician?: boolean;
-    admin?: boolean;
 }
 
-/** Données du profil */
-export interface TechnicianProfileCreateDto {
-    bio?: string;
-    idCategory?: number;
-    yearsExperience?: number;
-    hourlyRate?: number;
+export interface TechnicianDocumentDto {
+    idDocument?: number;
+    idProfile?: number;
+    type?: 'IDENTITY_CARD' | 'CERTIFICATE' | 'DIPLOMA' | 'PHOTO' | 'INSURANCE';
+    url?: string;
+    uploadedAt?: Date;
+    verified?: boolean;
+    verificationNote?: string;
 }
 
 export interface RegisterDto {
@@ -166,14 +153,16 @@ export interface RegisterAdminDto {
     profilePhotoUrl?: string;
 }
 
-export interface TechnicianSearchDto {
+export interface TechnicianResultSearchDto {
+    name?: string;
+    verified?: boolean;
+    averageRating?: number;
+    availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK';
+    hourlyRate?: number;
+    skillName?: string;
+    yearsOfExperience?: number;
     city?: string;
     neighborhood?: string;
-    categoryName?: string;
-    availabilityStatus?: 'AVAILABLE' | 'BUSY' | 'UNAVAILABLE' | 'ON_BREAK';
-    minRating?: number;
-    minPrice?: number;
-    maxPrice?: number;
 }
 
 export interface ClientDto {

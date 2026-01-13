@@ -9,25 +9,25 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.Te
 public interface TechnicianSkillJpaRepository extends JpaRepository<TechnicianSkillEntity, Long> {
 
     /**
-     * Récupère toutes les compétences d’un profil technicien
+     * Récupère toutes les compétences d’un technicien via son user id
      */
-    List<TechnicianSkillEntity> findByProfile_IdProfile(Long idProfile);
+    List<TechnicianSkillEntity> findByTechnician_IdUser(Long idUser);
 
     /**
      * Récupère les compétences d’un technicien par catégorie
      */
-    List<TechnicianSkillEntity> findByProfile_IdProfileAndCategory_IdCategory(
-            Long idProfile,
+    List<TechnicianSkillEntity> findByTechnician_IdUserAndCategory_IdCategory(
+            Long idUser,
             Long categoryId
     );
 
     /**
-     * Vérifie si une compétence existe déjà pour un profil
-     * (évite doublons : même skill + même profil)
+     * Vérifie si une compétence existe déjà pour un technicien
+     * (évite doublons : même name + même technicien)
      */
-    boolean existsByProfile_IdProfileAndName(
-            Long idProfile,
-            String nameSkill
+    boolean existsByTechnician_IdUserAndName(
+            Long idUser,
+            String name
     );
 
     /**
@@ -36,20 +36,17 @@ public interface TechnicianSkillJpaRepository extends JpaRepository<TechnicianSk
     void delete(TechnicianSkillEntity skill);
 
     /**
-     * Supprime toutes les compétences d’un profil
-     * (ex : suppression de profil)
+     * Supprime toutes les compétences d’un technicien (ex : suppression de l'utilisateur)
      */
-    void deleteByProfile_IdProfile(Long idProfile);
+    void deleteByTechnician_IdUser(Long idUser);
 
     /**
      * Récupère les profils par catégorie
      */
     List<TechnicianSkillEntity> findByCategory_IdCategory(Long id);
 
-    /**
-     * Récupère les compétences d’un technicien via son user ID
-     */
-    List<TechnicianSkillEntity> findByProfile_Technician_IdUser(Long idTechnician);
+    // NOTE: Use findByTechnician_IdUser to retrieve skills by user id
+
 
 
     

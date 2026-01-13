@@ -21,25 +21,25 @@ public interface TechnicianSkillRepository {
     Optional<TechnicianSkill> findById(Long skillId);
 
     /**
-     * Récupère toutes les compétences d’un profil technicien
+     * Récupère toutes les compétences d’un technicien via son user id
      */
-    List<TechnicianSkill> findByProfileId(Long profileId);
+    List<TechnicianSkill> findByUserId(Long userId);
 
     /**
      * Récupère les compétences d’un technicien par catégorie
      */
-    List<TechnicianSkill> findByProfileIdAndCategoryId(
-            Long profileId,
+    List<TechnicianSkill> findByUserIdAndCategoryId(
+            Long userId,
             Long categoryId
     );
 
     /**
-     * Vérifie si une compétence existe déjà pour un profil
-     * (évite doublons : même skill + même profil)
+     * Vérifie si une compétence existe déjà pour un technicien
+     * (évite doublons : même nom + même technicien)
      */
-    boolean existsByProfileIdAndNameSkill(
-            Long profileId,
-            String nameSkill
+    boolean existsByUserIdAndName(
+            Long userId,
+            String name
     );
 
     /**
@@ -48,10 +48,14 @@ public interface TechnicianSkillRepository {
     void delete(TechnicianSkill skill);
 
     /**
-     * Supprime toutes les compétences d’un profil
-     * (ex : suppression de profil)
+     * Supprime toutes les compétences d’un technicien (ex : suppression de l'utilisateur)
      */
-    void deleteByProfileId(Long profileId);
+    void deleteByUserId(Long userId);
+
+    /**
+     * Récupère toutes les compétences
+     */
+    List<TechnicianSkill> findAll();
 
     List<TechnicianSkill> findByCategoryId(Long id);
 }
