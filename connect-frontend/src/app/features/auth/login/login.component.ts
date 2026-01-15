@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AuthRequest } from '../../../api/models';
-import { TechniciensService } from '../../../api/services/techniciens.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
@@ -21,7 +20,6 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private techniciensService: TechniciensService,
     private router: Router
   ) {
     // Formulaire avec nonNullable pour éviter null
@@ -61,26 +59,22 @@ export class LoginComponent {
         // 🔐 Sauvegarde session
         this.authService.storeSession(res);
 
-        const userId = this.authService.getUserId();
+        const userRole = this.authService.getUserRole();
 
-        if (!userId) {
-          console.warn('UserId introuvable, redirection catalogue');
+        if (!userRole) {
+          console.warn('Rôle utilisateur introuvable');
           this.router.navigate(['/catalogue']);
           this.submitting = false;
           return;
         }
 
-        // 🔍 Vérifie si le user est technicien
-        this.techniciensService.getTechnicianById(userId, 'body').subscribe({
-          next: () => {
-            this.router.navigate(['/dashboard-technicien']);
-            this.submitting = false;
-          },
-          error: () => {
-            this.router.navigate(['/catalogue']);
-            this.submitting = false;
-          }
-        });
+        // 🔍 Redirige en fonction du rôle
+        if (userRole === 'TECHNICIAN') {
+          this.router.navigate(['/dashboard-technicien']);
+        } else {
+          this.router.navigate(['/catalogue']);
+        }
+        this.submitting = false;
       },
       error: (err) => {
         this.submitting = false;

@@ -25,8 +25,8 @@ export interface TechnicianSkillDto {
 
 export interface Rating {
     value?: number;
-    poor?: boolean;
     label?: string;
+    poor?: boolean;
     excellent?: boolean;
 }
 
@@ -92,8 +92,8 @@ export interface Technician {
     profilePhotoUrl?: string;
     id?: { cause?: { stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; suppressed?: Array<{ stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; localizedMessage?: string }>; localizedMessage?: string }; stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; suppressed?: Array<{ stackTrace?: Array<{ classLoaderName?: string; moduleName?: string; moduleVersion?: string; methodName?: string; fileName?: string; lineNumber?: number; className?: string; nativeMethod?: boolean }>; message?: string; localizedMessage?: string }>; localizedMessage?: string };
     fullName?: string;
-    admin?: boolean;
     client?: boolean;
+    admin?: boolean;
     technician?: boolean;
 }
 
@@ -139,6 +139,7 @@ export interface AuthResponse {
     userId?: number;
     firstName?: string;
     lastName?: string;
+    role?: 'CLIENT' | 'TECHNICIAN' | 'ADMIN';
     active?: boolean;
 }
 

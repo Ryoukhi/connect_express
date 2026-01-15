@@ -1,0 +1,22 @@
+2026-01-15 08:21:09.485 INFO  - Inscription d'un nouvel utilisateur email=clark@gmail.com
+2026-01-15 08:21:09.851 INFO  - Saving User email=clark@gmail.com, role=CLIENT
+2026-01-15 08:21:09.969 INFO  - User saved with id=15
+2026-01-15 08:21:10.152 INFO  - Inscription réussie pour utilisateur id=15, email=clark@gmail.com
+2026-01-15 08:21:54.347 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:21:54.519 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:23:54.229 INFO  - Inscription d'un nouvel utilisateur email=mignard@gmail.com
+2026-01-15 08:23:54.361 INFO  - Saving User email=mignard@gmail.com, role=TECHNICIAN
+2026-01-15 08:23:54.367 INFO  - User saved with id=16
+2026-01-15 08:23:54.372 INFO  - Inscription réussie pour utilisateur id=16, email=mignard@gmail.com
+2026-01-15 08:25:46.055 INFO  - Tentative de login pour email=sales@gmail.com
+2026-01-15 08:25:46.172 ERROR - Login échoué : mot de passe incorrect id=4
+2026-01-15 08:25:53.758 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:25:53.897 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:26:24.830 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:26:24.950 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:28:58.985 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:28:59.110 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:40:26.453 INFO  - Tentative de login pour email=admin@entreprise-x.com
+2026-01-15 08:40:26.890 ERROR - Login échoué : mot de passe incorrect id=12
+2026-01-15 08:40:31.912 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:40:32.176 INFO  - Login réussi pour l'utilisateur id=13

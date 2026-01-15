@@ -41,6 +41,11 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+  getUserRole(): string | null {
+    const user = this.getUser();
+    return user?.role ?? null;
+  }
+
   storeSession(response: RegisterResponseDto | AuthResponse | any): boolean {
 
     // Some HTTP clients return a full HttpResponse object; handle both shapes (body or direct object)
