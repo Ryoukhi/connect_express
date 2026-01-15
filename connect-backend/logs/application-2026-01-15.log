@@ -1,0 +1,309 @@
+2026-01-15 08:54:23.057 [restartedMain] ERROR o.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'inMemoryDatabaseShutdownExecutor' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'inMemoryDatabaseShutdownExecutor' defined in class path resource [org/springframework/boot/devtools/autoconfigure/DevToolsDataSourceAutoConfiguration.class]: Unsatisfied dependency expressed through method 'inMemoryDatabaseShutdownExecutor' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/jdbc/autoconfigure/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Cannot load driver class: org.h2.Driver
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:976)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.eadl.connect_backend.ConnectBackendApplication.main(ConnectBackendApplication.java:10)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'inMemoryDatabaseShutdownExecutor' defined in class path resource [org/springframework/boot/devtools/autoconfigure/DevToolsDataSourceAutoConfiguration.class]: Unsatisfied dependency expressed through method 'inMemoryDatabaseShutdownExecutor' parameter 0: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/jdbc/autoconfigure/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Cannot load driver class: org.h2.Driver
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1362)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1194)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
+	... 13 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/jdbc/autoconfigure/DataSourceConfiguration$Hikari.class]: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Cannot load driver class: org.h2.Driver
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1362)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1194)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 23 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception with message: Cannot load driver class: org.h2.Driver
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:183)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:72)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:152)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 37 common frames omitted
+Caused by: java.lang.IllegalStateException: Cannot load driver class: org.h2.Driver
+	at org.springframework.util.Assert.state(Assert.java:102)
+	at org.springframework.boot.jdbc.autoconfigure.DataSourceProperties.findDriverClassName(DataSourceProperties.java:187)
+	at org.springframework.boot.jdbc.autoconfigure.DataSourceProperties.determineDriverClassName(DataSourceProperties.java:177)
+	at org.springframework.boot.jdbc.autoconfigure.PropertiesJdbcConnectionDetails.getDriverClassName(PropertiesJdbcConnectionDetails.java:51)
+	at org.springframework.boot.jdbc.autoconfigure.DataSourceConfiguration.createDataSource(DataSourceConfiguration.java:63)
+	at org.springframework.boot.jdbc.autoconfigure.DataSourceConfiguration$Hikari.dataSource(DataSourceConfiguration.java:128)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:155)
+	... 40 common frames omitted
+2026-01-15 08:57:31.440 [restartedMain] DEBUG i.m.c.u.i.logging.InternalLoggerFactory - Using SLF4J as the default logging framework
+2026-01-15 08:57:31.699 [restartedMain] DEBUG com.zaxxer.hikari.util.UtilityElf - Class com.mysql.cj.jdbc.Driver found in Thread context class loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@2b0c7098
+2026-01-15 08:57:33.119 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - HikariPool-1 - configuration:
+2026-01-15 08:57:33.121 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - allowPoolSuspension.............false
+2026-01-15 08:57:33.121 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - autoCommit......................true
+2026-01-15 08:57:33.121 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - catalog.........................none
+2026-01-15 08:57:33.122 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - connectionInitSql...............none
+2026-01-15 08:57:33.122 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - connectionTestQuery.............none
+2026-01-15 08:57:33.122 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - connectionTimeout...............30000
+2026-01-15 08:57:33.123 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - credentials.....................com.zaxxer.hikari.util.Credentials@2bf25965
+2026-01-15 08:57:33.123 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - credentialsProvider.............none
+2026-01-15 08:57:33.123 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - credentialsProviderClassName....none
+2026-01-15 08:57:33.123 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - dataSource......................none
+2026-01-15 08:57:33.123 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceClassName.............none
+2026-01-15 08:57:33.124 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceJNDI..................none
+2026-01-15 08:57:33.124 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceProperties............{password=<masked>}
+2026-01-15 08:57:33.124 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - driverClassName................."com.mysql.cj.jdbc.Driver"
+2026-01-15 08:57:33.124 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - exceptionOverride...............none
+2026-01-15 08:57:33.124 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName......none
+2026-01-15 08:57:33.125 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckProperties...........{}
+2026-01-15 08:57:33.125 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckRegistry.............none
+2026-01-15 08:57:33.125 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - idleTimeout.....................600000
+2026-01-15 08:57:33.125 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - initializationFailTimeout.......1
+2026-01-15 08:57:33.125 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - isolateInternalQueries..........false
+2026-01-15 08:57:33.126 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - jdbcUrl.........................jdbc:mysql://localhost:3306/connectdb
+2026-01-15 08:57:33.126 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - keepaliveTime...................120000
+2026-01-15 08:57:33.126 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - leakDetectionThreshold..........0
+2026-01-15 08:57:33.126 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - maxLifetime.....................1800000
+2026-01-15 08:57:33.126 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - maximumPoolSize.................10
+2026-01-15 08:57:33.128 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - metricRegistry..................none
+2026-01-15 08:57:33.129 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - metricsTrackerFactory...........none
+2026-01-15 08:57:33.129 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - minimumIdle.....................10
+2026-01-15 08:57:33.129 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - password........................<masked>
+2026-01-15 08:57:33.130 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - poolName........................"HikariPool-1"
+2026-01-15 08:57:33.130 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - readOnly........................false
+2026-01-15 08:57:33.131 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - registerMbeans..................false
+2026-01-15 08:57:33.131 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - scheduledExecutor...............none
+2026-01-15 08:57:33.131 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - schema..........................none
+2026-01-15 08:57:33.131 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - threadFactory...................internal
+2026-01-15 08:57:33.131 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - transactionIsolation............default
+2026-01-15 08:57:33.132 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - username........................"root"
+2026-01-15 08:57:33.132 [restartedMain] DEBUG com.zaxxer.hikari.HikariConfig - validationTimeout...............5000
+2026-01-15 08:57:33.132 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-01-15 08:57:33.165 [restartedMain] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (aa591f92-3e9c-4bcd-93d1-620600cabdf6)
+2026-01-15 08:57:33.848 [restartedMain] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:33.850 [restartedMain] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:33.871 [restartedMain] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:33.949 [restartedMain] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (aa591f92-3e9c-4bcd-93d1-620600cabdf6)
+2026-01-15 08:57:33.950 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@76f4b95b
+2026-01-15 08:57:33.953 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-01-15 08:57:34.067 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=1/10, idle=0/10, active=1, waiting=0)
+2026-01-15 08:57:34.068 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (e40f48b3-2c47-49d9-af3f-0ac54b22f5c8)
+2026-01-15 08:57:34.085 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.086 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.092 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.103 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (e40f48b3-2c47-49d9-af3f-0ac54b22f5c8)
+2026-01-15 08:57:34.104 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ee83378
+2026-01-15 08:57:34.145 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=2/10, idle=2/10, active=0, waiting=0)
+2026-01-15 08:57:34.145 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (b9a8c9c3-3951-477f-a2d1-6d903aa51a1e)
+2026-01-15 08:57:34.159 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.160 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.167 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.180 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (b9a8c9c3-3951-477f-a2d1-6d903aa51a1e)
+2026-01-15 08:57:34.180 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1fd53943
+2026-01-15 08:57:34.224 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=3/10, idle=3/10, active=0, waiting=0)
+2026-01-15 08:57:34.224 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (337f1b1c-3951-4b41-94bc-fc8ac4832312)
+2026-01-15 08:57:34.240 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.241 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.246 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.254 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (337f1b1c-3951-4b41-94bc-fc8ac4832312)
+2026-01-15 08:57:34.254 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2e0004ad
+2026-01-15 08:57:34.287 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=4/10, idle=4/10, active=0, waiting=0)
+2026-01-15 08:57:34.287 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (20ec0765-40c7-4964-bcae-6c5d05525cac)
+2026-01-15 08:57:34.302 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.304 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.308 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.318 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (20ec0765-40c7-4964-bcae-6c5d05525cac)
+2026-01-15 08:57:34.318 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ffac60c
+2026-01-15 08:57:34.351 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=5/10, idle=5/10, active=0, waiting=0)
+2026-01-15 08:57:34.351 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (268131cd-6f5b-44e5-af48-9db110452a7e)
+2026-01-15 08:57:34.372 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.374 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.382 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.391 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (268131cd-6f5b-44e5-af48-9db110452a7e)
+2026-01-15 08:57:34.392 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7bb4dd57
+2026-01-15 08:57:34.428 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=6/10, idle=6/10, active=0, waiting=0)
+2026-01-15 08:57:34.429 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (57d15e7e-bbe1-43a6-aa23-537f33cac3fe)
+2026-01-15 08:57:34.449 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.450 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.455 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.466 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (57d15e7e-bbe1-43a6-aa23-537f33cac3fe)
+2026-01-15 08:57:34.466 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f2f306b
+2026-01-15 08:57:34.505 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=7/10, idle=7/10, active=0, waiting=0)
+2026-01-15 08:57:34.505 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (910e958e-29a2-47e3-8c5f-0f971012a005)
+2026-01-15 08:57:34.520 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.520 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.524 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.531 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (910e958e-29a2-47e3-8c5f-0f971012a005)
+2026-01-15 08:57:34.532 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3dc99f81
+2026-01-15 08:57:34.569 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=8/10, idle=8/10, active=0, waiting=0)
+2026-01-15 08:57:34.569 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (f91aaa18-ad3c-47bf-a5a2-f937c7710bc1)
+2026-01-15 08:57:34.586 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.586 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.592 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.601 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (f91aaa18-ad3c-47bf-a5a2-f937c7710bc1)
+2026-01-15 08:57:34.601 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@79159a5d
+2026-01-15 08:57:34.632 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=9/10, idle=9/10, active=0, waiting=0)
+2026-01-15 08:57:34.632 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Attempting to create/setup new connection (773dee6c-6f01-4ddc-9ddd-cbb3a940ad93)
+2026-01-15 08:57:34.649 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:2, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_Server_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:30129660, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.650 [HikariPool-1:connection-adder] DEBUG jdk.event.security - X509Certificate: Alg:SHA256withRSA, Serial:1, Subject:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Issuer:CN=MySQL_Server_8.3.0_Auto_Generated_CA_Certificate, Key type:RSA, Length:2048, Cert Id:3514159406, Valid from:20/10/2024 16:44, Valid until:18/10/2034 16:44
+2026-01-15 08:57:34.653 [HikariPool-1:connection-adder] DEBUG jdk.event.security -  TLSHandshake: localhost:3306, TLSv1.3, TLS_AES_256_GCM_SHA384, 30129660
+2026-01-15 08:57:34.663 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Established new connection (773dee6c-6f01-4ddc-9ddd-cbb3a940ad93)
+2026-01-15 08:57:34.664 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3deb49ae
+2026-01-15 08:57:34.696 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After adding stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-15 08:57:34.696 [HikariPool-1:connection-adder] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Connection not added, stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-15 08:57:39.488 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-15 08:57:40.057 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.a.AdminUserController:
+	{PATCH [/api/admin/users/{userId}/suspend]}: suspendUser(Long)
+	{PATCH [/api/admin/users/{userId}/activate]}: activateUser(Long)
+	{POST [/api/admin/users/admins]}: createAdmin(RegisterAdminDto)
+2026-01-15 08:57:40.071 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.a.AuthController:
+	{POST [/api/auth/register]}: register(RegisterDto)
+	{POST [/api/auth/register-technician]}: registerTechnician(RegisterDto)
+	{POST [/api/auth/logout/{idUser}]}: logout(Long)
+	{POST [/api/auth/login]}: login(AuthRequest)
+2026-01-15 08:57:40.080 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.c.CategoryController:
+	{DELETE [/api/categories/{id}]}: delete(Long)
+	{PATCH [/api/categories/{id}/activate]}: activate(Long)
+	{GET [/api/categories/active]}: getActiveCategories()
+	{GET [/api/categories/{id}]}: getById(Long)
+	{PATCH [/api/categories/{id}/icon]}: updateIcon(Long,CategoryDto)
+	{PATCH [/api/categories/{id}/deactivate]}: deactivate(Long)
+	{GET [/api/categories]}: getAllCategories()
+	{POST [/api/categories]}: createCategory(CategoryDto)
+	{PUT [/api/categories/{id}]}: updateCategory(Long,CategoryDto)
+	{PATCH [/api/categories/{id}/order]}: updateDisplayOrder(Long,CategoryDto)
+	{GET [/api/categories/{id}/technicians/count]}: countTechnicians(Long)
+2026-01-15 08:57:40.085 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.c.ClientController:
+	{GET [/api/clients/by-city]}: getClientsByCity(String)
+	{GET [/api/clients/stats/count-active]}: countActiveClients()
+	{GET [/api/clients/active]}: getActiveClients()
+	{GET [/api/clients/me/reservations]}: getMyReservations()
+2026-01-15 08:57:40.091 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.p.FactureController:
+	{GET [/api/factures/reservation/{idReservation}]}: getFacturesByReservation(Long)
+	{GET [/api/factures/{idFacture}]}: getFactureById(Long)
+	{GET [/api/factures]}: getAllFactures()
+	{DELETE [/api/factures/{idFacture}]}: deleteFacture(Long)
+	{POST [/api/factures]}: createFacture(FactureDto)
+	{PUT [/api/factures/{idFacture}]}: updateFacture(Long,FactureDto)
+2026-01-15 08:57:40.100 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.r.ReservationController:
+	{GET [/api/reservations/me/technician]}: getMyTechnicianReservations()
+	{GET [/api/reservations/me/client]}: getMyClientReservations()
+	{PUT [/api/reservations/{id}]}: updateReservation(Long,ReservationDto)
+	{POST [/api/reservations/{id}/status]}: changeStatus(Long,ReservationStatus)
+	{DELETE [/api/reservations/{id}]}: deleteReservation(Long)
+	{POST [/api/reservations/{id}/cancel]}: cancelReservation(Long,String)
+	{GET [/api/reservations/stats/count]}: countReservations()
+	{GET [/api/reservations/stats/count/accepted-now]}: countAcceptedNow()
+	{POST [/api/reservations]}: createReservation(ReservationDto)
+	{GET [/api/reservations/{id}]}: getById(Long)
+	{GET [/api/reservations/stats/count/pending]}: countPendingReservations()
+	{GET [/api/reservations/stats/rating/{technicianId}]}: getTechnicianAverageRating(Long)
+	{GET [/api/reservations/stats/revenue/{technicianId}]}: getTechnicianRevenue(Long)
+	{POST [/api/reservations/{id}/complete]}: completeReservation(Long)
+	{GET [/api/reservations/availability]}: checkAvailability(Long,LocalDateTime,LocalDateTime)
+2026-01-15 08:57:40.107 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.r.ReviewController:
+	{GET [/api/reviews/reservation/{reservationId}]}: getReviewForReservation(Long)
+	{POST [/api/reviews]}: createReview(ReviewDto)
+	{GET [/api/reviews/client/{clientId}]}: getClientReviews(Long)
+	{GET [/api/reviews/{id}]}: getReviewById(Long)
+	{GET [/api/reviews/stats/count]}: countReviews()
+	{PUT [/api/reviews/{id}]}: updateReview(Long,ReviewDto)
+	{DELETE [/api/reviews/{id}]}: deleteReview(Long,String)
+	{GET [/api/reviews/me]}: getMyReviews()
+2026-01-15 08:57:40.113 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.t.TechnicianController:
+	{GET [/api/technicians/{technicianId}]}: getTechnicianById(Long)
+	{POST [/api/technicians]}: registerTechnician(Technician)
+	{PUT [/api/technicians/{technicianId}/validate-kyc]}: validateKyc(Long)
+	{GET [/api/technicians/search]}: searchTechnicians(String,String,String,AvailabilityStatus,Double,Double,Double)
+	{GET [/api/technicians/active]}: getActiveTechnicians()
+	{GET [/api/technicians/stats/active/count]}: countActiveTechnicians()
+	{GET [/api/technicians/search/city]}: getByCity(String)
+	{GET [/api/technicians/search/neighborhood]}: getByNeighborhood(String)
+2026-01-15 08:57:40.118 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.t.TechnicianDocumentController:
+	{DELETE [/api/technician-documents/{id}]}: deleteDocument(Long)
+	{POST [/api/technician-documents/{id}/reject]}: rejectDocument(Long,String)
+	{POST [/api/technician-documents/{id}/verify]}: verifyDocument(Long,String)
+	{POST [/api/technician-documents]}: addDocument(TechnicianDocumentDto)
+	{GET [/api/technician-documents/{id}]}: getById(Long)
+	{GET [/api/technician-documents/skill/{skillId}]}: getBySkill(Long)
+2026-01-15 08:57:40.122 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	c.e.c.i.a.i.w.c.t.TechnicianSkillController:
+	{POST [/api/technician-skills/{idSkill}/verify]}: verifySkill(Long,boolean)
+	{DELETE [/api/technician-skills/{idSkill}]}: deleteSkill(Long)
+	{PUT [/api/technician-skills/{idSkill}]}: updateSkill(Long,TechnicianSkillDto)
+	{POST [/api/technician-skills]}: addSkill(TechnicianSkillDto)
+	{GET [/api/technician-skills/me]}: getMySkills()
+	{GET [/api/technician-skills/category/{categoryId}]}: getSkillsByCategory(Long)
+2026-01-15 08:57:40.127 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	o.s.b.w.a.e.BasicErrorController:
+	{ [/error]}: error(HttpServletRequest)
+	{ [/error], produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+2026-01-15 08:57:40.149 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	o.s.w.a.OpenApiWebMvcResource:
+	{GET [/v3/api-docs], produces [application/json]}: openapiJson(HttpServletRequest,String,Locale)
+	{GET [/v3/api-docs.yaml], produces [application/vnd.oai.openapi]}: openapiYaml(HttpServletRequest,String,Locale)
+2026-01-15 08:57:40.154 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	o.s.w.u.SwaggerWelcomeWebMvc:
+	{GET [/swagger-ui.html]}: redirectToUi(HttpServletRequest)
+2026-01-15 08:57:40.156 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 
+	o.s.w.u.SwaggerConfigResource:
+	{GET [/v3/api-docs/swagger-config], produces [application/json]}: openapiJson(HttpServletRequest)
+2026-01-15 08:57:40.168 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 'beanNameHandlerMapping' {}
+2026-01-15 08:57:40.222 [restartedMain] DEBUG _.s.web.servlet.HandlerMapping.Mappings - 'resourceHandlerMapping' {/webjars/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /**=ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]], /swagger-ui/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/swagger-ui/5.31.0/]], /swagger-ui/*swagger-initializer.js=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/swagger-ui/5.31.0/]], /webjars/*swagger-ui/**=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /webjars/*swagger-ui/*swagger-initializer.js=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]], /webjars/*swagger-ui/5.31.0/*swagger-initializer.js=ResourceHttpRequestHandler [classpath [META-INF/resources/webjars/]]}
+2026-01-15 08:58:04.068 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Pool stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-15 08:58:04.068 [HikariPool-1:housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2026-01-15 08:58:10.223 [SIGINT handler] DEBUG java.lang.Runtime - Runtime.exit() called with status: 130
+java.lang.Throwable: Runtime.exit(130)
+	at java.base/java.lang.Shutdown.logRuntimeExit(Shutdown.java:179)
+	at java.base/java.lang.Shutdown.exit(Shutdown.java:160)
+	at java.base/java.lang.Terminator$1.handle(Terminator.java:51)
+	at java.base/jdk.internal.misc.Signal$1.run(Signal.java:218)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-01-15 08:58:10.300 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-01-15 08:58:10.300 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Before shutdown stats (total=10/10, idle=10/10, active=0, waiting=0)
+2026-01-15 08:58:10.303 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@76f4b95b: (connection evicted)
+2026-01-15 08:58:10.310 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5ee83378: (connection evicted)
+2026-01-15 08:58:10.311 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1fd53943: (connection evicted)
+2026-01-15 08:58:10.312 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@2e0004ad: (connection evicted)
+2026-01-15 08:58:10.313 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7ffac60c: (connection evicted)
+2026-01-15 08:58:10.314 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7bb4dd57: (connection evicted)
+2026-01-15 08:58:10.317 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@f2f306b: (connection evicted)
+2026-01-15 08:58:10.318 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3dc99f81: (connection evicted)
+2026-01-15 08:58:10.319 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@79159a5d: (connection evicted)
+2026-01-15 08:58:10.320 [HikariPool-1:connection-closer] DEBUG com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3deb49ae: (connection evicted)
+2026-01-15 08:58:10.321 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - After  shutdown stats (total=0/10, idle=0/10, active=0, waiting=0)
+2026-01-15 08:58:10.322 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
