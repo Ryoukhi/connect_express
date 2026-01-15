@@ -1,0 +1,48 @@
+<div class="flex h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white shadow-md flex flex-col hidden md:flex">
+    <div class="p-6 border-b border-gray-100">
+      <h1 class="text-xl font-bold text-blue-600 flex items-center gap-2">
+        <span class="text-2xl">⚡</span> ConnectAdmin
+      </h1>
+    </div>
+    
+    <nav class="flex-1 p-4 space-y-1">
+      <a routerLink="/admin/dashboard" routerLinkActive="bg-blue-50 text-blue-600" class="flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+        <span>📊</span> Dashboard
+      </a>
+      
+      <div class="pt-4 pb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider px-4">Gestion</div>
+      
+      <a routerLink="/admin/categories" routerLinkActive="bg-blue-50 text-blue-600" class="flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+        <span>🏷️</span> Catégories
+      </a>
+      <a routerLink="/admin/technicians" routerLinkActive="bg-blue-50 text-blue-600" class="flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+        <span>👷</span> Techniciens
+      </a>
+      <a routerLink="/admin/clients" routerLinkActive="bg-blue-50 text-blue-600" class="flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+        <span>👥</span> Clients
+      </a>
+      <a routerLink="/admin/admins" routerLinkActive="bg-blue-50 text-blue-600" class="flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+        <span>🛡️</span> Administrateurs
+      </a>
+    </nav>
+    
+    <div class="p-4 border-t border-gray-100">
+      <button (click)="logout()" class="flex items-center gap-3 px-4 py-3 w-full text-left text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+        <span>🚪</span> Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Header (Visible on small screens) -->
+  <div class="md:hidden fixed top-0 left-0 right-0 bg-white h-16 shadow-sm z-10 flex items-center justify-between px-4">
+    <span class="font-bold text-blue-600">ConnectAdmin</span>
+    <button class="text-gray-600">☰</button> <!-- TODO: Add mobile menu toggle -->
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-1 overflow-auto md:p-8 p-4 pt-20 md:pt-8">
+    <router-outlet></router-outlet>
+  </main>
+</div>

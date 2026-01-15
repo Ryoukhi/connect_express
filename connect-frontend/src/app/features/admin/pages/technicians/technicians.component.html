@@ -1,0 +1,58 @@
+<div class="space-y-6">
+    <div class="flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">Gestion des Techniciens</h1>
+            <p class="text-gray-500">Validez les inscriptions et gérez les comptes techniciens</p>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-left">
+            <thead class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider">
+                <tr>
+                    <th class="p-4 font-semibold">Technicien</th>
+                    <th class="p-4 font-semibold">Spécialité</th>
+                    <th class="p-4 font-semibold">Date inscription</th>
+                    <th class="p-4 font-semibold">Statut</th>
+                    <th class="p-4 font-semibold text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @for (tech of technicians; track tech.id) {
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="p-4">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
+                                {{ tech.firstName.charAt(0) }}{{ tech.lastName.charAt(0) }}
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">{{ tech.firstName }} {{ tech.lastName }}</p>
+                                <p class="text-xs text-gray-500">{{ tech.email }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 text-gray-600">{{ tech.specialty }}</td>
+                    <td class="p-4 text-gray-600">{{ tech.joinedDate | date:'dd/MM/yyyy' }}</td>
+                    <td class="p-4">
+                        <span [class]="'py-1 px-3 rounded-full text-xs font-semibold ' + getStatusClass(tech.status)">
+                            {{ getStatusLabel(tech.status) }}
+                        </span>
+                    </td>
+                    <td class="p-4 text-right space-x-2">
+                        @if (tech.status === 'PENDING') {
+                        <button (click)="approveTechnician(tech.id)"
+                            class="text-green-600 hover:bg-green-50 p-2 rounded-lg" title="Valider">✅</button>
+                        <button (click)="rejectTechnician(tech.id)" class="text-red-600 hover:bg-red-50 p-2 rounded-lg"
+                            title="Refuser">❌</button>
+                        }
+                        <button (click)="deleteTechnician(tech.id)"
+                            class="text-gray-400 hover:text-red-600 hover:bg-gray-100 p-2 rounded-lg"
+                            title="Supprimer">🗑️</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
