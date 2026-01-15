@@ -71,6 +71,9 @@ export class LoginComponent {
         // 🔍 Redirige en fonction du rôle
         if (userRole === 'TECHNICIAN') {
           this.router.navigate(['/dashboard-technicien']);
+        }
+        if (userRole === 'ADMIN') {
+          this.router.navigate(['/dashboard-admin']);
         } else {
           this.router.navigate(['/catalogue']);
         }
