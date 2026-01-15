@@ -38,4 +38,7 @@ public class Client extends User {
                 ", active=" + active +
                 '}';
     }
+
+    public void setId(long id) {
+    }
 }
