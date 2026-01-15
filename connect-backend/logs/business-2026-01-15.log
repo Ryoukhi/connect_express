@@ -20,3 +20,53 @@
 2026-01-15 08:40:26.890 ERROR - Login échoué : mot de passe incorrect id=12
 2026-01-15 08:40:31.912 INFO  - Tentative de login pour email=admin@example.com
 2026-01-15 08:40:32.176 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 14:46:31.311 INFO  - Catégorie supprimée id=1
+2026-01-15 14:46:31.410 INFO  - Création de la catégorie: Plomberie
+2026-01-15 14:46:31.423 INFO  - Création de la catégorie: Plomberie
+2026-01-15 14:46:31.430 INFO  - Création de la catégorie: 
+2026-01-15 14:46:31.633 INFO  - Ajout d'un document pour la compétence id=10 par l'utilisateur id=100
+2026-01-15 14:46:31.639 INFO  - Vérification du document id=1 par utilisateur id=100
+2026-01-15 14:46:31.639 ERROR - Utilisateur id=100 non autorisé à vérifier des documents
+2026-01-15 14:46:31.642 INFO  - Ajout d'un document pour la compétence id=10 par l'utilisateur id=100
+2026-01-15 14:46:31.646 INFO  - Rejet du document id=1 par utilisateur id=50
+2026-01-15 14:46:31.655 INFO  - Vérification du document id=1 par utilisateur id=50
+2026-01-15 14:46:31.659 INFO  - Suppression document id=1 demandée par utilisateur id=50
+2026-01-15 14:46:31.666 INFO  - Suppression document id=1 demandée par utilisateur id=100
+2026-01-15 14:46:31.672 INFO  - Suppression document id=1 demandée par utilisateur id=999
+2026-01-15 14:46:31.672 ERROR - Utilisateur id=999 non autorisé à supprimer le document id=1
+2026-01-15 14:46:31.678 INFO  - Ajout d'un document pour la compétence id=10 par l'utilisateur id=999
+2026-01-15 14:46:31.679 ERROR - Utilisateur id=999 non propriétaire de la compétence id=10
+2026-01-15 14:46:32.147 INFO  - Suppression de l'avis id=1 par admin id=1, raison='raison'
+2026-01-15 14:46:32.149 ERROR - Avis introuvable pour suppression id=1
+2026-01-15 14:46:32.154 INFO  - Création d'un nouvel avis pour le client id=1
+2026-01-15 14:46:32.156 INFO  - Avis créé avec succès id=null, clientId=1, rating=5
+2026-01-15 14:46:32.162 ERROR - ClientId ou ReservationId manquant pour récupération d'avis
+2026-01-15 14:46:32.167 INFO  - Suppression de l'avis id=1 par admin id=99, raison='Contenu inapproprié'
+2026-01-15 14:46:32.167 INFO  - Avis id=1 supprimé avec succès
+2026-01-15 14:46:32.172 INFO  - Mise à jour de l'avis id=1
+2026-01-15 14:46:32.174 ERROR - Avis introuvable pour id=1
+2026-01-15 14:46:32.178 INFO  - Mise à jour de l'avis id=1
+2026-01-15 14:46:32.179 ERROR - Note obligatoire non fournie
+2026-01-15 14:46:32.179 ERROR - Erreur lors de la validation de la note pour avis id=1: La note est obligatoire
+2026-01-15 14:46:32.193 INFO  - Mise à jour de l'avis id=1
+2026-01-15 14:46:32.194 INFO  - Avis id=null mis à jour avec succès, rating=4
+2026-01-15 14:46:32.199 INFO  - Création d'un nouvel avis pour le client id=1
+2026-01-15 14:46:32.200 ERROR - Note obligatoire non fournie
+2026-01-15 14:46:32.200 ERROR - Erreur lors de la validation de la note pour client id=1: La note est obligatoire
+2026-01-15 14:46:32.204 INFO  - Suppression de l'avis id=1 par admin id=1, raison=' '
+2026-01-15 14:46:32.204 ERROR - Tentative de suppression de l'avis id=1 sans raison
+2026-01-15 14:46:32.345 INFO  - Recherche de techniciens avec critères: ville=CityX, quartier=NeighbourhoodY, catégorie=null, disponibilité=AVAILABLE, minRating=4.0, minPrice=40.0, maxPrice=60.0
+2026-01-15 14:46:32.767 INFO  - Suppression de la compétence id=1 par le technicien id=100
+2026-01-15 14:46:32.774 INFO  - Mise à jour de la compétence id=1 pour le technicien id=100
+2026-01-15 14:46:32.775 ERROR - Compétence introuvable id=1
+2026-01-15 14:46:32.781 INFO  - Vérification compétence id=1 par utilisateur id=50 -> true
+2026-01-15 14:46:32.781 ERROR - Utilisateur id=50 non autorisé à vérifier des compétences
+2026-01-15 14:46:32.785 INFO  - Mise à jour de la compétence id=1 pour le technicien id=999
+2026-01-15 14:46:32.785 ERROR - Tentative non autorisée de modifier la compétence id=1 par le technicien id=999
+2026-01-15 14:46:32.793 INFO  - Vérification compétence id=1 par utilisateur id=50 -> true
+2026-01-15 14:46:32.799 INFO  - Suppression de la compétence id=1 par le technicien id=999
+2026-01-15 14:46:32.799 ERROR - Tentative non autorisée de supprimer la compétence id=1 par le technicien id=999
+2026-01-15 14:46:32.804 INFO  - Ajout d'une compétence pour le technicien id=100
+2026-01-15 14:46:32.805 ERROR - Compétence déjà existante pour le technicien id=100 : Java
+2026-01-15 14:46:32.809 INFO  - Mise à jour de la compétence id=1 pour le technicien id=100
+2026-01-15 14:46:32.812 INFO  - Ajout d'une compétence pour le technicien id=100
