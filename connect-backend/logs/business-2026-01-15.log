@@ -20,6 +20,7 @@
 2026-01-15 08:40:26.890 ERROR - Login échoué : mot de passe incorrect id=12
 2026-01-15 08:40:31.912 INFO  - Tentative de login pour email=admin@example.com
 2026-01-15 08:40:32.176 INFO  - Login réussi pour l'utilisateur id=13
+<<<<<<< HEAD
 2026-01-15 10:31:46.575 INFO  - Tentative de login pour email=admin@example.com
 2026-01-15 10:31:47.231 INFO  - Login réussi pour l'utilisateur id=13
 2026-01-15 10:33:25.275 INFO  - Tentative de login pour email=elon@gmail.fr
@@ -474,3 +475,4 @@
 2026-01-15 22:04:26.356 INFO  - Found 10 categories with active = true
 2026-01-15 22:04:26.405 INFO  - Calculating average rating for technician 13 with status COMPLETED
 2026-01-15 22:04:26.419 INFO  - Average rating for technician 13: 0.0
+
