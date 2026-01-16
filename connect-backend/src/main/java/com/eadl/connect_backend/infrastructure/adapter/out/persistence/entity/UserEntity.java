@@ -83,10 +83,6 @@ public class UserEntity {
     @OneToOne(mappedBy = "technician", cascade = CascadeType.ALL, orphanRemoval = true)
     private TechnicianSkillEntity technicianSkill;
 
-    // Admin actions performed by an admin user
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AdminActionEntity> adminActions = new ArrayList<>();
-
     // ========== JPA Lifecycle ==========
     @PrePersist
     protected void onCreate() {

@@ -1,7 +1,6 @@
 package com.eadl.connect_backend.domain.model.chat;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * Conversation - Discussion entre un client et un technicien
