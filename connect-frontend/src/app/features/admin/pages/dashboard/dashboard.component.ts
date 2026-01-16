@@ -1,17 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  private adminService = inject(AdminService);
+
   stats = [
-    { title: 'Utilisateurs', value: '1,234', icon: '👥', color: 'bg-blue-100 text-blue-600' },
-    { title: 'Techniciens', value: '56', icon: '👷', color: 'bg-green-100 text-green-600' },
-    { title: 'Réservations', value: '89', icon: '📅', color: 'bg-purple-100 text-purple-600' },
-    { title: 'Revenus', value: '12,340 FCFA', icon: '💰', color: 'bg-yellow-100 text-yellow-600' }
+    { title: 'Utilisateurs', value: '...', icon: '👥', color: 'bg-blue-100 text-blue-600' },
+    { title: 'Techniciens', value: '...', icon: '👷', color: 'bg-green-100 text-green-600' },
+    { title: 'Réservations', value: '...', icon: '📅', color: 'bg-purple-100 text-purple-600' },
+    { title: 'Revenus', value: '...', icon: '💰', color: 'bg-yellow-100 text-yellow-600' }
   ];
+
+  ngOnInit() {
+    this.loadStats();
+  }
+
+  loadStats() {
+    this.adminService.getGeneralStatistics().subscribe({
+      next: (data) => {
+        this.stats = [
+          { title: 'Clients', value: data.activeClients?.toString() || '0', icon: '👥', color: 'bg-blue-100 text-blue-600' },
+          { title: 'Techniciens Actifs', value: data.activeTechnicians?.toString() || '0', icon: '👷', color: 'bg-green-100 text-green-600' },
+          { title: 'Réservations', value: data.totalReservations?.toString() || '0', icon: '📅', color: 'bg-purple-100 text-purple-600' },
+          { title: 'Revenus', value: (data.totalRevenue?.toString() || '0') + ' FCFA', icon: '💰', color: 'bg-yellow-100 text-yellow-600' }
+        ];
+      },
+      error: (err) => console.error('Failed to load stats', err)
+    });
+  }
 }

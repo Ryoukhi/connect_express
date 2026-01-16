@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AdminService, Client } from '../../services/admin.service';
+import { AdminService, UserDto } from '../../services/admin.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class ClientsComponent implements OnInit {
   private adminService = inject(AdminService);
 
-  clients: Client[] = [];
+  clients: UserDto[] = [];
 
   ngOnInit() {
     this.loadClients();
@@ -27,7 +27,7 @@ export class ClientsComponent implements OnInit {
 
   deleteClient(id: number) {
     if (confirm('Supprimer définitivement ce client ?')) {
-      this.adminService.deleteClient(id).subscribe(() => this.loadClients());
+      this.adminService.deleteUser(id).subscribe(() => this.loadClients());
     }
   }
 }

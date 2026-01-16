@@ -6,7 +6,6 @@ import com.eadl.connect_backend.domain.model.user.Technician;
 import java.util.List;
 import java.util.Optional;
 
-
 /**
  * Port IN - Service Technicien
  * Use cases généraux pour les techniciens
@@ -34,9 +33,10 @@ public interface TechnicianService {
             AvailabilityStatus availabilityStatus,
             Double minRating,
             Double minPrice,
-            Double maxPrice
-    );
-    
+            Double maxPrice);
+
     void updateAvailabilityStatus(Long technicianId, AvailabilityStatus status);
-    
+
+    List<Technician> getAllTechnicians();
+
 }

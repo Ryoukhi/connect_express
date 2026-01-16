@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AdminService, Technician } from '../../services/admin.service';
+import { AdminService, Technician, TechnicianSkillDto } from '../../services/admin.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -14,6 +14,9 @@ export class TechniciansComponent implements OnInit {
   private adminService = inject(AdminService);
 
   technicians: Technician[] = [];
+  selectedTechnicianSkills: TechnicianSkillDto[] = [];
+  selectedTechnicianName: string | null = null;
+  showSkillsModal = false;
 
   ngOnInit() {
     this.loadTechnicians();
@@ -21,8 +24,19 @@ export class TechniciansComponent implements OnInit {
 
   loadTechnicians() {
     this.adminService.getTechnicians().subscribe(res => {
+      // Map backend data to frontend interface if needed
+      // Currently using direct map, assuming fields align or are sufficient.
+      // Backend Technician extends User entity.
+      // Front expects 'specialty' but backend Tech might not have it directly on root if its strictly Entity.
+      // Important to note: Backend Entity MIGHT NOT have 'specialty' field exposed if it relies on Category/Skills strictly.
+      // But let's assume standard Entity serialization for now.
       this.technicians = res;
     });
+  }
+
+  getTechnicianStatus(tech: any): 'ACTIVE' | 'PENDING' | 'REJECTED' {
+    if (tech.active) return 'ACTIVE';
+    return 'PENDING'; // Default to pending if not active
   }
 
   approveTechnician(id: number) {
@@ -30,7 +44,7 @@ export class TechniciansComponent implements OnInit {
   }
 
   rejectTechnician(id: number) {
-    if (confirm('Refuser ce technicien ?')) {
+    if (confirm('Désactiver ce technicien ?')) {
       this.adminService.updateTechnicianStatus(id, 'REJECTED').subscribe(() => this.loadTechnicians());
     }
   }
@@ -41,7 +55,31 @@ export class TechniciansComponent implements OnInit {
     }
   }
 
-  getStatusClass(status: string): string {
+  viewSkills(tech: Technician) {
+    this.selectedTechnicianName = tech.firstName + ' ' + tech.lastName;
+    this.adminService.getTechnicianSkills(tech.idUser).subscribe(skills => {
+      this.selectedTechnicianSkills = skills;
+      this.showSkillsModal = true;
+    });
+  }
+
+  closeModal() {
+    this.showSkillsModal = false;
+    this.selectedTechnicianSkills = [];
+  }
+
+  verifySkill(skill: TechnicianSkillDto, verified: boolean) {
+    this.adminService.verifySkill(skill.idSkill, verified).subscribe(updated => {
+      // update local list
+      const index = this.selectedTechnicianSkills.findIndex(s => s.idSkill === updated.idSkill);
+      if (index !== -1) {
+        this.selectedTechnicianSkills[index] = updated;
+      }
+    });
+  }
+
+  getStatusClass(tech: any): string {
+    const status = this.getTechnicianStatus(tech);
     switch (status) {
       case 'ACTIVE': return 'bg-green-100 text-green-700';
       case 'PENDING': return 'bg-yellow-100 text-yellow-700';
@@ -50,11 +88,12 @@ export class TechniciansComponent implements OnInit {
     }
   }
 
-  getStatusLabel(status: string): string {
+  getStatusLabel(tech: any): string {
+    const status = this.getTechnicianStatus(tech);
     switch (status) {
       case 'ACTIVE': return 'Actif';
       case 'PENDING': return 'En attente';
-      case 'REJECTED': return 'Refusé';
+      case 'REJECTED': return 'Inactif';
       default: return status;
     }
   }

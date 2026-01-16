@@ -2,41 +2,94 @@
     <div class="flex justify-between items-center">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Gestion des Administrateurs</h1>
-            <p class="text-gray-500">Liste des administrateurs de la plateforme</p>
+            <p class="text-gray-500">Ajoutez les administrateurs et modérez leurs accès</p>
         </div>
-        <button
-            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
-            <span>➕</span> Nouvel Admin
+        <button (click)="toggleCreateForm()"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            {{ showCreateForm ? 'Annuler' : '+ Nouvel Admin' }}
         </button>
     </div>
+
+    <!-- Create Form -->
+    @if (showCreateForm) {
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h3 class="font-bold text-lg mb-4">Créer un nouvel administrateur</h3>
+        <form [formGroup]="createForm" (ngSubmit)="createAdmin()" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Prénom</label>
+                <input type="text" formControlName="firstName"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Nom</label>
+                <input type="text" formControlName="lastName"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" formControlName="email"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input type="password" formControlName="password"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Téléphone</label>
+                <input type="text" formControlName="phone"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
+            </div>
+            <div class="md:col-span-2 flex justify-end">
+                <button type="submit" [disabled]="createForm.invalid"
+                    class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50">
+                    Enregistrer
+                </button>
+            </div>
+            @if (errorMsg) {
+            <p class="text-red-600 text-sm md:col-span-2">{{ errorMsg }}</p>
+            }
+        </form>
+    </div>
+    }
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <table class="w-full text-left">
             <thead class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider">
                 <tr>
-                    <th class="p-4 font-semibold">Email</th>
+                    <th class="p-4 font-semibold">Administrateur</th>
                     <th class="p-4 font-semibold">Rôle</th>
-                    <th class="p-4 font-semibold">Dernière connexion</th>
+                    <th class="p-4 font-semibold">Téléphone</th>
+                    <th class="p-4 font-semibold">Créé le</th>
                     <th class="p-4 font-semibold text-right">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-                @for (admin of admins; track admin.id) {
+                @for (admin of admins; track admin.idUser) {
                 <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="p-4 font-medium text-gray-800">{{ admin.email }}</td>
                     <td class="p-4">
-                        <span
-                            [class]="'py-1 px-3 rounded-full text-xs font-semibold ' + (admin.role === 'SUPER_ADMIN' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700')">
-                            {{ getRoleLabel(admin.role) }}
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">
+                                {{ admin.firstName?.charAt(0) }}{{ admin.lastName?.charAt(0) }}
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800">{{ admin.firstName }} {{ admin.lastName }}</p>
+                                <p class="text-xs text-gray-500">{{ admin.email }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded-full">
+                            {{ admin.role }}
                         </span>
                     </td>
-                    <td class="p-4 text-gray-600">{{ admin.lastLogin | date:'dd/MM/yyyy HH:mm' }}</td>
+                    <td class="p-4 text-gray-600">{{ admin.phone || '-' }}</td>
+                    <td class="p-4 text-gray-600">{{ admin.createdAt | date:'dd/MM/yyyy' }}</td>
                     <td class="p-4 text-right">
-                        @if (admin.role !== 'SUPER_ADMIN') {
-                        <button (click)="deleteAdmin(admin.id)"
+                        <button (click)="deleteAdmin(admin.idUser)"
                             class="text-gray-400 hover:text-red-600 hover:bg-gray-100 p-2 rounded-lg"
                             title="Supprimer">🗑️</button>
-                        }
                     </td>
                 </tr>
                 }

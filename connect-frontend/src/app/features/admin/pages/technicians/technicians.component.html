@@ -11,14 +11,14 @@
             <thead class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider">
                 <tr>
                     <th class="p-4 font-semibold">Technicien</th>
-                    <th class="p-4 font-semibold">Spécialité</th>
-                    <th class="p-4 font-semibold">Date inscription</th>
+                    <th class="p-4 font-semibold">Ville / Quartier</th>
+                    <th class="p-4 font-semibold">Inscrit le</th>
                     <th class="p-4 font-semibold">Statut</th>
                     <th class="p-4 font-semibold text-right">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-                @for (tech of technicians; track tech.id) {
+                @for (tech of technicians; track tech.idUser) {
                 <tr class="hover:bg-gray-50 transition-colors">
                     <td class="p-4">
                         <div class="flex items-center gap-3">
@@ -29,24 +29,32 @@
                             <div>
                                 <p class="font-bold text-gray-800">{{ tech.firstName }} {{ tech.lastName }}</p>
                                 <p class="text-xs text-gray-500">{{ tech.email }}</p>
+                                <p class="text-xs text-gray-400">{{ tech.phone }}</p>
                             </div>
                         </div>
                     </td>
-                    <td class="p-4 text-gray-600">{{ tech.specialty }}</td>
-                    <td class="p-4 text-gray-600">{{ tech.joinedDate | date:'dd/MM/yyyy' }}</td>
+                    <td class="p-4 text-gray-600">
+                        {{ tech.city || '-' }} / {{tech.neighborhood || '-'}}
+                    </td>
+                    <td class="p-4 text-gray-600">{{ tech.createdAt | date:'dd/MM/yyyy' }}</td>
                     <td class="p-4">
-                        <span [class]="'py-1 px-3 rounded-full text-xs font-semibold ' + getStatusClass(tech.status)">
-                            {{ getStatusLabel(tech.status) }}
+                        <span [class]="'py-1 px-3 rounded-full text-xs font-semibold ' + getStatusClass(tech)">
+                            {{ getStatusLabel(tech) }}
                         </span>
                     </td>
                     <td class="p-4 text-right space-x-2">
-                        @if (tech.status === 'PENDING') {
-                        <button (click)="approveTechnician(tech.id)"
-                            class="text-green-600 hover:bg-green-50 p-2 rounded-lg" title="Valider">✅</button>
-                        <button (click)="rejectTechnician(tech.id)" class="text-red-600 hover:bg-red-50 p-2 rounded-lg"
-                            title="Refuser">❌</button>
+                        <button (click)="viewSkills(tech)" 
+                             class="text-blue-600 hover:bg-blue-50 p-2 rounded-lg" title="Voir Compétences">🛠️</button>
+                        
+                        @if (!tech.active) {
+                        <button (click)="approveTechnician(tech.idUser)"
+                            class="text-green-600 hover:bg-green-50 p-2 rounded-lg" title="Activer">✅</button>
+                        } @else {
+                        <button (click)="rejectTechnician(tech.idUser)" class="text-red-600 hover:bg-red-50 p-2 rounded-lg"
+                            title="Désactiver">❌</button>
                         }
-                        <button (click)="deleteTechnician(tech.id)"
+                        
+                        <button (click)="deleteTechnician(tech.idUser)"
                             class="text-gray-400 hover:text-red-600 hover:bg-gray-100 p-2 rounded-lg"
                             title="Supprimer">🗑️</button>
                     </td>
@@ -56,3 +64,56 @@
         </table>
     </div>
 </div>
+
+<!-- Skills Modal -->
+@if (showSkillsModal) {
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">Compétences de {{selectedTechnicianName}}</h2>
+            <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700">✕</button>
+        </div>
+
+        @if (selectedTechnicianSkills.length === 0) {
+            <p class="text-gray-500 italic">Aucune compétence enregistrée.</p>
+        } @else {
+            <div class="space-y-4">
+                @for (skill of selectedTechnicianSkills; track skill.idSkill) {
+                <div class="border rounded-lg p-4 flex justify-between items-start bg-gray-50">
+                    <div>
+                        <h3 class="font-bold text-lg">{{skill.name}}</h3>
+                        <p class="text-gray-600">{{skill.description}}</p>
+                        <div class="mt-2 flex gap-4 text-sm text-gray-500">
+                            <span>Niveau: {{skill.level}}</span>
+                            <span>Exp: {{skill.yearsExperience}} ans</span>
+                            <span>Tarif: {{skill.hourlyRate}} FCFA/h</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-end gap-2">
+                        @if (skill.verified) {
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                                ✓ Vérifiée
+                            </span>
+                            <button (click)="verifySkill(skill, false)" class="text-xs text-red-600 hover:underline">
+                                Annuler vérification
+                            </button>
+                        } @else {
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">
+                                En attente
+                            </span>
+                            <button (click)="verifySkill(skill, true)" class="bg-blue-600 text-white text-xs px-3 py-1 rounded hover:bg-blue-700">
+                                Valider la compétence
+                            </button>
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+        }
+        
+        <div class="mt-6 flex justify-end">
+            <button (click)="closeModal()" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Fermer</button>
+        </div>
+    </div>
+</div>
+}

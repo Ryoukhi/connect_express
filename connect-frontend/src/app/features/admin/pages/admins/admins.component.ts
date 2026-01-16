@@ -1,18 +1,33 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AdminService, AdminUser } from '../../services/admin.service';
+import { AdminService, UserDto } from '../../services/admin.service';
 import { CommonModule, DatePipe } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admins',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, ReactiveFormsModule],
   templateUrl: './admins.component.html',
   styleUrl: './admins.component.css'
 })
 export class AdminsComponent implements OnInit {
   private adminService = inject(AdminService);
+  private fb = inject(FormBuilder);
 
-  admins: AdminUser[] = [];
+  admins: UserDto[] = [];
+  showCreateForm = false;
+  createForm: FormGroup;
+  errorMsg = '';
+
+  constructor() {
+    this.createForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      phone: ['']
+    });
+  }
 
   ngOnInit() {
     this.loadAdmins();
@@ -26,11 +41,28 @@ export class AdminsComponent implements OnInit {
 
   deleteAdmin(id: number) {
     if (confirm('Supprimer cet administrateur ?')) {
-      this.adminService.deleteAdmin(id).subscribe(() => this.loadAdmins());
+      this.adminService.deleteUser(id).subscribe(() => this.loadAdmins());
     }
   }
 
-  getRoleLabel(role: string): string {
-    return role === 'SUPER_ADMIN' ? 'Super Admin' : 'Admin';
+  createAdmin() {
+    if (this.createForm.invalid) return;
+
+    this.adminService.createAdmin(this.createForm.value).subscribe({
+      next: () => {
+        this.showCreateForm = false;
+        this.createForm.reset();
+        this.loadAdmins();
+      },
+      error: (err) => {
+        this.errorMsg = 'Erreur lors de la création';
+        console.error(err);
+      }
+    });
+  }
+
+  toggleCreateForm() {
+    this.showCreateForm = !this.showCreateForm;
+    this.errorMsg = '';
   }
 }
