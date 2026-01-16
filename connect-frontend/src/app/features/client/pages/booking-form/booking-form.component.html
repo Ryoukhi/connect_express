@@ -3,13 +3,34 @@
     <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
         <!-- Header -->
         <div class="bg-blue-600 px-6 py-8 text-center" *ngIf="technician">
-            <div
-                class="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-bold text-blue-600 uppercase shadow-lg">
-                {{ technician.firstName?.charAt(0) }}{{ technician.lastName?.charAt(0) }}
+            <div class="relative inline-block mb-4">
+                <div
+                    class="w-24 h-24 bg-white rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-blue-600 uppercase shadow-lg overflow-hidden border-4 border-white/20">
+                    <img *ngIf="technician.profilePhotoUrl" [src]="technician.profilePhotoUrl"
+                        class="w-full h-full object-cover" [alt]="technician.firstName">
+                    <span *ngIf="!technician.profilePhotoUrl">{{ technician.firstName?.charAt(0) }}{{
+                        technician.lastName?.charAt(0) }}</span>
+                </div>
+                <!-- Status Badge -->
+                <div
+                    class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 rounded-full border-4 border-blue-600 shadow-md">
+                </div>
             </div>
-            <h2 class="text-2xl font-bold text-white">Réserver avec {{ technician.firstName }} {{ technician.lastName }}
+            <h2 class="text-2xl font-bold text-white">Réserver avec {{ technician.firstName }} {{ technician.lastName
+                }}
             </h2>
             <p class="text-blue-100 mt-2">Expert qualifié • {{ technician.city }}</p>
+
+            <!-- Contact Section -->
+            <div class="mt-6 flex flex-col items-center">
+                <p class="text-blue-100 text-xs font-medium mb-2 uppercase tracking-wider">Contactez-moi
+                </p>
+                <a [href]="'tel:' + technician.phone"
+                    class="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-colors px-6 py-2 rounded-full text-white font-bold border border-white/20 shadow-sm">
+                    <i class="fas fa-phone-alt"></i>
+                    {{ technician.phone }}
+                </a>
+            </div>
         </div>
 
         <div *ngIf="loading" class="p-8 text-center text-slate-500">

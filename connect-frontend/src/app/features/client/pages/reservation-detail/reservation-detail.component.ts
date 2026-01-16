@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ReservationControllerService } from '../../../../api/services/reservationController.service';
 import { ReservationDto } from '../../../../api/models';
 import { ReviewFormComponent } from '../../components/review-form/review-form.component';
+import { ClientHeaderComponent } from "../../../../core/layout/client-header/client-header.component";
 
 @Component({
     selector: 'app-reservation-detail',
     standalone: true,
-    imports: [CommonModule, ReviewFormComponent],
+    imports: [CommonModule, ReviewFormComponent, ClientHeaderComponent],
     templateUrl: './reservation-detail.component.html'
 })
 export class ReservationDetailComponent implements OnInit {

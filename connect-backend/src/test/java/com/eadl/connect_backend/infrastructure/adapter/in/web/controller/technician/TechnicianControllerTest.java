@@ -162,7 +162,7 @@ class TechnicianControllerTest {
         // Arrange
         TechnicianResultSearchDto dto = new TechnicianResultSearchDto(
                 1L, "Name", true, 4.5, com.eadl.connect_backend.domain.model.technician.AvailabilityStatus.AVAILABLE,
-                50.0, "Skill", 5, "City", "Neighborhood");
+                50.0, "Skill", 5, "City", "Neighborhood", "http://photo.jpg");
 
         when(technicianService.searchTechnicians(any(), any(), any(), any(), any(), any(), any()))
                 .thenReturn(List.of(dto));

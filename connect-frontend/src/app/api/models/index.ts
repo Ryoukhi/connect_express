@@ -165,6 +165,7 @@ export interface TechnicianResultSearchDto {
     yearsOfExperience?: number;
     city?: string;
     neighborhood?: string;
+    profilePhotoUrl?: string;
 }
 
 export interface ClientDto {

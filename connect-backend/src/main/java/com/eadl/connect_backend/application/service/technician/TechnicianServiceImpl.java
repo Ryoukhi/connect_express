@@ -27,9 +27,9 @@ public class TechnicianServiceImpl implements TechnicianService {
     private final com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository reservationRepository;
 
     public TechnicianServiceImpl(TechnicianRepository technicianRepository,
-                                 com.eadl.connect_backend.domain.port.out.persistence.TechnicianSkillRepository technicianSkillRepository,
-                                 com.eadl.connect_backend.domain.port.out.persistence.CategoryRepository categoryRepository,
-                                 com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository reservationRepository) {
+            com.eadl.connect_backend.domain.port.out.persistence.TechnicianSkillRepository technicianSkillRepository,
+            com.eadl.connect_backend.domain.port.out.persistence.CategoryRepository categoryRepository,
+            com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository reservationRepository) {
         this.technicianRepository = technicianRepository;
         this.technicianSkillRepository = technicianSkillRepository;
         this.categoryRepository = categoryRepository;
@@ -106,8 +106,11 @@ public class TechnicianServiceImpl implements TechnicianService {
     }
 
     @Override
-    public List<TechnicianResultSearchDto> searchTechnicians(String city, String neighborhood, String categoryName, AvailabilityStatus availabilityStatus, Double minRating, Double minPrice, Double maxPrice) {
-        log.info("Recherche de techniciens avec critères: ville={}, quartier={}, catégorie={}, disponibilité={}, minRating={}, minPrice={}, maxPrice={}", city, neighborhood, categoryName, availabilityStatus, minRating, minPrice, maxPrice);
+    public List<TechnicianResultSearchDto> searchTechnicians(String city, String neighborhood, String categoryName,
+            AvailabilityStatus availabilityStatus, Double minRating, Double minPrice, Double maxPrice) {
+        log.info(
+                "Recherche de techniciens avec critères: ville={}, quartier={}, catégorie={}, disponibilité={}, minRating={}, minPrice={}, maxPrice={}",
+                city, neighborhood, categoryName, availabilityStatus, minRating, minPrice, maxPrice);
 
         // Récupération des compétences correspondant aux critères de catégorie
         List<TechnicianSkill> skills;
@@ -122,11 +125,16 @@ public class TechnicianServiceImpl implements TechnicianService {
         List<TechnicianResultSearchDto> results = skills.stream()
                 .filter(skill -> {
                     // Disponibilité
-                    if (availabilityStatus != null && skill.getAvailabilityStatus() != availabilityStatus) return false;
+                    if (availabilityStatus != null && skill.getAvailabilityStatus() != availabilityStatus)
+                        return false;
 
                     // Tarif horaire
-                    if (minPrice != null && (skill.getHourlyRate() == null || skill.getHourlyRate().doubleValue() < minPrice)) return false;
-                    if (maxPrice != null && (skill.getHourlyRate() == null || skill.getHourlyRate().doubleValue() > maxPrice)) return false;
+                    if (minPrice != null
+                            && (skill.getHourlyRate() == null || skill.getHourlyRate().doubleValue() < minPrice))
+                        return false;
+                    if (maxPrice != null
+                            && (skill.getHourlyRate() == null || skill.getHourlyRate().doubleValue() > maxPrice))
+                        return false;
 
                     return true;
                 })
@@ -142,13 +150,19 @@ public class TechnicianServiceImpl implements TechnicianService {
                     com.eadl.connect_backend.domain.model.user.Technician tech = entry.getValue();
 
                     // Filtres sur ville / quartier
-                    if (city != null && (tech.getCity() == null || !city.equalsIgnoreCase(tech.getCity()))) return null;
-                    if (neighborhood != null && (tech.getNeighborhood() == null || !neighborhood.equalsIgnoreCase(tech.getNeighborhood()))) return null;
+                    if (city != null && (tech.getCity() == null || !city.equalsIgnoreCase(tech.getCity())))
+                        return null;
+                    if (neighborhood != null && (tech.getNeighborhood() == null
+                            || !neighborhood.equalsIgnoreCase(tech.getNeighborhood())))
+                        return null;
 
                     // Note minimale
-                    Double averageRating = reservationRepository.averageRatingByTechnicianIdAndStatus(tech.getIdUser(), com.eadl.connect_backend.domain.model.reservation.ReservationStatus.COMPLETED);
-                    if (averageRating == null) averageRating = 0.0;
-                    if (minRating != null && averageRating < minRating) return null;
+                    Double averageRating = reservationRepository.averageRatingByTechnicianIdAndStatus(tech.getIdUser(),
+                            com.eadl.connect_backend.domain.model.reservation.ReservationStatus.COMPLETED);
+                    if (averageRating == null)
+                        averageRating = 0.0;
+                    if (minRating != null && averageRating < minRating)
+                        return null;
 
                     return new TechnicianResultSearchDto(
                             tech.getIdUser(),
@@ -160,8 +174,8 @@ public class TechnicianServiceImpl implements TechnicianService {
                             skill.getName(),
                             skill.getYearsExperience() != null ? skill.getYearsExperience() : 0,
                             tech.getCity(),
-                            tech.getNeighborhood()
-                    );
+                            tech.getNeighborhood(),
+                            tech.getProfilePhotoUrl());
                 })
                 .filter(dto -> dto != null)
                 .collect(Collectors.toList());
@@ -172,21 +186,21 @@ public class TechnicianServiceImpl implements TechnicianService {
 
     @Override
     public void updateAvailabilityStatus(Long technicianId, AvailabilityStatus status) {
-            log.info("Mise à jour du statut de disponibilité pour le technicien id={} vers {}", technicianId, status);
-        
-            // Récupérer la compétence(s) du technicien via le repository (port)
-            List<TechnicianSkill> skills = technicianSkillRepository.findByUserId(technicianId);
-        
-            // Mettre à jour le statut si une compétence existe
-            if (!skills.isEmpty()) {
-                TechnicianSkill skill = skills.get(0);
-                skill.setAvailabilityStatus(status);
-                technicianSkillRepository.save(skill);
-                log.debug("Statut de disponibilité mis à jour avec succès pour le technicien id={}", technicianId);
-            } else {
-                log.warn("Aucune compétence trouvée pour le technicien id={}", technicianId);
-            }
-        
-            log.debug("Statut de disponibilité mis à jour pour {} compétences du technicien", skills.size());
+        log.info("Mise à jour du statut de disponibilité pour le technicien id={} vers {}", technicianId, status);
+
+        // Récupérer la compétence(s) du technicien via le repository (port)
+        List<TechnicianSkill> skills = technicianSkillRepository.findByUserId(technicianId);
+
+        // Mettre à jour le statut si une compétence existe
+        if (!skills.isEmpty()) {
+            TechnicianSkill skill = skills.get(0);
+            skill.setAvailabilityStatus(status);
+            technicianSkillRepository.save(skill);
+            log.debug("Statut de disponibilité mis à jour avec succès pour le technicien id={}", technicianId);
+        } else {
+            log.warn("Aucune compétence trouvée pour le technicien id={}", technicianId);
+        }
+
+        log.debug("Statut de disponibilité mis à jour pour {} compétences du technicien", skills.size());
     }
 }

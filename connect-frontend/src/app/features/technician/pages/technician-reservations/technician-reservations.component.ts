@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ReservationDto } from '../../../../api/models';
 import { TechnicianReservationService } from '../../services/technician-reservation.service';
 import { HeaderDashboardTechComponent } from "../../components/header-dashboard-tech/header-dashboard-tech.component";
+import { SidebarDashboardTechComponent } from "../../components/sidebar-dashboard-tech/sidebar-dashboard-tech.component";
+import { NavDashboardTechComponent } from "../../components/nav-dashboard-tech/nav-dashboard-tech.component";
 
 @Component({
   selector: 'app-technician-reservations',
   standalone: true,
-  imports: [CommonModule, HeaderDashboardTechComponent],
+  imports: [CommonModule, HeaderDashboardTechComponent, SidebarDashboardTechComponent, NavDashboardTechComponent],
   templateUrl: './technician-reservations.component.html',
   styleUrl: './technician-reservations.component.css'
 })
