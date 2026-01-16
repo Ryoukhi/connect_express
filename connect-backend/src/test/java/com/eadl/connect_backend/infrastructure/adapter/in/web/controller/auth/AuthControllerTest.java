@@ -23,6 +23,7 @@ import com.eadl.connect_backend.application.dto.RegisterDto;
 import com.eadl.connect_backend.application.dto.RegisterResponseDto;
 import com.eadl.connect_backend.application.mapper.RegisterMapper;
 import com.eadl.connect_backend.domain.model.user.Client;
+import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.Technician;
 import com.eadl.connect_backend.domain.port.in.user.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,7 +58,7 @@ class AuthControllerTest {
                 request.setPassword("password");
 
                 AuthResponse response = new AuthResponse("jwt-token", 1L, "Test", "User",
-                                com.eadl.connect_backend.domain.model.user.Role.CLIENT, true);
+                        Role.CLIENT, true, "http://image.jpg");
 
                 when(authService.login(any(AuthRequest.class))).thenReturn(response);
 

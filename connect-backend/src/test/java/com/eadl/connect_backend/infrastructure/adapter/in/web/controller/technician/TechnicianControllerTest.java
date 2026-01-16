@@ -161,7 +161,7 @@ class TechnicianControllerTest {
     void searchTechnicians_ShouldReturnListOfTechnicians() throws Exception {
         // Arrange
         TechnicianResultSearchDto dto = new TechnicianResultSearchDto(
-                "Name", true, 4.5, com.eadl.connect_backend.domain.model.technician.AvailabilityStatus.AVAILABLE,
+                1L, "Name", true, 4.5, com.eadl.connect_backend.domain.model.technician.AvailabilityStatus.AVAILABLE,
                 50.0, "Skill", 5, "City", "Neighborhood");
 
         when(technicianService.searchTechnicians(any(), any(), any(), any(), any(), any(), any()))
