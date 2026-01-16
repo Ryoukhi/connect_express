@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-                @for (client of clients; track client.id) {
+                @for (client of clients; track client.idUser) {
                 <tr class="hover:bg-gray-50 transition-colors">
                     <td class="p-4">
                         <div class="flex items-center gap-3">
@@ -33,9 +33,9 @@
                     </td>
                     <td class="p-4 text-gray-600">{{ client.email }}</td>
                     <td class="p-4 text-gray-600">{{ client.phone }}</td>
-                    <td class="p-4 text-gray-600">{{ client.joinedDate | date:'dd/MM/yyyy' }}</td>
+                    <td class="p-4 text-gray-600">{{ client.createdAt | date:'dd/MM/yyyy' }}</td>
                     <td class="p-4 text-right">
-                        <button (click)="deleteClient(client.id)"
+                        <button (click)="deleteClient(client.idUser)"
                             class="text-gray-400 hover:text-red-600 hover:bg-gray-100 p-2 rounded-lg"
                             title="Supprimer">🗑️</button>
                     </td>

@@ -32,6 +32,7 @@ export interface Technician extends UserDto {
     // Logic: if !active -> PENDING? Or if !kycVerified?
     // Backend 'validateKyc' activates the tech. So inactive = PENDING.
     joinedDate: string; // from createdAt
+    neighborhood?: string;
 }
 
 export interface TechnicianSkillDto {
@@ -91,6 +92,10 @@ export class AdminService {
 
     getClients(): Observable<UserDto[]> {
         return this.searchUsers(undefined, 'CLIENT');
+    }
+
+    getAdmins(): Observable<UserDto[]> {
+        return this.searchUsers(undefined, 'ADMIN');
     }
 
     // ================= TECHNICIANS =================
