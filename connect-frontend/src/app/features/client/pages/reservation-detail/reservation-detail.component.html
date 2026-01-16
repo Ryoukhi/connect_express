@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+
+        <div *ngIf="loading" class="text-center py-12 text-slate-500">
+            Chargement...
+        </div>
+
+        <div *ngIf="!loading && reservation" class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-slate-900 p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-3 text-slate-400 text-sm mb-2">
+                        <span>#{{ reservation.idReservation }}</span>
+                        <span>•</span>
+                        <span>{{ reservation.createdAt | date:'medium' }}</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-white">Détails de la réservation</h1>
+                </div>
+                <span
+                    [class]="'px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wide ' + getStatusClass(reservation.status)">
+                    {{ reservation.status }}
+                </span>
+            </div>
+
+            <!-- Info -->
+            <div class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Date prévue</h3>
+                        <p class="text-lg font-medium text-slate-900">{{ reservation.scheduledTime | date:'fullDate' }}
+                        </p>
+                        <p class="text-slate-500">{{ reservation.scheduledTime | date:'shortTime' }}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Lieu</h3>
+                        <p class="text-lg font-medium text-slate-900">{{ reservation.city }}</p>
+                        <p class="text-slate-500">{{ reservation.neighborhood }}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Description</h3>
+                    <p
+                        class="text-slate-700 bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm leading-relaxed">
+                        {{ reservation.description }}
+                    </p>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-wrap gap-4 pt-8 border-t border-slate-100">
+                    <button *ngIf="reservation.status === 'PENDING' || reservation.status === 'ACCEPTED'"
+                        (click)="cancelReservation()"
+                        class="px-6 py-2.5 rounded-lg border border-red-200 text-red-600 font-medium hover:bg-red-50 transition">
+                        Annuler la réservation
+                    </button>
+
+                    <button *ngIf="reservation.status === 'COMPLETED' && !reservation.idReview" (click)="openReview()"
+                        class="px-6 py-2.5 rounded-lg bg-yellow-500 text-white font-bold hover:bg-yellow-600 transition shadow-lg shadow-yellow-200">
+                        Laisser un avis
+                    </button>
+                    <div *ngIf="reservation.idReview" class="text-green-600 font-medium flex items-center gap-2">
+                        <i class="fas fa-check-circle"></i> Avis laissé
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Review Modal -->
+<app-review-form *ngIf="showReviewForm && reservation" [reservationId]="reservation.idReservation"
+    (onClose)="showReviewForm = false" (onSubmitSuccess)="onReviewSubmitted()">
+</app-review-form>

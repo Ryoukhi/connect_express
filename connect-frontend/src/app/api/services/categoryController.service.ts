@@ -33,7 +33,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -50,7 +50,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -83,7 +83,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -100,7 +100,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -117,7 +117,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -134,7 +134,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -183,7 +183,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -200,7 +200,7 @@ export class CategoryControllerService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

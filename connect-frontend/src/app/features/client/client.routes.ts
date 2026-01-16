@@ -1,0 +1,10 @@
+import { Routes } from '@angular/router';
+import { BookingFormComponent } from './pages/booking-form/booking-form.component';
+import { ClientReservationsComponent } from './pages/client-reservations/client-reservations.component';
+import { ReservationDetailComponent } from './pages/reservation-detail/reservation-detail.component';
+
+export const CLIENT_ROUTES: Routes = [
+    { path: 'book/:technicianId', component: BookingFormComponent },
+    { path: 'reservations', component: ClientReservationsComponent },
+    { path: 'reservations/:id', component: ReservationDetailComponent }
+];

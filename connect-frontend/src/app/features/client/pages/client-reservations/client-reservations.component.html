@@ -1,0 +1,89 @@
+<app-client-header></app-client-header>
+<div class="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-slate-900 mb-8">Mes Réservations</h1>
+
+        <!-- Tabs -->
+        <div class="flex border-b border-slate-200 mb-6">
+            <button (click)="activeTab = 'current'"
+                [class]="activeTab === 'current' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
+                class="pb-4 px-6 border-b-2 font-medium text-sm transition-colors">
+                En cours
+            </button>
+            <button (click)="activeTab = 'history'"
+                [class]="activeTab === 'history' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
+                class="pb-4 px-6 border-b-2 font-medium text-sm transition-colors">
+                Historique
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div *ngIf="loading" class="text-center py-12 text-slate-500">
+            <i class="fas fa-spinner fa-spin fa-2x mb-4"></i>
+            <p>Chargement de vos réservations...</p>
+        </div>
+
+        <div *ngIf="!loading">
+            <!-- Current List -->
+            <div *ngIf="activeTab === 'current'">
+                <div *ngIf="currentReservations.length === 0"
+                    class="text-center py-12 bg-white rounded-xl shadow-sm border border-slate-100">
+                    <p class="text-slate-500 mb-4">Aucune réservation en cours.</p>
+                    <a routerLink="/catalogue"
+                        class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition">
+                        Trouver un technicien
+                    </a>
+                </div>
+                <div class="space-y-4">
+                    <div *ngFor="let res of currentReservations"
+                        [routerLink]="['/client/reservations', res.idReservation]"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer flex justify-between items-center group">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <span
+                                    [class]="'px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide ' + getStatusClass(res.status)">
+                                    {{ getStatusLabel(res.status) }}
+                                </span>
+                                <span class="text-xs text-slate-400">{{ res.createdAt | date:'dd MMM yyyy' }}</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg">Réservation #{{ res.idReservation }}</h3>
+                            <p class="text-slate-600 text-sm mt-1">{{ res.description | slice:0:60 }}{{
+                                (res.description?.length || 0) > 60 ? '...' : '' }}</p>
+                        </div>
+                        <div class="text-slate-400 group-hover:text-blue-600 transition">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History List -->
+            <div *ngIf="activeTab === 'history'">
+                <div *ngIf="historyReservations.length === 0" class="text-center py-12 text-slate-500">
+                    Aucune réservation dans l'historique.
+                </div>
+                <div class="space-y-4">
+                    <div *ngFor="let res of historyReservations"
+                        [routerLink]="['/client/reservations', res.idReservation]"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer flex justify-between items-center opacity-75 hover:opacity-100 group">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <span
+                                    [class]="'px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide ' + getStatusClass(res.status)">
+                                    {{ getStatusLabel(res.status) }}
+                                </span>
+                                <span class="text-xs text-slate-400">{{ res.createdAt | date:'dd MMM yyyy' }}</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900">Réservation #{{ res.idReservation }}</h3>
+                            <p class="text-slate-500 text-sm mt-1">{{ res.scheduledTime | date:'dd MMM yyyy à HH:mm' }}
+                            </p>
+                        </div>
+                        <div class="text-slate-400 group-hover:text-blue-600 transition">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

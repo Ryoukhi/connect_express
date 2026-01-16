@@ -141,6 +141,7 @@ export interface AuthResponse {
     lastName?: string;
     role?: 'CLIENT' | 'TECHNICIAN' | 'ADMIN';
     active?: boolean;
+    profilePhotoUrl?: string;
 }
 
 export interface RegisterAdminDto {

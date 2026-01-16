@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TechnicianResultSearchDto, CategoryDto } from '../../../../api/models';
 import { TechniciensService } from '../../../../api/services/techniciens.service';
 import { CategoryControllerService } from '../../../../api/services/categoryController.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-content',
@@ -12,24 +13,27 @@ import { CategoryControllerService } from '../../../../api/services/categoryCont
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.css'
 })
-export class MainContentComponent {
+export class MainContentComponent implements OnInit{
   filters: {
     city?: string;
     district?: string;
     category?: string | null;
     availabilityStatus?: string;
     minRating?: number | null;
+    minPrice?: number | null;
     maxPrice?: number | null;
   } = {
-    city: '',
-    district: '',
-    category: null,
-    availabilityStatus: '',
-    minRating: null,
-    maxPrice: 50000
-  };
+      city: '',
+      district: '',
+      category: null,
+      availabilityStatus: '',
+      minRating: null,
+      minPrice: 0,
+      maxPrice: 50000
+    };
 
   categories: CategoryDto[] = [];
+  categoriesLoading = false;
   technicians: TechnicianResultSearchDto[] = [];
   loading = false;
   errorMsg: string | null = null;
@@ -37,9 +41,16 @@ export class MainContentComponent {
   pageSize: number = 9; // 3 colonnes x 3 lignes
   totalTechnicians: number = 0;
 
+  ngOnInit(): void {
+    this.loadCategories();
+    this.search;
+  }
+
   constructor(
     private techniciensService: TechniciensService,
-    private categoryService: CategoryControllerService
+
+    private categoryService: CategoryControllerService,
+    private router: Router
   ) {
     // initial load
     this.loadCategories();
@@ -47,9 +58,18 @@ export class MainContentComponent {
   }
 
   loadCategories() {
+    this.categoriesLoading = true;
     this.categoryService.getActiveCategories('body').subscribe({
-      next: (data) => this.categories = data || [],
-      error: () => this.categories = []
+      next: (data) => {
+        console.log('Categories from API:', data);
+        this.categories = data || [];
+        this.categoriesLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading categories', err);
+        this.categories = [];
+        this.categoriesLoading = false;
+      }
     });
   }
 
@@ -61,7 +81,6 @@ export class MainContentComponent {
 
   getTechnicianDisplayName(tech: any): string {
     if (!tech) return 'Technicien';
-    // New DTO provides a display `name` field
     if (tech.name) return tech.name;
     if (tech.fullName) return tech.fullName;
     return 'Technicien';
@@ -97,7 +116,7 @@ export class MainContentComponent {
       this.filters.category || undefined,
       availability as any,
       this.filters.minRating || undefined,
-      undefined,
+      this.filters.minPrice || undefined,
       this.filters.maxPrice || undefined,
       'body'
     ).subscribe({
@@ -165,4 +184,11 @@ export class MainContentComponent {
     });
   }
 
+  bookTechnician(tech: TechnicianResultSearchDto) {
+    this.router.navigate(['/client/book', (tech as any).id]);
+  }
+
+  trackByCategory(index: number, category: CategoryDto): number {
+    return category.idCategory || index;
+  }
 }

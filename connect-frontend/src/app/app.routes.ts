@@ -11,6 +11,7 @@ import { TechSkillsComponent } from './features/technician/pages/tech-skills/tec
 import { TodayReservationsComponent } from './features/technician/pages/today-reservations/today-reservations.component';
 import { ReservationDetailComponent } from './features/technician/pages/reservation-detail/reservation-detail.component';
 import { PendingReservationsComponent } from './features/technician/pages/pending-reservations/pending-reservations.component';
+import { TechnicianReservationsComponent } from './features/technician/pages/technician-reservations/technician-reservations.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -21,12 +22,18 @@ export const routes: Routes = [
   { path: 'dashboard-technicien', component: DashboardTechnicienComponent, canActivate: [authGuard] },
   { path: 'dashboard-technicien/profile', component: TechSkillsComponent, canActivate: [authGuard] },
   { path: 'dashboard-technicien/today', component: TodayReservationsComponent, canActivate: [authGuard] },
+  { path: 'dashboard-technicien/reservations', component: TechnicianReservationsComponent, canActivate: [authGuard] },
   { path: 'dashboard-technicien/reservation/:id', component: ReservationDetailComponent, canActivate: [authGuard] },
   { path: 'dashboard-technicien/pending', component: PendingReservationsComponent, canActivate: [authGuard] },
   {
-    path: 'admin',
+    path: 'dashboard-admin',
     loadChildren: () => import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES),
     canActivate: [adminGuard]
+  },
+  {
+    path: 'client',
+    loadChildren: () => import('./features/client/client.routes').then(m => m.CLIENT_ROUTES),
+    canActivate: [authGuard]
   },
   { path: '**', redirectTo: 'login' } // Wildcard route for a 404 page
 ];
