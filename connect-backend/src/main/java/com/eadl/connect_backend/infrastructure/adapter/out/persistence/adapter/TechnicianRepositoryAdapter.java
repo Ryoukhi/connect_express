@@ -98,7 +98,7 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
         log.debug("Finding active Technicians");
 
         return jpaRepository
-                .findByRoleAndActiveTrue(Role.TECHNICIAN, true)
+                .findByRoleAndActiveTrue(Role.TECHNICIAN)
                 .stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
@@ -106,14 +106,14 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Technician> findByRoleAndActiveTrue(Role role, boolean active) {
+    public List<Technician> findByRoleAndActiveTrue(Role role) {
         log.debug(
-                "Finding users by role={} and active={}",
-                role, active
+                "Finding users by role={} and active= true",
+                role
         );
 
         List<UserEntity> entities =
-                jpaRepository.findByRoleAndActiveTrue(role, active);
+                jpaRepository.findByRoleAndActiveTrue(role);
 
         return entities.stream()
                 .map(entity -> {

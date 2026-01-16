@@ -19,6 +19,12 @@ public class TechnicianSkillEntityMapper {
         entity.setName(skill.getName());
         entity.setDescription(skill.getDescription());
         entity.setLevel(skill.getLevel());
+        entity.setYearsExperience(skill.getYearsExperience());
+        entity.setHourlyRate(skill.getHourlyRate());
+        entity.setAvailabilityStatus(skill.getAvailabilityStatus());
+        entity.setVerified(skill.isVerified());
+        entity.setCreatedAt(skill.getCreatedAt());
+        entity.setUpdatedAt(skill.getUpdatedAt());
 
         // Création minimale des relations avec uniquement les IDs
         if (skill.getIdUser() != null) {
@@ -47,6 +53,12 @@ public class TechnicianSkillEntityMapper {
         skill.setName(entity.getName());
         skill.setDescription(entity.getDescription());
         skill.setLevel(entity.getLevel());
+        skill.setYearsExperience(entity.getYearsExperience());
+        skill.setHourlyRate(entity.getHourlyRate());
+        skill.setAvailabilityStatus(entity.getAvailabilityStatus());
+        skill.setVerified(entity.isVerified());
+        skill.setCreatedAt(entity.getCreatedAt());
+        skill.setUpdatedAt(entity.getUpdatedAt());
 
         if (entity.getTechnician() != null) {
             skill.setIdUser(entity.getTechnician().getIdUser());

@@ -66,6 +66,9 @@ public class TechnicianSkillServiceImpl implements TechnicianSkillService {
         existing.setName(updatedSkill.getName() != null ? updatedSkill.getName() : existing.getName());
         existing.setDescription(updatedSkill.getDescription() != null ? updatedSkill.getDescription() : existing.getDescription());
         existing.setLevel(updatedSkill.getLevel() != null ? updatedSkill.getLevel() : existing.getLevel());
+        existing.setYearsExperience(updatedSkill.getYearsExperience() != null ? updatedSkill.getYearsExperience() : existing.getYearsExperience());
+        existing.setHourlyRate(updatedSkill.getHourlyRate() != null ? updatedSkill.getHourlyRate() : existing.getHourlyRate());
+        existing.setAvailabilityStatus(updatedSkill.getAvailabilityStatus() != null ? updatedSkill.getAvailabilityStatus() : existing.getAvailabilityStatus());
         existing.setIdCategory(updatedSkill.getIdCategory() != null ? updatedSkill.getIdCategory() : existing.getIdCategory());
 
         TechnicianSkill saved = skillRepository.save(existing);

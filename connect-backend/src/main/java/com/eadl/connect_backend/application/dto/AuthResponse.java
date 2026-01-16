@@ -10,14 +10,16 @@ public class AuthResponse {
     private String lastName;
     private Role role;
     private boolean active;
+    private String profilePhotoUrl;
     
-    public AuthResponse(String token, Long userId, String firstName, String lastName, Role role, boolean active) {
+    public AuthResponse(String token, Long userId, String firstName, String lastName, Role role, boolean active, String profilePhotoUrl) {
         this.token = token;
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.active = active;
+        this.profilePhotoUrl = profilePhotoUrl;
     }
 
     public String getToken() {
@@ -68,6 +70,14 @@ public class AuthResponse {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getProfilePhotoUrl() {
+        return profilePhotoUrl;
+    }
+
+    public void setProfilePhotoUrl(String profilePhotoUrl) {
+        this.profilePhotoUrl = profilePhotoUrl;
     }
 
     

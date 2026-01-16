@@ -3,6 +3,7 @@ package com.eadl.connect_backend.application.dto;
 import com.eadl.connect_backend.domain.model.technician.AvailabilityStatus;
 
 public class TechnicianResultSearchDto {
+    private Long id;
     private String name;
     private boolean verified;
     private double averageRating;
@@ -13,7 +14,8 @@ public class TechnicianResultSearchDto {
     private String city;
     private String neighborhood;
 
-    public TechnicianResultSearchDto(String name, boolean verified, double averageRating, AvailabilityStatus availabilityStatus, double hourlyRate, String skillName, int yearsOfExperience, String city, String neighborhood) {
+    public TechnicianResultSearchDto(Long id, String name, boolean verified, double averageRating, AvailabilityStatus availabilityStatus, double hourlyRate, String skillName, int yearsOfExperience, String city, String neighborhood) {
+        this.id = id;
         this.name = name;
         this.verified = verified;
         this.averageRating = averageRating;
@@ -24,6 +26,8 @@ public class TechnicianResultSearchDto {
         this.city = city;
         this.neighborhood = neighborhood;
     }
+
+    public Long getId() { return id; }
 
     // Getters and Setters
     public String getName() { return name; }

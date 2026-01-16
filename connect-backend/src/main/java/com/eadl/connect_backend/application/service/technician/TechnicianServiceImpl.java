@@ -151,6 +151,7 @@ public class TechnicianServiceImpl implements TechnicianService {
                     if (minRating != null && averageRating < minRating) return null;
 
                     return new TechnicianResultSearchDto(
+                            tech.getIdUser(),
                             tech.getFullName(),
                             skill.isVerified(),
                             averageRating,
@@ -167,5 +168,25 @@ public class TechnicianServiceImpl implements TechnicianService {
 
         log.debug("Nombre de techniciens trouvés: {}", results.size());
         return results;
+    }
+
+    @Override
+    public void updateAvailabilityStatus(Long technicianId, AvailabilityStatus status) {
+            log.info("Mise à jour du statut de disponibilité pour le technicien id={} vers {}", technicianId, status);
+        
+            // Récupérer la compétence(s) du technicien via le repository (port)
+            List<TechnicianSkill> skills = technicianSkillRepository.findByUserId(technicianId);
+        
+            // Mettre à jour le statut si une compétence existe
+            if (!skills.isEmpty()) {
+                TechnicianSkill skill = skills.get(0);
+                skill.setAvailabilityStatus(status);
+                technicianSkillRepository.save(skill);
+                log.debug("Statut de disponibilité mis à jour avec succès pour le technicien id={}", technicianId);
+            } else {
+                log.warn("Aucune compétence trouvée pour le technicien id={}", technicianId);
+            }
+        
+            log.debug("Statut de disponibilité mis à jour pour {} compétences du technicien", skills.size());
     }
 }

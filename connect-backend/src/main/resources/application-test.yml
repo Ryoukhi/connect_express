@@ -11,7 +11,7 @@ spring:
     show-sql: false
 
 jwt:
-  secret: test-secret-key
+  secret: MjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA=
   expiration: 3600000
 
 logging:

@@ -37,4 +37,6 @@ public interface TechnicianService {
             Double maxPrice
     );
     
+    void updateAvailabilityStatus(Long technicianId, AvailabilityStatus status);
+    
 }

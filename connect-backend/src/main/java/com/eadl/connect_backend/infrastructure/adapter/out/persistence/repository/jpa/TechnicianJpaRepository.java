@@ -16,5 +16,5 @@ public interface TechnicianJpaRepository extends JpaRepository<UserEntity, Long>
 
     List<UserEntity> findByRole(Role role);
 
-     List<UserEntity> findByRoleAndActiveTrue(Role role, boolean active);
+     List<UserEntity> findByRoleAndActiveTrue(Role role);
 }

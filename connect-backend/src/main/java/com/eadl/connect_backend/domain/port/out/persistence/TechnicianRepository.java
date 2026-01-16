@@ -46,5 +46,5 @@ public interface TechnicianRepository {
      */
     List<Technician> findByActiveTrue();
 
-    List<Technician> findByRoleAndActiveTrue(Role role, boolean active);
+    List<Technician> findByRoleAndActiveTrue(Role role);
 }

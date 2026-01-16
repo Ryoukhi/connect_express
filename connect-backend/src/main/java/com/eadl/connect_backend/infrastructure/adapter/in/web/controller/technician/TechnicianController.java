@@ -154,4 +154,36 @@ public class TechnicianController {
             @RequestParam(required = false) Double maxPrice) {
         return technicianService.searchTechnicians(city, neighborhood, categoryName, availabilityStatus, minRating, minPrice, maxPrice);
     }
+
+    /* =========================
+       = DISPONIBILITÉ (TECHNICIAN) =
+       ========================= */
+    @Operation(summary = "Mettre à jour le statut de disponibilité du technicien")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Statut mis à jour",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Technician.class))),
+            @ApiResponse(responseCode = "404", description = "Technicien non trouvé"),
+            @ApiResponse(responseCode = "403", description = "Accès interdit")
+    })
+    @PreAuthorize("hasRole('TECHNICIAN')")
+    @PutMapping("/{technicianId}/availability")
+    public ResponseEntity<?> updateAvailabilityStatus(
+            @Parameter(description = "ID du technicien") @PathVariable Long technicianId,
+            @Parameter(description = "Nouveau statut de disponibilité") @RequestBody java.util.Map<String, String> body
+    ) {
+        String status = body.get("availabilityStatus");
+        if (status == null || status.isEmpty()) {
+            return ResponseEntity.badRequest().body(new java.util.HashMap<String, String>() {{ put("error", "availabilityStatus est requis"); }});
+        }
+        
+        try {
+            AvailabilityStatus availabilityStatus = AvailabilityStatus.valueOf(status);
+            technicianService.updateAvailabilityStatus(technicianId, availabilityStatus);
+            return technicianService.getTechnicianById(technicianId)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new java.util.HashMap<String, String>() {{ put("error", "Statut de disponibilité invalide"); }});
+        }
+    }
 }
