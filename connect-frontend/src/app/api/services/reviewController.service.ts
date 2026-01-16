@@ -25,15 +25,14 @@ export class ReviewControllerService {
         return context.set(this.clientContextToken, 'default');
     }
 
-    getReviewById(id: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReviewDto>;
-    getReviewById(id: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReviewDto>>;
-    getReviewById(id: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReviewDto>>;
+    getReviewById(id: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReviewDto>;
+    getReviewById(id: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReviewDto>>;
+    getReviewById(id: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReviewDto>>;
     getReviewById(id: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reviews/${id}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -42,15 +41,14 @@ export class ReviewControllerService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    updateReview(id: number, reviewDto: ReviewDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReviewDto>;
-    updateReview(id: number, reviewDto: ReviewDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReviewDto>>;
-    updateReview(id: number, reviewDto: ReviewDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReviewDto>>;
+    updateReview(id: number, reviewDto: ReviewDto, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReviewDto>;
+    updateReview(id: number, reviewDto: ReviewDto, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReviewDto>>;
+    updateReview(id: number, reviewDto: ReviewDto, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReviewDto>>;
     updateReview(id: number, reviewDto: ReviewDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reviews/${id}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -81,15 +79,14 @@ export class ReviewControllerService {
         return this.httpClient.delete(url, requestOptions);
     }
 
-    createReview(reviewDto: ReviewDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReviewDto>;
-    createReview(reviewDto: ReviewDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReviewDto>>;
-    createReview(reviewDto: ReviewDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReviewDto>>;
+    createReview(reviewDto: ReviewDto, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReviewDto>;
+    createReview(reviewDto: ReviewDto, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReviewDto>>;
+    createReview(reviewDto: ReviewDto, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReviewDto>>;
     createReview(reviewDto: ReviewDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reviews`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -115,15 +112,14 @@ export class ReviewControllerService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    getReviewForReservation(reservationId: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReviewDto>;
-    getReviewForReservation(reservationId: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReviewDto>>;
-    getReviewForReservation(reservationId: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReviewDto>>;
+    getReviewForReservation(reservationId: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReviewDto>;
+    getReviewForReservation(reservationId: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReviewDto>>;
+    getReviewForReservation(reservationId: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReviewDto>>;
     getReviewForReservation(reservationId: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reviews/reservation/${reservationId}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -132,15 +128,14 @@ export class ReviewControllerService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    getMyReviews(observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<ReviewDto>>;
-    getMyReviews(observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<ReviewDto>>>;
-    getMyReviews(observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<ReviewDto>>>;
+    getMyReviews(observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<ReviewDto>>;
+    getMyReviews(observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<ReviewDto>>>;
+    getMyReviews(observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<ReviewDto>>>;
     getMyReviews(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reviews/me`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -149,15 +144,14 @@ export class ReviewControllerService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    getClientReviews(clientId: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<ReviewDto>>;
-    getClientReviews(clientId: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<ReviewDto>>>;
-    getClientReviews(clientId: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<ReviewDto>>>;
+    getClientReviews(clientId: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<ReviewDto>>;
+    getClientReviews(clientId: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<ReviewDto>>>;
+    getClientReviews(clientId: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<ReviewDto>>>;
     getClientReviews(clientId: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reviews/client/${clientId}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

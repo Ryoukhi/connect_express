@@ -76,16 +76,15 @@ export class BookingFormComponent implements OnInit {
         this.submitLoading = true;
         this.errorMsg = null;
 
-        // Combine Date and Time
-        // Note: Backend DTO expects Date (ISO string normally).
-        // Let's assume standard ISO format YYYY-MM-DDTHH:mm:00
-        const scheduledDateTime = new Date(`${this.dateInput}T${this.timeInput}:00`);
+        // Combine Date and Time into a LocalDateTime compatible format (ISO 8601 without 'Z')
+        // Backend LocalDateTime expects "yyyy-MM-ddTHH:mm:ss"
+        const scheduledTime = `${this.dateInput}T${this.timeInput}:00`;
 
         const payload: ReservationDto = {
             ...this.reservation,
             idTechnician: this.technician.idUser,
-            scheduledTime: scheduledDateTime.toISOString() as any, // Cast to any if Typescript complains about Date vs String mismatch
-            dateRequested: new Date().toISOString() as any
+            scheduledTime: scheduledTime as any,
+            dateRequested: undefined // Backend handles this via @PrePersist or in service
         };
 
         this.reservationService.createReservation(payload).subscribe({
@@ -99,7 +98,7 @@ export class BookingFormComponent implements OnInit {
             error: (err) => {
                 this.submitLoading = false;
                 this.errorMsg = "Erreur lors de la réservation. Veuillez réessayer.";
-                console.error(err);
+                console.error("Reservation Error:", err);
             }
         });
     }

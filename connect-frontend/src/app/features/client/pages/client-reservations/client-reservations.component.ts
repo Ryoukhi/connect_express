@@ -24,19 +24,26 @@ export class ClientReservationsComponent implements OnInit {
 
     loadReservations() {
         this.loading = true;
+        console.log('Fetching client reservations...');
         this.reservationService.getMyClientReservations().subscribe({
             next: (data) => {
-                console.log('Reservations data:', data);
-                if (Array.isArray(data)) {
-                    this.reservations = data;
+                console.log('Successfully loaded reservations:', data);
+                // Ensure data is an array and filter out any invalid entries
+                if (data && Array.isArray(data)) {
+                    this.reservations = data.sort((a, b) => {
+                        // Sort by most recent first
+                        const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                        const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                        return dateB - dateA;
+                    });
                 } else {
-                    console.warn('Invalid reservations data format:', data);
+                    console.error('Expected array for reservations but received:', typeof data);
                     this.reservations = [];
                 }
                 this.loading = false;
             },
             error: (err) => {
-                console.error('Error loading reservations:', err);
+                console.error('Failed to load reservations:', err);
                 this.reservations = [];
                 this.loading = false;
             }
@@ -44,36 +51,46 @@ export class ClientReservationsComponent implements OnInit {
     }
 
     get currentReservations() {
-        return this.reservations.filter(r => ['PENDING', 'ACCEPTED', 'EN_ROUTE', 'IN_PROGRESS'].includes(r.status || ''));
+        const ongoingStatuses = ['PENDING', 'ACCEPTED', 'EN_ROUTE', 'IN_PROGRESS'];
+        return this.reservations.filter(r => ongoingStatuses.includes(r.status || ''));
     }
 
     get historyReservations() {
-        return this.reservations.filter(r => ['COMPLETED', 'CANCELLED', 'REJECTED'].includes(r.status || ''));
+        const historyStatuses = ['COMPLETED', 'CANCELLED', 'REJECTED'];
+        return this.reservations.filter(r => historyStatuses.includes(r.status || ''));
     }
 
     getStatusClass(status?: string): string {
         switch (status) {
-            case 'PENDING': return 'bg-yellow-100 text-yellow-800';
-            case 'ACCEPTED': return 'bg-blue-100 text-blue-800';
-            case 'EN_ROUTE': return 'bg-indigo-100 text-indigo-800';
-            case 'IN_PROGRESS': return 'bg-purple-100 text-purple-800';
-            case 'COMPLETED': return 'bg-green-100 text-green-800';
-            case 'CANCELLED': return 'bg-red-100 text-red-800';
-            case 'REJECTED': return 'bg-gray-100 text-gray-800';
-            default: return 'bg-gray-100 text-gray-800';
+            case 'PENDING':
+                return 'bg-amber-100 text-amber-700 border-amber-200';
+            case 'ACCEPTED':
+                return 'bg-blue-100 text-blue-700 border-blue-200';
+            case 'EN_ROUTE':
+                return 'bg-sky-100 text-sky-700 border-sky-200';
+            case 'IN_PROGRESS':
+                return 'bg-indigo-100 text-indigo-700 border-indigo-200';
+            case 'COMPLETED':
+                return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+            case 'CANCELLED':
+                return 'bg-rose-100 text-rose-700 border-rose-200';
+            case 'REJECTED':
+                return 'bg-slate-100 text-slate-700 border-slate-200';
+            default:
+                return 'bg-slate-100 text-slate-500 border-slate-200';
         }
     }
 
     getStatusLabel(status?: string): string {
-        switch (status) {
-            case 'PENDING': return 'En attente';
-            case 'ACCEPTED': return 'Acceptée';
-            case 'EN_ROUTE': return 'En route';
-            case 'IN_PROGRESS': return 'En cours';
-            case 'COMPLETED': return 'Terminée';
-            case 'CANCELLED': return 'Annulée';
-            case 'REJECTED': return 'Refusée';
-            default: return status || 'Inconnu';
-        }
+        const labels: { [key: string]: string } = {
+            'PENDING': 'En attente',
+            'ACCEPTED': 'Confirmée',
+            'EN_ROUTE': 'En chemin',
+            'IN_PROGRESS': 'En intervention',
+            'COMPLETED': 'Terminée',
+            'CANCELLED': 'Annulée',
+            'REJECTED': 'Refusée'
+        };
+        return labels[status || ''] || status || 'Inconnu';
     }
 }

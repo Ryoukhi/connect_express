@@ -59,6 +59,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/technician-skills/**").hasRole("TECHNICIAN")
                         // Admin-only endpoints
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/reservations/**").hasAnyRole("CLIENT", "TECHNICIAN")
                         // Tout le reste nécessite une authentification
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthFilter(jwtUtil, userDetailsService),

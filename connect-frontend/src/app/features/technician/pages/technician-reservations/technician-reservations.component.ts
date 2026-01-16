@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReservationDto } from '../../../../api/models';
 import { TechnicianReservationService } from '../../services/technician-reservation.service';
+import { HeaderDashboardTechComponent } from "../../components/header-dashboard-tech/header-dashboard-tech.component";
 
 @Component({
   selector: 'app-technician-reservations',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderDashboardTechComponent],
   templateUrl: './technician-reservations.component.html',
   styleUrl: './technician-reservations.component.css'
 })

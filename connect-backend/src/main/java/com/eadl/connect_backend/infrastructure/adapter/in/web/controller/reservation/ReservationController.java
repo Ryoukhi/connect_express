@@ -31,181 +31,176 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Tag(name = "Reservations", description = "Gestion des réservations pour clients, techniciens et admin")
 public class ReservationController {
 
-    private final ReservationService reservationService;
-    private final ReservationMapper reservationMapper;
-    private final CurrentUserProvider currentUserProvider;
+        private final ReservationService reservationService;
+        private final ReservationMapper reservationMapper;
+        private final CurrentUserProvider currentUserProvider;
 
-    // ================== CREATE ==================
-    @Operation(summary = "Créer une réservation (CLIENT)")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Réservation créée",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
-            @ApiResponse(responseCode = "400", description = "Données invalides"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasRole('CLIENT')")
-    @PostMapping
-    public ResponseEntity<ReservationDto> createReservation(@RequestBody ReservationDto dto) {
-        Reservation reservation = reservationMapper.toModel(dto);
-        Reservation created = reservationService.createReservation(reservation);
-        return ResponseEntity.status(HttpStatus.CREATED).body(reservationMapper.toDto(created));
-    }
+        // ================== CREATE ==================
+        @Operation(summary = "Créer une réservation (CLIENT)")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "201", description = "Réservation créée", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
+                        @ApiResponse(responseCode = "400", description = "Données invalides"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('CLIENT')")
+        @PostMapping
+        public ResponseEntity<ReservationDto> createReservation(@RequestBody ReservationDto dto) {
+                // Set the current client ID automatically
+                Long clientId = currentUserProvider.getCurrentUserId();
+                dto.setIdClient(clientId);
 
-    // ================== READ ==================
-    @Operation(summary = "Récupérer une réservation par ID")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Réservation trouvée",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
-            @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasAnyRole('CLIENT','TECHNICIAN','ADMIN')")
-    @GetMapping("/{id}")
-    public ResponseEntity<ReservationDto> getById(@Parameter(description = "ID de la réservation") @PathVariable Long id) {
-        return reservationService.getReservationById(id)
-                .map(reservationMapper::toDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+                Reservation reservation = reservationMapper.toModel(dto);
+                Reservation created = reservationService.createReservation(reservation);
+                return ResponseEntity.status(HttpStatus.CREATED).body(reservationMapper.toDto(created));
+        }
 
-    @Operation(summary = "Réservations du client connecté")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Liste des réservations"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasRole('CLIENT')")
-    @GetMapping("/me/client")
-    public ResponseEntity<List<ReservationDto>> getMyClientReservations() {
-        Long clientId = currentUserProvider.getCurrentUserId();
-        return ResponseEntity.ok(
-                reservationService.getClientReservations(clientId).stream().map(reservationMapper::toDto).toList()
-        );
-    }
+        // ================== READ ==================
+        @Operation(summary = "Récupérer une réservation par ID")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Réservation trouvée", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
+                        @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasAnyRole('CLIENT','TECHNICIAN','ADMIN')")
+        @GetMapping("/{id}")
+        public ResponseEntity<ReservationDto> getById(
+                        @Parameter(description = "ID de la réservation") @PathVariable Long id) {
+                return reservationService.getReservationById(id)
+                                .map(reservationMapper::toDto)
+                                .map(ResponseEntity::ok)
+                                .orElse(ResponseEntity.notFound().build());
+        }
 
-    @Operation(summary = "Réservations du technicien connecté")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Liste des réservations"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasRole('TECHNICIAN')")
-    @GetMapping("/me/technician")
-    public ResponseEntity<List<ReservationDto>> getMyTechnicianReservations() {
-        Long technicianId = currentUserProvider.getCurrentUserId();
-        return ResponseEntity.ok(
-                reservationService.getTechnicianReservations(technicianId).stream().map(reservationMapper::toDto).toList()
-        );
-    }
+        @Operation(summary = "Réservations du client connecté")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Liste des réservations"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('CLIENT')")
+        @GetMapping("/me/client")
+        public ResponseEntity<List<ReservationDto>> getMyClientReservations() {
+                Long clientId = currentUserProvider.getCurrentUserId();
+                return ResponseEntity.ok(
+                                reservationService.getClientReservations(clientId).stream()
+                                                .map(reservationMapper::toDto).toList());
+        }
 
-    // ================== UPDATE ==================
-    @Operation(summary = "Modifier une réservation")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Réservation mise à jour",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
-            @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasAnyRole('CLIENT','TECHNICIAN')")
-    @PutMapping("/{id}")
-    public ResponseEntity<ReservationDto> updateReservation(
-            @Parameter(description = "ID de la réservation") @PathVariable Long id,
-            @RequestBody ReservationDto dto
-    ) {
-        Reservation updated = reservationMapper.toModel(dto);
-        Reservation result = reservationService.updateReservation(id, updated);
-        return ResponseEntity.ok(reservationMapper.toDto(result));
-    }
+        @Operation(summary = "Réservations du technicien connecté")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Liste des réservations"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('TECHNICIAN')")
+        @GetMapping("/me/technician")
+        public ResponseEntity<List<ReservationDto>> getMyTechnicianReservations() {
+                Long technicianId = currentUserProvider.getCurrentUserId();
+                return ResponseEntity.ok(
+                                reservationService.getTechnicianReservations(technicianId).stream()
+                                                .map(reservationMapper::toDto).toList());
+        }
 
-    @Operation(summary = "Annuler une réservation")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Réservation annulée",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
-            @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasAnyRole('CLIENT','TECHNICIAN','ADMIN')")
-    @PostMapping("/{id}/cancel")
-    public ResponseEntity<ReservationDto> cancelReservation(
-            @Parameter(description = "ID de la réservation") @PathVariable Long id,
-            @Parameter(description = "Raison de l'annulation") @RequestParam(required = false) String reason
-    ) {
-        Long userId = currentUserProvider.getCurrentUserId();
-        Reservation cancelled = reservationService.cancelReservation(id, userId, reason);
-        return ResponseEntity.ok(reservationMapper.toDto(cancelled));
-    }
+        // ================== UPDATE ==================
+        @Operation(summary = "Modifier une réservation")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Réservation mise à jour", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
+                        @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasAnyRole('CLIENT','TECHNICIAN')")
+        @PutMapping("/{id}")
+        public ResponseEntity<ReservationDto> updateReservation(
+                        @Parameter(description = "ID de la réservation") @PathVariable Long id,
+                        @RequestBody ReservationDto dto) {
+                Reservation updated = reservationMapper.toModel(dto);
+                Reservation result = reservationService.updateReservation(id, updated);
+                return ResponseEntity.ok(reservationMapper.toDto(result));
+        }
 
-    @Operation(summary = "Changer le statut d’une réservation")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Statut mis à jour",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
-            @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasAnyRole('TECHNICIAN','ADMIN')")
-    @PostMapping("/{id}/status")
-    public ResponseEntity<ReservationDto> changeStatus(
-            @Parameter(description = "ID de la réservation") @PathVariable Long id,
-            @Parameter(description = "Nouveau statut") @RequestParam ReservationStatus status
-    ) {
-        Reservation updated = reservationService.changeStatus(id, status);
-        return ResponseEntity.ok(reservationMapper.toDto(updated));
-    }
+        @Operation(summary = "Annuler une réservation")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Réservation annulée", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
+                        @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasAnyRole('CLIENT','TECHNICIAN','ADMIN')")
+        @PostMapping("/{id}/cancel")
+        public ResponseEntity<ReservationDto> cancelReservation(
+                        @Parameter(description = "ID de la réservation") @PathVariable Long id,
+                        @Parameter(description = "Raison de l'annulation") @RequestParam(required = false) String reason) {
+                Long userId = currentUserProvider.getCurrentUserId();
+                Reservation cancelled = reservationService.cancelReservation(id, userId, reason);
+                return ResponseEntity.ok(reservationMapper.toDto(cancelled));
+        }
 
-    @Operation(summary = "Marquer une réservation comme complétée")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Réservation complétée",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
-            @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasRole('TECHNICIAN')")
-    @PostMapping("/{id}/complete")
-    public ResponseEntity<ReservationDto> completeReservation(
-            @Parameter(description = "ID de la réservation") @PathVariable Long id
-    ) {
-        Reservation completed = reservationService.completeReservation(id);
-        return ResponseEntity.ok(reservationMapper.toDto(completed));
-    }
+        @Operation(summary = "Changer le statut d’une réservation")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Statut mis à jour", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
+                        @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasAnyRole('TECHNICIAN','ADMIN')")
+        @PostMapping("/{id}/status")
+        public ResponseEntity<ReservationDto> changeStatus(
+                        @Parameter(description = "ID de la réservation") @PathVariable Long id,
+                        @Parameter(description = "Nouveau statut") @RequestParam ReservationStatus status) {
+                Reservation updated = reservationService.changeStatus(id, status);
+                return ResponseEntity.ok(reservationMapper.toDto(updated));
+        }
 
-    // ================== AVAILABILITY ==================
-    @Operation(summary = "Vérifier la disponibilité d’un technicien")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Disponibilité renvoyée"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @GetMapping("/availability")
-    public ResponseEntity<Boolean> checkAvailability(
-            @Parameter(description = "ID du technicien") @RequestParam Long technicianId,
-            @Parameter(description = "Début de la période") @RequestParam LocalDateTime start,
-            @Parameter(description = "Fin de la période") @RequestParam LocalDateTime end
-    ) {
-        return ResponseEntity.ok(reservationService.isTechnicianAvailable(technicianId, start, end));
-    }
+        @Operation(summary = "Marquer une réservation comme complétée")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Réservation complétée", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ReservationDto.class))),
+                        @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('TECHNICIAN')")
+        @PostMapping("/{id}/complete")
+        public ResponseEntity<ReservationDto> completeReservation(
+                        @Parameter(description = "ID de la réservation") @PathVariable Long id) {
+                Reservation completed = reservationService.completeReservation(id);
+                return ResponseEntity.ok(reservationMapper.toDto(completed));
+        }
 
-    // ================== ADMIN ==================
-    @Operation(summary = "Supprimer une réservation (admin)")
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Réservation supprimée"),
-            @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReservation(@Parameter(description = "ID de la réservation") @PathVariable Long id) {
-        Long adminId = currentUserProvider.getCurrentUserId();
-        reservationService.deleteReservation(id, adminId);
-        return ResponseEntity.noContent().build();
-    }
+        // ================== AVAILABILITY ==================
+        @Operation(summary = "Vérifier la disponibilité d’un technicien")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Disponibilité renvoyée"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @GetMapping("/availability")
+        public ResponseEntity<Boolean> checkAvailability(
+                        @Parameter(description = "ID du technicien") @RequestParam Long technicianId,
+                        @Parameter(description = "Début de la période") @RequestParam LocalDateTime start,
+                        @Parameter(description = "Fin de la période") @RequestParam LocalDateTime end) {
+                return ResponseEntity.ok(reservationService.isTechnicianAvailable(technicianId, start, end));
+        }
 
-    @Operation(summary = "Compter toutes les réservations (admin)")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Nombre total de réservations"),
-            @ApiResponse(responseCode = "403", description = "Accès interdit")
-    })
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/stats/count")
-    public ResponseEntity<Long> countReservations() {
-        return ResponseEntity.ok(reservationService.countReservations());
-    }
+        // ================== ADMIN ==================
+        @Operation(summary = "Supprimer une réservation (admin)")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "204", description = "Réservation supprimée"),
+                        @ApiResponse(responseCode = "404", description = "Réservation non trouvée"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('ADMIN')")
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Void> deleteReservation(
+                        @Parameter(description = "ID de la réservation") @PathVariable Long id) {
+                Long adminId = currentUserProvider.getCurrentUserId();
+                reservationService.deleteReservation(id, adminId);
+                return ResponseEntity.noContent().build();
+        }
+
+        @Operation(summary = "Compter toutes les réservations (admin)")
+        @ApiResponses({
+                        @ApiResponse(responseCode = "200", description = "Nombre total de réservations"),
+                        @ApiResponse(responseCode = "403", description = "Accès interdit")
+        })
+        @PreAuthorize("hasRole('ADMIN')")
+        @GetMapping("/stats/count")
+        public ResponseEntity<Long> countReservations() {
+                return ResponseEntity.ok(reservationService.countReservations());
+        }
 
         @Operation(summary = "Revenu total d'un technicien (COMPLETED)")
         @ApiResponses({
