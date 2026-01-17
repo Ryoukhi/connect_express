@@ -193,4 +193,44 @@ export class TechniciensService {
 
         return this.httpClient.get(url, requestOptions);
     }
+
+    getAvailableCities(observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<string>>;
+    getAvailableCities(observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<string>>>;
+    getAvailableCities(observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<string>>>;
+    getAvailableCities(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/technicians/locations/cities`;
+
+        const requestOptions: any = {
+            observe: observe as any,
+            responseType: 'json',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
+
+    getAvailableNeighborhoods(city: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<string>>;
+    getAvailableNeighborhoods(city: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<string>>>;
+    getAvailableNeighborhoods(city: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<string>>>;
+    getAvailableNeighborhoods(city: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+        const url = `${this.basePath}/api/technicians/locations/neighborhoods`;
+
+        let params = new HttpParams();
+        if (city != null) {
+            params = HttpParamsBuilder.addToHttpParams(params, city, 'city');
+        }
+
+        const requestOptions: any = {
+            observe: observe as any,
+            params,
+            responseType: 'json',
+            reportProgress: options?.reportProgress,
+            withCredentials: options?.withCredentials,
+            context: this.createContextWithClientId(options?.context)
+        };
+
+        return this.httpClient.get(url, requestOptions);
+    }
 }

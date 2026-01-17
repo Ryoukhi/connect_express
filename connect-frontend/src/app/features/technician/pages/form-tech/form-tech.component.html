@@ -1,211 +1,273 @@
 <div class="flex min-h-screen">
 
-        <!-- 1️⃣ PANNEAU LATÉRAL GAUCHE (VISUEL & ARGUMENTS) - Masqué sur Mobile -->
-        <div class="hidden lg:flex w-1/3 bg-blue-600 p-12 flex-col justify-between text-white sticky top-0 h-screen">
-            <div>
-                <a href="index.html" class="flex items-center gap-2 mb-12">
-                    <div class="bg-white p-2 rounded-lg">
-                        <i class="fas fa-bolt text-blue-600"></i>
-                    </div>
-                    <span class="text-2xl font-bold tracking-tight">Connect<span class="text-blue-200">Express</span></span>
-                </a>
+    <!-- 1️⃣ PANNEAU LATÉRAL GAUCHE (VISUEL & ARGUMENTS) - Masqué sur Mobile -->
+    <div class="hidden lg:flex w-1/3 bg-blue-600 p-12 flex-col justify-between text-white sticky top-0 h-screen">
+        <div>
+            <a href="index.html" class="flex items-center gap-2 mb-12">
+                <div class="bg-white p-2 rounded-lg">
+                    <i class="fas fa-bolt text-blue-600"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tight">Connect<span class="text-blue-200">Express</span></span>
+            </a>
 
-                <h2 class="text-4xl font-extrabold leading-tight mb-6">
-                    Développez votre activité avec nous.
-                </h2>
+            <h2 class="text-4xl font-extrabold leading-tight mb-6">
+                Développez votre activité avec nous.
+            </h2>
 
-                <div class="space-y-8 mt-12">
-                    <div class="flex gap-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-400">
-                            <i class="fas fa-users text-xl"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-lg">Accès à des milliers de clients</p>
-                            <p class="text-blue-100 text-sm">Ne perdez plus de temps à chercher des chantiers.</p>
-                        </div>
+            <div class="space-y-8 mt-12">
+                <div class="flex gap-4">
+                    <div
+                        class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-400">
+                        <i class="fas fa-users text-xl"></i>
                     </div>
-                    <div class="flex gap-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-400">
-                            <i class="fas fa-calendar-check text-xl"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-lg">Gérez votre emploi du temps</p>
-                            <p class="text-blue-100 text-sm">Soyez libre de choisir vos heures d'intervention.</p>
-                        </div>
+                    <div>
+                        <p class="font-bold text-lg">Accès à des milliers de clients</p>
+                        <p class="text-blue-100 text-sm">Ne perdez plus de temps à chercher des chantiers.</p>
                     </div>
-                    <div class="flex gap-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-400">
-                            <i class="fas fa-wallet text-xl"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-lg">Paiements garantis</p>
-                            <p class="text-blue-100 text-sm">Recevez vos fonds en toute sécurité après chaque service.</p>
-                        </div>
+                </div>
+                <div class="flex gap-4">
+                    <div
+                        class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-400">
+                        <i class="fas fa-calendar-check text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">Gérez votre emploi du temps</p>
+                        <p class="text-blue-100 text-sm">Soyez libre de choisir vos heures d'intervention.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div
+                        class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shrink-0 border border-blue-400">
+                        <i class="fas fa-wallet text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-lg">Paiements garantis</p>
+                        <p class="text-blue-100 text-sm">Recevez vos fonds en toute sécurité après chaque service.</p>
                     </div>
                 </div>
             </div>
-
-            <p class="text-sm text-blue-200">
-                Déjà partenaire ? <a routerLink="/login" class="text-white font-bold underline">Connectez-vous</a>
-            </p>
         </div>
 
-        <!-- 2️⃣ FORMULAIRE D'INSCRIPTION -->
-        <div class="flex-1 flex flex-col items-center justify-center p-6 md:p-12 overflow-y-auto">
-            <div class="max-w-2xl w-full">
+        <p class="text-sm text-blue-200">
+            Déjà partenaire ? <a routerLink="/login" class="text-white font-bold underline">Connectez-vous</a>
+        </p>
+    </div>
 
-                <!-- Logo Mobile -->
-                <div class="lg:hidden flex justify-center mb-8">
-                    <div class="flex items-center gap-2">
-                        <div class="bg-blue-600 p-2 rounded-lg">
-                            <i class="fas fa-bolt text-white"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-blue-900">Connect<span class="text-blue-600">Express</span></span>
+    <!-- 2️⃣ FORMULAIRE D'INSCRIPTION -->
+    <div class="flex-1 flex flex-col items-center justify-center p-6 md:p-12 overflow-y-auto">
+        <div class="max-w-2xl w-full">
+
+            <!-- Logo Mobile -->
+            <div class="lg:hidden flex justify-center mb-8">
+                <div class="flex items-center gap-2">
+                    <div class="bg-blue-600 p-2 rounded-lg">
+                        <i class="fas fa-bolt text-white"></i>
                     </div>
+                    <span class="text-2xl font-bold text-blue-900">Connect<span
+                            class="text-blue-600">Express</span></span>
                 </div>
+            </div>
 
-                <div class="mb-10 text-center lg:text-left">
-                    <h1 class="text-3xl font-black text-slate-900">Devenir Technicien Partenaire</h1>
-                    <p class="text-slate-500 mt-2">Créez votre profil professionnel en moins de 2 minutes.</p>
-                </div>
+            <div class="mb-10 text-center lg:text-left">
+                <h1 class="text-3xl font-black text-slate-900">Devenir Technicien Partenaire</h1>
+                <p class="text-slate-500 mt-2">Créez votre profil professionnel en moins de 2 minutes.</p>
+            </div>
 
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
 
-                    <!-- Groupe 1 : Identité -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Prénom</label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                <input type="text" formControlName="firstName" placeholder="Jean" class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" [ngClass]="{'border-red-500': f['firstName'].invalid && f['firstName'].touched}" required>
-                                <div *ngIf="f['firstName'].invalid && f['firstName'].touched" class="text-red-500 text-sm mt-1">
-                                  <div *ngIf="f['firstName'].errors?.['required']">Le prénom est obligatoire</div>
-                                  <div *ngIf="f['firstName'].errors?.['maxlength']">Le prénom est trop long</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Nom</label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                    <i class="far fa-user"></i>
-                                </span>
-                                <input type="text" formControlName="lastName" placeholder="Dupont" class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" [ngClass]="{'border-red-500': f['lastName'].invalid && f['lastName'].touched}" required>
-                                <div *ngIf="f['lastName'].invalid && f['lastName'].touched" class="text-red-500 text-sm mt-1">
-                                  <div *ngIf="f['lastName'].errors?.['required']">Le nom est obligatoire</div>
-                                  <div *ngIf="f['lastName'].errors?.['maxlength']">Le nom est trop long</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Groupe 2 : Contact -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Adresse Email Professionnelle</label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                    <i class="far fa-envelope"></i>
-                                </span>
-                                <input type="email" formControlName="email" placeholder="nom@exemple.com" class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" [ngClass]="{'border-red-500': f['email'].invalid && f['email'].touched}" required>
-                                <div *ngIf="f['email'].invalid && f['email'].touched" class="text-red-500 text-sm mt-1">
-                                  <div *ngIf="f['email'].errors?.['required']">L'email est obligatoire</div>
-                                  <div *ngIf="f['email'].errors?.['email']">L'email n'est pas valide</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Téléphone</label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                    <i class="fas fa-phone-alt"></i>
-                                </span>
-                                <input type="tel" formControlName="phone" placeholder="6xx xxx xxx" class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" [ngClass]="{'border-red-500': f['phone'].invalid && f['phone'].touched}" required>
-                                <div *ngIf="f['phone'].invalid && f['phone'].touched" class="text-red-500 text-sm mt-1">
-                                  <div *ngIf="f['phone'].errors?.['required']">Le numéro de téléphone est obligatoire</div>
-                                  <div *ngIf="f['phone'].errors?.['pattern']">Le numéro de téléphone n'est pas valide</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Groupe 3 : Localisation -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="mb-4">
-                          <label class="block font-semibold mb-1">Ville</label>
-                          <select formControlName="city"
-                                  class="w-full p-2 border rounded"
-                                  [ngClass]="{'border-red-500': f['city'].invalid && f['city'].touched}">
-                            <option value="">Sélectionnez votre ville</option>
-                            <option *ngFor="let ville of villes" [value]="ville">{{ ville }}</option>
-                          </select>
-                          <div *ngIf="f['city'].invalid && f['city'].touched" class="text-red-500 text-sm mt-1">
-                            <div *ngIf="f['city'].errors?.['required']">La ville est obligatoire</div>
-                          </div>
-                        </div>
-                        <div>
-                          <label class="block text-sm font-semibold text-slate-700 mb-2">Quartier principal</label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </span>
-                                <input type="text" formControlName="neighborhood" placeholder="Ex: Akwa" class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" [ngClass]="{'border-red-500': f['neighborhood'].invalid && f['neighborhood'].touched}" required>
-                                <div *ngIf="f['neighborhood'].invalid && f['neighborhood'].touched" class="text-red-500 text-sm mt-1">
-                                  <div *ngIf="f['neighborhood'].errors?.['required']">Le quartier est obligatoire</div>
-                                  <div *ngIf="f['neighborhood'].errors?.['maxlength']">Le quartier est trop long</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Groupe 4 : Mot de passe -->
+                <!-- Groupe 1 : Identité -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Mot de passe</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Prénom</label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                                <i class="fas fa-lock"></i>
+                                <i class="far fa-user"></i>
                             </span>
-                            <input type="password" formControlName="password" placeholder="••••••••" class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" [ngClass]="{'border-red-500': f['password'].invalid && f['password'].touched}" required>
-                            <div *ngIf="f['password'].invalid && f['password'].touched" class="text-red-500 text-sm mt-1">
-                              <div *ngIf="f['password'].errors?.['required']">Le mot de passe est obligatoire</div>
-                              <div *ngIf="f['password'].errors?.['minlength']">Le mot de passe doit contenir au moins 8 caractères</div>
-                              <div *ngIf="f['password'].errors?.['pattern']">Doit contenir majuscule, minuscule, chiffre et caractère spécial</div>
+                            <input type="text" formControlName="firstName" placeholder="Jean"
+                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                [ngClass]="{'border-red-500': f['firstName'].invalid && f['firstName'].touched}"
+                                required>
+                            <div *ngIf="f['firstName'].invalid && f['firstName'].touched"
+                                class="text-red-500 text-sm mt-1">
+                                <div *ngIf="f['firstName'].errors?.['required']">Le prénom est obligatoire</div>
+                                <div *ngIf="f['firstName'].errors?.['maxlength']">Le prénom est trop long</div>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-400 mt-2 italic">Minimum 8 caractères</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Nom</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="far fa-user"></i>
+                            </span>
+                            <input type="text" formControlName="lastName" placeholder="Dupont"
+                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                [ngClass]="{'border-red-500': f['lastName'].invalid && f['lastName'].touched}" required>
+                            <div *ngIf="f['lastName'].invalid && f['lastName'].touched"
+                                class="text-red-500 text-sm mt-1">
+                                <div *ngIf="f['lastName'].errors?.['required']">Le nom est obligatoire</div>
+                                <div *ngIf="f['lastName'].errors?.['maxlength']">Le nom est trop long</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Groupe 2 : Contact -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Adresse Email
+                            Professionnelle</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="far fa-envelope"></i>
+                            </span>
+                            <input type="email" formControlName="email" placeholder="nom@exemple.com"
+                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                [ngClass]="{'border-red-500': f['email'].invalid && f['email'].touched}" required>
+                            <div *ngIf="f['email'].invalid && f['email'].touched" class="text-red-500 text-sm mt-1">
+                                <div *ngIf="f['email'].errors?.['required']">L'email est obligatoire</div>
+                                <div *ngIf="f['email'].errors?.['email']">L'email n'est pas valide</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Téléphone</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="fas fa-phone-alt"></i>
+                            </span>
+                            <input type="tel" formControlName="phone" placeholder="6xx xxx xxx"
+                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                [ngClass]="{'border-red-500': f['phone'].invalid && f['phone'].touched}" required>
+                            <div *ngIf="f['phone'].invalid && f['phone'].touched" class="text-red-500 text-sm mt-1">
+                                <div *ngIf="f['phone'].errors?.['required']">Le numéro de téléphone est obligatoire
+                                </div>
+                                <div *ngIf="f['phone'].errors?.['pattern']">Le numéro de téléphone n'est pas valide
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Groupe 3 : Localisation -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="mb-4">
+                        <label class="block font-semibold mb-1">Ville</label>
+                        <select formControlName="city" class="w-full p-2 border rounded"
+                            [ngClass]="{'border-red-500': f['city'].invalid && f['city'].touched}">
+                            <option value="">Sélectionnez votre ville</option>
+                            <option *ngFor="let ville of villes" [value]="ville">{{ ville }}</option>
+                        </select>
+                        <div *ngIf="f['city'].invalid && f['city'].touched" class="text-red-500 text-sm mt-1">
+                            <div *ngIf="f['city'].errors?.['required']">La ville est obligatoire</div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Quartier principal</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                            <input type="text" formControlName="neighborhood" placeholder="Ex: Akwa"
+                                class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                                [ngClass]="{'border-red-500': f['neighborhood'].invalid && f['neighborhood'].touched}"
+                                required>
+                            <div *ngIf="f['neighborhood'].invalid && f['neighborhood'].touched"
+                                class="text-red-500 text-sm mt-1">
+                                <div *ngIf="f['neighborhood'].errors?.['required']">Le quartier est obligatoire</div>
+                                <div *ngIf="f['neighborhood'].errors?.['maxlength']">Le quartier est trop long</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Groupe 5 : Photo de profil -->
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Photo de profil professionnelle</label>
-                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 border-dashed rounded-xl hover:border-blue-400 transition cursor-pointer bg-slate-50">
+                </div>
+
+                <!-- Groupe 4 : Mot de passe -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Mot de passe</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" formControlName="password" placeholder="••••••••"
+                            class="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                            [ngClass]="{'border-red-500': f['password'].invalid && f['password'].touched}" required>
+                        <div *ngIf="f['password'].invalid && f['password'].touched" class="text-red-500 text-sm mt-1">
+                            <div *ngIf="f['password'].errors?.['required']">Le mot de passe est obligatoire</div>
+                            <div *ngIf="f['password'].errors?.['minlength']">Le mot de passe doit contenir au moins 8
+                                caractères</div>
+                            <div *ngIf="f['password'].errors?.['pattern']">Doit contenir majuscule, minuscule, chiffre
+                                et caractère spécial</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-2 italic">Minimum 8 caractères</p>
+                </div>
+
+                <!-- Groupe 5 : Photo de profil -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Photo de profil
+                        professionnelle</label>
+
+                    <div class="relative group">
+                        <!-- Preview Area -->
+                        <div *ngIf="previewUrl" class="relative w-32 h-32 mx-auto mb-4">
+                            <img [src]="previewUrl" alt="Preview"
+                                class="w-full h-full object-cover rounded-2xl shadow-md border-2 border-blue-100">
+                            <div class="absolute -top-2 -right-2 bg-blue-600 text-white p-1.5 rounded-full shadow-lg cursor-pointer hover:bg-blue-700 transition"
+                                (click)="fileInput.click()">
+                                <i class="fas fa-camera text-xs"></i>
+                            </div>
+                        </div>
+
+                        <!-- Upload Area (when no preview or loading) -->
+                        <div *ngIf="!previewUrl && !isUploading" (click)="fileInput.click()"
+                            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 border-dashed rounded-xl hover:border-blue-400 transition cursor-pointer bg-slate-50">
                             <div class="space-y-1 text-center">
                                 <i class="far fa-image text-slate-400 text-3xl mb-2"></i>
-                                <div class="flex text-sm text-slate-600">
-                                    <label for="file-upload" class="relative cursor-pointer bg-transparent rounded-md font-bold text-blue-600 hover:text-blue-500">
-                                        <span>Télécharger un fichier</span>
-                                        <input id="file-upload" formControlName="profilePhotoUrl" type="file" class="sr-only">
-                                    </label>
-                                    <p class="pl-1">ou glisser-déposer</p>
+                                <div class="flex text-sm text-slate-600 justify-center">
+                                    <span class="font-bold text-blue-600 hover:text-blue-500">Télécharger un
+                                        fichier</span>
                                 </div>
                                 <p class="text-xs text-slate-400">PNG, JPG jusqu'à 10MB</p>
                             </div>
                         </div>
+
+                        <!-- Loading State -->
+                        <div *ngIf="isUploading"
+                            class="mt-1 flex justify-center px-6 py-10 border-2 border-blue-200 border-dashed rounded-xl bg-blue-50/50">
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-2">
+                                </div>
+                                <p class="text-sm text-blue-600 font-medium">Upload en cours...</p>
+                            </div>
+                        </div>
+
+                        <!-- Hidden File Input -->
+                        <input #fileInput id="file-upload" type="file" class="hidden" (change)="onFileSelected($event)"
+                            accept="image/*">
                     </div>
 
-                    <!-- Server Error -->
-                    <div *ngIf="serverError" class="text-red-500 text-sm mb-4">
-                      {{ serverError }}
+                    <!-- Change Photo Button (when preview exists) -->
+                    <div *ngIf="previewUrl && !isUploading" class="text-center">
+                        <button type="button" (click)="fileInput.click()"
+                            class="text-sm font-semibold text-blue-600 hover:text-blue-500 underline">
+                            Changer la photo
+                        </button>
                     </div>
+                </div>
 
-                    <!-- Bouton Submit -->
-                    <button type="submit" [disabled]="submitting" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition-all duration-200">
-                        Rejoindre le réseau
-                    </button>
-                </form>
-            </div>
+                <!-- Server Error -->
+                <div *ngIf="serverError" class="text-red-500 text-sm mb-4">
+                    {{ serverError }}
+                </div>
+
+                <!-- Bouton Submit -->
+                <button type="submit" [disabled]="submitting"
+                    class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition-all duration-200">
+                    Rejoindre le réseau
+                </button>
+            </form>
         </div>
     </div>
+</div>

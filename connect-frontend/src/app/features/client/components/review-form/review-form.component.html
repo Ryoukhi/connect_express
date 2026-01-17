@@ -4,7 +4,9 @@
             <i class="fas fa-times text-xl"></i>
         </button>
 
-        <h2 class="text-xl font-bold text-slate-900 mb-6 text-center">Noter la prestation</h2>
+        <h2 class="text-xl font-bold text-slate-900 mb-6 text-center">
+            {{ existingReview ? 'Modifier mon avis' : 'Noter la prestation' }}
+        </h2>
 
         <div class="flex justify-center gap-2 mb-6 text-3xl cursor-pointer">
             <i *ngFor="let star of [1,2,3,4,5]" class="fas fa-star transition hover:scale-110"
@@ -19,8 +21,11 @@
         <button (click)="submitReview()" [disabled]="rating === 0 || loading"
             class="w-full py-3 rounded-xl font-bold text-white transition shadow-lg"
             [ngClass]="rating > 0 ? 'bg-blue-600 hover:bg-blue-700' : 'bg-slate-300 cursor-not-allowed'">
-            <span *ngIf="!loading">Envoyer l'avis</span>
-            <span *ngIf="loading"><i class="fas fa-spinner fa-spin mr-2"></i> Envoi...</span>
+            <span *ngIf="!loading">{{ existingReview ? 'Mettre à jour' : "Envoyer l'avis" }}</span>
+            <span *ngIf="loading">
+                <i class="fas fa-spinner fa-spin mr-2"></i>
+                {{ existingReview ? 'Mise à jour...' : "Envoi..." }}
+            </span>
         </button>
     </div>
 </div>

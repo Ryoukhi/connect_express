@@ -19,26 +19,30 @@ public class ReviewMapper {
     }
 
     public ReviewDto toDto(Review review) {
-        if (review == null) return null;
+        if (review == null)
+            return null;
 
         ReviewDto dto = new ReviewDto();
         dto.setIdReview(review.getIdReview());
         dto.setIdClient(review.getIdClient());
         dto.setRating(review.getRating());
         dto.setComment(review.getComment());
+        dto.setIdReservation(review.getIdReservation());
         dto.setCreatedAt(review.getCreatedAt());
 
         return dto;
     }
 
     public Review toModel(ReviewDto dto) {
-        if (dto == null) return null;
+        if (dto == null)
+            return null;
 
         Review review = new Review();
         review.setIdReview(dto.getIdReview());
         review.setIdClient(dto.getIdClient());
         review.setRating(dto.getRating());
         review.setComment(dto.getComment());
+        review.setIdReservation(dto.getIdReservation());
         review.setCreatedAt(dto.getCreatedAt());
 
         return review;

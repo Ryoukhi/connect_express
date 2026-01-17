@@ -22,15 +22,17 @@
       </div>
 
       <!-- Actions -->
-      <div class="flex gap-3">
-        <button
-        routerLink="/devenir-technicien"
+      <div class="flex items-center gap-3">
+        <a routerLink="/login" class="px-4 py-2 text-sm font-semibold text-blue-600 hover:text-blue-700 transition">
+          Se connecter
+        </a>
+
+        <button routerLink="/devenir-technicien"
           class="hidden sm:block px-4 py-2 text-sm font-semibold border border-slate-300 rounded-full hover:bg-slate-50 transition">
           Devenir technicien
         </button>
 
-        <button
-          routerLink="/register"
+        <button routerLink="/register"
           class="px-5 py-2 text-sm font-semibold bg-blue-600 text-white rounded-full shadow-lg shadow-blue-200 hover:bg-blue-700 transition">
           S'inscrire
         </button>

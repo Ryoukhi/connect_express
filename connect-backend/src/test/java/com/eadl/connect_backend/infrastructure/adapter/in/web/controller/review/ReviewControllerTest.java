@@ -65,13 +65,14 @@ class ReviewControllerTest {
         inputDto.setRating(Rating.of(5));
         inputDto.setComment("Great job");
         Long clientId = 1L;
+        Long reservationId = 10L;
         Review createdReview = new Review();
         ReviewDto outputDto = new ReviewDto();
         outputDto.setIdReview(1L);
         outputDto.setRating(Rating.of(5));
 
         when(currentUserProvider.getCurrentUserId()).thenReturn(clientId);
-        when(reviewService.createReview(clientId, Rating.of(5), "Great job")).thenReturn(createdReview);
+        when(reviewService.createReview(clientId, reservationId, Rating.of(5), "Great job")).thenReturn(createdReview);
         when(reviewMapper.toDto(createdReview)).thenReturn(outputDto);
 
         // Act & Assert

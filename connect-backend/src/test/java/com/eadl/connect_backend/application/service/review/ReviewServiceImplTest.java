@@ -33,6 +33,7 @@ class ReviewServiceImplTest {
     void setUp() {
         review = new Review();
         review.setIdClient(1L);
+        review.setIdReservation(10L);
         review.setRating(new Rating(5));
         review.setComment("Excellent service");
     }
@@ -45,7 +46,7 @@ class ReviewServiceImplTest {
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
         Review result =
-                reviewService.createReview(1L, new Rating(5), "Excellent service");
+                reviewService.createReview(1L, 10L, new Rating(5), "Excellent service");
 
         assertThat(result).isNotNull();
         assertThat(result.getRating().getValue()).isEqualTo(5);
@@ -55,7 +56,7 @@ class ReviewServiceImplTest {
     @Test
     void shouldThrowIfRatingIsNull() {
         assertThatThrownBy(() ->
-                reviewService.createReview(1L, null, "comment"))
+                reviewService.createReview(1L, 10L, null, "comment"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("note est obligatoire");
     }
@@ -63,7 +64,7 @@ class ReviewServiceImplTest {
     @Test
     void shouldThrowIfRatingIsOutOfRange() {
         assertThatThrownBy(() ->
-                reviewService.createReview(1L, new Rating(6), "comment"))
+                reviewService.createReview(1L, 10L,new Rating(6), "comment"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("entre 1 et 5");
     }

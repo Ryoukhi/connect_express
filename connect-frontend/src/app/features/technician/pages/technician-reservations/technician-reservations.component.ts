@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReservationDto } from '../../../../api/models';
+import { ReservationDto, UserDto, ReviewDto } from '../../../../api/models';
 import { TechnicianReservationService } from '../../services/technician-reservation.service';
+import { UserControllerService } from '../../../../api/services/userController.service';
+import { ReviewControllerService } from '../../../../api/services/reviewController.service';
 import { HeaderDashboardTechComponent } from "../../components/header-dashboard-tech/header-dashboard-tech.component";
 import { SidebarDashboardTechComponent } from "../../components/sidebar-dashboard-tech/sidebar-dashboard-tech.component";
 import { NavDashboardTechComponent } from "../../components/nav-dashboard-tech/nav-dashboard-tech.component";
+import { FormsModule } from '@angular/forms';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-technician-reservations',
   standalone: true,
-  imports: [CommonModule, HeaderDashboardTechComponent, SidebarDashboardTechComponent, NavDashboardTechComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeaderDashboardTechComponent,
+    SidebarDashboardTechComponent,
+    NavDashboardTechComponent
+  ],
   templateUrl: './technician-reservations.component.html',
   styleUrl: './technician-reservations.component.css'
 })
@@ -18,10 +29,13 @@ export class TechnicianReservationsComponent implements OnInit {
   reservations: ReservationDto[] = [];
   filteredReservations: ReservationDto[] = [];
   selectedReservation: ReservationDto | null = null;
+  selectedClient: UserDto | null = null; // To store client info
+  selectedReview: ReviewDto | null = null; // To store review info
   loading = false;
   actionInProgress = false;
   errorMessage: string | null = null;
   successMessage: string | null = null;
+  searchTerm = '';
 
   // Filtres
   statusFilter = 'ALL'; // ALL, PENDING, ACCEPTED, EN_ROUTE, IN_PROGRESS, COMPLETED, REJECTED, CANCELLED
@@ -47,21 +61,37 @@ export class TechnicianReservationsComponent implements OnInit {
     CANCELLED: 'bg-gray-100 text-gray-800'
   };
 
-  constructor(private reservationService: TechnicianReservationService) { }
+  constructor(
+    private reservationService: TechnicianReservationService,
+    private userService: UserControllerService,
+    private reviewService: ReviewControllerService
+  ) { }
 
   ngOnInit(): void {
     this.loadReservations();
   }
 
-  loadReservations(): void {
-    this.loading = true;
+  loadReservations(refresh = false): void {
+    if (!refresh) this.loading = true;
     this.errorMessage = null;
 
     this.reservationService.getMyReservations().subscribe({
       next: (data) => {
-        this.reservations = Array.isArray(data) ? data : (data ? [data] : []);
+        this.reservations = data || [];
+        // Sort by date (descending)
+        this.reservations.sort((a, b) => {
+          const dateA = a.scheduledTime ? new Date(a.scheduledTime).getTime() : 0;
+          const dateB = b.scheduledTime ? new Date(b.scheduledTime).getTime() : 0;
+          return dateB - dateA;
+        });
         this.applyFilter();
         this.loading = false;
+
+        // If we had a selected reservation, update it
+        if (this.selectedReservation) {
+          const updated = this.reservations.find(r => r.idReservation === this.selectedReservation?.idReservation);
+          if (updated) this.selectedReservation = updated;
+        }
       },
       error: (err) => {
         this.errorMessage = 'Erreur lors du chargement des réservations';
@@ -72,17 +102,46 @@ export class TechnicianReservationsComponent implements OnInit {
   }
 
   applyFilter(): void {
-    if (this.statusFilter === 'ALL') {
-      this.filteredReservations = this.reservations;
-    } else {
-      this.filteredReservations = this.reservations.filter(r => r.status === this.statusFilter);
+    let filtered = this.reservations;
+
+    if (this.statusFilter !== 'ALL') {
+      filtered = filtered.filter(r => r.status === this.statusFilter);
     }
+
+    if (this.searchTerm) {
+      const search = this.searchTerm.toLowerCase();
+      filtered = filtered.filter(r =>
+        (r.description?.toLowerCase().includes(search)) ||
+        (r.city?.toLowerCase().includes(search)) ||
+        (r.neighborhood?.toLowerCase().includes(search))
+      );
+    }
+
+    this.filteredReservations = filtered;
   }
 
   selectReservation(reservation: ReservationDto): void {
     this.selectedReservation = reservation;
+    this.selectedClient = null;
+    this.selectedReview = null;
     this.errorMessage = null;
     this.successMessage = null;
+
+    // Fetch client info if we have idClient
+    if (reservation.idClient) {
+      this.userService.getUserById(reservation.idClient).subscribe({
+        next: (user: UserDto) => this.selectedClient = user,
+        error: () => console.warn('Could not load client details')
+      });
+    }
+
+    // Fetch review if it exists
+    if (reservation.idReservation && (reservation.status === 'COMPLETED' || reservation.idReview)) {
+      this.reviewService.getReviewForReservation(reservation.idReservation).subscribe({
+        next: (review) => this.selectedReview = review,
+        error: () => console.warn('No review found for this reservation')
+      });
+    }
   }
 
   closeDetail(): void {

@@ -26,8 +26,7 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
 
     public TechnicianRepositoryAdapter(
             TechnicianJpaRepository jpaRepository,
-            TechnicianEntityMapper mapper
-    ) {
+            TechnicianEntityMapper mapper) {
         this.jpaRepository = jpaRepository;
         this.mapper = mapper;
     }
@@ -109,11 +108,9 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
     public List<Technician> findByRoleAndActiveTrue(Role role) {
         log.debug(
                 "Finding users by role={} and active= true",
-                role
-        );
+                role);
 
-        List<UserEntity> entities =
-                jpaRepository.findByRoleAndActiveTrue(role);
+        List<UserEntity> entities = jpaRepository.findByRoleAndActiveTrue(role);
 
         return entities.stream()
                 .map(entity -> {
@@ -126,13 +123,25 @@ public class TechnicianRepositoryAdapter implements TechnicianRepository {
                     log.error(
                             "Expected Technician but got {} for userId={}",
                             user.getClass().getSimpleName(),
-                            entity.getIdUser()
-                    );
+                            entity.getIdUser());
 
                     throw new IllegalStateException(
-                            "Expected Technician, got " + user.getClass().getSimpleName()
-                    );
+                            "Expected Technician, got " + user.getClass().getSimpleName());
                 })
                 .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findDistinctCities() {
+        log.debug("Finding distinct cities for active technicians");
+        return jpaRepository.findDistinctCities();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findDistinctNeighborhoodsByCity(String city) {
+        log.debug("Finding distinct neighborhoods for city: {}", city);
+        return jpaRepository.findDistinctNeighborhoodsByCity(city);
     }
 }

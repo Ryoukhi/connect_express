@@ -23,7 +23,6 @@ public abstract class User {
     protected boolean emailVerified;
     protected boolean phoneVerified;
     protected String profilePhotoUrl;
-    
 
     // Constructeur protégé
     protected User() {
@@ -33,14 +32,16 @@ public abstract class User {
         this.emailVerified = false;
         this.phoneVerified = false;
         this.profilePhotoUrl = null;
-        
+
     }
 
     // ========== Business Logic Methods ==========
-    public void updateProfile(String firstName, String lastName, String phone) {
+    public void updateProfile(String firstName, String lastName, String phone, String city, String neighborhood) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+        this.city = city;
+        this.neighborhood = neighborhood;
         this.updatedAt = LocalDateTime.now();
     }
 
@@ -173,11 +174,13 @@ public abstract class User {
     // ========== equals & hashCode ==========
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         User user = (User) o;
-        return Objects.equals(idUser, user.idUser) && 
-               Objects.equals(email, user.email);
+        return Objects.equals(idUser, user.idUser) &&
+                Objects.equals(email, user.email);
     }
 
     @Override
@@ -198,11 +201,11 @@ public abstract class User {
 
     // Méthode de restauration pour le mapping depuis l'entité
     public void restore(Long idUser, String firstName, String lastName,
-                        String email, String phone, String password,
-                        Role role, String city, String neighborhood, LocalDateTime createdAt,
-                        LocalDateTime updatedAt, boolean active,
-                        boolean emailVerified, boolean phoneVerified,
-                        String profilePhotoUrl) {
+            String email, String phone, String password,
+            Role role, String city, String neighborhood, LocalDateTime createdAt,
+            LocalDateTime updatedAt, boolean active,
+            boolean emailVerified, boolean phoneVerified,
+            String profilePhotoUrl) {
         this.idUser = idUser;
         this.firstName = firstName;
         this.lastName = lastName;

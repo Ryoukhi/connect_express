@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CompétencesTechnicienService, DocumentsTechnicienService, CategoryControllerService } from '../../../../api/services';
 import { TechnicianSkillDto, TechnicianDocumentDto, CategoryDto } from '../../../../api/models';
 import { downloadFile } from '../../../../api/utils/file-download';
+import { StorageService } from '../../../../services/storage.service';
 
 @Component({
   selector: 'app-form-skill',
@@ -21,11 +22,16 @@ export class FormSkillComponent implements OnInit {
   documents: TechnicianDocumentDto[] = [];
   editing = false;
 
+  isUploadingDoc = false;
+  uploadedDocUrl: string | null = null;
+  selectedFileName: string | null = null;
+
   constructor(
     private fb: FormBuilder,
     private compService: CompétencesTechnicienService,
     private documentsService: DocumentsTechnicienService,
-    private categoryService: CategoryControllerService
+    private categoryService: CategoryControllerService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +42,8 @@ export class FormSkillComponent implements OnInit {
       description: [''],
       level: [1, [Validators.min(1), Validators.max(5)]],
       yearsExperience: [0, [Validators.min(0)]],
-      hourlyRate: [0, [Validators.min(0)]]
+      hourlyRate: [0, [Validators.min(0)]],
+      availabilityStatus: ['AVAILABLE']
     });
 
     this.docForm = this.fb.group({
@@ -76,7 +83,8 @@ export class FormSkillComponent implements OnInit {
       level: value.level,
       yearsExperience: value.yearsExperience,
       hourlyRate: value.hourlyRate,
-      idCategory: value.idCategory
+      idCategory: value.idCategory,
+      availabilityStatus: value.availabilityStatus
     };
 
     if (this.editing && dto.idSkill) {
@@ -85,7 +93,7 @@ export class FormSkillComponent implements OnInit {
           this.loadSkills();
           this.resetForm();
         },
-        error: () => {}
+        error: () => { }
       });
     } else {
       this.compService.addSkill(dto, 'body').subscribe({
@@ -93,7 +101,7 @@ export class FormSkillComponent implements OnInit {
           this.loadSkills();
           this.resetForm();
         },
-        error: () => {}
+        error: () => { }
       });
     }
   }
@@ -107,7 +115,8 @@ export class FormSkillComponent implements OnInit {
       description: s.description,
       level: s.level,
       yearsExperience: s.yearsExperience,
-      hourlyRate: s.hourlyRate
+      hourlyRate: s.hourlyRate,
+      availabilityStatus: s.availabilityStatus || 'AVAILABLE'
     });
     // also select it so documents can be managed
     this.selectSkill(s);
@@ -122,7 +131,8 @@ export class FormSkillComponent implements OnInit {
       description: '',
       level: 1,
       yearsExperience: 0,
-      hourlyRate: 0
+      hourlyRate: 0,
+      availabilityStatus: 'AVAILABLE'
     });
   }
 
@@ -137,7 +147,7 @@ export class FormSkillComponent implements OnInit {
         }
         this.loadSkills();
       },
-      error: () => {}
+      error: () => { }
     });
   }
 
@@ -154,8 +164,28 @@ export class FormSkillComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFileName = file.name;
+      this.isUploadingDoc = true;
+      this.storageService.upload(file).subscribe({
+        next: (response) => {
+          this.isUploadingDoc = false;
+          this.uploadedDocUrl = response.url;
+          this.docForm.patchValue({ url: response.url });
+        },
+        error: (err) => {
+          this.isUploadingDoc = false;
+          this.selectedFileName = null;
+          console.error('Upload failed', err);
+        }
+      });
+    }
+  }
+
   addDocument() {
-    if (!this.selectedSkill || this.docForm.invalid) return;
+    if (!this.selectedSkill || this.docForm.invalid || this.isUploadingDoc) return;
     const value = this.docForm.value;
     const dto: TechnicianDocumentDto = {
       idProfile: this.selectedSkill.idSkill,
@@ -167,8 +197,10 @@ export class FormSkillComponent implements OnInit {
       next: () => {
         this.loadDocuments(this.selectedSkill!.idSkill);
         this.docForm.reset({ type: 'IDENTITY_CARD', url: '' });
+        this.uploadedDocUrl = null;
+        this.selectedFileName = null;
       },
-      error: () => {}
+      error: () => { }
     });
   }
 
@@ -177,7 +209,7 @@ export class FormSkillComponent implements OnInit {
     if (!confirm('Supprimer ce document ?')) return;
     this.documentsService.deleteDocument(id, 'body').subscribe({
       next: () => this.loadDocuments(this.selectedSkill?.idSkill),
-      error: () => {}
+      error: () => { }
     });
   }
 

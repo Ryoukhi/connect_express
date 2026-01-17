@@ -24,8 +24,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(
             UserRepository userRepository,
             CurrentUserProvider currentUserProvider,
-            PasswordEncoder passwordEncoder
-    ) {
+            PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.currentUserProvider = currentUserProvider;
         this.passwordEncoder = passwordEncoder;
@@ -67,8 +66,9 @@ public class UserServiceImpl implements UserService {
         existingUser.updateProfile(
                 user.getFirstName(),
                 user.getLastName(),
-                user.getPhone()
-        );
+                user.getPhone(),
+                user.getCity(),
+                user.getNeighborhood());
 
         User savedUser = userRepository.save(existingUser);
         log.info("Profil utilisateur mis à jour avec succès id={}", currentUserId);

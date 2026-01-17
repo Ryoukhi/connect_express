@@ -12,6 +12,7 @@ import { ReviewDto } from '../../../../api/models';
 })
 export class ReviewFormComponent {
     @Input() reservationId: number | undefined;
+    @Input() existingReview: ReviewDto | null = null;
     @Output() onClose = new EventEmitter<void>();
     @Output() onSubmitSuccess = new EventEmitter<void>();
 
@@ -22,37 +23,55 @@ export class ReviewFormComponent {
 
     constructor(private reviewService: ReviewControllerService) { }
 
+    ngOnInit() {
+        if (this.existingReview) {
+            this.rating = this.existingReview.rating?.value || 0;
+            this.comment = this.existingReview.comment || '';
+        }
+    }
+
     submitReview() {
-        if (!this.reservationId || this.rating === 0) return;
+        if (this.rating === 0) return;
 
         this.loading = true;
-        const review: ReviewDto = {
-            // Backend expects these but the createReview endpoint relies on path params logic or DTO
-            // Actually Controller: createReview(@RequestBody ReviewDto dto). Service: createReview(clientId, dto.rating, dto.comment) -> Wait.
-            // ReviewController.createReview calls reviewService.createReview(clientId, dto.getRating(), dto.getComment())
-            // But we need to link it to a reservation potentially? The current backend 'createReview' doesn't seem to take reservationId.
-            // Let's check ReviewController again.
-            // public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto dto)
-            // Service implementation creates a review. Does it link to reservation?
-            // If not, we might have a gap. But let's assume standard behavior for now.
-            rating: { value: this.rating },
-            comment: this.comment
-        };
 
-        // Wait, the API definition for ReviewDto has 'rating' as object {value, label...}.
-        // But ReviewService.createReview signature in java: createReview(Long clientId, Rating rating, String comment).
-        // Let's rely on standard mapping.
+        if (this.existingReview?.idReview) {
+            // Update existing
+            const review: ReviewDto = {
+                ...this.existingReview,
+                rating: { value: this.rating },
+                comment: this.comment
+            };
+            this.reviewService.updateReview(this.existingReview.idReview, review).subscribe({
+                next: () => {
+                    this.loading = false;
+                    this.onSubmitSuccess.emit();
+                },
+                error: (err) => {
+                    console.error(err);
+                    this.loading = false;
+                    alert("Erreur lors de la mise à jour de l'avis.");
+                }
+            });
+        } else {
+            // Create new
+            const review: ReviewDto = {
+                idReservation: this.reservationId,
+                rating: { value: this.rating },
+                comment: this.comment
+            };
 
-        this.reviewService.createReview(review).subscribe({
-            next: () => {
-                this.loading = false;
-                this.onSubmitSuccess.emit();
-            },
-            error: (err) => {
-                console.error(err);
-                this.loading = false;
-                alert("Erreur lors de l'envoi de l'avis.");
-            }
-        });
+            this.reviewService.createReview(review).subscribe({
+                next: () => {
+                    this.loading = false;
+                    this.onSubmitSuccess.emit();
+                },
+                error: (err) => {
+                    console.error(err);
+                    this.loading = false;
+                    alert("Erreur lors de l'envoi de l'avis.");
+                }
+            });
+        }
     }
 }

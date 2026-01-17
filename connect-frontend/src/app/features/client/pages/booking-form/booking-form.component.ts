@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { TechniciensService } from '../../../../api/services/techniciens.service';
 import { ReservationControllerService } from '../../../../api/services/reservationController.service';
 import { Technician, ReservationDto } from '../../../../api/models';
@@ -10,7 +10,7 @@ import { ClientHeaderComponent } from "../../../../core/layout/client-header/cli
 @Component({
     selector: 'app-booking-form',
     standalone: true,
-    imports: [CommonModule, FormsModule, ClientHeaderComponent],
+    imports: [CommonModule, FormsModule, ClientHeaderComponent,RouterModule, RouterLink],
     templateUrl: './booking-form.component.html'
 })
 export class BookingFormComponent implements OnInit {

@@ -157,7 +157,7 @@ export class ReservationsService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -174,7 +174,7 @@ export class ReservationsService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -191,7 +191,7 @@ export class ReservationsService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -208,7 +208,7 @@ export class ReservationsService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -225,7 +225,7 @@ export class ReservationsService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -242,7 +242,7 @@ export class ReservationsService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -259,7 +259,7 @@ export class ReservationsService {
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -288,7 +288,7 @@ export class ReservationsService {
         const requestOptions: any = {
             observe: observe as any,
             params,
-            responseType: 'blob' as 'blob',
+            responseType: 'json' as 'json',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

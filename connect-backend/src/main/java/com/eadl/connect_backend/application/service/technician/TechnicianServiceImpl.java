@@ -124,6 +124,11 @@ public class TechnicianServiceImpl implements TechnicianService {
 
         List<TechnicianResultSearchDto> results = skills.stream()
                 .filter(skill -> {
+                    // Only show verified skills
+                    if (!skill.isVerified()) {
+                        return false;
+                    }
+
                     // Disponibilité
                     if (availabilityStatus != null && skill.getAvailabilityStatus() != availabilityStatus)
                         return false;
@@ -202,5 +207,20 @@ public class TechnicianServiceImpl implements TechnicianService {
         }
 
         log.debug("Statut de disponibilité mis à jour pour {} compétences du technicien", skills.size());
+    }
+
+    @Override
+    public List<String> getAvailableCities() {
+        log.debug("Récupération des villes disponibles");
+        return technicianRepository.findDistinctCities();
+    }
+
+    @Override
+    public List<String> getAvailableNeighborhoods(String city) {
+        log.debug("Récupération des quartiers pour la ville: {}", city);
+        if (city == null || city.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return technicianRepository.findDistinctNeighborhoodsByCity(city);
     }
 }

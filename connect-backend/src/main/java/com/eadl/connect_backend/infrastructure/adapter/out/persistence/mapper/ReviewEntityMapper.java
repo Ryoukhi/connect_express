@@ -10,9 +10,11 @@ import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.Us
 @Component
 public class ReviewEntityMapper {
 
-    /* =========================
-       Entity -> Domain
-       ========================= */
+    /*
+     * =========================
+     * Entity -> Domain
+     * =========================
+     */
     public Review toModel(ReviewEntity entity) {
         if (entity == null) {
             return null;
@@ -33,12 +35,19 @@ public class ReviewEntityMapper {
             review.setIdClient(entity.getClient().getIdUser());
         }
 
+        // Reservation (ID only)
+        if (entity.getReservation() != null) {
+            review.setIdReservation(entity.getReservation().getIdReservation());
+        }
+
         return review;
     }
 
-    /* =========================
-       Domain -> Entity (CREATE)
-       ========================= */
+    /*
+     * =========================
+     * Domain -> Entity (CREATE)
+     * =========================
+     */
     public ReviewEntity toEntity(Review review) {
         if (review == null) {
             return null;
@@ -56,17 +65,24 @@ public class ReviewEntityMapper {
 
         // Client reference
         if (review.getIdClient() != null) {
-            UserEntity client = new UserEntity();
-            client.setIdUser(review.getIdClient());
-            entity.setClient(client);
+            if (entity.getClient() == null) {
+                UserEntity client = new UserEntity();
+                client.setIdUser(review.getIdClient());
+                entity.setClient(client);
+            }
         }
+
+        // We don't link reservation here because we don't want a full entity object
+        // without proper persistence context. This will be handled in the adapter.
 
         return entity;
     }
 
-    /* =========================
-       UPDATE EXISTING ENTITY
-       ========================= */
+    /*
+     * =========================
+     * UPDATE EXISTING ENTITY
+     * =========================
+     */
     public void updateEntity(ReviewEntity entity, Review review) {
 
         if (review.getComment() != null) {

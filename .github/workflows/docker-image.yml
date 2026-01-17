@@ -1,4 +1,4 @@
-name: Simple Docker CI
+name: Simple Docker CI with SonarQube
 
 on:
   push:
@@ -7,39 +7,78 @@ on:
     branches: [main, dev]
   workflow_dispatch:
 
-# Set these secrets in repository settings: DOCKERHUB_USERNAME, DOCKERHUB_TOKEN
+# Set these secrets in repository settings: 
+# DOCKERHUB_USERNAME, DOCKERHUB_TOKEN, SONAR_TOKEN, SONAR_HOST_URL
 
 jobs:
-  test:
+  test-and-analyze:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Nécessaire pour SonarQube
 
+      # ===== FRONTEND TESTS & ANALYSIS =====
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: ./connect-frontend/package-lock.json
 
       - name: Install frontend dependencies
         run: npm ci
         working-directory: ./connect-frontend
 
-      # - name: Run frontend tests
-      #   run: npm test --if-present
-      #   working-directory: ./connect-frontend
+      - name: Run frontend tests with coverage
+        run: npm run test:coverage
+        working-directory: ./connect-frontend
+        continue-on-error: true  # Continue même si les tests échouent
 
+      - name: SonarQube Scan - Frontend
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          projectBaseDir: ./connect-frontend
+          args: >
+            -Dsonar.projectKey=connect-frontend
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=**/*.spec.ts
+            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/dist/**,**/coverage/**
+            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+
+      # ===== BACKEND TESTS & ANALYSIS =====
       - name: Use Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
+          cache: maven
 
-      - name: Build backend (with Unit tests)
-        run: mvn clean package
+      - name: Cache SonarQube packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Build backend with tests and SonarQube analysis
+        run: |
+          mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=connect-backend \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
         working-directory: ./connect-backend
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   build-and-push:
-    needs: test
+    needs: test-and-analyze
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -66,5 +105,3 @@ jobs:
           docker build -t $IMAGE:$TAG ./connect-frontend -f ./connect-frontend/Dockerfile
           docker push $IMAGE:$TAG
           if [ "${GITHUB_REF#refs/heads/}" = "main" ]; then docker tag $IMAGE:$TAG $IMAGE:latest && docker push $IMAGE:latest; fi
-
-

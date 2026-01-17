@@ -23,3 +23,4 @@ export { ReservationControllerService } from "./reservationController.service";
 export { ReservationsService } from "./reservations.service";
 export { ReviewControllerService } from "./reviewController.service";
 export { TechniciensService } from "./techniciens.service";
+export * from './userController.service';

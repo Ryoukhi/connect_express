@@ -32,4 +32,10 @@ export class ClientHeaderComponent {
     this.router.navigate(['/login']);
   }
 
+  get avatarUrl(): string {
+    return this.profilePhotoUrl?.trim()
+      ? this.profilePhotoUrl
+      : `https://ui-avatars.com/api/?name=${encodeURIComponent(this.fullName)}&background=2563eb&color=fff`;
+  }
+
 }

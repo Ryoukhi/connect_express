@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReservationControllerService } from '../../../../api/services/reservationController.service';
-import { ReservationDto } from '../../../../api/models';
+import { ReviewControllerService } from '../../../../api/services/reviewController.service';
+import { ReservationDto, ReviewDto } from '../../../../api/models';
 import { ReviewFormComponent } from '../../components/review-form/review-form.component';
 import { ClientHeaderComponent } from "../../../../core/layout/client-header/client-header.component";
 
@@ -14,6 +15,7 @@ import { ClientHeaderComponent } from "../../../../core/layout/client-header/cli
 })
 export class ReservationDetailComponent implements OnInit {
     reservation: ReservationDto | null = null;
+    existingReview: ReviewDto | null = null;
     loading = true;
     errorMsg: string | null = null;
     showReviewForm = false;
@@ -21,7 +23,8 @@ export class ReservationDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private reservationService: ReservationControllerService
+        private reservationService: ReservationControllerService,
+        private reviewService: ReviewControllerService
     ) { }
 
     ngOnInit() {
@@ -37,6 +40,14 @@ export class ReservationDetailComponent implements OnInit {
             next: (res) => {
                 this.reservation = res;
                 this.loading = false;
+
+                // Fetch review if exists
+                if (res.idReservation && (res.status === 'COMPLETED' || res.idReview)) {
+                    this.reviewService.getReviewForReservation(res.idReservation).subscribe({
+                        next: (review) => this.existingReview = review,
+                        error: () => this.existingReview = null
+                    });
+                }
             },
             error: () => {
                 this.errorMsg = "Réservation introuvable.";

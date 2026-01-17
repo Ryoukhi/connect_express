@@ -33,6 +33,7 @@ export interface Rating {
 export interface ReviewDto {
     idReview?: number;
     idClient?: number;
+    idReservation?: number;
     rating?: Rating;
     comment?: string;
     createdAt?: Date;
@@ -120,6 +121,7 @@ export interface RegisterDto {
 
 export interface RegisterResponseDto {
     token?: string;
+    userId?: number;
     firstName?: string;
     lastName?: string;
     email?: string;
@@ -166,6 +168,22 @@ export interface TechnicianResultSearchDto {
     city?: string;
     neighborhood?: string;
     profilePhotoUrl?: string;
+}
+
+export interface UserDto {
+    idUser?: number;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    role?: 'CLIENT' | 'TECHNICIAN' | 'ADMIN';
+    city?: string;
+    neighborhood?: string;
+    active?: boolean;
+    emailVerified?: boolean;
+    phoneVerified?: boolean;
+    profilePhotoUrl?: string;
+    createdAt?: Date;
 }
 
 export interface ClientDto {

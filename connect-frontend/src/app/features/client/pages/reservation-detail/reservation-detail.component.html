@@ -55,12 +55,28 @@
                         Annuler la réservation
                     </button>
 
-                    <button *ngIf="reservation.status === 'COMPLETED' && !reservation.idReview" (click)="openReview()"
-                        class="px-6 py-2.5 rounded-lg bg-yellow-500 text-white font-bold hover:bg-yellow-600 transition shadow-lg shadow-yellow-200">
-                        Laisser un avis
-                    </button>
-                    <div *ngIf="reservation.idReview" class="text-green-600 font-medium flex items-center gap-2">
-                        <i class="fas fa-check-circle"></i> Avis laissé
+                    <div *ngIf="reservation.status === 'COMPLETED'" class="w-full">
+                        <div *ngIf="existingReview" class="mb-6 bg-blue-50 border border-blue-100 p-6 rounded-2xl">
+                            <h4 class="text-sm font-bold text-blue-900 mb-3 flex items-center justify-between">
+                                <span>Votre avis</span>
+                                <button (click)="openReview()"
+                                    class="text-blue-600 hover:text-blue-800 flex items-center gap-1 text-xs">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </button>
+                            </h4>
+                            <div class="flex items-center gap-1 mb-2 text-yellow-500">
+                                <i *ngFor="let star of [1,2,3,4,5]" class="fas fa-star"
+                                    [ngClass]="{'text-slate-200': (existingReview.rating?.value || 0) < star}"></i>
+                                <span class="ml-2 text-xs font-bold text-slate-900">{{ existingReview.rating?.value
+                                    }}/5</span>
+                            </div>
+                            <p class="text-sm text-slate-700 italic">"{{ existingReview.comment }}"</p>
+                        </div>
+
+                        <button *ngIf="!existingReview" (click)="openReview()"
+                            class="px-6 py-2.5 rounded-lg bg-yellow-500 text-white font-bold hover:bg-yellow-600 transition shadow-lg shadow-yellow-200 flex items-center gap-2">
+                            <i class="fas fa-star"></i> Laisser un avis
+                        </button>
                     </div>
                 </div>
             </div>
@@ -70,5 +86,5 @@
 
 <!-- Review Modal -->
 <app-review-form *ngIf="showReviewForm && reservation" [reservationId]="reservation.idReservation"
-    (onClose)="showReviewForm = false" (onSubmitSuccess)="onReviewSubmitted()">
+    [existingReview]="existingReview" (onClose)="showReviewForm = false" (onSubmitSuccess)="onReviewSubmitted()">
 </app-review-form>

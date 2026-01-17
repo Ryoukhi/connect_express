@@ -8,6 +8,7 @@ public class ReviewDto {
 
     private Long idReview;
     private Long idClient;
+    private Long idReservation;
     private Rating rating;
     private String comment;
     private LocalDateTime createdAt;
@@ -28,6 +29,14 @@ public class ReviewDto {
 
     public void setIdClient(Long idClient) {
         this.idClient = idClient;
+    }
+
+    public Long getIdReservation() {
+        return idReservation;
+    }
+
+    public void setIdReservation(Long idReservation) {
+        this.idReservation = idReservation;
     }
 
     public Rating getRating() {

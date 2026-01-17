@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink, RouterModule } from "@angular/router";
 import { AuthControllerService, AuthenticationService, RegisterDto } from '../../../../api';
 import { AuthService } from '../../../../services/auth.service';
+import { StorageService } from '../../../../services/storage.service';
 import { CommonModule } from '@angular/common';
 
 
@@ -17,6 +18,8 @@ export class FormTechComponent implements OnInit {
   registerForm!: FormGroup;
   submitting = false;
   serverError: string | null = null;
+  isUploading = false;
+  previewUrl: string | null = null;
 
   // Liste des villes du Cameroun
   villes: string[] = [
@@ -30,6 +33,7 @@ export class FormTechComponent implements OnInit {
     private fb: FormBuilder,
     private authentificationService: AuthenticationService,
     private authService: AuthService,
+    private storageService: StorageService,
     private router: Router
   ) {}
 
@@ -53,10 +57,29 @@ export class FormTechComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.isUploading = true;
+      this.storageService.upload(file).subscribe({
+        next: (response) => {
+          this.previewUrl = response.url;
+          this.registerForm.patchValue({ profilePhotoUrl: response.url });
+          this.isUploading = false;
+        },
+        error: (err) => {
+          console.error('Upload error', err);
+          this.serverError = "Erreur lors de l'upload de la photo";
+          this.isUploading = false;
+        }
+      });
+    }
+  }
+
   onSubmit() {
     this.serverError = null;
 
-    if (this.registerForm.invalid) {
+    if (this.registerForm.invalid || this.isUploading) {
       this.registerForm.markAllAsTouched();
       return;
     }

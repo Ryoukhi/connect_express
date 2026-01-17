@@ -41,8 +41,7 @@ public class ReservationServiceImpl implements ReservationService {
         boolean available = reservationRepository.existsTechnicianReservationBetween(
                 reservation.getIdTechnician(),
                 reservation.getScheduledTime(),
-                reservation.getScheduledTime()
-        );
+                reservation.getScheduledTime());
 
         if (available) {
             log.error("Conflit de disponibilité pour le technicien id={} à {}",
@@ -141,10 +140,10 @@ public class ReservationServiceImpl implements ReservationService {
 
         Reservation reservation = getExistingReservation(idReservation);
 
-        if (reservation.getStatus() != ReservationStatus.ACCEPTED) {
+        if (reservation.getStatus() != ReservationStatus.IN_PROGRESS) {
             log.error("Impossible de compléter la réservation id={} : status actuel={}",
                     idReservation, reservation.getStatus());
-            throw new BusinessException("Only accepted reservations can be completed");
+            throw new BusinessException("Seules les réservations en cours (IN_PROGRESS) peuvent être terminées");
         }
 
         reservation.setStatus(ReservationStatus.COMPLETED);
@@ -189,7 +188,8 @@ public class ReservationServiceImpl implements ReservationService {
         LocalDateTime startOfDay = today.atStartOfDay();
         LocalDateTime endOfDay = startOfDay.plusDays(1).minusNanos(1);
         log.debug("Comptage des réservations ACCEPTED programmées entre {} et {}", startOfDay, endOfDay);
-        long count = reservationRepository.countByStatusAndScheduledTimeBetween(ReservationStatus.ACCEPTED, startOfDay, endOfDay);
+        long count = reservationRepository.countByStatusAndScheduledTimeBetween(ReservationStatus.ACCEPTED, startOfDay,
+                endOfDay);
         log.debug("Nombre de réservations ACCEPTED pour la date {} : {}", today, count);
         return Long.valueOf(count);
     }
@@ -207,7 +207,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Transactional(readOnly = true)
     public BigDecimal getTechnicianRevenue(Long technicianId) {
         log.debug("Calcul du revenu total pour le technicien id={}", technicianId);
-        BigDecimal sum = reservationRepository.sumPriceByTechnicianIdAndStatus(technicianId, ReservationStatus.COMPLETED);
+        BigDecimal sum = reservationRepository.sumPriceByTechnicianIdAndStatus(technicianId,
+                ReservationStatus.COMPLETED);
         if (sum == null) {
             sum = BigDecimal.ZERO;
         }
@@ -219,7 +220,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Transactional(readOnly = true)
     public Double getTechnicianAverageRating(Long technicianId) {
         log.debug("Calcul de la moyenne des notes pour le technicien id={}", technicianId);
-        Double average = reservationRepository.averageRatingByTechnicianIdAndStatus(technicianId, ReservationStatus.COMPLETED);
+        Double average = reservationRepository.averageRatingByTechnicianIdAndStatus(technicianId,
+                ReservationStatus.COMPLETED);
         if (average == null) {
             average = 0.0;
         }
@@ -227,9 +229,11 @@ public class ReservationServiceImpl implements ReservationService {
         return average;
     }
 
-    /* =======================
-       Méthodes privées
-       ======================= */
+    /*
+     * =======================
+     * Méthodes privées
+     * =======================
+     */
 
     private Reservation getExistingReservation(Long idReservation) {
         return reservationRepository.findById(idReservation)
