@@ -62,6 +62,7 @@ class ReviewControllerTest {
     void createReview_ShouldReturnCreatedReview() throws Exception {
         // Arrange
         ReviewDto inputDto = new ReviewDto();
+        inputDto.setIdReservation(10L);
         inputDto.setRating(Rating.of(5));
         inputDto.setComment("Great job");
         Long clientId = 1L;
@@ -69,6 +70,7 @@ class ReviewControllerTest {
         Review createdReview = new Review();
         ReviewDto outputDto = new ReviewDto();
         outputDto.setIdReview(1L);
+        outputDto.setIdReservation(reservationId);
         outputDto.setRating(Rating.of(5));
 
         when(currentUserProvider.getCurrentUserId()).thenReturn(clientId);
@@ -191,13 +193,12 @@ class ReviewControllerTest {
     void getReviewForReservation_ShouldReturnReview() throws Exception {
         // Arrange
         Long reservationId = 1L;
-        Long clientId = 1L;
         Review review = new Review();
         ReviewDto dto = new ReviewDto();
         dto.setIdReview(1L);
+        dto.setIdReservation(reservationId);
 
-        when(currentUserProvider.getCurrentUserId()).thenReturn(clientId);
-        when(reviewService.getReviewByClientAndReservation(clientId, reservationId)).thenReturn(Optional.of(review));
+        when(reviewService.getReviewByReservationId(reservationId)).thenReturn(Optional.of(review));
         when(reviewMapper.toDto(review)).thenReturn(dto);
 
         // Act & Assert

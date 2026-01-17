@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -202,8 +205,8 @@ class ReservationServiceImplTest {
     }
 
     @Test
-    void shouldCompleteReservationIfAccepted() {
-        reservation.setStatus(ReservationStatus.ACCEPTED);
+    void shouldCompleteReservationIfInProgress() {
+        reservation.setStatus(ReservationStatus.IN_PROGRESS);
 
         when(reservationRepository.findById(1L))
                 .thenReturn(Optional.of(reservation));
