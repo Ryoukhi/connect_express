@@ -1,0 +1,274 @@
+<div class="flex min-h-screen">
+  <app-sidebar-dashboard-tech></app-sidebar-dashboard-tech>
+
+  <!-- 2️⃣ CONTENU PRINCIPAL -->
+  <main class="flex-1 flex flex-col min-w-0">
+    <app-header-dashboard-tech></app-header-dashboard-tech>
+    <!-- paste here -->
+    <div class="p-6 bg-slate-50 min-h-screen">
+      <!-- Header Section -->
+      <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">Gestion des Interventions</h1>
+          <p class="text-slate-500">Suivez et mettez à jour l'état de vos réservations</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button (click)="loadReservations(true)"
+            class="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition border border-transparent hover:border-slate-200">
+            <i class="fas fa-sync-alt" [class.animate-spin]="loading"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Alert Messages -->
+      <div *ngIf="successMessage"
+        class="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+        <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+          <i class="fas fa-check"></i>
+        </div>
+        <p class="font-medium">{{ successMessage }}</p>
+      </div>
+      <div *ngIf="errorMessage"
+        class="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+        <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-rose-600">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <p class="font-medium">{{ errorMessage }}</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Sidebar: Search & List -->
+        <div class="lg:col-span-5 space-y-6">
+          <!-- Filters Card -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+            <div class="relative mb-5">
+              <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input type="text" [(ngModel)]="searchTerm" (input)="applyFilter()"
+                placeholder="Rechercher par ville, quartier..."
+                class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white transition text-sm">
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <button *ngFor="let filter of ['ALL', 'PENDING', 'ACCEPTED', 'IN_PROGRESS', 'COMPLETED']"
+                (click)="statusFilter = filter; applyFilter()"
+                [class]="statusFilter === filter ? 'bg-blue-600 text-white shadow-md shadow-blue-100' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'"
+                class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition">
+                {{ filter === 'ALL' ? 'Tous' : (statusLabels[filter] || filter) }}
+              </button>
+            </div>
+          </div>
+
+          <!-- List Container -->
+          <div class="space-y-4">
+            <div *ngIf="loading"
+              class="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-dashed border-slate-300">
+              <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4">
+              </div>
+              <p class="text-slate-500 font-medium tracking-tight">Synchronisation de vos données...</p>
+            </div>
+
+            <div *ngIf="!loading && filteredReservations.length === 0"
+              class="text-center py-20 bg-white rounded-2xl border border-dashed border-slate-300">
+              <div
+                class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
+                <i class="fas fa-calendar-times text-2xl"></i>
+              </div>
+              <p class="text-slate-500 font-semibold mb-1">Aucune réservation</p>
+              <p class="text-xs text-slate-400">Essayez de modifier vos filtres ou effectuez une nouvelle recherche.
+              </p>
+            </div>
+
+            <div *ngFor="let res of filteredReservations" (click)="selectReservation(res)"
+              [class.border-blue-600]="selectedReservation?.idReservation === res.idReservation"
+              [class.bg-blue-50]="selectedReservation?.idReservation === res.idReservation"
+              class="bg-white p-5 rounded-2xl border-2 border-transparent shadow-sm hover:shadow-md cursor-pointer transition flex gap-4 group">
+
+              <div class="flex-1">
+                <div class="flex justify-between items-start mb-3">
+                  <span [ngClass]="statusColors[res.status!] || 'bg-slate-100 text-slate-800'"
+                    class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-widest">
+                    {{ statusLabels[res.status!] || res.status }}
+                  </span>
+                  <span class="text-xs font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded">#{{ res.idReservation
+                    }}</span>
+                </div>
+                <h3 class="font-bold text-slate-900 mb-1 line-clamp-1 group-hover:text-blue-600 transition">{{
+                  res.description || 'Intervention technique' }}</h3>
+                <div class="flex items-center gap-4 text-xs text-slate-500">
+                  <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt text-slate-400"></i> {{
+                    res.city }}, {{ res.neighborhood }}</span>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                  <span class="text-[11px] font-bold text-slate-400 uppercase tracking-tighter">
+                    <i class="far fa-clock mr-1"></i> {{ res.scheduledTime | date:'dd MMM, HH:mm' }}
+                  </span>
+                  <span class="text-sm font-black text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg">
+                    {{ res.price | number:'1.0-0' }} <span class="text-[10px]">FCFA</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Section -->
+        <div class="lg:col-span-7">
+          <div *ngIf="selectedReservation"
+            class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden sticky top-6 animate-in zoom-in-95 duration-200">
+            <!-- Detail Header -->
+            <div class="bg-slate-900 p-6 text-white relative">
+              <button (click)="closeDetail()" class="absolute top-6 right-6 text-white/50 hover:text-white transition">
+                <i class="fas fa-times text-xl"></i>
+              </button>
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-xl">
+                  <i class="fas fa-tools"></i>
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold">Intervention #{{ selectedReservation.idReservation }}</h2>
+                  <p class="text-blue-400 text-sm font-medium">{{ statusLabels[selectedReservation.status!] ||
+                    selectedReservation.status }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detail Body -->
+            <div class="p-8">
+              <!-- Client Profile Snippet -->
+              <div class="mb-8 p-5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center gap-5">
+                <img
+                  [src]="selectedClient?.profilePhotoUrl || 'https://ui-avatars.com/api/?name=' + (selectedClient?.firstName || 'Client') + '&background=2563eb&color=fff'"
+                  class="w-16 h-16 rounded-2xl object-cover shadow-sm border-2 border-white" alt="Client">
+                <div class="flex-1">
+                  <p class="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-1">Demandeur</p>
+                  <h4 class="text-lg font-bold text-slate-900">{{ (selectedClient?.firstName || '') + ' ' +
+                    (selectedClient?.lastName || '') || 'Chargement...' }}</h4>
+                  <div class="flex gap-4 mt-1">
+                    <a [href]="'tel:' + selectedClient?.phone"
+                      class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">
+                      <i class="fas fa-phone-alt"></i> Appeler
+                    </a>
+                    <span class="text-xs text-slate-400 flex items-center gap-1">
+                      <i class="fas fa-envelope"></i> {{ selectedClient?.email || 'N/A' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <label
+                    class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-1.5">Description</label>
+                  <p class="text-sm text-slate-700 leading-relaxed font-medium">{{ selectedReservation.description ||
+                    'Aucune description fournie' }}</p>
+                </div>
+                <div class="space-y-4">
+                  <div>
+                    <label
+                      class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-1.5">Localisation</label>
+                    <p class="text-sm font-bold text-slate-900"><i class="fas fa-map-pin text-rose-500 mr-2"></i> {{
+                      selectedReservation.city }}, {{ selectedReservation.neighborhood }}</p>
+                  </div>
+                  <div>
+                    <label
+                      class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-1.5">Financier</label>
+                    <p class="text-lg font-black text-emerald-600">{{ selectedReservation.price | number:'1.0-0' }}
+                      FCFA</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border-t border-slate-100 pt-8 mt-8">
+                <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest block mb-4">Gérer
+                  l'avancement</label>
+
+                <div class="grid grid-cols-1 gap-3">
+                  <!-- Action Buttons Based on Status -->
+                  <ng-container [ngSwitch]="selectedReservation.status">
+                    <div *ngSwitchCase="'PENDING'" class="flex flex-col gap-3">
+                      <button (click)="acceptReservation()" [disabled]="actionInProgress"
+                        class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-emerald-100 flex items-center justify-center gap-2">
+                        <i class="fas fa-check-circle"></i> Accepter la demande
+                      </button>
+                      <button (click)="rejectReservation()" [disabled]="actionInProgress"
+                        class="w-full py-4 bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-times-circle"></i> Décliner l'intervention
+                      </button>
+                    </div>
+
+                    <div *ngSwitchCase="'ACCEPTED'" class="flex flex-col gap-3">
+                      <button (click)="startRoute()" [disabled]="actionInProgress"
+                        class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-100 flex items-center justify-center gap-2">
+                        <i class="fas fa-car-side"></i> Je me déplace
+                      </button>
+                      <button (click)="cancelReservation()" [disabled]="actionInProgress"
+                        class="w-full py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-ban"></i> Annuler l'intervention
+                      </button>
+                    </div>
+
+                    <div *ngSwitchCase="'EN_ROUTE'" class="flex flex-col gap-3">
+                      <button (click)="startWork()" [disabled]="actionInProgress"
+                        class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-orange-100 flex items-center justify-center gap-2">
+                        <i class="fas fa-bolt"></i> Commencer l'intervention
+                      </button>
+                    </div>
+
+                    <div *ngSwitchCase="'IN_PROGRESS'" class="flex flex-col gap-3">
+                      <button (click)="completeWork()" [disabled]="actionInProgress"
+                        class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-emerald-100 flex items-center justify-center gap-2">
+                        <i class="fas fa-clipboard-check"></i> Marquer comme terminé
+                      </button>
+                    </div>
+
+                    <div *ngSwitchCase="'COMPLETED'" class="flex flex-col gap-4">
+                      <div class="p-6 bg-emerald-50 border border-emerald-100 rounded-2xl">
+                        <p class="text-emerald-700 font-bold mb-2 flex items-center gap-2">
+                          <i class="fas fa-check-double"></i> Intervention terminée
+                        </p>
+
+                        <!-- Review display if exists -->
+                        <div *ngIf="selectedReview" class="mt-4 pt-4 border-t border-emerald-100">
+                          <div class="flex items-center gap-1 mb-2 text-yellow-500">
+                            <i *ngFor="let star of [1,2,3,4,5]" class="fas fa-star"
+                              [ngClass]="{'text-slate-200': (selectedReview.rating?.value || 0) < star}">
+                            </i>
+                            <span class="ml-2 text-xs font-bold text-slate-900">{{ selectedReview.rating?.value
+                              }}/5</span>
+                          </div>
+                          <p class="text-sm text-slate-700 italic">"{{ selectedReview.comment }}"</p>
+                        </div>
+
+                        <div *ngIf="!selectedReview" class="mt-2 text-xs text-emerald-600 italic">
+                          En attente de l'avis du client
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngSwitchDefault class="p-6 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                      <p class="text-slate-500 font-medium italic">Cette réservation est archivée ({{
+                        statusLabels[selectedReservation.status!] || selectedReservation.status }})</p>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detail Empty Placeholder -->
+          <div *ngIf="!selectedReservation"
+            class="bg-white rounded-2xl shadow-sm border-2 border-dashed border-slate-200 p-20 text-center flex flex-col items-center sticky top-6">
+            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6 text-slate-300">
+              <i class="fas fa-mouse-pointer text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Sélectionnez une intervention</h3>
+            <p class="text-slate-500 max-w-[280px] leading-relaxed">Cliquez sur une carte à gauche pour consulter les
+              détails et gérer le statut de l'intervention.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+<app-nav-dashboard-tech></app-nav-dashboard-tech>

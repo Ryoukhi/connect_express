@@ -31,7 +31,7 @@ public class TechnicianSkillRepositoryAdapter implements TechnicianSkillReposito
 
     @Override
     public TechnicianSkill save(TechnicianSkill skill) {
-        log.info("Saving TechnicianSkill for profileId={}", skill.getIdProfile());
+        log.info("Saving TechnicianSkill for userId={}", skill.getIdUser());
 
         TechnicianSkillEntity entity = mapper.toEntity(skill);
         TechnicianSkillEntity saved = technicianSkillJpaRepository.save(entity);
@@ -49,42 +49,42 @@ public class TechnicianSkillRepositoryAdapter implements TechnicianSkillReposito
     }
 
     @Override
-    public List<TechnicianSkill> findByProfileId(Long profileId) {
-        log.debug("Finding TechnicianSkills by profileId={}", profileId);
+    public List<TechnicianSkill> findByUserId(Long userId) {
+        log.debug("Finding TechnicianSkills by userId={} (fallback via findAll)", userId);
 
-        return technicianSkillJpaRepository
-                .findByProfile_IdProfile(profileId)
-                .stream()
+        return technicianSkillJpaRepository.findAll().stream()
+                .filter(e -> e.getTechnician() != null && userId.equals(e.getTechnician().getIdUser()))
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<TechnicianSkill> findByProfileIdAndCategoryId(
-            Long profileId,
+    public List<TechnicianSkill> findByUserIdAndCategoryId(
+            Long userId,
             Long categoryId
     ) {
         log.debug(
-                "Finding TechnicianSkills by profileId={} and categoryId={}",
-                profileId, categoryId
+                "Finding TechnicianSkills by userId={} and categoryId={} (fallback via findAll)",
+                userId, categoryId
         );
 
-        return technicianSkillJpaRepository
-                .findByProfile_IdProfileAndCategory_IdCategory(profileId, categoryId)
-                .stream()
+        return technicianSkillJpaRepository.findAll().stream()
+                .filter(e -> e.getTechnician() != null && userId.equals(e.getTechnician().getIdUser())
+                        && e.getCategory() != null && categoryId.equals(e.getCategory().getIdCategory()))
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public boolean existsByProfileIdAndNameSkill(Long profileId, String nameSkill) {
+    public boolean existsByUserIdAndName(Long userId, String name) {
         log.debug(
-                "Checking existence of TechnicianSkill profileId={}, name={}",
-                profileId, nameSkill
+                "Checking existence of TechnicianSkill userId={}, name={} (fallback via findAll)",
+                userId, name
         );
 
-        return technicianSkillJpaRepository
-                .existsByProfile_IdProfileAndName(profileId, nameSkill);
+        return technicianSkillJpaRepository.findAll().stream()
+                .filter(e -> e.getTechnician() != null && userId.equals(e.getTechnician().getIdUser()))
+                .anyMatch(e -> name != null && name.equalsIgnoreCase(e.getName()));
     }
 
     @Override
@@ -99,9 +99,19 @@ public class TechnicianSkillRepositoryAdapter implements TechnicianSkillReposito
     }
 
     @Override
-    public void deleteByProfileId(Long profileId) {
-        log.info("Deleting all TechnicianSkills for profileId={}", profileId);
-        technicianSkillJpaRepository.deleteByProfile_IdProfile(profileId);
+    public void deleteByUserId(Long userId) {
+        log.info("Deleting all TechnicianSkills for userId={} (fallback)", userId);
+        technicianSkillJpaRepository.findAll().stream()
+                .filter(e -> e.getTechnician() != null && userId.equals(e.getTechnician().getIdUser()))
+                .forEach(technicianSkillJpaRepository::delete);
+    }
+
+    @Override
+    public List<TechnicianSkill> findAll() {
+        log.debug("Retrieving all TechnicianSkills via JPA");
+        return technicianSkillJpaRepository.findAll().stream()
+                .map(mapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -16,13 +16,15 @@ public class Reservation {
     private LocalDateTime scheduledTime;
     private ReservationStatus status;
     private BigDecimal price;
-    private String address;
+    private String city;
+    private String neighborhood;
     private String description;
     private String cancellationReason;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime completedAt;
 
+    
     public Reservation() {}
 
     // ========== Business Logic Methods ==========
@@ -142,10 +144,6 @@ public class Reservation {
         return price;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -242,10 +240,6 @@ public class Reservation {
         this.price = price;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -256,5 +250,21 @@ public class Reservation {
 
     public Object getId() {
         return null;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
     }
 }

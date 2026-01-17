@@ -1,0 +1,108 @@
+<app-client-header></app-client-header>
+
+<div class="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <nav class="flex mb-8 text-sm font-medium text-slate-500">
+        <ol class="flex items-center space-x-2">
+            <li><a routerLink="/catalogue" class="hover:text-blue-600">Accueil</a></li>
+            <li><i class="fas fa-chevron-right text-[10px] mx-2"></i></li>
+            <li class="text-slate-900">Reserver</li>
+        </ol>
+    </nav>
+    <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-blue-600 px-6 py-8 text-center" *ngIf="technician">
+            <div class="relative inline-block mb-4">
+                <div
+                    class="w-24 h-24 bg-white rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-blue-600 uppercase shadow-lg overflow-hidden border-4 border-white/20">
+                    <img *ngIf="technician.profilePhotoUrl" [src]="technician.profilePhotoUrl"
+                        class="w-full h-full object-cover" [alt]="technician.firstName">
+                    <span *ngIf="!technician.profilePhotoUrl">{{ technician.firstName?.charAt(0) }}{{
+                        technician.lastName?.charAt(0) }}</span>
+                </div>
+                <!-- Status Badge -->
+                <div
+                    class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 rounded-full border-4 border-blue-600 shadow-md">
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-white">Réserver avec {{ technician.firstName }} {{ technician.lastName
+                }}
+            </h2>
+            <p class="text-blue-100 mt-2">Expert qualifié • {{ technician.city }}</p>
+
+            <!-- Contact Section -->
+            <div class="mt-6 flex flex-col items-center">
+                <p class="text-blue-100 text-xs font-medium mb-2 uppercase tracking-wider">Contactez-moi
+                </p>
+                <a [href]="'tel:' + technician.phone"
+                    class="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-colors px-6 py-2 rounded-full text-white font-bold border border-white/20 shadow-sm">
+                    <i class="fas fa-phone-alt"></i>
+                    {{ technician.phone }}
+                </a>
+            </div>
+        </div>
+
+        <div *ngIf="loading" class="p-8 text-center text-slate-500">
+            Chargement...
+        </div>
+
+        <div *ngIf="!loading && technician" class="p-8">
+            <form (ngSubmit)="submitBooking()">
+
+                <!-- Alert Error -->
+                <div *ngIf="errorMsg" class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                    <p class="text-red-700 text-sm">{{ errorMsg }}</p>
+                </div>
+
+                <!-- Alert Success -->
+                <div *ngIf="successMsg" class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                    <p class="text-green-700 text-sm font-bold">{{ successMsg }}</p>
+                    <p class="text-green-600 text-xs">Redirection en cours...</p>
+                </div>
+
+                <!-- Date & Heure -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Date souhaitée *</label>
+                        <input type="date" [(ngModel)]="dateInput" name="date" required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Heure *</label>
+                        <input type="time" [(ngModel)]="timeInput" name="time" required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Description du problème *</label>
+                    <textarea [(ngModel)]="reservation.description" name="description" rows="4" required
+                        placeholder="Décrivez ce dont vous avez besoin en détail..."
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"></textarea>
+                </div>
+
+                <!-- Adresse -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Ville *</label>
+                        <input type="text" [(ngModel)]="reservation.city" name="city" required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Quartier *</label>
+                        <input type="text" [(ngModel)]="reservation.neighborhood" name="neighborhood" required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <button type="submit" [disabled]="submitLoading || successMsg"
+                    class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span *ngIf="!submitLoading">Confirmer la demande</span>
+                    <span *ngIf="submitLoading"><i class="fas fa-spinner fa-spin mr-2"></i> Envoi...</span>
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>

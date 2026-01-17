@@ -15,6 +15,8 @@ import com.eadl.connect_backend.domain.port.out.persistence.ReviewRepository;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.ReviewEntity;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper.ReviewEntityMapper;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.repository.jpa.ReviewJpaRepository;
+import com.eadl.connect_backend.infrastructure.adapter.out.persistence.repository.jpa.ReservationJpaRepository;
+import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.ReservationEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,16 +34,40 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
     private static final Logger log = LoggerFactory.getLogger(ReviewRepositoryAdapter.class);
 
     private final ReviewJpaRepository reviewJpaRepository;
+    private final ReservationJpaRepository reservationJpaRepository;
     private final ReviewEntityMapper reviewEntityMapper;
 
-    /* =========================
-       CREATE
-       ========================= */
+    /*
+     * =========================
+     * CREATE
+     * =========================
+     */
     @Override
     public Review save(Review review) {
         log.info("Saving review: {}", review);
 
         ReviewEntity entity = reviewEntityMapper.toEntity(review);
+
+        // Handle Reservation link
+        if (review.getIdReservation() != null) {
+            ReservationEntity reservation = reservationJpaRepository.findById(review.getIdReservation())
+                    .orElseThrow(
+                            () -> new IllegalArgumentException("Reservation not found: " + review.getIdReservation()));
+            entity.setReservation(reservation);
+
+            // Save review first to get ID
+            ReviewEntity saved = reviewJpaRepository.save(entity);
+
+            // Update reservation with review reference
+            reservation.setReview(saved);
+            reservationJpaRepository.save(reservation);
+
+            Review savedReview = reviewEntityMapper.toModel(saved);
+            log.info("Review saved with id {} and linked to reservation {}", savedReview.getIdReview(),
+                    review.getIdReservation());
+            return savedReview;
+        }
+
         ReviewEntity saved = reviewJpaRepository.save(entity);
         Review savedReview = reviewEntityMapper.toModel(saved);
 
@@ -49,9 +75,11 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
         return savedReview;
     }
 
-    /* =========================
-       UPDATE
-       ========================= */
+    /*
+     * =========================
+     * UPDATE
+     * =========================
+     */
     @Override
     public Review update(Long idReview, Review review) {
         log.info("Updating review id {} with data: {}", idReview, review);
@@ -72,9 +100,11 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
         return updatedReview;
     }
 
-    /* =========================
-       FIND BY ID
-       ========================= */
+    /*
+     * =========================
+     * FIND BY ID
+     * =========================
+     */
     @Override
     @Transactional(readOnly = true)
     public Optional<Review> findById(Long idReview) {
@@ -85,15 +115,16 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
 
         review.ifPresentOrElse(
                 r -> log.info("Review found: {}", r),
-                () -> log.warn("No review found with id {}", idReview)
-        );
+                () -> log.warn("No review found with id {}", idReview));
 
         return review;
     }
 
-    /* =========================
-       FIND BY CLIENT
-       ========================= */
+    /*
+     * =========================
+     * FIND BY CLIENT
+     * =========================
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Review> findByClientId(Long idClient) {
@@ -108,9 +139,11 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
         return reviews;
     }
 
-    /* =========================
-       COUNT
-       ========================= */
+    /*
+     * =========================
+     * COUNT
+     * =========================
+     */
     @Override
     @Transactional(readOnly = true)
     public Long count() {
@@ -122,9 +155,11 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
         return count;
     }
 
-    /* =========================
-       DELETE
-       ========================= */
+    /*
+     * =========================
+     * DELETE
+     * =========================
+     */
     @Override
     public void delete(Review review) {
         if (review.getIdReview() == null) {
@@ -137,9 +172,11 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
         log.info("Review deleted successfully");
     }
 
-    /* =========================
-       BUSINESS – AVG RATING
-       ========================= */
+    /*
+     * =========================
+     * BUSINESS – AVG RATING
+     * =========================
+     */
     @Override
     @Transactional(readOnly = true)
     public BigDecimal calculateAverageRating(List<Long> reviewIds) {
@@ -150,8 +187,7 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
             return BigDecimal.ZERO;
         }
 
-        List<Integer> ratings =
-                reviewJpaRepository.findRatingsByReviewIds(reviewIds);
+        List<Integer> ratings = reviewJpaRepository.findRatingsByReviewIds(reviewIds);
 
         if (ratings.isEmpty()) {
             log.warn("No ratings found for review IDs {}", reviewIds);
@@ -165,42 +201,48 @@ public class ReviewRepositoryAdapter implements ReviewRepository {
         BigDecimal average = sum.divide(
                 BigDecimal.valueOf(ratings.size()),
                 2,
-                RoundingMode.HALF_UP
-        );
+                RoundingMode.HALF_UP);
 
         log.info("Average rating calculated: {}", average);
         return average;
     }
 
-    /* =========================
-       FIND BY CLIENT + RESERVATION
-       ========================= */
+    /*
+     * =========================
+     * FIND BY CLIENT + RESERVATION
+     * =========================
+     */
     @Override
     @Transactional(readOnly = true)
     public Optional<Review> findByClientIdAndReservationId(
             Long clientId,
-            Long reservationId
-    ) {
+            Long reservationId) {
         log.info(
                 "Finding review for client {} and reservation {}",
                 clientId,
-                reservationId
-        );
+                reservationId);
 
-        Optional<Review> review =
-                reviewJpaRepository
-                        .findByClient_IdUserAndReservation_IdReservation(
-                                clientId, reservationId)
-                        .map(reviewEntityMapper::toModel);
+        Optional<Review> review = reviewJpaRepository
+                .findByClient_IdUserAndReservation_IdReservation(
+                        clientId, reservationId)
+                .map(reviewEntityMapper::toModel);
 
         review.ifPresentOrElse(
                 r -> log.info("Review found: {}", r),
                 () -> log.warn(
                         "No review found for client {} and reservation {}",
                         clientId,
-                        reservationId)
-        );
+                        reservationId));
 
         return review;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Review> findByReservationId(Long reservationId) {
+        log.info("Finding review for reservation id {}", reservationId);
+
+        return reviewJpaRepository.findByReservation_IdReservation(reservationId)
+                .map(reviewEntityMapper::toModel);
     }
 }

@@ -1,0 +1,192 @@
+<app-client-header></app-client-header>
+<div class="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-slate-900 mb-8">Mes Réservations</h1>
+
+        <!-- Tabs -->
+        <div class="flex border-b border-slate-200 mb-6 sticky top-0 bg-slate-50 z-10 pt-2">
+        <nav class="flex mb-8 text-sm font-medium text-slate-500">
+            <ol class="flex items-center space-x-2">
+                <li><a routerLink="/catalogue" class="hover:text-blue-600">Accueil</a></li>
+                <li><i class="fas fa-chevron-right text-[10px] mx-2"></i></li>
+                <li class="text-slate-900">Mes Réservations</li>
+            </ol>
+        </nav>
+            <button (click)="activeTab = 'current'"
+                [class]="activeTab === 'current' ? 'border-primary-600 text-primary-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
+                class="pb-4 px-6 border-b-2 font-semibold text-sm transition-all duration-200">
+                Suivi en cours
+                <span *ngIf="currentReservations.length > 0"
+                    class="ml-2 px-2 py-0.5 bg-primary-100 text-primary-700 rounded-full text-xs">
+                    {{ currentReservations.length }}
+                </span>
+            </button>
+            <button (click)="activeTab = 'history'"
+                [class]="activeTab === 'history' ? 'border-primary-600 text-primary-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
+                class="pb-4 px-6 border-b-2 font-semibold text-sm transition-all duration-200">
+                Historique
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div *ngIf="loading" class="flex flex-col items-center justify-center py-20 text-slate-500">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+            <p class="font-medium">Chargement de vos réservations...</p>
+        </div>
+
+        <div *ngIf="!loading">
+            <!-- Current List -->
+            <div *ngIf="activeTab === 'current'" class="animate-fade-in">
+                <div *ngIf="currentReservations.length === 0"
+                    class="text-center py-16 bg-white rounded-2xl shadow-sm border border-slate-100">
+                    <div class="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-calendar-alt text-3xl text-slate-300"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Pas de réservations en cours</h3>
+                    <p class="text-slate-500 mb-8 max-w-sm mx-auto">Vous n'avez aucune intervention prévue pour le
+                        moment. Trouvez un expert dès maintenant !</p>
+                    <a routerLink="/catalogue"
+                        class="inline-flex items-center gap-2 bg-primary-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-primary-700 transition transform hover:scale-105 shadow-lg shadow-primary-200">
+                        Explorer le catalogue
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    <div *ngFor="let res of currentReservations"
+                        class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-primary-100 transition-all duration-300 relative overflow-hidden group">
+
+                        <!-- Left Border Decorator -->
+                        <div class="absolute left-0 top-0 bottom-0 w-1.5" [ngClass]="{
+                            'bg-amber-400': res.status === 'PENDING',
+                            'bg-blue-400': res.status === 'ACCEPTED',
+                            'bg-sky-400': res.status === 'EN_ROUTE',
+                            'bg-indigo-400': res.status === 'IN_PROGRESS'
+                        }"></div>
+
+                        <div class="p-6">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <span
+                                            [class]="'px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm border ' + getStatusClass(res.status)">
+                                            {{ getStatusLabel(res.status) }}
+                                        </span>
+                                        <span class="text-xs font-medium text-slate-400 flex items-center gap-1">
+                                            <i class="far fa-calendar"></i>
+                                            {{ res.createdAt | date:'dd/MM/yyyy' }}
+                                        </span>
+                                    </div>
+
+                                    <h3 class="font-bold text-slate-900 text-xl mb-2 flex items-center gap-2">
+                                        Réservation #{{ res.idReservation }}
+                                    </h3>
+
+                                    <p class="text-slate-600 text-sm line-clamp-2 leading-relaxed mb-4">
+                                        {{ res.description || 'Pas de description fournie' }}
+                                    </p>
+
+                                    <div class="flex flex-wrap gap-3">
+                                        <div
+                                            class="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+                                            <i class="fas fa-map-marker-alt text-primary-500"></i>
+                                            {{ res.city }}, {{ res.neighborhood }}
+                                        </div>
+                                        <div
+                                            class="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+                                            <i class="fas fa-clock text-primary-500"></i>
+                                            {{ res.scheduledTime | date:'dd MMM yyyy à HH:mm' }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex flex-row md:flex-col items-center md:items-end gap-4 pt-4 md:pt-0 border-t md:border-t-0 border-slate-50">
+                                    <div class="flex-1 md:flex-none text-left md:text-right">
+                                        <span
+                                            class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Montant</span>
+                                        <span class="text-2xl font-black text-slate-900">{{ res.price | number:'1.0-0'
+                                            }} <small class="text-xs font-bold text-slate-500">FCFA</small></span>
+                                    </div>
+                                    <a [routerLink]="['/client/reservations', res.idReservation]"
+                                        class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-primary-600 transition-colors shadow-lg shadow-slate-200 flex items-center gap-2">
+                                        Suivre l'évolution
+                                        <i class="fas fa-arrow-right text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History List -->
+            <div *ngIf="activeTab === 'history'" class="animate-fade-in">
+                <div *ngIf="historyReservations.length === 0"
+                    class="text-center py-20 bg-white rounded-2xl border border-dashed border-slate-200">
+                    <p class="text-slate-400 font-medium">Aucune réservation passée dans votre historique.</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div *ngFor="let res of historyReservations"
+                        class="bg-white p-5 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-4 group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center border" [ngClass]="{
+                                'bg-emerald-50 text-emerald-500 border-emerald-100': res.status === 'COMPLETED',
+                                'bg-rose-50 text-rose-500 border-rose-100': res.status === 'CANCELLED' || res.status === 'REJECTED'
+                            }">
+                                <i [class]="res.status === 'COMPLETED' ? 'fas fa-check-circle' : 'fas fa-times-circle'"
+                                    class="text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="font-bold text-slate-900">#{{ res.idReservation }}</span>
+                                    <span
+                                        [class]="'px-2 py-0.5 rounded text-[9px] font-extrabold uppercase border ' + getStatusClass(res.status)">
+                                        {{ getStatusLabel(res.status) }}
+                                    </span>
+                                </div>
+                                <p class="text-[11px] text-slate-500 flex items-center gap-1">
+                                    <i class="far fa-calendar-check"></i>
+                                    {{ (res.completedAt || res.updatedAt) | date:'dd MMM yyyy' }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-wrap items-center gap-4 w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 pt-3 md:pt-0 border-slate-50">
+                            <div class="text-left md:text-right px-2">
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tight mb-0.5">Total
+                                </p>
+                                <p class="font-black text-slate-900">{{ res.price | number:'1.0-0' }} <span
+                                        class="text-[10px]">FCFA</span></p>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <!-- Quick Review Action -->
+                                <button *ngIf="res.status === 'COMPLETED' && !res.idReview"
+                                    [routerLink]="['/client/reservations', res.idReservation]"
+                                    class="px-4 py-2 bg-amber-500 text-white rounded-lg text-xs font-bold hover:bg-amber-600 transition-colors shadow-sm flex items-center gap-2">
+                                    <i class="fas fa-star"></i>
+                                    Donner un avis
+                                </button>
+
+                                <div *ngIf="res.idReview"
+                                    class="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg text-xs font-bold border border-emerald-100">
+                                    <i class="fas fa-check"></i>
+                                    Avis publié
+                                </div>
+
+                                <a [routerLink]="['/client/reservations', res.idReservation]"
+                                    class="p-2.5 bg-slate-50 text-slate-600 rounded-lg hover:bg-primary-50 hover:text-primary-600 transition-colors border border-slate-100"
+                                    title="Voir les détails">
+                                    <i class="fas fa-external-link-alt text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

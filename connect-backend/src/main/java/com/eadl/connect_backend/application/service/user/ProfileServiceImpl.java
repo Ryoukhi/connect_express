@@ -2,17 +2,13 @@ package com.eadl.connect_backend.application.service.user;
 
 import com.eadl.connect_backend.domain.model.user.User;
 import com.eadl.connect_backend.domain.port.in.user.ProfileService;
+import com.eadl.connect_backend.domain.port.out.external.StorageService;
 import com.eadl.connect_backend.domain.port.out.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Implémentation du service de gestion des profils utilisateurs
@@ -25,6 +21,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final StorageService storageService;
 
     @Override
     public User updateProfilePhoto(Long idUser, byte[] photoData, String fileName) {
@@ -32,18 +29,21 @@ public class ProfileServiceImpl implements ProfileService {
         User user = userRepository.findById(idUser)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
 
-        try {
-            Path dir = Paths.get("uploads", "profile_photos", String.valueOf(idUser));
-            Files.createDirectories(dir);
-            Path filePath = dir.resolve(fileName);
-            Files.write(filePath, photoData);
-            String url = filePath.toAbsolutePath().toString();
-            user.updateProfilePhoto(url);
-            return userRepository.save(user);
-        } catch (IOException e) {
-            log.error("Erreur lors de l'enregistrement de la photo de profil pour l'utilisateur {}", idUser, e);
-            throw new RuntimeException("Erreur lors de l'enregistrement de la photo de profil", e);
+        // Supprimer l'ancienne photo si elle existe
+        String oldUrl = user.getProfilePhotoUrl();
+        if (oldUrl != null) {
+            try {
+                storageService.deleteFile(oldUrl);
+            } catch (Exception e) {
+                log.warn("Impossible de supprimer l'ancienne photo de profil: {}", oldUrl, e);
+            }
         }
+
+        String folder = "profile_photos/" + idUser;
+        String url = storageService.uploadFile(photoData, fileName, folder, "image/jpeg"); // Default to jpeg
+
+        user.updateProfilePhoto(url);
+        return userRepository.save(user);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class ProfileServiceImpl implements ProfileService {
         String url = user.getProfilePhotoUrl();
         if (url != null) {
             try {
-                Files.deleteIfExists(Paths.get(url));
-            } catch (IOException e) {
+                storageService.deleteFile(url);
+            } catch (Exception e) {
                 log.warn("Impossible de supprimer le fichier de photo de profil: {}", url, e);
             }
             user.deleteProfilePhoto();
@@ -80,8 +80,8 @@ public class ProfileServiceImpl implements ProfileService {
         String url = user.getProfilePhotoUrl();
         if (url != null) {
             try {
-                Files.deleteIfExists(Paths.get(url));
-            } catch (IOException e) {
+                storageService.deleteFile(url);
+            } catch (Exception e) {
                 log.warn("Impossible de supprimer le fichier de photo de profil: {}", url, e);
             }
         }

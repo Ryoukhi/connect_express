@@ -34,3 +34,9 @@ build/
 
 hs_err_pid14636.log
 
+### log spring boot / logback ###
+logs/*.log
+
+.env
+.env.dev
+.env.prod

@@ -1,183 +1,318 @@
-    <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row min-h-screen bg-slate-50/30 pt-16">
 
-        <!-- 2️⃣ SIDEBAR FILTRES (HIDDEN ON MOBILE) -->
-        <aside
-          class="hidden md:block w-72 h-[calc(100vh-64px)] sticky top-16 border-r border-slate-200 p-6 overflow-y-auto"
-        >
-          <!-- Header -->
-          <div class="flex items-center justify-between mb-8">
-            <h2 class="font-bold text-lg italic">Filtres</h2>
-            <button
-              class="text-xs text-blue-600 font-semibold hover:underline"
-              (click)="resetFilters()"
-            >
-              Réinitialiser
-            </button>
+  <!-- 2️⃣ SIDEBAR FILTRES (DESKTOP) -->
+  <aside
+    class="hidden md:block flex-shrink-0 w-80 h-[calc(100vh-64px)] sticky top-16 border-r border-slate-200 p-8 overflow-y-auto bg-white">
+    <ng-container *ngTemplateOutlet="filterContent"></ng-container>
+  </aside>
+
+  <!-- MOBILE FILTERS OVERLAY -->
+  <div *ngIf="showMobileFilters" class="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm md:hidden"
+    (click)="toggleMobileFilters()">
+    <div class="absolute right-0 top-0 h-full w-[85%] bg-white p-6 shadow-2xl filters-overlay-enter"
+      (click)="$event.stopPropagation()">
+      <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+        <h2 class="text-xl font-bold text-slate-900">Filtres</h2>
+        <button (click)="toggleMobileFilters()" class="text-slate-400 hover:text-slate-600">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <ng-container *ngTemplateOutlet="filterContent"></ng-container>
+    </div>
+  </div>
+
+  <!-- 3️⃣ CONTENU PRINCIPAL -->
+  <main class="flex-1 p-4 md:p-10">
+
+    <!-- Barre horizontale des catégories -->
+    <div class="relative mb-8">
+      <div class="flex flex-wrap items-center gap-2 md:gap-3">
+        <ng-container *ngIf="categoriesLoading">
+          <div class="flex items-center gap-3">
+            <div *ngFor="let i of [1,2,3,4,5]"
+              class="h-10 w-28 bg-white border border-slate-200 rounded-full animate-pulse"></div>
           </div>
+        </ng-container>
 
-          <!-- Ville -->
-          <div class="mb-6">
-            <h3 class="filter-title">Ville</h3>
-            <select [(ngModel)]="filters.city" class="filter-select">
-              <option value="">Toutes les villes</option>
-              <option>Douala</option>
-              <option>Yaoundé</option>
-              <option>Bafoussam</option>
-            </select>
-          </div>
-
-          <!-- Quartier -->
-          <div class="mb-6">
-            <h3 class="filter-title">Quartier</h3>
-            <input
-              type="text"
-              [(ngModel)]="filters.district"
-              placeholder="Ex: Akwa, Bonamoussadi"
-              class="filter-input"
-            />
-          </div>
-
-          <!-- Catégorie
-          <div class="mb-6">
-            <h3 class="filter-title">Catégorie</h3>
-            <select [(ngModel)]="filters.category" class="filter-select">
-              <option value="">Toutes</option>
-              <option *ngFor="let c of categories" [value]="c.name">{{ c.name }}</option>
-            </select>
-          </div> -->
-
-          <!-- Disponibilité -->
-          <div class="mb-6">
-            <h3 class="filter-title">Disponibilité</h3>
-            <select [(ngModel)]="filters.availabilityStatus" class="filter-select">
-              <option value="">Toutes</option>
-              <option value="AVAILABLE">Disponible</option>
-              <option value="BUSY">Occupé</option>
-              <option value="OFFLINE">Hors ligne</option>
-            </select>
-          </div>
-
-          <!-- Note minimum -->
-          <div class="mb-6">
-            <h3 class="filter-title">Note minimum</h3>
-            <select [(ngModel)]="filters.minRating" class="filter-select">
-              <option value="">Toutes</option>
-              <option [value]="4">4⭐ et plus</option>
-              <option [value]="4.5">4.5⭐ et plus</option>
-            </select>
-          </div>
-
-          <!-- Budget -->
-          <div class="mb-8">
-            <h3 class="filter-title">Budget max (FCFA/h)</h3>
-            <input
-              type="range"
-              min="2000"
-              max="50000"
-              step="500"
-              [(ngModel)]="filters.maxPrice"
-              class="w-full accent-blue-600"
-            />
-            <p class="text-xs text-slate-500 mt-2">
-              Jusqu’à {{ filters.maxPrice || '∞' }} FCFA
-            </p>
-          </div>
-
-          <!-- Bouton -->
-          <button
-            (click)="search()"
-            class="w-full py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
-          >
-            Rechercher
+        <ng-container *ngIf="!categoriesLoading">
+          <button (click)="selectCategory(null)" [ngClass]=" {
+              'px-6 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300': true,
+              'bg-blue-600 text-white shadow-lg shadow-blue-200 ring-2 ring-blue-100': !filters.category,
+              'bg-white text-slate-600 border border-slate-200 hover:border-blue-400': !!filters.category
+            } ">
+            Tous les métiers
           </button>
-        </aside>
 
-        <!-- 3️⃣ CONTENU PRINCIPAL -->
-        <main class="flex-1 p-4 md:p-8">
-
-            <!-- Barre horizontale des catégories -->
-            <div class="flex items-center gap-3 overflow-x-auto no-scrollbar pb-6">
-                <button (click)="selectCategory(null)" [ngClass]="{ 'px-6 py-2.5 rounded-full text-sm font-bold whitespace-nowrap shadow-lg shadow-blue-100': true, 'bg-blue-600 text-white': !filters.category, 'bg-white border border-slate-200': !!filters.category }">Tous</button>
-                <button *ngFor="let c of categories" (click)="selectCategory(c)" [ngClass]="{ 'px-6 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition': true, 'bg-blue-600 text-white': filters.category === c.name, 'bg-white border border-slate-200 hover:border-blue-400': filters.category !== c.name }">{{ c.name }}</button>
-            </div>
-
-            <!-- Header résultats -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                <div>
-                    <h1 class="text-2xl font-extrabold text-slate-900">Techniciens disponibles</h1>
-                    <p class="text-slate-500 text-sm">142 professionnels trouvés à Douala</p>
-                </div>
-                <!-- <div class="flex items-center gap-2">
-                    <span class="text-sm text-slate-500">Trier par :</span>
-                    <select class="bg-transparent font-bold text-sm outline-none cursor-pointer text-blue-600">
-                        <option>Les mieux notés</option>
-                        <option>Prix croissant</option>
-                        <option>Plus proches</option>
-                    </select>
-                </div> -->
-            </div>
-
-            <!-- GRILLE DES TECHNICIENS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <div *ngIf="loading" class="col-span-3 text-center py-8">Chargement des techniciens…</div>
-
-                <div *ngIf="!loading && technicians.length === 0" class="col-span-3 text-center py-8 text-slate-500">
-                    Aucun technicien trouvé.
-                </div>
-
-                <div *ngFor="let tech of technicians" class="bg-white rounded-[2rem] border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-blue-100 transition-all duration-300 group">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Tech">
-                        <div class="absolute top-4 left-4 flex gap-2">
-                            <span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">{{ getCategoryName(tech.idCategory) }}</span>
-                        </div>
-                        <button class="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur hover:bg-white rounded-full flex items-center justify-center text-white hover:text-red-500 transition shadow-lg">
-                            <i class="far fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
-                                    {{ getTechnicianDisplayName(tech) }}
-                                    <i *ngIf="tech.verified" class="fas fa-check-circle text-blue-500 text-xs" title="Vérifié"></i>
-                                </h3>
-                                <p class="text-slate-500 text-sm italic"><i class="fas fa-map-marker-alt mr-1"></i> {{ tech.id ? 'Quartier inconnu' : '—' }}</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-blue-600 font-extrabold text-lg">{{ tech.hourlyRate || '—' }} <span class="text-[10px]">FCFA/h</span></p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4 py-4 border-y border-slate-50 my-4 text-xs font-medium text-slate-600">
-                            <span class="flex items-center gap-1"><i class="fas fa-star text-yellow-400"></i> {{ tech.averageRating || '—' }}</span>
-                            <span class="flex items-center gap-1"><i class="fas fa-briefcase text-slate-400"></i> {{ tech.yearsExperience || '—' }} ans</span>
-                        </div>
-
-                        <div class="flex items-center justify-between gap-4">
-                            <div class="flex items-center gap-1">
-                                <span [ngClass]="{'w-2 h-2 rounded-full animate-pulse bg-green-500': tech.availabilityStatus === 'AVAILABLE', 'w-2 h-2 rounded-full bg-slate-300': tech.availabilityStatus !== 'AVAILABLE'}"></span>
-                                <span class="text-[10px] font-bold uppercase" [ngClass]="{'text-green-600': tech.availabilityStatus === 'AVAILABLE', 'text-slate-400': tech.availabilityStatus !== 'AVAILABLE'}">{{ tech.availabilityStatus || 'Indisponible' }}</span>
-                            </div>
-                            <button class="bg-slate-900 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-600 transition-colors shadow-lg">Réserver</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- PAGINATION -->
-            <div class="mt-12 flex justify-center items-center gap-4">
-                <button [disabled]="currentPage === 1" (click)="previousPage()" [ngClass]="{'w-10 h-10 border border-slate-200 rounded-full flex items-center justify-center hover:bg-white transition': true, 'opacity-50 cursor-not-allowed': currentPage === 1, 'cursor-pointer': currentPage > 1}"><i class="fas fa-chevron-left"></i></button>
-                <span class="text-sm font-bold">Page {{ currentPage }} sur {{ getTotalPages() }}</span>
-                <button [disabled]="currentPage === getTotalPages()" (click)="nextPage()" [ngClass]="{'w-10 h-10 border border-slate-200 rounded-full flex items-center justify-center hover:bg-white transition': true, 'opacity-50 cursor-not-allowed': currentPage === getTotalPages(), 'cursor-pointer': currentPage < getTotalPages()}"><i class="fas fa-chevron-right"></i></button>
-            </div>
-
-        </main>
+          <button *ngFor="let c of categories; trackBy: trackByCategory" (click)="selectCategory(c)" [ngClass]=" {
+              'px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300 flex items-center gap-2': true,
+              'bg-blue-600 text-white shadow-lg shadow-blue-200 ring-2 ring-blue-100': filters.category === c.name,
+              'bg-white text-slate-600 border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30': filters.category !== c.name
+            } ">
+            <img *ngIf="c.iconUrl" [src]="c.iconUrl" alt="{{c.name}}" class="h-4 w-4 rounded-sm object-cover" />
+            <span>{{ c.name }}</span>
+          </button>
+        </ng-container>
+      </div>
     </div>
 
-    <!-- BOUTON FILTRE MOBILE (FLOAT) -->
-    <button class="md:hidden fixed bottom-6 right-6 bg-blue-600 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-xl z-50">
-        <i class="fas fa-sliders-h"></i>
-    </button>
+    <!-- Header résultats -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+      <div>
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-2">Techniciens disponibles</h1>
+        <p class="text-slate-500 font-medium">
+          <span class="text-blue-600 font-bold">{{ totalTechnicians }}</span> professionnels trouvés
+          <span *ngIf="filters.city" class="text-slate-400 mx-1">•</span>
+          <span *ngIf="filters.city">à {{ filters.city }}</span>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- GRILLE DES TECHNICIENS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+
+      <ng-container *ngIf="loading">
+        <div *ngFor="let i of [1,2,3,4,5,6]"
+          class="bg-white rounded-[2.5rem] border border-slate-100 p-4 space-y-4 shadow-sm animate-pulse">
+          <div class="aspect-[4/3] bg-slate-100 rounded-[2rem]"></div>
+          <div class="h-6 w-3/4 bg-slate-100 rounded"></div>
+          <div class="h-4 w-1/2 bg-slate-100 rounded"></div>
+        </div>
+      </ng-container>
+
+      <div *ngIf="!loading && technicians.length === 0"
+        class="col-span-full flex flex-col items-center justify-center py-20 text-center">
+        <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-400">
+          <i class="fas fa-search text-3xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-slate-900">Aucun technicien trouvé</h3>
+        <p class="text-slate-500 mt-1">Essayez de modifier vos filtres pour voir plus de résultats.</p>
+        <button (click)="resetFilters()" class="mt-6 text-blue-600 font-bold hover:underline">Réinitialiser les
+          filtres</button>
+      </div>
+
+      <div *ngFor="let tech of technicians"
+        class="bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)] transition-all duration-500 group flex flex-col h-full">
+
+        <div class="relative aspect-[4/3] overflow-hidden m-4 mb-0 rounded-[2rem]">
+          <img
+            [src]="tech.profilePhotoUrl || 'https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?auto=format&fit=crop&q=80&w=600'"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" [alt]="tech.name"
+            onerror="this.src='https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?auto=format&fit=crop&q=80&w=600'">
+
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          </div>
+
+          <div class="absolute top-4 left-4">
+            <span
+              class="bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-[11px] font-bold text-slate-900 uppercase tracking-wider shadow-xl border border-white/20">
+              {{ tech.skillName || 'Service' }}
+            </span>
+          </div>
+
+          <!-- Price overlay on image for better impact -->
+          <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+            <div class="bg-blue-600 text-white px-4 py-2 rounded-2xl shadow-lg border border-blue-400/30">
+              <span class="text-[10px] block opacity-80 font-bold uppercase tracking-tighter leading-none">Tarif</span>
+              <span class="font-black text-lg">{{ tech.hourlyRate || 0 | number }} <span
+                  class="text-xs font-bold">FCFA</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 sm:p-6 md:p-8 flex flex-col flex-1">
+          <div class="mb-3">
+            <h3
+              class="font-bold text-lg md:text-xl text-slate-900 flex items-center gap-2 group-hover:text-blue-600 transition-colors">
+              {{ getTechnicianDisplayName(tech) }}
+              <i *ngIf="tech.verified" class="fas fa-check-circle text-blue-500 text-sm" title="Vérifié"></i>
+            </h3>
+            <div class="flex items-center gap-2 text-slate-500 text-xs md:text-sm font-medium mt-1">
+              <i class="fas fa-map-marker-alt text-slate-400"></i>
+              <span>{{ tech.city }}, {{ tech.neighborhood || '—' }}</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-50 my-auto text-sm">
+            <div class="flex flex-col gap-1">
+              <span class="text-xs text-slate-400 font-bold uppercase">Note</span>
+              <div class="flex items-center gap-1.5">
+                <i class="fas fa-star text-yellow-400"></i>
+                <span class="font-bold text-slate-700">{{ tech.averageRating || '—' }}</span>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1 text-right">
+              <span class="text-xs text-slate-400 font-bold uppercase">Expérience</span>
+              <div class="flex items-center justify-end gap-1.5">
+                <i class="fas fa-briefcase text-slate-400"></i>
+                <span class="font-bold text-slate-700">{{ tech.yearsOfExperience || 0 }} ans</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-6 pt-6">
+            <div class="flex items-center gap-2">
+              <div class="relative flex items-center justify-center">
+                <span class="w-2.5 h-2.5 rounded-full" [ngClass]="{
+                    'bg-green-500': tech.availabilityStatus === 'AVAILABLE',
+                    'bg-orange-500': tech.availabilityStatus === 'BUSY',
+                    'bg-red-500': tech.availabilityStatus === 'UNAVAILABLE',
+                    'bg-blue-500': tech.availabilityStatus === 'ON_BREAK'
+                  }"></span>
+                <span *ngIf="tech.availabilityStatus === 'AVAILABLE'"
+                  class="absolute w-2.5 h-2.5 bg-green-500 rounded-full animate-ping opacity-75"></span>
+              </div>
+              <span class="text-[11px] font-black uppercase tracking-widest" [ngClass]="{
+                  'text-green-600': tech.availabilityStatus === 'AVAILABLE',
+                  'text-orange-600': tech.availabilityStatus === 'BUSY',
+                  'text-red-600': tech.availabilityStatus === 'UNAVAILABLE',
+                  'text-blue-600': tech.availabilityStatus === 'ON_BREAK'
+                }">
+                {{ tech.availabilityStatus === 'AVAILABLE' ? 'Disponible' :
+                tech.availabilityStatus === 'BUSY' ? 'Occupé' :
+                tech.availabilityStatus === 'UNAVAILABLE' ? 'Indisponible' :
+                tech.availabilityStatus === 'ON_BREAK' ? 'En pause' : 'Indisponible' }}
+              </span>
+            </div>
+            <button (click)="bookTechnician(tech)"
+              class="relative bg-slate-900 text-white px-8 py-3 rounded-2xl text-sm font-bold hover:bg-blue-600 transition-all duration-300 shadow-xl overflow-hidden group/btn">
+              <span
+                class="relative z-10 transition-transform duration-300 inline-block group-hover/btn:-translate-y-10">Réserver</span>
+              <span
+                class="absolute inset-0 flex items-center justify-center translate-y-10 group-hover/btn:translate-y-0 transition-transform duration-300">
+                <i class="fas fa-calendar-check text-lg"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div *ngIf="getTotalPages() > 1" class="mt-16 flex justify-center items-center gap-6">
+      <button [disabled]="currentPage === 1" (click)="previousPage()"
+        class="w-12 h-12 border border-slate-200 rounded-2xl flex items-center justify-center bg-white hover:bg-slate-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed text-slate-900 shadow-sm">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <div class="flex items-center gap-3">
+        <span class="text-sm font-black text-slate-900">Page {{ currentPage }} <span
+            class="text-slate-400 font-medium">sur</span> {{ getTotalPages() }}</span>
+      </div>
+
+      <button [disabled]="currentPage === getTotalPages()" (click)="nextPage()"
+        class="w-12 h-12 border border-slate-200 rounded-2xl flex items-center justify-center bg-white hover:bg-slate-50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed text-slate-900 shadow-sm">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<!-- BOUTON FILTRE MOBILE (FLOAT) -->
+<button (click)="toggleMobileFilters()"
+  class="md:hidden fixed bottom-6 right-6 bg-blue-600 text-white w-16 h-16 rounded-full shadow-[0_15px_40px_rgba(37,99,235,0.4)] flex items-center justify-center text-2xl z-50 ring-4 ring-white transition-transform active:scale-90">
+  <i class="fas fa-sliders-h"></i>
+</button>
+
+<!-- FILTER CONTENT TEMPLATE -->
+<ng-template #filterContent>
+  <div class="space-y-8">
+    <!-- Header (Desktop only) -->
+    <div class="hidden md:flex items-center justify-between mb-8">
+      <h2 class="font-black text-2xl text-slate-900 tracking-tight">Filtres</h2>
+      <button class="text-xs text-blue-600 font-bold hover:text-blue-800 tracking-wider uppercase"
+        (click)="resetFilters()">
+        Effacer
+      </button>
+    </div>
+
+    <!-- Ville -->
+    <div>
+      <h3 class="filter-title">Ville</h3>
+      <div class="relative">
+        <select [(ngModel)]="filters.city" (ngModelChange)="onCityChange()" class="filter-select appearance-none">
+          <option value="">Toutes les villes</option>
+          <option *ngFor="let city of availableCities" [value]="city">{{ city }}</option>
+        </select>
+        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+          <i class="fas fa-chevron-down text-xs"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quartier -->
+    <div>
+      <h3 class="filter-title">Quartier</h3>
+      <div class="relative">
+        <select [(ngModel)]="filters.district" class="filter-select appearance-none" [disabled]="!filters.city">
+          <option value="">{{ filters.city ? 'Tous les quartiers' : 'Sélectionnez une ville d\'abord' }}</option>
+          <option *ngFor="let neighborhood of availableNeighborhoods" [value]="neighborhood">{{ neighborhood }}</option>
+        </select>
+        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+          <i class="fas fa-chevron-down text-xs"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disponibilité -->
+    <div>
+      <h3 class="filter-title">Disponibilité</h3>
+      <div class="space-y-2">
+        <div *ngFor="let status of [
+          {id: '', label: 'Tous les statuts'},
+          {id: 'AVAILABLE', label: 'Disponible', color: 'bg-green-500'},
+          {id: 'BUSY', label: 'En intervention', color: 'bg-orange-500'},
+          {id: 'ON_BREAK', label: 'En pause', color: 'bg-blue-500'},
+          {id: 'UNAVAILABLE', label: 'Hors ligne', color: 'bg-red-500'}
+        ]" (click)="filters.availabilityStatus = status.id" [ngClass]="{
+          'flex items-center gap-3 p-3 rounded-xl border transition-all cursor-pointer': true,
+          'bg-blue-50 border-blue-200 text-blue-700': filters.availabilityStatus === status.id,
+          'bg-slate-50 border-slate-100 hover:border-slate-200 text-slate-600': filters.availabilityStatus !== status.id
+        }">
+          <div *ngIf="status.id" class="w-2.5 h-2.5 rounded-full {{status.color}}"></div>
+          <span class="text-sm font-bold">{{status.label}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Note minimum -->
+    <div>
+      <h3 class="filter-title">Expertise</h3>
+      <div class="grid grid-cols-2 gap-2">
+        <button *ngFor="let rate of [4, 4.5]" (click)="filters.minRating = (filters.minRating === rate ? null : rate)"
+          [ngClass]="{
+            'px-4 py-3 rounded-xl border font-bold text-sm transition-all': true,
+            'bg-yellow-50 border-yellow-200 text-yellow-700': filters.minRating === rate,
+            'bg-slate-50 border-slate-100 hover:border-slate-200 text-slate-600': filters.minRating !== rate
+          }">
+          {{ rate }}⭐ +
+        </button>
+      </div>
+    </div>
+
+    <!-- Budget -->
+    <div>
+      <h3 class="filter-title">Budget max (FCFA/h)</h3>
+      <input type="range" min="0" max="100000" step="500" [(ngModel)]="filters.maxPrice"
+        class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 mb-2">
+      <div class="flex justify-between items-center text-sm font-black text-slate-900">
+        <span>0</span>
+        <span class="bg-blue-600 text-white px-3 py-1 rounded-lg">{{ filters.maxPrice | number }} FCFA</span>
+      </div>
+    </div>
+
+    <div class="pt-4 flex flex-col gap-4">
+      <button (click)="search()"
+        class="w-full py-4 bg-blue-600 text-white rounded-2xl font-black shadow-xl shadow-blue-200 hover:bg-blue-700 transition-all transform active:scale-[0.98]">
+        Appliquer les filtres
+      </button>
+
+      <button (click)="resetFilters()" class="md:hidden w-full py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold">
+        Tout réinitialiser
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -2,7 +2,7 @@ package com.eadl.connect_backend.infrastructure.adapter.out.persistence.mapper;
 
 import com.eadl.connect_backend.domain.model.technician.TechnicianSkill;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.CategoryEntity;
-import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianProfileEntity;
+import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.UserEntity;
 import com.eadl.connect_backend.infrastructure.adapter.out.persistence.entity.TechnicianSkillEntity;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +16,21 @@ public class TechnicianSkillEntityMapper {
 
         TechnicianSkillEntity entity = new TechnicianSkillEntity();
         entity.setIdSkill(skill.getIdSkill());
-        entity.setName(skill.getNameSkill());
+        entity.setName(skill.getName());
         entity.setDescription(skill.getDescription());
         entity.setLevel(skill.getLevel());
+        entity.setYearsExperience(skill.getYearsExperience());
+        entity.setHourlyRate(skill.getHourlyRate());
+        entity.setAvailabilityStatus(skill.getAvailabilityStatus());
+        entity.setVerified(skill.isVerified());
+        entity.setCreatedAt(skill.getCreatedAt());
+        entity.setUpdatedAt(skill.getUpdatedAt());
 
         // Création minimale des relations avec uniquement les IDs
-        if (skill.getIdProfile() != null) {
-            TechnicianProfileEntity profile = new TechnicianProfileEntity();
-            profile.setIdProfile(skill.getIdProfile());
-            entity.setProfile(profile);
+        if (skill.getIdUser() != null) {
+            UserEntity user = new UserEntity();
+            user.setIdUser(skill.getIdUser());
+            entity.setTechnician(user);
         }
 
         if (skill.getIdCategory() != null) {
@@ -44,12 +50,18 @@ public class TechnicianSkillEntityMapper {
 
         TechnicianSkill skill = new TechnicianSkill();
         skill.setIdSkill(entity.getIdSkill());
-        skill.setNameSkill(entity.getName());
+        skill.setName(entity.getName());
         skill.setDescription(entity.getDescription());
         skill.setLevel(entity.getLevel());
+        skill.setYearsExperience(entity.getYearsExperience());
+        skill.setHourlyRate(entity.getHourlyRate());
+        skill.setAvailabilityStatus(entity.getAvailabilityStatus());
+        skill.setVerified(entity.isVerified());
+        skill.setCreatedAt(entity.getCreatedAt());
+        skill.setUpdatedAt(entity.getUpdatedAt());
 
-        if (entity.getProfile() != null) {
-            skill.setIdProfile(entity.getProfile().getIdProfile());
+        if (entity.getTechnician() != null) {
+            skill.setIdUser(entity.getTechnician().getIdUser());
         }
 
         if (entity.getCategory() != null) {

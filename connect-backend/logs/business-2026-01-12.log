@@ -1,0 +1,20 @@
+2026-01-12 07:31:29.784 INFO  - Tentative de login pour email=elon@gmail.fr
+2026-01-12 07:31:30.074 WARN  - Login échoué : compte désactivé id=10
+2026-01-12 07:36:33.917 INFO  - Inscription d'un nouvel utilisateur email=admin@entreprise-x.com
+2026-01-12 07:36:34.050 INFO  - Saving User email=admin@entreprise-x.com, role=TECHNICIAN
+2026-01-12 07:36:34.151 INFO  - User saved with id=12
+2026-01-12 07:36:34.303 INFO  - Inscription réussie pour utilisateur id=12, email=admin@entreprise-x.com
+2026-01-12 09:34:49.620 INFO  - Inscription d'un nouvel utilisateur email=admin@example.com
+2026-01-12 09:34:49.771 INFO  - Saving User email=admin@example.com, role=TECHNICIAN
+2026-01-12 09:34:49.822 INFO  - User saved with id=13
+2026-01-12 09:34:49.825 INFO  - Inscription réussie pour utilisateur id=13, email=admin@example.com
+2026-01-12 12:17:00.503 INFO  - Tentative de login pour email=admin@example.com
+2026-01-12 12:17:01.121 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-12 12:18:29.911 INFO  - Inscription d'un nouvel utilisateur email=azerty@gmail.com
+2026-01-12 12:18:30.044 INFO  - Saving User email=azerty@gmail.com, role=TECHNICIAN
+2026-01-12 12:18:30.122 INFO  - User saved with id=14
+2026-01-12 12:18:30.124 INFO  - Inscription réussie pour utilisateur id=14, email=azerty@gmail.com
+2026-01-12 16:23:22.627 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-12 16:23:23.379 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-12 16:43:28.879 INFO  - Tentative de login pour email=admin@example.com
+2026-01-12 16:43:29.152 INFO  - Login réussi pour l'utilisateur id=13

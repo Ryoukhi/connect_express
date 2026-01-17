@@ -29,7 +29,8 @@ public class ReservationMapper {
         dto.setStatus(reservation.getStatus());
 
         dto.setPrice(reservation.getPrice());
-        dto.setAddress(reservation.getAddress());
+        dto.setCity(reservation.getCity());
+        dto.setNeighborhood(reservation.getNeighborhood());
         dto.setDescription(reservation.getDescription());
         dto.setCancellationReason(reservation.getCancellationReason());
 
@@ -54,7 +55,8 @@ public class ReservationMapper {
         reservation.setStatus(dto.getStatus());
 
         reservation.setPrice(dto.getPrice());
-        reservation.setAddress(dto.getAddress());
+        reservation.setCity(dto.getCity());
+        reservation.setNeighborhood(dto.getNeighborhood());
         reservation.setDescription(dto.getDescription());
         reservation.setCancellationReason(dto.getCancellationReason());
 

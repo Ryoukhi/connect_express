@@ -9,16 +9,18 @@ import java.util.Objects;
 public class Review {
     private Long idReview;
     private Long idClient;
+    private Long idReservation;
     private Rating rating;
     private String comment;
     private LocalDateTime createdAt;
 
-    public Review() {}
+    public Review() {
+    }
 
     // ========== Factory Method ==========
-    public static Review create(Long idReservation, Long idClient, 
-                               Long idTechnician, int ratingValue, 
-                               String comment) {
+    public static Review create(Long idReservation, Long idClient,
+            Long idTechnician, int ratingValue,
+            String comment) {
         Review review = new Review();
         review.idClient = idClient;
         review.rating = Rating.of(ratingValue);
@@ -32,7 +34,6 @@ public class Review {
         this.rating = Rating.of(newRating);
         this.comment = newComment;
     }
-
 
     public boolean isPositive() {
         return rating.isExcellent();
@@ -51,6 +52,10 @@ public class Review {
         return idClient;
     }
 
+    public Long getIdReservation() {
+        return idReservation;
+    }
+
     public Rating getRating() {
         return rating;
     }
@@ -63,7 +68,6 @@ public class Review {
         return createdAt;
     }
 
-    
     // ========== Setters (pour reconstruction depuis DB) ==========
     public void setIdReview(Long idReview) {
         this.idReview = idReview;
@@ -81,6 +85,10 @@ public class Review {
         this.idClient = idClient;
     }
 
+    public void setIdReservation(Long idReservation) {
+        this.idReservation = idReservation;
+    }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
@@ -88,8 +96,10 @@ public class Review {
     // ========== equals & hashCode ==========
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Review review = (Review) o;
         return Objects.equals(idReview, review.idReview);
     }

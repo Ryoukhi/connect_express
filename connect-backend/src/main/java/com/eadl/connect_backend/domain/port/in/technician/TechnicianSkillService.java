@@ -53,4 +53,12 @@ public interface TechnicianSkillService {
      * @return Optional de compétence
      */
     Optional<TechnicianSkill> getSkillById(Long skillId);
+
+    /**
+     * Confirme ou annule la vérification d'une compétence (action réservée aux admins)
+     * @param skillId ID de la compétence
+     * @param verified true pour vérifier, false pour annuler
+     * @return compétence mise à jour
+     */
+    TechnicianSkill verifySkill(Long skillId, boolean verified);
 }

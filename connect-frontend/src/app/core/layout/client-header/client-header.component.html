@@ -1,31 +1,84 @@
-    <!-- 1️⃣ NAVIGATION HAUTE (FIXE) -->
-    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200">
-        <div class="max-w-[1440px] mx-auto px-4 h-16 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-8">
-                <a href="index.html" class="flex items-center gap-2">
-                    <div class="bg-blue-600 p-1.5 rounded-lg text-white text-xs"><i class="fas fa-bolt"></i></div>
-                    <span class="text-xl font-bold tracking-tight hidden sm:block">Connect<span class="text-blue-600">Express</span></span>
-                </a>
-                <!-- Barre de recherche rapide -->
-                <div class="hidden md:flex items-center bg-slate-100 px-4 py-2 rounded-full w-96 border border-transparent focus-within:border-blue-400 focus-within:bg-white transition-all">
-                    <i class="fas fa-search text-slate-400 mr-2"></i>
-                    <input type="text" placeholder="Rechercher un plombier, électricien..." class="bg-transparent outline-none text-sm w-full">
-                </div>
-            </div>
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200 w-full">
+  <div class="max-w-[1440px] mx-auto px-4 h-16 flex items-center justify-between gap-4">
 
-            <div class="flex items-center gap-2 border-l pl-4 border-slate-200">
-              <div class="text-right hidden sm:block">
-                <p class="text-xs font-bold">
-                  {{ fullName }}
-                </p>
-              </div>
-
-              <img
-                [src]="'https://ui-avatars.com/api/?name=' + fullName + '&background=2563eb&color=fff'"
-                class="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-                alt="Profile"
-              >
-            </div>
+    <div class="flex items-center gap-4 md:gap-8 flex-1">
+      <a routerLink="/" class="flex items-center gap-2 shrink-0">
+        <div class="bg-blue-600 p-1.5 rounded-lg text-white text-xs">
+          <i class="fas fa-bolt"></i>
         </div>
-    </nav>
+        <span class="text-xl font-bold tracking-tight hidden sm:block">
+          Connect<span class="text-blue-600">Express</span>
+        </span>
+      </a>
 
+      <div
+        class="hidden md:flex items-center bg-slate-100 px-4 py-2 rounded-full max-w-md flex-1 border border-transparent focus-within:border-blue-400 focus-within:bg-white transition-all">
+        <i class="fas fa-search text-slate-400 mr-2"></i>
+        <input type="text" placeholder="Rechercher un plombier, électricien..."
+          class="bg-transparent outline-none text-sm w-full">
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 sm:gap-6">
+
+      <a routerLink="/catalogue" routerLinkActive="text-blue-600"
+        class="hidden sm:block text-sm font-medium text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
+        Catalogue
+      </a>
+
+      <a routerLink="/client/reservations" routerLinkActive="text-blue-600"
+        class="hidden xs:block text-sm font-medium text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
+        Mes Réservations
+      </a>
+
+      <div class="relative border-l pl-2 sm:pl-4 border-slate-200" (clickOutside)="showMenu = false">
+
+        <button (click)="toggleMenu()"
+          class="flex items-center gap-3 hover:bg-slate-50 rounded-lg p-1.5 transition cursor-pointer focus:outline-none">
+
+          <img [src]="avatarUrl" class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg object-cover shadow-sm" alt="Profile">
+
+          <div class="hidden lg:block text-left">
+            <p class="text-xs font-bold text-slate-900 leading-tight">{{ fullName }}</p>
+            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Client</p>
+          </div>
+
+          <i class="fas fa-chevron-down text-[10px] text-slate-400 transition-transform duration-200"
+            [ngClass]="{'rotate-180': showMenu}"></i>
+        </button>
+
+        <div *ngIf="showMenu"
+          class="absolute top-[120%] right-0 w-52 bg-white border border-slate-200 rounded-xl shadow-xl py-2 z-[100] animate-in fade-in slide-in-from-top-2 duration-200">
+
+          <div class="px-4 py-2 border-b border-slate-50 lg:hidden">
+            <p class="text-xs font-bold text-slate-900">{{ fullName }}</p>
+          </div>
+
+          <a routerLink="/client/profil" (click)="showMenu = false"
+            class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+            <i class="fas fa-user-circle text-slate-400 w-5"></i> Mon Profil
+          </a>
+
+          <a routerLink="/catalogue" (click)="showMenu = false"
+            class="sm:hidden flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+            <i class="fas fa-th-list text-slate-400 w-5"></i> Catalogue
+          </a>
+
+          <a routerLink="/client/reservations" (click)="showMenu = false"
+            class="xs:hidden flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+            <i class="fas fa-calendar-alt text-slate-400 w-5"></i> Mes Réservations
+          </a>
+
+          <hr class="my-1 border-slate-100">
+
+          <button (click)="logout(); showMenu = false"
+            class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium text-left">
+            <i class="fas fa-sign-out-alt w-5"></i>
+            Déconnexion
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>

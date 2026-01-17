@@ -111,10 +111,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Long countTechniciansByCategory(Long idCategory) {
-        // Count distinct profile IDs in technician skills
+        // Count distinct user IDs in technician skills
         return technicianSkillRepository.findByCategoryId(idCategory)
                 .stream()
-                .map(s -> s.getIdProfile())
+                .map(s -> s.getIdUser())
                 .distinct()
                 .count();
     }

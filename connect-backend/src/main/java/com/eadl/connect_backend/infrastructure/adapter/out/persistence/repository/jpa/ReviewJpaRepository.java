@@ -30,7 +30,8 @@ public interface ReviewJpaRepository extends JpaRepository<ReviewEntity, Long> {
     List<Integer> findRatingsByReviewIds(@Param("reviewIds") List<Long> reviewIds);
 
     Optional<ReviewEntity> findByClient_IdUserAndReservation_IdReservation(
-        Long clientId,
-        Long reservationId
-    );
+            Long clientId,
+            Long reservationId);
+
+    Optional<ReviewEntity> findByReservation_IdReservation(Long reservationId);
 }

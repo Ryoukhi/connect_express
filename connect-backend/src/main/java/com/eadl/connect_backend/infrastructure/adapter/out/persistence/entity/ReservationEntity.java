@@ -41,7 +41,9 @@ public class ReservationEntity {
 
     private BigDecimal price;
 
-    private String address;
+    private String city;
+
+    private String neighborhood;
 
     private String description;
 
@@ -78,6 +80,7 @@ public class ReservationEntity {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.dateRequested = LocalDateTime.now();
     }
 
     @PreUpdate

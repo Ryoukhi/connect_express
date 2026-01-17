@@ -1,72 +1,57 @@
 package com.eadl.connect_backend.application.service.technician;
 
 import org.springframework.stereotype.Service;
-import com.eadl.connect_backend.domain.model.technician.TechnicianDocument;
-import com.eadl.connect_backend.domain.model.user.Role;
+import lombok.RequiredArgsConstructor;
+
 import com.eadl.connect_backend.domain.model.user.User;
+import com.eadl.connect_backend.domain.model.technician.TechnicianDocument;
+import com.eadl.connect_backend.domain.model.technician.TechnicianSkill;
 import com.eadl.connect_backend.domain.port.in.technician.TechnicianDocumentService;
 import com.eadl.connect_backend.domain.port.out.persistence.TechnicianDocumentRepository;
-import com.eadl.connect_backend.domain.port.out.persistence.UserRepository;
+import com.eadl.connect_backend.domain.port.out.persistence.TechnicianSkillRepository;
 import com.eadl.connect_backend.domain.port.out.security.CurrentUserProvider;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
+@RequiredArgsConstructor
 @Slf4j
 public class TechnicianDocumentServiceImpl implements TechnicianDocumentService {
 
     private final TechnicianDocumentRepository documentRepository;
+    private final TechnicianSkillRepository skillRepository;
     private final CurrentUserProvider currentUserProvider;
-    private final UserRepository userRepository;
-
-    public TechnicianDocumentServiceImpl(
-            TechnicianDocumentRepository documentRepository,
-            CurrentUserProvider currentUserProvider,
-            UserRepository userRepository) {
-        this.documentRepository = documentRepository;
-        this.currentUserProvider = currentUserProvider;
-        this.userRepository = userRepository;
-    }
 
     @Override
     public TechnicianDocument addDocument(TechnicianDocument document) {
         Long currentUserId = currentUserProvider.getCurrentUserId();
-        log.info("Ajout d'un document pour le profil id={} par l'utilisateur id={}", document.getIdProfile(), currentUserId);
+        log.info("Ajout d'un document pour la compétence id={} par l'utilisateur id={}", document.getIdProfile(), currentUserId);
 
-        User currentUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> {
-                    log.error("Utilisateur courant introuvable id={}", currentUserId);
-                    return new IllegalStateException("Current user not found");
-                });
-
-        if (!currentUser.getRole().equals(Role.TECHNICIAN)) {
-            log.error("L'utilisateur id={} n'est pas technicien et ne peut pas ajouter de documents", currentUserId);
-            throw new IllegalStateException("Only technicians can add documents");
+        if (document.getIdProfile() == null) {
+            throw new IllegalArgumentException("L'identifiant de la compétence (idProfile) doit être renseigné");
         }
 
-        TechnicianDocument newDocument = new TechnicianDocument();
-        newDocument.setIdProfile(document.getIdProfile());
-        newDocument.setType(document.getType());
-        newDocument.setUrl(document.getUrl());
-        newDocument.setUploadedAt(LocalDateTime.now());
-        newDocument.setVerified(false);
-        newDocument.setVerificationNote(null);
+        // Verify the skill exists and belongs to the current user
+        TechnicianSkill skill = skillRepository.findById(document.getIdProfile())
+                .orElseThrow(() -> new IllegalArgumentException("Compétence introuvable"));
 
-        TechnicianDocument saved = documentRepository.save(newDocument);
-        log.info("Document ajouté avec succès id={}, url={}", saved.getId(), saved.getUrl());
+        if (!skill.getIdUser().equals(currentUserId)) {
+            log.error("Utilisateur id={} non propriétaire de la compétence id={}", currentUserId, document.getIdProfile());
+            throw new SecurityException("Vous ne pouvez pas ajouter un document pour cette compétence");
+        }
+
+        TechnicianDocument saved = documentRepository.save(document);
+        log.debug("Document ajouté id={}", saved.getIdDocument());
         return saved;
     }
 
     @Override
-    public List<TechnicianDocument> getDocumentsByProfileId(Long technicianProfileId) {
-        log.debug("Récupération des documents pour le profil id={}", technicianProfileId);
-        List<TechnicianDocument> documents = documentRepository.findByProfileId(technicianProfileId);
-        log.debug("Nombre de documents récupérés pour le profil id={}: {}", technicianProfileId, documents.size());
-        return documents;
+    public List<TechnicianDocument> getDocumentsByTechnicianSkillId(Long technicianSkillId) {
+        log.debug("Récupération des documents pour la compétence id={}", technicianSkillId);
+        return documentRepository.findByProfileId(technicianSkillId);
     }
 
     @Override
@@ -78,83 +63,78 @@ public class TechnicianDocumentServiceImpl implements TechnicianDocumentService 
     @Override
     public void verifyDocument(Long documentId, String verificationNote) {
         Long currentUserId = currentUserProvider.getCurrentUserId();
-        log.info("Validation du document id={} par l'administrateur id={}", documentId, currentUserId);
+        log.info("Vérification du document id={} par utilisateur id={}", documentId, currentUserId);
 
-        User currentUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> {
-                    log.error("Utilisateur courant introuvable id={}", currentUserId);
-                    return new IllegalStateException("Current user not found");
-                });
-
-        if (!currentUser.getRole().equals(Role.ADMIN)) {
-            log.error("L'utilisateur id={} n'est pas admin et ne peut pas valider le document id={}", currentUserId, documentId);
-            throw new IllegalStateException("Only admins can verify documents");
+        // Only admins may verify documents
+        try {
+            User u = currentUserProvider.getCurrentUser();
+            if (u == null || !u.isAdmin()) {
+                log.error("Utilisateur id={} non autorisé à vérifier des documents", currentUserId);
+                throw new SecurityException("Accès refusé : opération réservée aux administrateurs");
+            }
+        } catch (IllegalStateException ise) {
+            log.error("Aucun utilisateur authentifié pour vérifier le document id={}", documentId);
+            throw new SecurityException("Utilisateur non authentifié");
         }
 
-        TechnicianDocument document = documentRepository.findById(documentId)
-                .orElseThrow(() -> {
-                    log.error("Document introuvable id={}", documentId);
-                    return new IllegalArgumentException("Document not found");
-                });
+        TechnicianDocument doc = documentRepository.findById(documentId)
+                .orElseThrow(() -> new IllegalArgumentException("Document introuvable"));
 
-        document.setVerified(true);
-        document.setVerificationNote(verificationNote);
-        documentRepository.save(document);
-        log.info("Document id={} validé avec succès, note='{}'", documentId, verificationNote);
+        doc.approve(verificationNote);
+        documentRepository.save(doc);
+        log.debug("Document id={} vérifié", documentId);
     }
 
     @Override
     public void rejectDocument(Long documentId, String verificationNote) {
         Long currentUserId = currentUserProvider.getCurrentUserId();
-        log.info("Rejet du document id={} par l'administrateur id={}", documentId, currentUserId);
+        log.info("Rejet du document id={} par utilisateur id={}", documentId, currentUserId);
 
-        User currentUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> {
-                    log.error("Utilisateur courant introuvable id={}", currentUserId);
-                    return new IllegalStateException("Current user not found");
-                });
-
-        if (!currentUser.getRole().equals(Role.ADMIN)) {
-            log.error("L'utilisateur id={} n'est pas admin et ne peut pas rejeter le document id={}", currentUserId, documentId);
-            throw new IllegalStateException("Only admins can reject documents");
+        // Only admins may reject documents
+        try {
+            User u = currentUserProvider.getCurrentUser();
+            if (u == null || !u.isAdmin()) {
+                log.error("Utilisateur id={} non autorisé à rejeter des documents", currentUserId);
+                throw new SecurityException("Accès refusé : opération réservée aux administrateurs");
+            }
+        } catch (IllegalStateException ise) {
+            log.error("Aucun utilisateur authentifié pour rejeter le document id={}", documentId);
+            throw new SecurityException("Utilisateur non authentifié");
         }
 
-        TechnicianDocument document = documentRepository.findById(documentId)
-                .orElseThrow(() -> {
-                    log.error("Document introuvable id={}", documentId);
-                    return new IllegalArgumentException("Document not found");
-                });
+        TechnicianDocument doc = documentRepository.findById(documentId)
+                .orElseThrow(() -> new IllegalArgumentException("Document introuvable"));
 
-        document.setVerified(false);
-        document.setVerificationNote(verificationNote);
-        documentRepository.save(document);
-        log.info("Document id={} rejeté avec succès, note='{}'", documentId, verificationNote);
+        doc.reject(verificationNote);
+        documentRepository.save(doc);
+        log.debug("Document id={} rejeté", documentId);
     }
 
     @Override
     public void deleteDocument(Long documentId) {
         Long currentUserId = currentUserProvider.getCurrentUserId();
-        log.info("Suppression du document id={} par l'utilisateur id={}", documentId, currentUserId);
+        log.info("Suppression document id={} demandée par utilisateur id={}", documentId, currentUserId);
 
-        User currentUser = userRepository.findById(currentUserId)
-                .orElseThrow(() -> {
-                    log.error("Utilisateur courant introuvable id={}", currentUserId);
-                    return new IllegalStateException("Current user not found");
-                });
+        TechnicianDocument doc = documentRepository.findById(documentId)
+                .orElseThrow(() -> new IllegalArgumentException("Document introuvable"));
 
-        TechnicianDocument document = documentRepository.findById(documentId)
-                .orElseThrow(() -> {
-                    log.error("Document introuvable id={}", documentId);
-                    return new IllegalArgumentException("Document not found");
-                });
+        // Allow owner of the skill or admin
+        TechnicianSkill skill = skillRepository.findById(doc.getIdProfile())
+                .orElseThrow(() -> new IllegalArgumentException("Compétence introuvable associée au document"));
 
-        if (!currentUser.getRole().equals(Role.ADMIN) &&
-                !document.getIdProfile().equals(currentUser.getIdUser())) {
-            log.error("Utilisateur id={} n'a pas le droit de supprimer le document id={}", currentUserId, documentId);
-            throw new IllegalStateException("You are not allowed to delete this document");
+        try {
+            User u = currentUserProvider.getCurrentUser();
+            if (!u.isAdmin() && !skill.getIdUser().equals(currentUserId)) {
+                log.error("Utilisateur id={} non autorisé à supprimer le document id={}", currentUserId, documentId);
+                throw new SecurityException("Accès refusé");
+            }
+        } catch (IllegalStateException ise) {
+            log.error("Aucun utilisateur authentifié pour supprimer le document id={}", documentId);
+            throw new SecurityException("Utilisateur non authentifié");
         }
 
-        documentRepository.delete(document);
-        log.info("Document id={} supprimé avec succès", documentId);
+        documentRepository.delete(doc);
+        log.debug("Document id={} supprimé", documentId);
     }
+
 }

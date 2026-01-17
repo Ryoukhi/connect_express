@@ -1,0 +1,16 @@
+2026-01-09 11:14:07.493 INFO  - Inscription d'un nouvel utilisateur email=elon@gmail.fr
+2026-01-09 11:14:08.053 INFO  - Saving User email=elon@gmail.fr, role=TECHNICIAN
+2026-01-09 11:14:08.177 INFO  - User saved with id=10
+2026-01-09 11:14:08.313 INFO  - Inscription réussie pour utilisateur id=10, email=elon@gmail.fr
+2026-01-09 14:05:50.019 INFO  - Tentative de login pour email=elon@gmail.fr
+2026-01-09 14:05:50.226 WARN  - Login échoué : compte désactivé id=10
+2026-01-09 14:06:00.006 INFO  - Tentative de login pour email=elon@gmail.fr
+2026-01-09 14:06:00.024 WARN  - Login échoué : compte désactivé id=10
+2026-01-09 14:06:01.088 INFO  - Tentative de login pour email=elon@gmail.fr
+2026-01-09 14:06:01.098 WARN  - Login échoué : compte désactivé id=10
+2026-01-09 14:07:17.870 INFO  - Tentative de login pour email=elon@gmail.fr
+2026-01-09 14:07:17.901 WARN  - Login échoué : compte désactivé id=10
+2026-01-09 14:08:27.045 INFO  - Inscription d'un nouvel utilisateur email=yaya@gmail.com
+2026-01-09 14:08:27.175 INFO  - Saving User email=yaya@gmail.com, role=TECHNICIAN
+2026-01-09 14:08:27.208 INFO  - User saved with id=11
+2026-01-09 14:08:27.210 INFO  - Inscription réussie pour utilisateur id=11, email=yaya@gmail.com

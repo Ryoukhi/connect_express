@@ -27,8 +27,16 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review createReview(Long idClient, Rating rating, String comment) {
-        log.info("Création d'un nouvel avis pour le client id={}", idClient);
+    public Review createReview(Long idClient, Long idReservation, Rating rating, String comment) {
+        log.info("Création d'un nouvel avis pour le client id={} sur la réservation id={}", idClient, idReservation);
+
+        // Enforce one review per reservation
+        Optional<Review> existing = reviewRepository.findByClientIdAndReservationId(idClient, idReservation);
+        if (existing.isPresent()) {
+            log.warn("Le client id={} a déjà laissé un avis pour la réservation id={}", idClient, idReservation);
+            throw new IllegalArgumentException(
+                    "Un avis existe déjà pour cette réservation. Vous pouvez le modifier si nécessaire.");
+        }
 
         try {
             validateRating(rating);
@@ -39,12 +47,14 @@ public class ReviewServiceImpl implements ReviewService {
 
         Review review = new Review();
         review.setIdClient(idClient);
+        review.setIdReservation(idReservation); // LINK RESERVATION
         review.setRating(rating);
         review.setComment(comment);
         review.setCreatedAt(LocalDateTime.now());
 
         Review saved = reviewRepository.save(review);
-        log.info("Avis créé avec succès id={}, clientId={}, rating={}", saved.getId(), idClient, rating.getValue());
+        log.info("Avis créé avec succès id={}, clientId={}, reservationId={}, rating={}",
+                saved.getIdReview(), idClient, idReservation, rating.getValue());
         return saved;
     }
 
@@ -139,5 +149,18 @@ public class ReviewServiceImpl implements ReviewService {
         }
 
         return reviewRepository.findByClientIdAndReservationId(clientId, reservationId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Review> getReviewByReservationId(Long reservationId) {
+        log.debug("Récupération de l'avis pour la réservation id={}", reservationId);
+
+        if (reservationId == null) {
+            log.error("ReservationId manquant pour récupération d'avis");
+            throw new IllegalArgumentException("ReservationId is required");
+        }
+
+        return reviewRepository.findByReservationId(reservationId);
     }
 }

@@ -1,0 +1,71 @@
+<div class="space-y-6">
+    <div class="flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">Gestion des Catégories</h1>
+            <p class="text-gray-500">Gérez les catégories de services disponibles</p>
+        </div>
+        <button (click)="openAddModal()"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <span>➕</span> Nouvelle Catégorie
+        </button>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <table class="w-full text-left">
+            <thead class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider">
+                <tr>
+                    <th class="p-4 font-semibold">Nom</th>
+                    <th class="p-4 font-semibold">Description</th>
+                    <th class="p-4 font-semibold">Services / Techs</th>
+                    <th class="p-4 font-semibold text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @for (category of categories; track category.id) {
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="p-4 font-medium text-gray-800">{{ category.name }}</td>
+                    <td class="p-4 text-gray-600">{{ category.description }}</td>
+                    <td class="p-4">
+                        <span class="bg-blue-100 text-blue-700 py-1 px-3 rounded-full text-xs font-semibold">{{
+                            category.count }}</span>
+                    </td>
+                    <td class="p-4 text-right space-x-2">
+                        <button (click)="openEditModal(category)"
+                            class="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-2 rounded-lg">✏️</button>
+                        <button (click)="deleteCategory(category.id)"
+                            class="text-red-600 hover:text-red-800 hover:bg-red-50 p-2 rounded-lg">🗑️</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+@if (showModal) {
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6 animate-fade-in-up">
+        <h2 class="text-xl font-bold mb-4">{{ isEditing ? 'Modifier' : 'Ajouter' }} une catégorie</h2>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
+                <input [(ngModel)]="currentCategory.name" type="text"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea [(ngModel)]="currentCategory.description" rows="3"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"></textarea>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-end gap-3">
+            <button (click)="closeModal()" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">Annuler</button>
+            <button (click)="saveCategory()"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Enregistrer</button>
+        </div>
+    </div>
+</div>
+}

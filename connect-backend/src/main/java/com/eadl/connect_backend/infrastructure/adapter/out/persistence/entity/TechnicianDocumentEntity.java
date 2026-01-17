@@ -31,8 +31,8 @@ public class TechnicianDocumentEntity {
     private String verificationNote;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_profile")
-    private TechnicianProfileEntity profile;
+    @JoinColumn(name = "id_skill")
+    private TechnicianSkillEntity skill;
 
     @PrePersist
     protected void onCreate() {

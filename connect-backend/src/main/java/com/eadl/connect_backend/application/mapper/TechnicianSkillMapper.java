@@ -21,11 +21,17 @@ public class TechnicianSkillMapper {
         TechnicianSkillDto technicianSkillDto = new TechnicianSkillDto();
         
         technicianSkillDto.setIdSkill(skill.getIdSkill());
-        technicianSkillDto.setIdProfile(skill.getIdProfile());
+        technicianSkillDto.setIdUser(skill.getIdUser());
         technicianSkillDto.setIdCategory(skill.getIdCategory());
-        technicianSkillDto.setNameSkill(skill.getNameSkill());
+        technicianSkillDto.setName(skill.getName());
         technicianSkillDto.setDescription(skill.getDescription());
         technicianSkillDto.setLevel(skill.getLevel());
+        technicianSkillDto.setYearsExperience(skill.getYearsExperience());
+        technicianSkillDto.setHourlyRate(skill.getHourlyRate());
+        technicianSkillDto.setAvailabilityStatus(skill.getAvailabilityStatus());
+        technicianSkillDto.setVerified(skill.isVerified());
+        technicianSkillDto.setCreatedAt(skill.getCreatedAt());
+        technicianSkillDto.setUpdatedAt(skill.getUpdatedAt());
 
         return technicianSkillDto;
     }
@@ -36,11 +42,17 @@ public class TechnicianSkillMapper {
         TechnicianSkill skill = new TechnicianSkill();
         
         skill.setIdSkill(dto.getIdSkill());
-        skill.setIdProfile(dto.getIdProfile());
+        skill.setIdUser(dto.getIdUser());
         skill.setIdCategory(dto.getIdCategory());
-        skill.setNameSkill(dto.getNameSkill());
+        skill.setName(dto.getName());
         skill.setDescription(dto.getDescription());
         skill.setLevel(dto.getLevel());
+        skill.setYearsExperience(dto.getYearsExperience());
+        skill.setHourlyRate(dto.getHourlyRate());
+        skill.setAvailabilityStatus(dto.getAvailabilityStatus());
+        skill.setVerified(dto.isVerified());
+        skill.setCreatedAt(dto.getCreatedAt());
+        skill.setUpdatedAt(dto.getUpdatedAt());
 
         return skill;
     }

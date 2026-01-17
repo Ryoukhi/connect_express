@@ -1,0 +1,5 @@
+/* Styles for reservation detail page */
+
+:host {
+  display: block;
+}

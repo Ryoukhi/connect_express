@@ -5,6 +5,7 @@ import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
 
 /**
  * Port IN - ReservationService
@@ -79,4 +80,25 @@ public interface ReservationService {
      * Compte le nombre total de réservations
      */
     Long countReservations();
+
+        /**
+         * Compte le nombre de réservations ACCEPTED programmées pour maintenant
+         */
+        Long countAcceptedNow();
+
+        /**
+         * Calcule le revenu total d'un technicien (somme des `price`) pour les réservations COMPLETED
+         */
+        BigDecimal getTechnicianRevenue(Long technicianId);
+
+        /**
+         * Calcule la moyenne des notes (rating) d'un technicien sur ses réservations COMPLETED
+         * Retourne un Double entre 0 et 5, ou 0 si aucune réservation complétée n'existe
+         */
+        Double getTechnicianAverageRating(Long technicianId);
+
+        /**
+         * Compte le nombre de réservations avec le statut PENDING
+         */
+        Long countPendingReservations();
 }

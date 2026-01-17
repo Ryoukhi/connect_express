@@ -25,15 +25,14 @@ export class ReservationControllerService {
         return context.set(this.clientContextToken, 'default');
     }
 
-    getById(id: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReservationDto>;
-    getById(id: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReservationDto>>;
-    getById(id: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReservationDto>>;
+    getById(id: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReservationDto>;
+    getById(id: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReservationDto>>;
+    getById(id: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReservationDto>>;
     getById(id: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations/${id}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -42,15 +41,14 @@ export class ReservationControllerService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    updateReservation(id: number, reservationDto: ReservationDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReservationDto>;
-    updateReservation(id: number, reservationDto: ReservationDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReservationDto>>;
-    updateReservation(id: number, reservationDto: ReservationDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReservationDto>>;
+    updateReservation(id: number, reservationDto: ReservationDto, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReservationDto>;
+    updateReservation(id: number, reservationDto: ReservationDto, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReservationDto>>;
+    updateReservation(id: number, reservationDto: ReservationDto, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReservationDto>>;
     updateReservation(id: number, reservationDto: ReservationDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations/${id}`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -75,15 +73,14 @@ export class ReservationControllerService {
         return this.httpClient.delete(url, requestOptions);
     }
 
-    createReservation(reservationDto: ReservationDto, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReservationDto>;
-    createReservation(reservationDto: ReservationDto, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReservationDto>>;
-    createReservation(reservationDto: ReservationDto, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReservationDto>>;
+    createReservation(reservationDto: ReservationDto, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReservationDto>;
+    createReservation(reservationDto: ReservationDto, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReservationDto>>;
+    createReservation(reservationDto: ReservationDto, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReservationDto>>;
     createReservation(reservationDto: ReservationDto, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -92,9 +89,9 @@ export class ReservationControllerService {
         return this.httpClient.post(url, reservationDto, requestOptions);
     }
 
-    changeStatus(id: number, status: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED', observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReservationDto>;
-    changeStatus(id: number, status: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED', observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReservationDto>>;
-    changeStatus(id: number, status: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED', observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReservationDto>>;
+    changeStatus(id: number, status: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED', observe?: 'body', options?: RequestOptions<'json'>): Observable<ReservationDto>;
+    changeStatus(id: number, status: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED', observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReservationDto>>;
+    changeStatus(id: number, status: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED', observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReservationDto>>;
     changeStatus(id: number, status: 'PENDING' | 'ACCEPTED' | 'EN_ROUTE' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'REJECTED', observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations/${id}/status`;
 
@@ -106,7 +103,6 @@ export class ReservationControllerService {
         const requestOptions: any = {
             observe: observe as any,
             params,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -115,15 +111,14 @@ export class ReservationControllerService {
         return this.httpClient.post(url, null, requestOptions);
     }
 
-    completeReservation(id: number, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReservationDto>;
-    completeReservation(id: number, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReservationDto>>;
-    completeReservation(id: number, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReservationDto>>;
+    completeReservation(id: number, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReservationDto>;
+    completeReservation(id: number, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReservationDto>>;
+    completeReservation(id: number, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReservationDto>>;
     completeReservation(id: number, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations/${id}/complete`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -132,9 +127,9 @@ export class ReservationControllerService {
         return this.httpClient.post(url, null, requestOptions);
     }
 
-    cancelReservation(id: number, reason?: string, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ReservationDto>;
-    cancelReservation(id: number, reason?: string, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ReservationDto>>;
-    cancelReservation(id: number, reason?: string, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ReservationDto>>;
+    cancelReservation(id: number, reason?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<ReservationDto>;
+    cancelReservation(id: number, reason?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ReservationDto>>;
+    cancelReservation(id: number, reason?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ReservationDto>>;
     cancelReservation(id: number, reason?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations/${id}/cancel`;
 
@@ -146,7 +141,6 @@ export class ReservationControllerService {
         const requestOptions: any = {
             observe: observe as any,
             params,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -189,15 +183,14 @@ export class ReservationControllerService {
         return this.httpClient.get(url, requestOptions);
     }
 
-    getMyClientReservations(observe?: 'body', options?: RequestOptions<'blob'>): Observable<Array<ReservationDto>>;
-    getMyClientReservations(observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<Array<ReservationDto>>>;
-    getMyClientReservations(observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<Array<ReservationDto>>>;
+    getMyClientReservations(observe?: 'body', options?: RequestOptions<'json'>): Observable<Array<ReservationDto>>;
+    getMyClientReservations(observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<Array<ReservationDto>>>;
+    getMyClientReservations(observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Array<ReservationDto>>>;
     getMyClientReservations(observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/api/reservations/me/client`;
 
         const requestOptions: any = {
             observe: observe as any,
-            responseType: 'blob' as 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

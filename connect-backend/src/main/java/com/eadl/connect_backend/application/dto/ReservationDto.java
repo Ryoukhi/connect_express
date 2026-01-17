@@ -2,6 +2,7 @@ package com.eadl.connect_backend.application.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
 
@@ -12,12 +13,34 @@ public class ReservationDto {
     private Long idTechnician;
     private Long idReview;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateRequested;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime scheduledTime;
     private ReservationStatus status;
 
     private BigDecimal price;
-    private String address;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    private String neighborhood;
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
     private String description;
     private String cancellationReason;
 
@@ -89,14 +112,6 @@ public class ReservationDto {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getDescription() {

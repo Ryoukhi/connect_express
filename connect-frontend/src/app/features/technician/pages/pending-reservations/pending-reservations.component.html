@@ -1,0 +1,21 @@
+<div class="p-6 max-w-4xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Demandes en attente</h2>
+
+  <div *ngIf="loading" class="text-sm text-slate-400">Chargement…</div>
+  <div *ngIf="!loading && pending.length === 0" class="text-sm text-slate-400">Aucune demande en attente.</div>
+
+  <ul *ngIf="!loading && pending.length" class="space-y-4">
+    <li *ngFor="let r of pending" class="bg-white p-4 rounded shadow flex justify-between items-start">
+      <div>
+        <div class="font-bold">{{ r.scheduledTime | date:'EEE, d MMM HH:mm' }} — {{ r.description || 'Réservation' }}</div>
+        <div class="text-sm text-slate-500">{{ r.neighborhood }}{{ r.city ? (', ' + r.city) : '' }} • {{ r.price ? (r.price + ' F') : '' }}</div>
+      </div>
+      <div class="flex gap-2">
+        <a [routerLink]="['/dashboard-technicien/reservation', r.idReservation]" class="px-3 py-1 border rounded text-sm text-blue-600 hover:underline">Voir</a>
+        <button (click)="acceptReservation(r)" [disabled]="isActionInProgress(r.idReservation)" class="px-3 py-1 bg-blue-600 text-white rounded text-sm">Accepter</button>
+        <button (click)="refuseReservation(r)" [disabled]="isActionInProgress(r.idReservation)" class="px-3 py-1 border rounded text-sm text-red-600">Refuser</button>
+      </div>
+    </li>
+  </ul>
+
+</div>

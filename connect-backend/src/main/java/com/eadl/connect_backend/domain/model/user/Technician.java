@@ -8,7 +8,7 @@ public class Technician extends User {
     public Technician() {
         super();
         this.role = Role.TECHNICIAN;
-        this.active = false; // Inactif jusqu'à validation KYC
+        this.active = true; // Inactif jusqu'à validation KYC
     }
 
     // ========== Factory Method ==========

@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.eadl.connect_backend.domain.model.user.Role;
 import com.eadl.connect_backend.domain.model.user.User;
 
 import io.jsonwebtoken.lang.Collections;
@@ -20,6 +21,7 @@ public class CustomUserDetails implements UserDetails{
     protected String email;
     protected String phone;
     protected String password;
+    protected Role role;
     protected LocalDateTime createdAt;
     protected LocalDateTime updatedAt;
     protected boolean active;
@@ -35,6 +37,7 @@ public class CustomUserDetails implements UserDetails{
         this.email = user.getEmail();
         this.phone = user.getPhone();
         this.password = user.getPassword();
+        this.role = user.getRole();
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
         this.active = user.isActive();
@@ -68,5 +71,9 @@ public class CustomUserDetails implements UserDetails{
     @Override
     public boolean isEnabled() {
         return this.active;
+    }
+    
+    public Role getRole() {
+        return this.role;
     }
 }

@@ -11,6 +11,8 @@ import com.eadl.connect_backend.domain.port.exception.ReservationNotFoundExcepti
 import com.eadl.connect_backend.domain.port.in.reservation.ReservationService;
 import com.eadl.connect_backend.domain.port.out.persistence.ReservationRepository;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +41,7 @@ public class ReservationServiceImpl implements ReservationService {
         boolean available = reservationRepository.existsTechnicianReservationBetween(
                 reservation.getIdTechnician(),
                 reservation.getScheduledTime(),
-                reservation.getScheduledTime()
-        );
+                reservation.getScheduledTime());
 
         if (available) {
             log.error("Conflit de disponibilité pour le technicien id={} à {}",
@@ -139,10 +140,10 @@ public class ReservationServiceImpl implements ReservationService {
 
         Reservation reservation = getExistingReservation(idReservation);
 
-        if (reservation.getStatus() != ReservationStatus.ACCEPTED) {
+        if (reservation.getStatus() != ReservationStatus.IN_PROGRESS) {
             log.error("Impossible de compléter la réservation id={} : status actuel={}",
                     idReservation, reservation.getStatus());
-            throw new BusinessException("Only accepted reservations can be completed");
+            throw new BusinessException("Seules les réservations en cours (IN_PROGRESS) peuvent être terminées");
         }
 
         reservation.setStatus(ReservationStatus.COMPLETED);
@@ -180,9 +181,59 @@ public class ReservationServiceImpl implements ReservationService {
         return count;
     }
 
-    /* =======================
-       Méthodes privées
-       ======================= */
+    @Override
+    @Transactional(readOnly = true)
+    public Long countAcceptedNow() {
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfDay = today.atStartOfDay();
+        LocalDateTime endOfDay = startOfDay.plusDays(1).minusNanos(1);
+        log.debug("Comptage des réservations ACCEPTED programmées entre {} et {}", startOfDay, endOfDay);
+        long count = reservationRepository.countByStatusAndScheduledTimeBetween(ReservationStatus.ACCEPTED, startOfDay,
+                endOfDay);
+        log.debug("Nombre de réservations ACCEPTED pour la date {} : {}", today, count);
+        return Long.valueOf(count);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long countPendingReservations() {
+        log.debug("Comptage des réservations PENDING");
+        long count = reservationRepository.countByStatus(ReservationStatus.PENDING);
+        log.debug("Nombre de réservations PENDING : {}", count);
+        return Long.valueOf(count);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public BigDecimal getTechnicianRevenue(Long technicianId) {
+        log.debug("Calcul du revenu total pour le technicien id={}", technicianId);
+        BigDecimal sum = reservationRepository.sumPriceByTechnicianIdAndStatus(technicianId,
+                ReservationStatus.COMPLETED);
+        if (sum == null) {
+            sum = BigDecimal.ZERO;
+        }
+        log.debug("Revenu total pour le technicien id={} : {}", technicianId, sum);
+        return sum;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Double getTechnicianAverageRating(Long technicianId) {
+        log.debug("Calcul de la moyenne des notes pour le technicien id={}", technicianId);
+        Double average = reservationRepository.averageRatingByTechnicianIdAndStatus(technicianId,
+                ReservationStatus.COMPLETED);
+        if (average == null) {
+            average = 0.0;
+        }
+        log.debug("Moyenne des notes pour le technicien id={} : {}/5", technicianId, average);
+        return average;
+    }
+
+    /*
+     * =======================
+     * Méthodes privées
+     * =======================
+     */
 
     private Reservation getExistingReservation(Long idReservation) {
         return reservationRepository.findById(idReservation)

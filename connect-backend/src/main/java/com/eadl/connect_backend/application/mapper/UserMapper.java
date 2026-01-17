@@ -20,7 +20,8 @@ public class UserMapper {
     }
 
     public static UserDto toDto(User user) {
-        if (user == null) return null;
+        if (user == null)
+            return null;
 
         UserDto dto = new UserDto();
         dto.setIdUser(user.getIdUser());
@@ -31,18 +32,22 @@ public class UserMapper {
         dto.setRole(user.getRole());
         dto.setCity(user.getCity());
         dto.setNeighborhood(user.getNeighborhood());
+        dto.setProfilePhotoUrl(user.getProfilePhotoUrl());
+        dto.setActive(user.isActive());
+        dto.setEmailVerified(user.isEmailVerified());
+        dto.setPhoneVerified(user.isPhoneVerified());
+        dto.setCreatedAt(user.getCreatedAt());
 
         return dto;
     }
 
-
     public static List<UserDto> toDtos(List<User> users) {
-        if (users == null) return List.of();
+        if (users == null)
+            return List.of();
 
         return users.stream()
                 .map(UserMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    
 }

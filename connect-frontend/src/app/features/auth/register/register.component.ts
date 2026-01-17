@@ -4,8 +4,8 @@ import { AuthControllerService } from '../../../api/services/authController.serv
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { RegisterDto } from '../../../api/models';
 import { CommonModule } from '@angular/common';
-import { HttpClient} from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -27,12 +27,16 @@ export class RegisterComponent implements OnInit {
     'Foumbot', 'Ngaoundéré', 'Edéa', 'Mbalmayo', 'Buea', 'Yagoua', 'Kumba', 'Bangangté', 'Dschang', 'Bafang'
   ];
 
+  isUploading = false;
+  previewUrl: string | null = null;
+
   constructor(
     private fb: FormBuilder,
     private authControllerService: AuthControllerService,
     private authService: AuthService,
+    private storageService: StorageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -51,10 +55,33 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.isUploading = true;
+      this.storageService.upload(file).subscribe({
+        next: (response) => {
+          this.isUploading = false;
+          this.registerForm.patchValue({ profilePhotoUrl: response.url });
+          this.previewUrl = response.url;
+        },
+        error: (err) => {
+          this.isUploading = false;
+          console.error('Upload failed', err);
+          // Optional: Show error to user
+        }
+      });
+    }
+  }
+
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.serverError = null;
+
+    if (this.isUploading) {
+      return;
+    }
 
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();

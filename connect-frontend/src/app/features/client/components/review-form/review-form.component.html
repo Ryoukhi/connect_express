@@ -1,0 +1,31 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl relative animate-fadeIn">
+        <button (click)="onClose.emit()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <h2 class="text-xl font-bold text-slate-900 mb-6 text-center">
+            {{ existingReview ? 'Modifier mon avis' : 'Noter la prestation' }}
+        </h2>
+
+        <div class="flex justify-center gap-2 mb-6 text-3xl cursor-pointer">
+            <i *ngFor="let star of [1,2,3,4,5]" class="fas fa-star transition hover:scale-110"
+                [ngClass]="{'text-yellow-400': star <= (hoverRating || rating), 'text-slate-200': star > (hoverRating || rating)}"
+                (mouseenter)="hoverRating = star" (mouseleave)="hoverRating = 0" (click)="rating = star">
+            </i>
+        </div>
+
+        <textarea [(ngModel)]="comment" rows="4" placeholder="Partagez votre expérience..."
+            class="w-full rounded-xl border-slate-200 focus:ring-blue-500 focus:border-blue-500 mb-6"></textarea>
+
+        <button (click)="submitReview()" [disabled]="rating === 0 || loading"
+            class="w-full py-3 rounded-xl font-bold text-white transition shadow-lg"
+            [ngClass]="rating > 0 ? 'bg-blue-600 hover:bg-blue-700' : 'bg-slate-300 cursor-not-allowed'">
+            <span *ngIf="!loading">{{ existingReview ? 'Mettre à jour' : "Envoyer l'avis" }}</span>
+            <span *ngIf="loading">
+                <i class="fas fa-spinner fa-spin mr-2"></i>
+                {{ existingReview ? 'Mise à jour...' : "Envoi..." }}
+            </span>
+        </button>
+    </div>
+</div>

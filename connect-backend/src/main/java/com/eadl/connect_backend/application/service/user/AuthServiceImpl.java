@@ -62,8 +62,9 @@ public class AuthServiceImpl implements AuthService {
                 user.getIdUser(),
                 user.getFirstName(),
                 user.getLastName(),
-                user.isActive()
-        );
+                user.getRole(),
+                user.isActive(),
+                user.getProfilePhotoUrl());
     }
 
     @Override
@@ -116,13 +117,13 @@ public class AuthServiceImpl implements AuthService {
 
         return new RegisterResponseDto(
                 token,
+                savedUser.getIdUser(),
                 savedUser.getFirstName(),
                 savedUser.getLastName(),
                 savedUser.getEmail(),
                 savedUser.getPhone(),
                 savedUser.getCity(),
                 savedUser.getNeighborhood(),
-                savedUser.getProfilePhotoUrl()
-        );
+                savedUser.getProfilePhotoUrl());
     }
 }

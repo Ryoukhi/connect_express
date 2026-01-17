@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AuthRequest } from '../../../api/models';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
@@ -43,18 +43,41 @@ export class LoginComponent {
     this.submitting = true;
 
     const authRequest: AuthRequest = {
-      email: this.email!.value,      // safe access avec nonNullable
+      email: this.email!.value,
       password: this.password!.value
     };
 
     this.authService.login(authRequest).subscribe({
       next: (res) => {
         if (!res?.token) {
-          console.error('Login succeeded but no token in response', res);
+          console.error('Login réussi mais token manquant', res);
+          this.serverError = 'Erreur interne d’authentification';
+          this.submitting = false;
           return;
         }
+
+        // 🔐 Sauvegarde session
         this.authService.storeSession(res);
-        setTimeout(() => this.router.navigate(['/catalogue']), 200);
+
+        const userRole = this.authService.getUserRole();
+
+        if (!userRole) {
+          console.warn('Rôle utilisateur introuvable');
+          this.router.navigate(['/catalogue']);
+          this.submitting = false;
+          return;
+        }
+
+        // 🔍 Redirige en fonction du rôle
+        if (userRole === 'TECHNICIAN') {
+          this.router.navigate(['/dashboard-technicien']);
+        }
+        else if (userRole === 'ADMIN') {
+          this.router.navigate(['/dashboard-admin']);
+        } else {
+          this.router.navigate(['/catalogue']);
+        }
+        this.submitting = false;
       },
       error: (err) => {
         this.submitting = false;

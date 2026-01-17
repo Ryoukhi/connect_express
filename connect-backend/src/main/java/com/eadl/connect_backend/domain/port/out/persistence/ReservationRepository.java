@@ -3,6 +3,7 @@ package com.eadl.connect_backend.domain.port.out.persistence;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
 
 import com.eadl.connect_backend.domain.model.reservation.Reservation;
 import com.eadl.connect_backend.domain.model.reservation.ReservationStatus;
@@ -77,6 +78,18 @@ public interface ReservationRepository {
             Long technicianId,
             ReservationStatus status
     );
+
+    long countByStatusAndScheduledTimeBetween(
+            ReservationStatus status,
+            LocalDateTime start,
+            LocalDateTime end
+    );
+
+    BigDecimal sumPriceByTechnicianIdAndStatus(Long technicianId, ReservationStatus status);
+
+    Double averageRatingByTechnicianIdAndStatus(Long technicianId, ReservationStatus status);
+
+        long countByStatus(ReservationStatus status);
 
     List<Long> findReviewIdsByIdTechnicianAndStatus(
             Long technicianId,

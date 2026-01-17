@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TechnicianProfileResponseDto, CategoryDto } from '../../../../api/models';
-import { TechnicianControllerService } from '../../../../api/services/technicianController.service';
+import { TechnicianResultSearchDto, CategoryDto } from '../../../../api/models';
+import { TechniciensService } from '../../../../api/services/techniciens.service';
 import { CategoryControllerService } from '../../../../api/services/categoryController.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-content',
@@ -12,44 +13,68 @@ import { CategoryControllerService } from '../../../../api/services/categoryCont
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.css'
 })
-export class MainContentComponent {
+export class MainContentComponent implements OnInit {
   filters: {
     city?: string;
     district?: string;
     category?: string | null;
     availabilityStatus?: string;
     minRating?: number | null;
+    minPrice?: number | null;
     maxPrice?: number | null;
   } = {
-    city: '',
-    district: '',
-    category: null,
-    availabilityStatus: '',
-    minRating: null,
-    maxPrice: 50000
-  };
+      city: '',
+      district: '',
+      category: null,
+      availabilityStatus: '',
+      minRating: null,
+      minPrice: 0,
+      maxPrice: 50000
+    };
+  showMobileFilters = false;
 
   categories: CategoryDto[] = [];
-  technicians: TechnicianProfileResponseDto[] = [];
+  categoriesLoading = false;
+  technicians: TechnicianResultSearchDto[] = [];
   loading = false;
   errorMsg: string | null = null;
   currentPage: number = 1;
   pageSize: number = 9; // 3 colonnes x 3 lignes
   totalTechnicians: number = 0;
 
+  availableCities: string[] = [];
+  availableNeighborhoods: string[] = [];
+
+  ngOnInit(): void {
+    this.loadCategories();
+    this.search;
+  }
+
   constructor(
-    private technicianService: TechnicianControllerService,
-    private categoryService: CategoryControllerService
+    private techniciensService: TechniciensService,
+
+    private categoryService: CategoryControllerService,
+    private router: Router
   ) {
     // initial load
     this.loadCategories();
+    this.loadCities();
     this.search();
   }
 
   loadCategories() {
+    this.categoriesLoading = true;
     this.categoryService.getActiveCategories('body').subscribe({
-      next: (data) => this.categories = data || [],
-      error: () => this.categories = []
+      next: (data) => {
+        console.log('Categories from API:', data);
+        this.categories = data || [];
+        this.categoriesLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading categories', err);
+        this.categories = [];
+        this.categoriesLoading = false;
+      }
     });
   }
 
@@ -61,11 +86,8 @@ export class MainContentComponent {
 
   getTechnicianDisplayName(tech: any): string {
     if (!tech) return 'Technicien';
-    const first = tech.firstName || tech.technician?.firstName;
-    const last = tech.lastName || tech.technician?.lastName;
-    if (first || last) return `${first || ''} ${last || ''}`.trim();
+    if (tech.name) return tech.name;
     if (tech.fullName) return tech.fullName;
-    if (tech.technicianId) return `Technicien #${tech.technicianId}`;
     return 'Technicien';
   }
 
@@ -78,7 +100,38 @@ export class MainContentComponent {
       minRating: null,
       maxPrice: 50000
     };
+    this.availableNeighborhoods = [];
     this.search();
+  }
+
+  loadCities() {
+    this.techniciensService.getAvailableCities('body').subscribe({
+      next: (cities) => {
+        this.availableCities = cities || [];
+      },
+      error: (err) => {
+        console.error('Error loading cities', err);
+        this.availableCities = [];
+      }
+    });
+  }
+
+  onCityChange() {
+    // Reset neighborhood when city changes
+    this.filters.district = '';
+    this.availableNeighborhoods = [];
+
+    if (this.filters.city) {
+      this.techniciensService.getAvailableNeighborhoods(this.filters.city, 'body').subscribe({
+        next: (neighborhoods) => {
+          this.availableNeighborhoods = neighborhoods || [];
+        },
+        error: (err) => {
+          console.error('Error loading neighborhoods', err);
+          this.availableNeighborhoods = [];
+        }
+      });
+    }
   }
 
   selectCategory(category: CategoryDto | null) {
@@ -86,20 +139,25 @@ export class MainContentComponent {
     this.search();
   }
 
+  toggleMobileFilters() {
+    this.showMobileFilters = !this.showMobileFilters;
+  }
+
   search() {
     this.loading = true;
     this.errorMsg = null;
     this.currentPage = 1; // Reset to first page on new search
+    this.showMobileFilters = false; // Close mobile filters on search
 
-    const availability = this.filters.availabilityStatus === 'OFFLINE' ? 'UNAVAILABLE' : this.filters.availabilityStatus || undefined;
+    const availability = this.filters.availabilityStatus || undefined;
 
-    this.technicianService.search(
+    this.techniciensService.searchTechnicians(
       this.filters.city || undefined,
       this.filters.district || undefined,
       this.filters.category || undefined,
       availability as any,
       this.filters.minRating || undefined,
-      undefined,
+      this.filters.minPrice || undefined,
       this.filters.maxPrice || undefined,
       'body'
     ).subscribe({
@@ -116,7 +174,7 @@ export class MainContentComponent {
     });
   }
 
-  getPaginatedTechnicians(allTechnicians: TechnicianProfileResponseDto[]): TechnicianProfileResponseDto[] {
+  getPaginatedTechnicians(allTechnicians: TechnicianResultSearchDto[]): TechnicianResultSearchDto[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     return allTechnicians.slice(startIndex, endIndex);
@@ -142,11 +200,10 @@ export class MainContentComponent {
 
   private loadPageResults(): void {
     // Re-fetch all results and apply pagination
-    // This is a simplified approach; ideally, backend would support offset/limit
     this.loading = true;
-    const availability = this.filters.availabilityStatus === 'OFFLINE' ? 'UNAVAILABLE' : this.filters.availabilityStatus || undefined;
+    const availability = this.filters.availabilityStatus || undefined;
 
-    this.technicianService.search(
+    this.techniciensService.searchTechnicians(
       this.filters.city || undefined,
       this.filters.district || undefined,
       this.filters.category || undefined,
@@ -167,4 +224,11 @@ export class MainContentComponent {
     });
   }
 
+  bookTechnician(tech: TechnicianResultSearchDto) {
+    this.router.navigate(['/client/book', (tech as any).id]);
+  }
+
+  trackByCategory(index: number, category: CategoryDto): number {
+    return category.idCategory || index;
+  }
 }

@@ -1,0 +1,478 @@
+2026-01-15 08:21:09.485 INFO  - Inscription d'un nouvel utilisateur email=clark@gmail.com
+2026-01-15 08:21:09.851 INFO  - Saving User email=clark@gmail.com, role=CLIENT
+2026-01-15 08:21:09.969 INFO  - User saved with id=15
+2026-01-15 08:21:10.152 INFO  - Inscription réussie pour utilisateur id=15, email=clark@gmail.com
+2026-01-15 08:21:54.347 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:21:54.519 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:23:54.229 INFO  - Inscription d'un nouvel utilisateur email=mignard@gmail.com
+2026-01-15 08:23:54.361 INFO  - Saving User email=mignard@gmail.com, role=TECHNICIAN
+2026-01-15 08:23:54.367 INFO  - User saved with id=16
+2026-01-15 08:23:54.372 INFO  - Inscription réussie pour utilisateur id=16, email=mignard@gmail.com
+2026-01-15 08:25:46.055 INFO  - Tentative de login pour email=sales@gmail.com
+2026-01-15 08:25:46.172 ERROR - Login échoué : mot de passe incorrect id=4
+2026-01-15 08:25:53.758 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:25:53.897 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:26:24.830 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:26:24.950 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:28:58.985 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:28:59.110 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 08:40:26.453 INFO  - Tentative de login pour email=admin@entreprise-x.com
+2026-01-15 08:40:26.890 ERROR - Login échoué : mot de passe incorrect id=12
+2026-01-15 08:40:31.912 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 08:40:32.176 INFO  - Login réussi pour l'utilisateur id=13
+<<<<<<< HEAD
+2026-01-15 10:31:46.575 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 10:31:47.231 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 10:33:25.275 INFO  - Tentative de login pour email=elon@gmail.fr
+2026-01-15 10:33:25.285 WARN  - Login échoué : compte désactivé id=10
+2026-01-15 10:33:41.926 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 10:33:42.050 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 10:35:41.866 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 10:35:41.989 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 11:40:22.987 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 11:40:23.441 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 13:05:24.206 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 13:05:25.317 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 13:06:08.818 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 13:06:08.945 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 13:13:45.241 INFO  - Tentative de login pour email=mignard@gmail.com
+2026-01-15 13:13:45.369 INFO  - Login réussi pour l'utilisateur id=16
+2026-01-15 13:43:14.682 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 13:43:15.186 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 13:43:59.474 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 13:43:59.622 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 13:48:08.952 INFO  - Fetching categories by active = true
+2026-01-15 13:48:09.152 INFO  - Found 10 categories with active = true
+2026-01-15 13:57:21.909 INFO  - Fetching categories by active = true
+2026-01-15 13:57:21.927 INFO  - Found 10 categories with active = true
+2026-01-15 14:08:15.471 INFO  - Fetching categories by active = true
+2026-01-15 14:08:15.480 INFO  - Found 10 categories with active = true
+2026-01-15 14:08:15.533 INFO  - Fetching categories by active = true
+2026-01-15 14:08:15.539 INFO  - Found 10 categories with active = true
+2026-01-15 14:09:29.807 INFO  - Fetching categories by active = true
+2026-01-15 14:09:29.825 INFO  - Fetching categories by active = true
+2026-01-15 14:09:29.831 INFO  - Found 10 categories with active = true
+2026-01-15 14:09:29.849 INFO  - Found 10 categories with active = true
+2026-01-15 14:12:16.116 INFO  - Fetching categories by active = true
+2026-01-15 14:12:16.149 INFO  - Fetching categories by active = true
+2026-01-15 14:12:16.159 INFO  - Found 10 categories with active = true
+2026-01-15 14:12:16.198 INFO  - Found 10 categories with active = true
+2026-01-15 14:13:23.790 INFO  - Fetching categories by active = true
+2026-01-15 14:13:23.892 INFO  - Fetching categories by active = true
+2026-01-15 14:13:23.929 INFO  - Found 10 categories with active = true
+2026-01-15 14:13:23.951 INFO  - Found 10 categories with active = true
+2026-01-15 14:13:33.948 INFO  - Fetching categories by active = true
+2026-01-15 14:13:33.971 INFO  - Fetching categories by active = true
+2026-01-15 14:13:33.979 INFO  - Found 10 categories with active = true
+2026-01-15 14:13:33.990 INFO  - Found 10 categories with active = true
+2026-01-15 14:16:52.670 INFO  - Fetching categories by active = true
+2026-01-15 14:16:52.691 INFO  - Found 10 categories with active = true
+2026-01-15 14:16:52.778 INFO  - Fetching categories by active = true
+2026-01-15 14:16:52.785 INFO  - Found 10 categories with active = true
+2026-01-15 14:17:49.469 INFO  - Fetching categories by active = true
+2026-01-15 14:17:49.495 INFO  - Fetching categories by active = true
+2026-01-15 14:17:49.516 INFO  - Found 10 categories with active = true
+2026-01-15 14:17:49.516 INFO  - Found 10 categories with active = true
+2026-01-15 14:23:20.218 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 14:23:20.536 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 14:34:12.317 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 14:34:12.448 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 14:34:41.732 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 14:34:41.852 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 14:34:41.914 INFO  - Fetching categories by active = true
+2026-01-15 14:34:41.931 INFO  - Found 10 categories with active = true
+2026-01-15 14:34:41.939 INFO  - Fetching categories by active = true
+2026-01-15 14:34:41.951 INFO  - Found 10 categories with active = true
+2026-01-15 14:40:48.124 INFO  - Fetching categories by active = true
+2026-01-15 14:40:48.226 INFO  - Fetching categories by active = true
+2026-01-15 14:40:48.261 INFO  - Found 10 categories with active = true
+2026-01-15 14:40:48.468 INFO  - Found 10 categories with active = true
+2026-01-15 14:41:08.381 INFO  - Fetching categories by active = true
+2026-01-15 14:41:08.427 INFO  - Fetching categories by active = true
+2026-01-15 14:41:08.471 INFO  - Found 10 categories with active = true
+2026-01-15 14:41:08.472 INFO  - Found 10 categories with active = true
+2026-01-15 14:41:17.059 INFO  - Fetching categories by active = true
+2026-01-15 14:41:17.073 INFO  - Found 10 categories with active = true
+2026-01-15 14:41:17.092 INFO  - Fetching categories by active = true
+2026-01-15 14:41:17.116 INFO  - Found 10 categories with active = true
+2026-01-15 14:41:27.830 INFO  - Fetching categories by active = true
+2026-01-15 14:41:27.838 INFO  - Fetching categories by active = true
+2026-01-15 14:41:27.849 INFO  - Found 10 categories with active = true
+2026-01-15 14:41:27.849 INFO  - Found 10 categories with active = true
+2026-01-15 14:43:04.965 INFO  - Fetching categories by active = true
+2026-01-15 14:43:04.979 INFO  - Found 10 categories with active = true
+2026-01-15 14:43:05.011 INFO  - Fetching categories by active = true
+2026-01-15 14:43:05.018 INFO  - Found 10 categories with active = true
+2026-01-15 14:44:12.295 INFO  - Fetching categories by active = true
+2026-01-15 14:44:12.303 INFO  - Found 10 categories with active = true
+2026-01-15 14:44:12.317 INFO  - Fetching categories by active = true
+2026-01-15 14:44:12.328 INFO  - Found 10 categories with active = true
+2026-01-15 14:45:29.825 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 14:45:30.011 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 14:45:39.295 INFO  - Fetching categories by active = true
+2026-01-15 14:45:39.309 INFO  - Found 10 categories with active = true
+2026-01-15 15:24:29.019 INFO  - Fetching categories by active = true
+2026-01-15 15:24:29.438 INFO  - Found 10 categories with active = true
+2026-01-15 15:30:55.049 INFO  - Fetching categories by active = true
+2026-01-15 15:30:55.282 INFO  - Found 10 categories with active = true
+2026-01-15 15:42:14.073 INFO  - Fetching categories by active = true
+2026-01-15 15:42:14.180 INFO  - Found 10 categories with active = true
+2026-01-15 15:47:26.292 INFO  - Fetching categories by active = true
+2026-01-15 15:47:26.312 INFO  - Found 10 categories with active = true
+2026-01-15 15:47:44.722 INFO  - Ajout d'une compétence pour le technicien id=13
+2026-01-15 15:47:44.729 INFO  - Saving TechnicianSkill for userId=13
+2026-01-15 15:47:44.825 INFO  - TechnicianSkill saved with id=1
+2026-01-15 15:48:32.418 INFO  - Ajout d'une compétence pour le technicien id=13
+2026-01-15 15:48:32.431 INFO  - Saving TechnicianSkill for userId=13
+2026-01-15 15:49:21.021 INFO  - Mise à jour de la compétence id=1 pour le technicien id=13
+2026-01-15 15:49:21.046 INFO  - Saving TechnicianSkill for userId=13
+2026-01-15 15:49:21.072 INFO  - TechnicianSkill saved with id=1
+2026-01-15 15:49:44.300 INFO  - Suppression de la compétence id=1 par le technicien id=13
+2026-01-15 15:49:44.342 INFO  - Deleting TechnicianSkill with id=1
+2026-01-15 15:50:37.182 INFO  - Ajout d'une compétence pour le technicien id=13
+2026-01-15 15:50:37.188 INFO  - Saving TechnicianSkill for userId=13
+2026-01-15 15:50:37.200 INFO  - TechnicianSkill saved with id=3
+2026-01-15 15:52:30.956 INFO  - Finding reservations by technician id: 13
+2026-01-15 15:52:30.958 INFO  - Summing price for technician 13 with status COMPLETED
+2026-01-15 15:52:30.992 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 15:52:31.028 INFO  - Found 0 reservations for technician id 13
+2026-01-15 15:52:31.042 INFO  - Sum for technician 13: 0.00
+2026-01-15 15:52:31.053 INFO  - Average rating for technician 13: 0.0
+2026-01-15 15:52:46.326 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 15:52:46.579 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 15:52:46.728 INFO  - Fetching categories by active = true
+2026-01-15 15:52:46.730 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:52:46.761 INFO  - Found 10 categories with active = true
+2026-01-15 15:52:46.853 INFO  - Fetching categories by active = true
+2026-01-15 15:52:46.910 INFO  - Found 10 categories with active = true
+2026-01-15 15:52:49.631 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:52:50.580 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:52:51.274 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:52:55.286 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:52:56.474 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:52:57.476 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:04.991 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Jardinage, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:05.005 INFO  - Finding category by name: Jardinage
+2026-01-15 15:53:05.089 INFO  - Found category: Category{idCategory=6, name='Jardinage', active=true}
+2026-01-15 15:53:08.344 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:08.353 INFO  - Finding category by name: Informatique
+2026-01-15 15:53:08.374 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 15:53:09.451 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:09.459 INFO  - Finding category by name: Informatique
+2026-01-15 15:53:09.470 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 15:53:11.607 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Coiffure, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:11.608 INFO  - Finding category by name: Coiffure
+2026-01-15 15:53:11.617 INFO  - Found category: Category{idCategory=9, name='Coiffure', active=true}
+2026-01-15 15:53:13.357 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Électricité, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:13.363 INFO  - Finding category by name: Électricité
+2026-01-15 15:53:13.384 INFO  - Found category: Category{idCategory=2, name='Électricité', active=true}
+2026-01-15 15:53:14.379 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Plomberie, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:14.380 INFO  - Finding category by name: Plomberie
+2026-01-15 15:53:14.409 INFO  - Found category: Category{idCategory=1, name='Plomberie', active=true}
+2026-01-15 15:53:49.575 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:49.584 INFO  - Finding category by name: Informatique
+2026-01-15 15:53:49.597 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 15:53:50.883 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Coiffure, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:50.884 INFO  - Finding category by name: Coiffure
+2026-01-15 15:53:50.890 INFO  - Found category: Category{idCategory=9, name='Coiffure', active=true}
+2026-01-15 15:53:51.965 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Dépannage électroménager, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:51.966 INFO  - Finding category by name: Dépannage électroménager
+2026-01-15 15:53:51.972 INFO  - Found category: Category{idCategory=10, name='Dépannage électroménager', active=true}
+2026-01-15 15:53:53.589 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Peinture, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:53:53.591 INFO  - Finding category by name: Peinture
+2026-01-15 15:53:53.603 INFO  - Found category: Category{idCategory=3, name='Peinture', active=true}
+2026-01-15 15:55:33.558 INFO  - Finding reservations by client id: 5
+2026-01-15 15:55:33.595 INFO  - Found 0 reservations for client id 5
+2026-01-15 15:58:42.252 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 15:58:42.254 INFO  - Fetching categories by active = true
+2026-01-15 15:58:42.267 INFO  - Fetching categories by active = true
+2026-01-15 15:58:42.277 INFO  - Found 10 categories with active = true
+2026-01-15 15:58:42.299 INFO  - Found 10 categories with active = true
+2026-01-15 15:58:52.504 INFO  - Summing price for technician 5 with status COMPLETED
+2026-01-15 15:58:52.508 INFO  - Finding reservations by technician id: 5
+2026-01-15 15:58:52.514 INFO  - Calculating average rating for technician 5 with status COMPLETED
+2026-01-15 15:58:52.537 INFO  - Sum for technician 5: 0.00
+2026-01-15 15:58:52.538 INFO  - Found 0 reservations for technician id 5
+2026-01-15 15:58:52.571 INFO  - Average rating for technician 5: 0.0
+2026-01-15 15:58:58.466 INFO  - Fetching categories by active = true
+2026-01-15 15:58:58.503 INFO  - Found 10 categories with active = true
+2026-01-15 15:59:01.887 INFO  - Finding reservations by technician id: 5
+2026-01-15 15:59:01.892 INFO  - Calculating average rating for technician 5 with status COMPLETED
+2026-01-15 15:59:01.900 INFO  - Summing price for technician 5 with status COMPLETED
+2026-01-15 15:59:01.911 INFO  - Found 0 reservations for technician id 5
+2026-01-15 15:59:01.917 INFO  - Average rating for technician 5: 0.0
+2026-01-15 15:59:01.943 INFO  - Sum for technician 5: 0.00
+2026-01-15 15:59:14.017 INFO  - Calculating average rating for technician 5 with status COMPLETED
+2026-01-15 15:59:14.017 INFO  - Finding reservations by technician id: 5
+2026-01-15 15:59:14.029 INFO  - Average rating for technician 5: 0.0
+2026-01-15 15:59:14.030 INFO  - Found 0 reservations for technician id 5
+2026-01-15 15:59:14.031 INFO  - Summing price for technician 5 with status COMPLETED
+2026-01-15 15:59:14.039 INFO  - Sum for technician 5: 0.00
+2026-01-15 15:59:19.245 INFO  - Fetching categories by active = true
+2026-01-15 15:59:19.255 INFO  - Found 10 categories with active = true
+2026-01-15 16:01:16.827 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 16:01:17.010 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 16:01:17.141 INFO  - Fetching categories by active = true
+2026-01-15 16:01:17.145 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:01:17.149 INFO  - Found 10 categories with active = true
+2026-01-15 16:01:17.220 INFO  - Fetching categories by active = true
+2026-01-15 16:01:17.227 INFO  - Found 10 categories with active = true
+2026-01-15 16:01:53.044 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:01:53.045 INFO  - Finding category by name: Informatique
+2026-01-15 16:01:53.052 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:01:53.896 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:01:53.899 INFO  - Finding category by name: Informatique
+2026-01-15 16:01:53.909 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:01:57.073 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:01:57.075 INFO  - Finding category by name: Informatique
+2026-01-15 16:01:57.088 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:01:57.958 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:01:57.960 INFO  - Finding category by name: Informatique
+2026-01-15 16:01:57.970 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:01:58.685 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Coiffure, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:01:58.687 INFO  - Finding category by name: Coiffure
+2026-01-15 16:01:58.704 INFO  - Found category: Category{idCategory=9, name='Coiffure', active=true}
+2026-01-15 16:01:59.645 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:01:59.672 INFO  - Finding category by name: Informatique
+2026-01-15 16:01:59.684 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:02:04.564 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=AVAILABLE, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:02:04.579 INFO  - Finding category by name: Informatique
+2026-01-15 16:02:04.593 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:02:45.032 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:02:45.036 INFO  - Fetching categories by active = true
+2026-01-15 16:02:45.045 INFO  - Fetching categories by active = true
+2026-01-15 16:02:45.052 INFO  - Found 10 categories with active = true
+2026-01-15 16:02:45.066 INFO  - Found 10 categories with active = true
+2026-01-15 16:02:52.384 INFO  - Fetching categories by active = true
+2026-01-15 16:02:52.384 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:02:52.397 INFO  - Fetching categories by active = true
+2026-01-15 16:02:52.412 INFO  - Found 10 categories with active = true
+2026-01-15 16:02:52.421 INFO  - Found 10 categories with active = true
+2026-01-15 16:03:03.963 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:03.966 INFO  - Finding category by name: Informatique
+2026-01-15 16:03:03.974 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:03:10.889 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Coiffure, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:10.896 INFO  - Finding category by name: Coiffure
+2026-01-15 16:03:10.911 INFO  - Found category: Category{idCategory=9, name='Coiffure', active=true}
+2026-01-15 16:03:13.647 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Dépannage électroménager, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:13.653 INFO  - Finding category by name: Dépannage électroménager
+2026-01-15 16:03:13.676 INFO  - Found category: Category{idCategory=10, name='Dépannage électroménager', active=true}
+2026-01-15 16:03:14.869 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Coiffure, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:14.877 INFO  - Finding category by name: Coiffure
+2026-01-15 16:03:14.883 INFO  - Found category: Category{idCategory=9, name='Coiffure', active=true}
+2026-01-15 16:03:15.666 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:15.672 INFO  - Finding category by name: Informatique
+2026-01-15 16:03:15.681 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:03:17.206 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Nettoyage, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:17.207 INFO  - Finding category by name: Nettoyage
+2026-01-15 16:03:17.216 INFO  - Found category: Category{idCategory=7, name='Nettoyage', active=true}
+2026-01-15 16:03:18.074 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Plomberie, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:18.075 INFO  - Finding category by name: Plomberie
+2026-01-15 16:03:18.082 INFO  - Found category: Category{idCategory=1, name='Plomberie', active=true}
+2026-01-15 16:03:18.678 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Électricité, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:18.680 INFO  - Finding category by name: Électricité
+2026-01-15 16:03:18.696 INFO  - Found category: Category{idCategory=2, name='Électricité', active=true}
+2026-01-15 16:03:19.272 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Peinture, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:03:19.277 INFO  - Finding category by name: Peinture
+2026-01-15 16:03:19.282 INFO  - Found category: Category{idCategory=3, name='Peinture', active=true}
+2026-01-15 16:07:39.382 INFO  - Fetching categories by active = true
+2026-01-15 16:07:39.383 INFO  - Fetching categories by active = true
+2026-01-15 16:07:39.390 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:07:39.426 INFO  - Found 10 categories with active = true
+2026-01-15 16:07:39.429 INFO  - Found 10 categories with active = true
+2026-01-15 16:10:58.594 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:10:58.740 INFO  - Fetching categories by active = true
+2026-01-15 16:10:58.856 INFO  - Fetching categories by active = true
+2026-01-15 16:10:58.883 INFO  - Found 10 categories with active = true
+2026-01-15 16:10:58.891 INFO  - Found 10 categories with active = true
+2026-01-15 16:11:31.025 INFO  - Fetching categories by active = true
+2026-01-15 16:11:31.027 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:11:31.028 INFO  - Fetching categories by active = true
+2026-01-15 16:11:31.042 INFO  - Found 10 categories with active = true
+2026-01-15 16:11:31.048 INFO  - Found 10 categories with active = true
+2026-01-15 16:11:40.445 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 16:11:40.602 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 16:11:40.755 INFO  - Fetching categories by active = true
+2026-01-15 16:11:40.755 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:11:40.768 INFO  - Found 10 categories with active = true
+2026-01-15 16:11:40.834 INFO  - Fetching categories by active = true
+2026-01-15 16:11:40.839 INFO  - Found 10 categories with active = true
+2026-01-15 16:11:55.529 INFO  - Tentative de login pour email=joliejulie@gmail.com
+2026-01-15 16:11:55.672 INFO  - Login réussi pour l'utilisateur id=5
+2026-01-15 16:11:55.848 INFO  - Fetching categories by active = true
+2026-01-15 16:11:55.848 INFO  - Fetching categories by active = true
+2026-01-15 16:11:55.849 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:11:55.860 INFO  - Found 10 categories with active = true
+2026-01-15 16:11:55.890 INFO  - Found 10 categories with active = true
+2026-01-15 16:11:59.741 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Nettoyage, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:11:59.755 INFO  - Finding category by name: Nettoyage
+2026-01-15 16:11:59.818 INFO  - Found category: Category{idCategory=7, name='Nettoyage', active=true}
+2026-01-15 16:12:00.895 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:12:00.898 INFO  - Finding category by name: Informatique
+2026-01-15 16:12:00.902 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:12:02.373 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Nettoyage, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:12:02.375 INFO  - Finding category by name: Nettoyage
+2026-01-15 16:12:02.385 INFO  - Found category: Category{idCategory=7, name='Nettoyage', active=true}
+2026-01-15 16:12:03.147 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:12:03.148 INFO  - Finding category by name: Informatique
+2026-01-15 16:12:03.155 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 16:12:04.907 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Nettoyage, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:12:04.919 INFO  - Finding category by name: Nettoyage
+2026-01-15 16:12:04.926 INFO  - Found category: Category{idCategory=7, name='Nettoyage', active=true}
+2026-01-15 16:12:08.645 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Nettoyage, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:12:08.649 INFO  - Finding category by name: Nettoyage
+2026-01-15 16:12:08.654 INFO  - Found category: Category{idCategory=7, name='Nettoyage', active=true}
+2026-01-15 16:12:10.621 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:12:12.470 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:14:49.851 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:14:49.861 INFO  - Fetching categories by active = true
+2026-01-15 16:14:49.888 INFO  - Found 10 categories with active = true
+2026-01-15 16:14:49.893 INFO  - Fetching categories by active = true
+2026-01-15 16:14:49.923 INFO  - Found 10 categories with active = true
+2026-01-15 16:15:57.301 INFO  - Fetching categories by active = true
+2026-01-15 16:15:57.301 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:15:57.309 INFO  - Found 10 categories with active = true
+2026-01-15 16:15:57.367 INFO  - Fetching categories by active = true
+2026-01-15 16:15:57.383 INFO  - Found 10 categories with active = true
+2026-01-15 16:22:23.325 INFO  - Fetching categories by active = true
+2026-01-15 16:22:23.328 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:22:23.348 INFO  - Fetching categories by active = true
+2026-01-15 16:22:23.353 INFO  - Found 10 categories with active = true
+2026-01-15 16:22:23.389 INFO  - Found 10 categories with active = true
+2026-01-15 16:25:30.372 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:25:30.374 INFO  - Fetching categories by active = true
+2026-01-15 16:25:30.386 INFO  - Fetching categories by active = true
+2026-01-15 16:25:30.412 INFO  - Found 10 categories with active = true
+2026-01-15 16:25:30.423 INFO  - Found 10 categories with active = true
+2026-01-15 16:29:17.795 INFO  - Fetching categories by active = true
+2026-01-15 16:29:17.797 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 16:29:17.809 INFO  - Fetching categories by active = true
+2026-01-15 16:29:17.813 INFO  - Found 10 categories with active = true
+2026-01-15 16:29:17.830 INFO  - Found 10 categories with active = true
+2026-01-15 16:29:25.654 INFO  - Finding reservations by client id: 5
+2026-01-15 16:29:25.676 INFO  - Found 0 reservations for client id 5
+2026-01-15 16:32:30.675 INFO  - Finding reservations by client id: 5
+2026-01-15 16:32:30.696 INFO  - Found 0 reservations for client id 5
+2026-01-15 19:50:40.640 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 19:50:40.871 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 19:50:41.238 INFO  - Finding reservations by technician id: 13
+2026-01-15 19:50:41.245 INFO  - Summing price for technician 13 with status COMPLETED
+2026-01-15 19:50:41.270 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 19:50:41.325 INFO  - Found 0 reservations for technician id 13
+2026-01-15 19:50:41.331 INFO  - Average rating for technician 13: 0.0
+2026-01-15 19:50:41.336 INFO  - Sum for technician 13: 0.00
+2026-01-15 19:50:47.324 INFO  - Fetching categories by active = true
+2026-01-15 19:50:47.388 INFO  - Found 10 categories with active = true
+2026-01-15 20:05:58.642 INFO  - Finding reservations by technician id: 13
+2026-01-15 20:05:58.656 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 20:05:58.656 INFO  - Summing price for technician 13 with status COMPLETED
+2026-01-15 20:05:58.659 INFO  - Found 0 reservations for technician id 13
+2026-01-15 20:05:58.680 INFO  - Sum for technician 13: 0.00
+2026-01-15 20:05:58.681 INFO  - Average rating for technician 13: 0.0
+2026-01-15 20:08:55.444 INFO  - Tentative de login pour email=admin@entreprise-x.com
+2026-01-15 20:08:55.580 ERROR - Login échoué : mot de passe incorrect id=12
+2026-01-15 20:09:00.476 INFO  - Tentative de login pour email=admin@example.com
+2026-01-15 20:09:00.653 INFO  - Login réussi pour l'utilisateur id=13
+2026-01-15 20:09:01.273 INFO  - Summing price for technician 13 with status COMPLETED
+2026-01-15 20:09:01.292 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 20:09:01.306 INFO  - Sum for technician 13: 0.00
+2026-01-15 20:09:01.306 INFO  - Finding reservations by technician id: 13
+2026-01-15 20:09:01.323 INFO  - Average rating for technician 13: 0.0
+2026-01-15 20:09:01.326 INFO  - Found 0 reservations for technician id 13
+2026-01-15 20:09:06.058 INFO  - Fetching categories by active = true
+2026-01-15 20:09:06.087 INFO  - Found 10 categories with active = true
+2026-01-15 20:09:21.365 INFO  - Suppression de la compétence id=3 par le technicien id=13
+2026-01-15 20:09:21.399 INFO  - Deleting TechnicianSkill with id=3
+2026-01-15 20:09:51.008 INFO  - Ajout d'une compétence pour le technicien id=13
+2026-01-15 20:09:51.021 INFO  - Saving TechnicianSkill for userId=13
+2026-01-15 20:09:51.081 INFO  - TechnicianSkill saved with id=4
+2026-01-15 20:10:01.851 INFO  - Mise à jour de la compétence id=4 pour le technicien id=13
+2026-01-15 20:10:01.857 INFO  - Saving TechnicianSkill for userId=13
+2026-01-15 20:10:01.866 INFO  - TechnicianSkill saved with id=4
+2026-01-15 20:10:18.938 INFO  - Ajout d'un document pour la compétence id=4 par l'utilisateur id=13
+2026-01-15 20:10:18.952 INFO  - Saving TechnicianDocument
+2026-01-15 20:10:18.978 INFO  - TechnicianDocument saved with id=1
+2026-01-15 21:12:19.890 INFO  - Inscription d'un nouvel utilisateur email=momo@gmail.com
+2026-01-15 21:12:20.235 INFO  - Saving User email=momo@gmail.com, role=CLIENT
+2026-01-15 21:12:20.330 INFO  - User saved with id=17
+2026-01-15 21:12:20.358 INFO  - Inscription réussie pour utilisateur id=17, email=momo@gmail.com
+2026-01-15 21:12:20.566 INFO  - Fetching categories by active = true
+2026-01-15 21:12:20.566 INFO  - Fetching categories by active = true
+2026-01-15 21:12:20.586 INFO  - Found 10 categories with active = true
+2026-01-15 21:12:20.594 INFO  - Found 10 categories with active = true
+2026-01-15 21:12:20.626 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:12:20.713 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:12:20.767 INFO  - Average rating for technician 13: 0.0
+2026-01-15 21:12:31.784 INFO  - Finding reservations by client id: 17
+2026-01-15 21:12:31.801 INFO  - Found 0 reservations for client id 17
+2026-01-15 21:12:40.203 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:12:40.211 INFO  - Fetching categories by active = true
+2026-01-15 21:12:40.211 INFO  - Fetching categories by active = true
+2026-01-15 21:12:40.228 INFO  - Found 10 categories with active = true
+2026-01-15 21:12:40.228 INFO  - Found 10 categories with active = true
+2026-01-15 21:12:40.235 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:12:40.258 INFO  - Average rating for technician 13: 0.0
+2026-01-15 21:12:51.431 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Peinture, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:12:51.436 INFO  - Finding category by name: Peinture
+2026-01-15 21:12:51.488 INFO  - Found category: Category{idCategory=3, name='Peinture', active=true}
+2026-01-15 21:12:53.007 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Informatique, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:12:53.007 INFO  - Finding category by name: Informatique
+2026-01-15 21:12:53.012 INFO  - Found category: Category{idCategory=8, name='Informatique', active=true}
+2026-01-15 21:12:53.025 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:12:53.029 INFO  - Average rating for technician 13: 0.0
+2026-01-15 21:19:41.342 INFO  - Création d'une nouvelle réservation pour clientId=null et technicianId=13
+2026-01-15 21:19:41.343 ERROR - Données invalides pour la création de réservation : Reservation{idReservation=null, idClient=null, idTechnician=13, scheduledTime=2026-05-04T03:00, status=null, price=null}
+2026-01-15 21:39:24.212 INFO  - Fetching categories by active = true
+2026-01-15 21:39:24.212 INFO  - Fetching categories by active = true
+2026-01-15 21:39:24.229 INFO  - Found 10 categories with active = true
+2026-01-15 21:39:24.229 INFO  - Found 10 categories with active = true
+2026-01-15 21:39:24.243 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:39:24.358 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:39:24.399 INFO  - Average rating for technician 13: 0.0
+2026-01-15 21:41:04.627 INFO  - Inscription d'un nouvel utilisateur email=micode@yahoo.com
+2026-01-15 21:41:05.424 INFO  - Saving User email=micode@yahoo.com, role=CLIENT
+2026-01-15 21:41:06.194 INFO  - User saved with id=18
+2026-01-15 21:41:06.899 INFO  - Inscription réussie pour utilisateur id=18, email=micode@yahoo.com
+2026-01-15 21:41:07.902 INFO  - Fetching categories by active = true
+2026-01-15 21:41:08.201 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:41:08.729 INFO  - Fetching categories by active = true
+2026-01-15 21:41:08.881 INFO  - Found 10 categories with active = true
+2026-01-15 21:41:09.818 INFO  - Found 10 categories with active = true
+2026-01-15 21:41:10.052 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:41:10.534 INFO  - Average rating for technician 13: 0.0
+2026-01-15 21:41:14.381 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=Plomberie, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:41:14.461 INFO  - Finding category by name: Plomberie
+2026-01-15 21:41:14.772 INFO  - Found category: Category{idCategory=1, name='Plomberie', active=true}
+2026-01-15 21:41:15.379 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:41:15.656 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:41:15.748 INFO  - Average rating for technician 13: 0.0
+2026-01-15 21:45:33.136 INFO  - Inscription d'un nouvel utilisateur email=jules@tata.com
+2026-01-15 21:45:33.295 INFO  - Saving User email=jules@tata.com, role=CLIENT
+2026-01-15 21:45:33.309 INFO  - User saved with id=19
+2026-01-15 21:45:33.333 INFO  - Inscription réussie pour utilisateur id=19, email=jules@tata.com
+2026-01-15 21:45:33.495 INFO  - Fetching categories by active = true
+2026-01-15 21:45:33.523 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:45:33.531 INFO  - Found 10 categories with active = true
+2026-01-15 21:45:33.589 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:45:33.609 INFO  - Average rating for technician 13: 0.0
+2026-01-15 21:45:33.678 INFO  - Fetching categories by active = true
+2026-01-15 21:45:33.694 INFO  - Found 10 categories with active = true
+2026-01-15 21:59:51.781 INFO  - Inscription d'un nouvel utilisateur email=step@gmail.com
+2026-01-15 21:59:52.087 INFO  - Saving User email=step@gmail.com, role=CLIENT
+2026-01-15 21:59:52.215 INFO  - User saved with id=20
+2026-01-15 21:59:52.423 INFO  - Inscription réussie pour utilisateur id=20, email=step@gmail.com
+2026-01-15 21:59:53.111 INFO  - Fetching categories by active = true
+2026-01-15 21:59:53.125 INFO  - Fetching categories by active = true
+2026-01-15 21:59:53.126 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 21:59:53.156 INFO  - Found 10 categories with active = true
+2026-01-15 21:59:53.156 INFO  - Found 10 categories with active = true
+2026-01-15 21:59:53.278 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 21:59:53.322 INFO  - Average rating for technician 13: 0.0
+2026-01-15 22:04:26.332 INFO  - Fetching categories by active = true
+2026-01-15 22:04:26.333 INFO  - Fetching categories by active = true
+2026-01-15 22:04:26.334 INFO  - Recherche de techniciens avec critères: ville=null, quartier=null, catégorie=null, disponibilité=null, minRating=null, minPrice=null, maxPrice=50000.0
+2026-01-15 22:04:26.353 INFO  - Found 10 categories with active = true
+2026-01-15 22:04:26.356 INFO  - Found 10 categories with active = true
+2026-01-15 22:04:26.405 INFO  - Calculating average rating for technician 13 with status COMPLETED
+2026-01-15 22:04:26.419 INFO  - Average rating for technician 13: 0.0
+
